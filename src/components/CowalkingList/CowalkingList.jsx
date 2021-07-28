@@ -6,13 +6,6 @@ function CowalkingList () {
     return (
         <ul className='cowalkingList'>
             <CowalkingCard/>
-            <CowalkingCard/>
-            <CowalkingCard/>
-            <CowalkingCard/>
-            <CowalkingCard/>
-            <CowalkingCard/>
-            <CowalkingCard/>
-            <CowalkingCard/>
         </ul>
     )
 }
