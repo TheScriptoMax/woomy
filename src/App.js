@@ -1,4 +1,4 @@
-import './App.css';
+import './base.css';
 import CowalkingCard from './componants/CowalkingCard';
 
 
