@@ -2,8 +2,6 @@ import './App.css';
 import CowalkingCard from './componants/CowalkingCard';
 
 
-
-
 function App() {
 
   
