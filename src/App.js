@@ -1,5 +1,8 @@
 import './base.css';
+import './App.css';
 import CowalkingCard from './componants/CowalkingCard';
+import Footer from './components/footer/footer';
+import Header from './header/header';
 
 
 function App() {
@@ -8,6 +11,8 @@ function App() {
   return (
     <div>
       <CowalkingCard></CowalkingCard>
+      <Header/>
+      <Footer/>
     </div>
   );
 }
