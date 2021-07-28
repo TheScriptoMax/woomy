@@ -1,0 +1,25 @@
+footer{
+    display: flex;
+    justify-content:space-around;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+ 
+    text-align: center;
+}
+
+footer .div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer p{
+    margin-top:10px;
+    margin-bottom:10px;
+    font-size: 16px;
+}
+
+footer div svg path{
+    color: #8A55A3;
+}
