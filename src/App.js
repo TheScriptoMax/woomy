@@ -13,9 +13,9 @@ function App() {
       
       <Header/>
       
-      <CowalkingList/>
+      {/* <CowalkingList/> */}
 
-      {/* <CowalkingTicket/> */}
+      <CowalkingTicket/>
       
       <Footer/>
       
