@@ -9,7 +9,7 @@ function CowalkerItem () {
     return(
         <li className="cowalkerItem">
             <figure>
-                <img src={profilpic} alt="profil picture"/>
+                <img src={profilpic} alt="profil"/>
             </figure>
             <h3>Michelin Machin</h3>
             <div className="cowalkerItemButton">
