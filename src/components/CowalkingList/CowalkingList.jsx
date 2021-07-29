@@ -23,11 +23,17 @@ function CowalkingList () {
     // },[])
 
     return (
-        {/* <ul className='cowalkingList'>
-            {
-                cowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
-            }
-        </ul> */}
+
+       {/*
+        <div className="container">
+            <ul className='cowalkingList'>
+                {
+                    cowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
+                }
+            </ul>
+        </div>
+        */}
+
     )
 }
 

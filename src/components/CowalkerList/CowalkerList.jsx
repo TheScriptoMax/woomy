@@ -1,13 +1,14 @@
-
+import CowalkerItem from "../CowalkerItem/CowalkerItem";
 
 function CowalkerList () {
     return (
         <div>
-            <div className="container">
-                <ul>
-                    
-                </ul>
-            </div>
+            
+            <ul className="cowalkerList">
+                <CowalkerItem/>
+                <CowalkerItem/>
+            </ul>
+            
         </div>
     )
 };

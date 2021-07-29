@@ -15,6 +15,13 @@ function App() {
 
     <div>
       
+
+      <Header/>
+      
+      {/* <CowalkingList/> */}
+
+      <CowalkingTicket/>
+
       
       
     </div>
