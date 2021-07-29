@@ -1,17 +1,14 @@
 import './App.css';
-import CowalkingList from './components/CowalkingList/CowalkingList';
 import Footer from './components/footer/footer';
 import Header from './components/header/header';
-import CowalkingTicket from './components/CowalkingTicket/CowalkingTicket';
-import Notification from './components/Notifications/Notification';
-
+import Params from './components/Params/Params';
 function App() {
 
   
   return (
     <div>
       <Header/>
-      <Notification/>
+      <Params/>
       {/* <CowalkingTicket/> */}
       <Footer/>
     </div>
