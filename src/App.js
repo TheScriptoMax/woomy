@@ -5,6 +5,7 @@ import Footer from './components/footer/footer';
 import Header from './components/header/header';
 import CowalkingTicket from './components/CowalkingTicket/CowalkingTicket';
 import Login from './components/Login/Login';
+import SignIn from './components/SignIn/SignIn';
 
 
 function App() {
@@ -14,14 +15,7 @@ function App() {
 
     <div>
       
-      {/* <Header/>
       
-      <CowalkingList/>
-
-      <CowalkingTicket/>
-      
-      <Footer/> */}
-      <Login />
       
     </div>
   );

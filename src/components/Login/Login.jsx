@@ -6,14 +6,14 @@ import Button from '@material-ui/core/Button';
 export default function Login () {
     return (
     <div className='login container'>
-        <form className='login-contain'>
-            <p>E-Mail</p>
+        <form className='login-content'>
+            
             <TextField id="standard-basic" label="Entrez votre email" variant="standard" />
-            <p>Mot de passe</p>
+            
             <TextField id="standard-basic" label="Entrez votre mot de passe" variant="standard" />
-            <p>Vous avez oublié votre mot de passe? <span>Cliquez ici</span></p>
+            <p className='forgot-password'>Vous avez oublié votre mot de passe? <a href=''>Cliquez ici</a></p>
         </form>
-        <div>
+        <div className='button-container'>
             <Button variant="contained">S'identifier</Button>
             <p>Pas de compte ?</p>
             <Button variant="contained">S'inscrire</Button>
