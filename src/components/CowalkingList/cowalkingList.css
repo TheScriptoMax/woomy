@@ -1,0 +1,7 @@
+.cowalkingList{
+    display: block;
+    position: relative;
+    margin-top: 6.625rem;
+    margin-bottom: 6.625rem;
+    z-index: 1;
+}

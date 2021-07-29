@@ -1,0 +1,28 @@
+
+header{
+    position: fixed;
+    top:0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 1.25rem 0;
+    background-color: white;
+    box-shadow: 0rem 1px 10px  black;
+    z-index: 2;
+}
+
+header div svg path{
+    color: #8A55A3;
+}
+
+h1{
+    font-size:18px;
+    color:#BD1347;
+}
+
+button{
+    border: 1px solid black;
+    background-color: chocolate;
+    border-radius: 50%;
+}
