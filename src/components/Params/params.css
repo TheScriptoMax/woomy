@@ -1,0 +1,38 @@
+/* commentaire */
+
+
+h2{
+    text-align: center;
+}
+
+.account-field{
+    width: 100%;
+    background-color:#DCD9D9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top:1rem;
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+    padding-left:0.5rem;
+    padding-right:0.5rem;
+}
+
+.account-field-result{
+    display: flex;
+    align-items: center;
+}
+
+.account-field div p{
+    margin:0;
+}
+
+.account-field p{
+    margin:0;
+}
+
+.account-top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
