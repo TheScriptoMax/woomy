@@ -14,11 +14,17 @@ function CowalkingCard ({cowalk,index}) {
             <div className='cowalkingCardTitle'>
                 <h3>itinéraire:{index+1}</h3>
                 <div className='cowalkingCardRoute'>
-                    <p>Départ:{cowalk.startFrom}</p>
+                    <div className="cowalkingCardDeparture">
+                        <p>Départ:</p>
+                        <span>{cowalk.startFrom}</span>
+                    </div>
                     <span>
                         <TrendingFlatIcon/>
                     </span>
-                    <p>Destination:{cowalk.goTo}</p>
+                    <div className="cowalkingCardDestination">
+                        <p>Destination:</p>
+                        <span>{cowalk.goTo}</span>
+                    </div>
                 </div>
                 <p>Heure de départ:{cowalk.startTime.match(/[\d]{2}:[\d]{2}/g)}</p>
             </div>
