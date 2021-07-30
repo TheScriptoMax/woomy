@@ -24,6 +24,9 @@ li{
 h1,h2,h3,h4,p{
   margin: 0;
 }
+figure{
+  margin: 0;
+}
 a:-webkit-any-link {
   text-decoration: none;
   color: inherit;

@@ -1,30 +1,38 @@
-import './cowalkingList.css'
+
+/// ----- Import Components ---- ///
 import CowalkingCard from "../CowalkingCard/CowalkingCard";
-import axios from 'axios';
+
+/// ----- CSS ----- ///
+import './cowalkingList.css'
+
+/// ----- React Modules ----- ///
 import { useState,useEffect } from 'react';
 
-// const axiosInstance = axios.create({
-//     baseURL: 'http://localhost:8080/'
-// })
+/// ----- Axios Modules ----- ///
+import axios from 'axios';
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:8080/'
+})
 
 function CowalkingList () {
     
-    // const [cowalks,setCowalks] = useState([])
+    const [cowalks,setCowalks] = useState([])
 
-    // const getCowalks = async () => {
-    //     const res = await axiosInstance.get('/cowalk')
-    //     setCowalks(res.data)
-    //     console.log(res.data)
-    //     console.log(cowalks)
-    // }
+    const getCowalks = async () => {
+        const res = await axiosInstance.get('/cowalk')
+        setCowalks(res.data)
+        console.log(res.data)
+        console.log(cowalks)
+    }
 
-    // useEffect(()=>{
-    //     getCowalks()
-    // },[])
+    useEffect(()=>{
+        getCowalks()
+    },[])
 
     return (
 
-       {/*
+      
         <div className="container">
             <ul className='cowalkingList'>
                 {
@@ -32,7 +40,7 @@ function CowalkingList () {
                 }
             </ul>
         </div>
-        */}
+        
 
     )
 }
