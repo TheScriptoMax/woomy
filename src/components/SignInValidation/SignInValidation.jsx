@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 import './SignInValidation.css'; 
 
-//FUNCTION SignInValidation
+//PAGE VALIDATION INCRIPTION 
 
 export default function SignInValidation () {
     return (

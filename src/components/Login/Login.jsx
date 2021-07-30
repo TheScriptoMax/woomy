@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 // CSS IMPORT
 import './Login.css';
 
-//FUNCTION Login
+//PAGE CONNEXION
 export default function Login () {
     return (
 
@@ -28,7 +28,7 @@ export default function Login () {
             <Button variant="contained">S'identifier</Button>
             <p>Pas de compte ?</p>
             <Button variant="contained">S'inscrire</Button>
-            
+
         </div>
 
     </div>

@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 // CSS IMPORT
 import './SignIn.css';
 
-//FUNCTION SignIn
+//PAGE INSCRIPTION
 export default function SignIn () {
     return (
 
