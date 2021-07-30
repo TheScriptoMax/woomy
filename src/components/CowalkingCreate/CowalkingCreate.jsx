@@ -1,9 +1,17 @@
-import './cowalkingcreate.css';
+
+/// ----- Material UI ---- ///
+
 import  Select from '@material-ui/core/Select';
 import  InputLabel from '@material-ui/core/Inputlabel';
 import  MenuItem from '@material-ui/core/MenuItem';
 import  TextField from '@material-ui/core/Textfield';
 import Button from '@material-ui/core/Button';
+
+/// ----- CSS ----- ///
+import './cowalkingcreate.css';
+
+
+///////// PAGE DE CREATION DES COPIETONNAGE //////////
 
 function CoWalkingCreate() {
 
@@ -34,4 +42,6 @@ function CoWalkingCreate() {
       </div>
     );
   }
-  export default CoWalkingCreate;
+
+export default CoWalkingCreate;
+

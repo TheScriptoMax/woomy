@@ -1,4 +1,7 @@
+/// ----- Import Components ----- ///
 import CowalkerItem from "../CowalkerItem/CowalkerItem";
+
+///////// liste des copiétonneuses //////////
 
 function CowalkerList () {
     return (

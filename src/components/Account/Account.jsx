@@ -1,7 +1,13 @@
-import './account.css';
+/// ----- Material UI ----- ///
 import { Avatar } from '@material-ui/core';
 
+/// ----- CSS ----- ///
+import './account.css';
 
+/// ----- React modules ///
+import {Link} from "react-router-dom";
+
+//////// Page de profile ////////
 
 function Account() {
     return (
@@ -41,11 +47,13 @@ function Account() {
                     <p>0600000000</p>
                 </div>
             </div>
-            <div className='account-field'>
-                <p>Parametres</p>
-                <div className="account-field-result">
+            <Link to="/param">
+                <div className='account-field'>
+                    <p>Parametres</p>
+                    <div className="account-field-result">
+                    </div>
                 </div>
-            </div>
+            </Link>
         </div>
       </div>
     );

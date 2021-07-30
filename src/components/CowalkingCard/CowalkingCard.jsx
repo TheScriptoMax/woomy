@@ -1,12 +1,20 @@
+
+/// ----- Material UI ----- ///
 import ButtonRound from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import GroupIcon from '@material-ui/icons/Group';
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
+
+/// ----- Import image ----- ///
+import ImageProfil from './profile-pic-placeholder.png'
+
+/// ----- CSS ----- ///
 import "./cowalkingCard.css";
+
+/// ----- React Modules ----- ///
 import {Link} from "react-router-dom";
 
-
+/////////// CARTE DE COPIETONNAGE //////////////
 
 function CowalkingCard ({cowalk,index}) {
     
@@ -32,8 +40,13 @@ function CowalkingCard ({cowalk,index}) {
                 </div>
                 <div className='cowalkingCardFooter'>
                     <div className='cowalkingCardCount'>
-                        <GroupIcon/>
-                        <span></span>
+                        <figure>
+                            <img src={ImageProfil} alt="profil" />
+                        </figure>
+                        <ul>
+                            <li><span>+3</span></li>
+                        </ul>
+                        
                     </div>
                     <div className='cowalkingCardButtons'>
                         <ButtonRound aria-label="delete" onClick={(e) => { 
