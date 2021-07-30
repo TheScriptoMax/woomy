@@ -8,6 +8,7 @@ import CowalkingCreate from './components/CowalkingCreate/CowalkingCreate';
 import CowalkingSearch from './components/CowalkingCreate/CowalkingCreate';
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
+import SignInValidation from './components/SignInValidation/SignInValidation';
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,19 +20,21 @@ function App() {
 
   
   return (
-    <Router>
+    <div>
+    {/* <Router>
       <div>
-        <Header/>
-          <Switch>
-            <Route exact path='/ticket' component={CowalkingTicket}/>
-            <Route exact path='/create' component={CowalkingCreate}/>
-            <Route exact path='/search' component={CowalkingSearch}/>
-            {/* <Route exact path='/account' component={CowalkingCreate}/> */}
-            <Route exact path='/list' component={CowalkingList}/>
-          </Switch>
-        <Footer/>        
+      <Header/>
+      <Switch>
+      <Route exact path='/ticket' component={CowalkingTicket}/>
+      <Route exact path='/create' component={CowalkingCreate}/>
+      <Route exact path='/search' component={CowalkingSearch}/>
+      <Route exact path='/account' component={CowalkingCreate}/>
+      <Route exact path='/list' component={CowalkingList}/>
+      </Switch>
+      <Footer/>        
       </div>
-    </Router>
+    </Router> */}
+    </div>
 
   );
 }
