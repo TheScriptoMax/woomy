@@ -4,29 +4,43 @@ import  Select from '@material-ui/core/Select';
 import  InputLabel from '@material-ui/core/Inputlabel';
 import  MenuItem from '@material-ui/core/MenuItem';
 import  TextField from '@material-ui/core/Textfield';
+import {
+  DateTimePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
 
 /// ----- CSS ----- ///
 import './cowalkingsearch.css';
 
+/// ----- React Modules ----- ///
+
+import { useState } from 'react';
+import DateFnsUtils from '@date-io/date-fns'
+
 
 function CoWalkingSearch() {
-
-
+  const [selectedDate, handleDateChange] = useState(new Date());
     return (
       <div className="colwalkingsearch-container">
          <h2>Rechercher un itinéraire</h2>
          <form className="searchform">
-         <InputLabel className="label">Départ</InputLabel>
+
+          <InputLabel className="label">Départ</InputLabel>
+
             <Select labelId="label" id="select" >
-                <MenuItem >Velpeau</MenuItem>
-                <MenuItem >SPDC</MenuItem>
+              <MenuItem >Velpeau</MenuItem>
+              <MenuItem >SPDC</MenuItem>
             </Select>
-            <TextField
-                id="time"
-                label="Heure du départ"
-                type="time"
-                />
-        </form>
+
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DateTimePicker
+                value={selectedDate}
+                onChange={handleDateChange}
+                minutesStep={5}
+              />
+            </MuiPickersUtilsProvider>
+
+          </form>
         <div className="separator"></div>
         {/* <ul className='cowalkingList'>
             {

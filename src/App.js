@@ -24,6 +24,7 @@
 
 /// ----- CSS ----- ///
 import './App.css';
+
 /// ----- React Modules ----- ///
 
 import {
@@ -32,13 +33,8 @@ import {
   Route,
 } from "react-router-dom";
 
-
-
-/////////////////////APP/////////////////////////////
-
 function App() {
 
-  
   return (
     <Router>
       <div>
@@ -53,10 +49,8 @@ function App() {
             <Route exact path='/list' component={CowalkingList}/>
           </Switch>
         <Footer/>
-        
       </div>
     </Router>
   );
 }
-
 export default App;

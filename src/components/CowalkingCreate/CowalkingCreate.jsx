@@ -4,40 +4,50 @@
 import  Select from '@material-ui/core/Select';
 import  InputLabel from '@material-ui/core/Inputlabel';
 import  MenuItem from '@material-ui/core/MenuItem';
-import  TextField from '@material-ui/core/Textfield';
 import Button from '@material-ui/core/Button';
+import {
+  DateTimePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
 
 /// ----- CSS ----- ///
 import './cowalkingcreate.css';
 
+/// ----- React Modules ----- ///
+
+import { useState } from 'react';
+import DateFnsUtils from '@date-io/date-fns'
 
 ///////// PAGE DE CREATION DES COPIETONNAGE //////////
 
-function CoWalkingCreate() {
 
+function CoWalkingCreate() {
+  const [selectedDate, handleDateChange] = useState(new Date());
 
     return (
       <div className="container">
         <h2>Créer votre itinéraire</h2>
         <form className="createform">
-            <InputLabel className="label">Départ</InputLabel>
-            <Select labelId="label" id="select" >
-                <MenuItem >Velpeau</MenuItem>
-                <MenuItem >SPDC</MenuItem>
-            </Select>
-            <InputLabel className="label">Destination</InputLabel>
-            <Select labelId="label" id="select" >
-                <MenuItem >Velpeau</MenuItem>
-                <MenuItem >SPDC</MenuItem>
-            </Select> 
-            <TextField
-                id="time"
-                label="Heure du départ"
-                type="time"
-                />
-            <div className="button-container">
+          <InputLabel className="label">Départ</InputLabel>
+          <Select labelId="label" id="select" >
+            <MenuItem >Velpeau</MenuItem>
+            <MenuItem >SPDC</MenuItem>
+          </Select>
+          <InputLabel className="label">Destination</InputLabel>
+          <Select labelId="label" id="select" >
+            <MenuItem >Velpeau</MenuItem>
+            <MenuItem >SPDC</MenuItem>
+          </Select>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <DateTimePicker
+            value={selectedDate}
+            onChange={handleDateChange}
+            minutesStep={5}
+            />
+          </MuiPickersUtilsProvider>
+          <div className="button-container">
             <Button variant="contained">Créer</Button>
-            </div>
+          </div>
         </form>
       </div>
     );

@@ -17,8 +17,6 @@ function Notification() {
           <MessageCard/>
           {/* <NotificationCard/> */}
       </div>
-
-
     );
   }
   export default Notification;
