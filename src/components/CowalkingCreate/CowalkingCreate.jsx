@@ -48,6 +48,7 @@ function CoWalkingCreate() {
         startFrom: startFromRef.current.value,
         goTo: goToRef.current.value,
         startTime: selectedDate,
+        createdAt: database.getCurrentTimestamp,
         owner: currentUser.uid,
       }).then((docRef)=> {
         database.membersApproved(docRef.id).doc(currentUser.uid).set({
