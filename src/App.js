@@ -22,6 +22,11 @@
     /**** NOTIFICATION *****/ 
     import Notification from './components/Notifications/Notification';
 
+
+    /**** SIGN IN ****/
+    import SignInValidation from './components/SignInValidation/SignInValidation'
+    import SignInConfirm from './components/SignInConfirm/SignInConfirm'
+
 /// ----- CSS ----- ///
 import './App.css';
 
@@ -47,6 +52,8 @@ function App() {
             <Route exact path='/message' component={Notification}/>
             <Route exact path='/param' component={Params}/>
             <Route exact path='/list' component={CowalkingList}/>
+            <Route exact path='/validation' component={SignInValidation}/>
+            <Route exact path='/confirm' component={SignInConfirm}/>
           </Switch>
         <Footer/>
       </div>
