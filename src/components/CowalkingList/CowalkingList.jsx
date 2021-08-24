@@ -8,12 +8,6 @@ import './cowalkingList.css'
 /// ----- React Modules ----- ///
 import { useState,useEffect } from 'react';
 
-/// ----- Axios Modules ----- ///
-import axios from 'axios';
-
-const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8080/'
-})
 
 function CowalkingList () {
     

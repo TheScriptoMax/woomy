@@ -45,7 +45,7 @@ function App() {
                 <Header/>
                 <Switch>
                     <Route exact path='/ticket' component={CowalkingTicket}/>
-                    <Route exact path='/create' component={CowalkingCreate}/>
+                    <PrivateRoute exact path='/create' component={CowalkingCreate}/>
                     <PrivateRoute exact path='/search' component={CowalkingSearch}/>
                     <Route path='/signin' component={SignIn}/>
                     <Route path='/login' component={Login}/>
