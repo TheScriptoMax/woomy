@@ -16,9 +16,7 @@ const axiosInstance = axios.create({
 })
 
 function CowalkingList () {
-    
     const [cowalks,setCowalks] = useState([])
-
     const getCowalks = async () => {
         const res = await axiosInstance.get('/cowalk')
         setCowalks(res.data)
@@ -31,8 +29,6 @@ function CowalkingList () {
     },[])
 
     return (
-          
-
         <div className="container">
 
             <ul className='cowalkingList'>
@@ -41,7 +37,6 @@ function CowalkingList () {
                 }
             </ul>
         </div>
-        
 
     )
 }
