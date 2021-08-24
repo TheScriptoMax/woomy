@@ -49,7 +49,7 @@ function App() {
                     <PrivateRoute exact path='/search' component={CowalkingSearch}/>
                     <Route path='/signin' component={SignIn}/>
                     <Route path='/login' component={Login}/>
-                    <Route exact path='/account' component={Account}/>
+                    <PrivateRoute exact path='/account' component={Account}/>
                     <Route exact path='/message' component={Notification}/>
                     <Route exact path='/param' component={Params}/>
                     <Route exact path='/list' component={CowalkingList}/>
