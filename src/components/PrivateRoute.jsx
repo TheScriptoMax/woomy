@@ -13,7 +13,7 @@ export default function PrivateRoute({component: Component, ...rest})
                 if (currentUser && currentUser.emailVerified) {
                     return <Component {...props} />
                 } else if (currentUser && !currentUser.emailVerified) {
-                    return <Redirect to="/param" />
+                    return <Redirect to="/send-email" />
                 } else {
                     return <Redirect to="/login" />
                 }

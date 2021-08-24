@@ -10,6 +10,7 @@ import Footer from './components/footer/footer';
 /**** CONNEXION *****/
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
+import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent'
 
 /**** PROFIL *****/
 import Account from './components/Account/Account';
@@ -35,6 +36,7 @@ import {
     Route,
 } from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute'
+import EmailNotVerifiedRoute from "./components/EmailNotVerifiedRoute";
 
 function App() {
 
@@ -44,15 +46,27 @@ function App() {
             <AuthProvider>
                 <Header/>
                 <Switch>
-                    <Route exact path='/ticket' component={CowalkingTicket}/>
-                    <Route exact path='/create' component={CowalkingCreate}/>
-                    <PrivateRoute exact path='/search' component={CowalkingSearch}/>
-                    <Route path='/signin' component={SignIn}/>
-                    <Route path='/login' component={Login}/>
-                    <PrivateRoute exact path='/account' component={Account}/>
-                    <Route exact path='/message' component={Notification}/>
-                    <Route exact path='/param' component={Params}/>
-                    <Route exact path='/list' component={CowalkingList}/>
+                    {/*----- Route public -----*/}
+
+                        <Route path='/signin' component={SignIn}/>
+                        <Route path='/login' component={Login}/>
+
+                        <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
+                        <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+
+                    {/*----- Route private -----*/}
+
+                        {/*----- Ticket -----*/}
+                        <PrivateRoute exact path='/ticket' component={CowalkingTicket}/>
+                        <PrivateRoute exact path='/create' component={CowalkingCreate}/>
+                        <PrivateRoute exact path='/search' component={CowalkingSearch}/>
+                        <PrivateRoute exact path='/list' component={CowalkingList}/>
+                        <PrivateRoute exact path='/message' component={Notification}/>
+
+                        {/*----- Account -----*/}
+                        <PrivateRoute exact path='/account' component={Account}/>
+                        <PrivateRoute exact path='/param' component={Params}/>
+
                 </Switch>
                 <Footer/>
 

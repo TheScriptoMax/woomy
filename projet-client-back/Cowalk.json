@@ -1,0 +1,22 @@
+{
+    "id":"<string>",
+    "startFrom":{
+        "uid":"<string>",
+        "name"
+    },
+    "goto":"<string>",
+    "startTime":"<date>",
+    "hostId":"<string>",
+    "cowalker":[{
+        "userId":"<string>"
+    }],
+    "cowalkerPending":[{
+        "userId":"<string>",
+        "firstname":"<string>",
+        "lastname":"<string>",
+        "phone":"<number>",
+        "photoUrl"
+    },
+]
+
+}
