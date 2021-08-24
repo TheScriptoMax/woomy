@@ -25,6 +25,11 @@ import CowalkingSearch from './components/CowalkingSearch/CowalkingSearch';
 /**** NOTIFICATION *****/
 import Notification from './components/Notifications/Notification';
 
+
+    /**** SIGN IN ****/
+    import SignInValidation from './components/SignInValidation/SignInValidation'
+    import SignInConfirm from './components/SignInConfirm/SignInConfirm'
+
 /// ----- CSS ----- ///
 import './App.css';
 
@@ -54,7 +59,8 @@ function App() {
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
 
-                    {/*----- Route private -----*/}
+
+                    {/*----- Route private SignInConfirm -----*/}
 
                         {/*----- Ticket -----*/}
                         <PrivateRoute exact path='/ticket' component={CowalkingTicket}/>
@@ -66,6 +72,9 @@ function App() {
                         {/*----- Account -----*/}
                         <PrivateRoute exact path='/account' component={Account}/>
                         <PrivateRoute exact path='/param' component={Params}/>
+
+
+                    {/*<Route exact path='/confirm' component={SignInConfirm}/>*/}
 
                 </Switch>
                 <Footer/>
