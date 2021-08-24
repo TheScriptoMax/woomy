@@ -47,6 +47,7 @@ function App() {
             <Route exact path='/message' component={Notification}/>
             <Route exact path='/param' component={Params}/>
             <Route exact path='/list' component={CowalkingList}/>
+            <Route exact path='/login' component={Login}/>
           </Switch>
         <Footer/>
       </div>
