@@ -1,7 +1,15 @@
-import './cowalkingList.css'
+
+/// ----- Import Components ---- ///
 import CowalkingCard from "../CowalkingCard/CowalkingCard";
-import axios from 'axios';
+
+/// ----- CSS ----- ///
+import './cowalkingList.css'
+
+/// ----- React Modules ----- ///
 import { useState,useEffect } from 'react';
+
+/// ----- Axios Modules ----- ///
+import axios from 'axios';
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:8080/'
@@ -23,6 +31,8 @@ function CowalkingList () {
     },[])
 
     return (
+
+
         <div className="container">
             <ul className='cowalkingList'>
                 {
@@ -30,6 +40,8 @@ function CowalkingList () {
                 }
             </ul>
         </div>
+        
+
     )
 }
 

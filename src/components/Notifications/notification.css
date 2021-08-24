@@ -1,0 +1,12 @@
+.separator-dark{
+    width:100%;
+    height:2px;
+    background-color: grey;
+    margin-top:1rem;
+    margin-bottom:1rem;
+}
+
+.notif-header{
+    display: flex;
+    justify-content: space-between;
+}

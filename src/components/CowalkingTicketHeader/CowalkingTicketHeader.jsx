@@ -1,10 +1,15 @@
+/// ----- Material UI ----- ///
+
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 import ButtonRound from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+
+/// ----- CSS ----- ///
+
 import './cowalkingTicketHeader.css';
 
-
+//////// HEADER DU TICKET DE COPIETONNAGE /////////
 
 function CowalkingTicketHeader () {
     return (
