@@ -38,3 +38,37 @@
 .cowalkingCardButtons:nth-child(1){
     padding-left:1.25rem ;
 }
+
+.cowalkingCardCount{
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+    position: relative;
+}
+
+.cowalkingCardCount figure{
+    width: 2.125rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right:0.5rem ;
+
+}
+.cowalkingCardCount img{
+    max-width: 100%;
+}
+.cowalkingCardCount li{
+    position: relative;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.cowalkingCardCount li:last-child{
+    background-color: white;
+    margin-right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}

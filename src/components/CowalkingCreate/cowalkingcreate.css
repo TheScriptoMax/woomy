@@ -1,0 +1,12 @@
+h2{
+    text-align: center;
+}
+
+.MuiInputBase-root, .MuiFormControl-root{
+width: 100%;
+
+}
+
+label{
+margin-top:1rem;
+}
