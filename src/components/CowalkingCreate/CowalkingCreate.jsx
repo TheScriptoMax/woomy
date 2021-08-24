@@ -23,7 +23,7 @@ import DateFnsUtils from '@date-io/date-fns'
 
 function CoWalkingCreate() {
   const [selectedDate, handleDateChange] = useState(new Date());
-
+console.log(selectedDate);
     return (
       <div className="container">
         <h2>Créer votre itinéraire</h2>

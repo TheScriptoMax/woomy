@@ -16,6 +16,7 @@ import {Alert} from "@material-ui/lab";
 
 //PAGE INSCRIPTION
 export default function SignIn () {
+
     const [error, setError] = useState();
     const [loading, setLoading] = useState();
 
@@ -26,7 +27,6 @@ export default function SignIn () {
     const lastnameRef = useRef();
     const phoneRef = useRef();
     const history = useHistory();
-
 
     const {signup} = useAuth()
 
