@@ -16,9 +16,9 @@ header div svg path{
     color: #8A55A3;
 }
 
-h1{
-    font-size:18px;
-    color:#BD1347;
+.logoWoomy svg{
+    width: 3em;
+    height: min-content;
 }
 
 button{
