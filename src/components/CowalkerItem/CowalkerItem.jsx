@@ -16,6 +16,7 @@ import './cowalkerItem.css'
 
 function CowalkerItem () {
 
+
     return(
         <li className="cowalkerItem">
             <figure>
@@ -25,9 +26,6 @@ function CowalkerItem () {
             <div className="cowalkerItemButton">
                 <ButtonRound>
                     <PhoneIcon/>
-                </ButtonRound>
-                <ButtonRound>
-                    <MessageIcon/>
                 </ButtonRound>
             </div>
         </li>
