@@ -36,21 +36,25 @@ import {
 function App() {
 
   return (
-    <Router>
-      <div>
-        <Header/>
-          <Switch>
-            <Route exact path='/ticket' component={CowalkingTicket}/>
-            <Route exact path='/create' component={CowalkingCreate}/>
-            <Route exact path='/search' component={CowalkingSearch}/>
-            <Route exact path='/account' component={Account}/>
-            <Route exact path='/message' component={Notification}/>
-            <Route exact path='/param' component={Params}/>
-            <Route exact path='/list' component={CowalkingList}/>
-          </Switch>
-        <Footer/>
-      </div>
-    </Router>
+    
+        
+      <Router>
+        <div>
+          <Header/>
+            <Switch>
+              <Route exact path='/account' component={Account}/>
+              <Route exact path='/param' component={Params}/>
+              <Route exact path='/message' component={Notification}/>
+              <Route exact path='/ticket' component={CowalkingTicket}/>
+              <Route exact path='/create' component={CowalkingCreate}/>
+              <Route exact path='/search' component={CowalkingSearch}/>
+              <Route exact path='/list' component={CowalkingList}/>
+            </Switch>
+          <Footer/>
+        </div>
+      </Router>
+    
+
   );
 }
 export default App;
