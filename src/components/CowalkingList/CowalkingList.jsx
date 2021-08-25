@@ -8,40 +8,41 @@ import './cowalkingList.css'
 /// ----- React Modules ----- ///
 import { useState,useEffect } from 'react';
 
-/// ----- Axios Modules ----- ///
-import axios from 'axios';
+//FIREBASE
+import {database} from '../../firebase'
 
-const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8080/'
-})
 
 function CowalkingList () {
-    
+
     const [cowalks,setCowalks] = useState([])
 
-    const getCowalks = async () => {
-        const res = await axiosInstance.get('/cowalk')
-        setCowalks(res.data)
-        console.log(res.data)
-        console.log(cowalks)
-    }
 
-    useEffect(()=>{
-        getCowalks()
-    },[])
+    useEffect(() => {
+        database.cowalks
+            .get()
+            .then((querySnapshot) => {
+                const tempResults = [];
+                querySnapshot.forEach((doc) => {
+                    tempResults.push(
+                        database.formatDoc(doc)
+                    )
+                })
+                setCowalks(tempResults);
+                console.log(tempResults);
+            })
+    }, []);
 
     return (
-
-
         <div className="container">
+
+            {cowalks.length ?
+
             <ul className='cowalkingList'>
                 {
                     cowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
                 }
-            </ul>
+            </ul> : <p>Allez vous faire cuire un oeuf</p> }
         </div>
-        
-
     )
 }
 

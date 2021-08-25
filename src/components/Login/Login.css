@@ -28,4 +28,6 @@
     text-decoration: none;
 }
 
-
+label{
+    position:block;
+}
