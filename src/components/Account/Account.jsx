@@ -19,7 +19,6 @@ import {database} from "../../firebase";
 //////// Page de profile ////////
 
 function Account() {
-<<<<<<< HEAD
 
     const [userData, setUserData] = useState({});
     const [error, setError] = useState('');
