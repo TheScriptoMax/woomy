@@ -8,37 +8,46 @@ import EditIcon from '@material-ui/icons/Edit';
 /// ----- CSS ----- ///
 
 import './cowalkingTicketHeader.css';
+import {Link} from "react-router-dom";
 
 //////// HEADER DU TICKET DE COPIETONNAGE /////////
 
-function CowalkingTicketHeader () {
+function CowalkingTicketHeader ({cowalk}) {
+
     return (
         <div className="cowalkingTicketHeader">
             <div className='cowalkingTicketHeaderTitle'>
+
                 <ButtonRound aria-label="delete">
                     <DeleteIcon/>
                 </ButtonRound>
                 <h2>Itinéraire:</h2>
+
+            <Link
+                to={`/ticket/edit/${cowalk.id}`}
+                >
                 <ButtonRound aria-label="edit">
                     <EditIcon/>
                 </ButtonRound>
+
+            </Link>
             </div>
             <div className='cowalkingTicketRoute'>
                 <div>
                     <h3>Départ:</h3>
-                    <p></p>
+                    <p>{cowalk.startFrom}</p>
                 </div>
                 <span>
                     <TrendingFlatIcon/>
                 </span>
                 <div>
                     <h3>Destination:</h3>
-                    <p></p>
+                    <p>{cowalk.goTo}</p>
                 </div>
             </div>
             <div className='cowalkingTicketDeparture'>
                 <h3>Heure de départ:</h3>
-                <p>23H45</p>
+                <p>{cowalk.startTime.toString()}</p>
             </div>
             
         </div>
