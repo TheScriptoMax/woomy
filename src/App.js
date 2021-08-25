@@ -11,7 +11,7 @@ import Footer from './components/footer/footer';
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
-import EmailConfirmation from './components/EmailConfirmation/EmailConfirmation';
+import AwaitingApprouval from './components/AwaitingApprouval/AwaitingApprouval';
 
 /**** PROFIL *****/
 import Account from './components/Account/Account';
@@ -55,10 +55,9 @@ function App() {
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         {/*<EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>*/}
-                        <EmailNotVerifiedRoute path='/email-confirmation' component={EmailConfirmation}/>
-                    {}
+                        <EmailNotVerifiedRoute path='/awaiting-approuval' component={AwaitingApprouval}/>
 
-                    {/*----- Route private EmailConfirmation -----*/}
+                    {/*----- Route private AwaitingApprouval -----*/}
 
                         {/*----- Ticket -----*/}
                         <PrivateRoute exact path='/ticket' component={CowalkingTicket}/>

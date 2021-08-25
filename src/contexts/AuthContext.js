@@ -18,6 +18,14 @@ export function AuthProvider({children}) {
         return newUserCredentials;
     }
 
+    function reSendEmail(email){
+        return auth.user.sendEmailVerification(email);
+    }
+
+    function resetPassword(email){
+        return auth.sendPasswordResetEmail(email)
+    }
+
     function login(email, password) {
         return auth.signInWithEmailAndPassword(email, password)
     }
@@ -38,7 +46,9 @@ export function AuthProvider({children}) {
         currentUser,
         signup,
         login,
-        logout
+        logout,
+        reSendEmail,
+        resetPassword
     }
 
     return (

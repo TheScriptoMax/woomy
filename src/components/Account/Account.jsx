@@ -1,6 +1,6 @@
 
 /// ----- Material UI ----- ///
-import { Avatar } from '@material-ui/core';
+import {Avatar, Button} from '@material-ui/core';
 
 /// ----- CSS ----- ///
 import './account.css';
@@ -20,7 +20,7 @@ function Account() {
 
     const [userData, setUserData] = useState({});
     const [error, setError] = useState('');
-    const {logout} = useAuth();
+    const {logout, resetPassword} = useAuth();
 
     const {currentUser} = useAuth();
     useEffect(()=> {
@@ -32,6 +32,16 @@ function Account() {
 
     }, [currentUser.uid])
 
+    async function clickResetPassword(){
+        resetPassword(currentUser.email)
+            .then(() => {
+                console.log('email envoyé a ' + currentUser.email);
+            })
+            .catch((error) =>{
+                setError('Marche pas')
+            })
+    }
+
     /*
     async function handleLogout() {
         try {
@@ -42,7 +52,6 @@ function Account() {
             setError('Woops, on a pas réussi à vous déconnecter')
         }
     }
-
      */
 
 
@@ -90,6 +99,7 @@ function Account() {
                     </div>
                 </div>
             </Link>
+            <Button onClick={clickResetPassword}>Reset</Button>
         </div>
       </div>
     );
