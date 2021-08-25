@@ -65,6 +65,42 @@ function CowalkingEdit() {
   );
 
 
+    function handleSubmitCowalk(ev) {
+        ev.preventDefault();
+
+        const promises = [];
+        setLoading(true);
+        setError('');
+        if (goToRef.current.value !== currentCowalk.goTo) {
+            promises.push(database.cowalks.doc(cowalkId).update({
+                goTo: goToRef.current.value,
+            }))
+        }
+
+        if (startFromRef.current.value !== currentCowalk.startFrom) {
+            promises.push(database.cowalks.doc(cowalkId).update({
+                startFrom: startFromRef.current.value,
+            }))
+        }
+
+        if (selectedDate !== new Date(currentCowalk.startTime.seconds * 1000)) {
+            promises.push(database.cowalks.doc(cowalkId).update({
+                startTime: selectedDate,
+            }))
+        }
+
+        Promise.all(promises)
+            .then(() => {
+                console.log('Edit updated successfully');
+            })
+            .catch((error) => {
+                setError(error);
+            })
+            .finally(() => {
+                setLoading(false);
+                history.push(`/ticket/${cowalkId}`);
+            })
+    }
 
     return (
         <>
@@ -94,11 +130,12 @@ function CowalkingEdit() {
               </MuiPickersUtilsProvider>
 
               <div className="button-container">
-                <Button disabled={loading} onClick={handleSubmitCowalk} type="submit" variant="contained">Créer</Button>
+                <Button disabled={loading} onClick={handleSubmitCowalk} type="submit" variant="contained">Modifier</Button>
                 {error && <Alert>{error}</Alert>}
               </div>
             </form>
-          </div>}</>
+          </div>}
+        </>
     );
   }
 
