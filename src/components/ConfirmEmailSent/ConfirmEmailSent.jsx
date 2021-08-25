@@ -33,17 +33,18 @@ export default function ConfirmEmailSent () {
     }, [currentUser.uid])
 
 
-    async function sendEmail(){
-        // reSendEmail(currentUser.email)
-        //     .then(() => {
-        //         console.log('email envoyé a ' + currentUser.email);
-        //     })
-        //     .catch((error) =>{
-        //         setError('Marche pas')
-        //     })
-        console.log(currentUser.email)
+    async function sendEmail(ev){
+        ev.preventDefault();
+        console.log(currentUser)
+        try{
+        reSendEmail(currentUser)
+            .then(() => {
+                console.log('email envoyé a ' + currentUser.email);
+            })
+        } catch(error) {
+            setError('Marche pas');
+        }
     }
-
 
     /*
     async function handleLogout() {

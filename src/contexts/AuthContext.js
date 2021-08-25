@@ -18,8 +18,9 @@ export function AuthProvider({children}) {
         return newUserCredentials;
     }
 
-    function reSendEmail(email){
-        // return auth.;
+    async function reSendEmail(){
+        const newEmailVerification = await auth.currentUser.sendEmailVerification();
+        return newEmailVerification;
     }
 
     function resetPassword(email){
