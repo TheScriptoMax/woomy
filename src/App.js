@@ -13,20 +13,23 @@ import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
 import AwaitingApprouval from './components/AwaitingApprouval/AwaitingApprouval';
 import SendNewValidation from './components/SendNewValidation/SendNewValidation';
+import PasswordChange from './components/PasswordChange/PasswordChange';
 
 /**** PROFIL *****/
 import Account from './components/Account/Account';
 import Params from './components/Params/Params';
 
-/**** CRUD COPIETONNAGE *****/
+
+
+/**** CRUD COPIETONNAGE *****/ 
 import CowalkingList from './components/CowalkingList/CowalkingList';
 import CowalkingTicket from './components/CowalkingTicket/CowalkingTicket';
 import CowalkingCreate from './components/CowalkingCreate/CowalkingCreate';
 import CowalkingSearch from './components/CowalkingSearch/CowalkingSearch';
-
-/**** NOTIFICATION *****/
+   
+    
+/**** NOTIFICATION *****/ 
 import Notification from './components/Notifications/Notification';
-
 
 /// ----- CSS ----- ///
 import './App.css';
@@ -71,6 +74,7 @@ function App() {
                         {/*----- Account -----*/}
                         <PrivateRoute exact path='/account' component={Account}/>
                         <PrivateRoute exact path='/param' component={Params}/>
+                        <PrivateRoute path='/passwordchange' component={PasswordChange}/>
 
                 </Switch>
                 <Footer/>
