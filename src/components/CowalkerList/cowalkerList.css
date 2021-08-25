@@ -1,4 +1,10 @@
 .cowalkerList{
     margin: 0 auto;
-    
+}
+
+.CowalkerListcontainer svg{
+    align-items: center;
+    width: 100%;
+    height:65px;
+    padding-bottom:30px;
 }

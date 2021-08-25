@@ -41,7 +41,7 @@ import PrivateRoute from './components/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/EmailNotVerifiedRoute";
 
 function App() {
-
+  
     return (
         <Router>
 
@@ -77,6 +77,7 @@ function App() {
             </AuthProvider>
         </Router>
     );
+
 }
 
 export default App;

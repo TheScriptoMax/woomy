@@ -1,6 +1,7 @@
 
 /// ----- Material UI ----- ///
 import { Avatar } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
 /// ----- CSS ----- ///
 import './account.css';
@@ -90,6 +91,10 @@ function Account() {
                     </div>
                 </div>
             </Link>
+            <div className="button-bot-account">
+                <Button variant="contained"> Se deconnecter </Button>
+            </div>
+   
         </div>
       </div>
     );
