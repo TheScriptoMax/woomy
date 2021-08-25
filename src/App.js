@@ -20,7 +20,8 @@ import PasswordChange from './components/PasswordChange/PasswordChange';
 import Account from './components/Account/Account';
 import Params from './components/Params/Params';
 
-
+/**** ADMIN *****/
+import AdminPlace from "./components/AdminPlace/AdminPlace";
 
 /**** CRUD COPIETONNAGE *****/ 
 import CowalkingList from './components/CowalkingList/CowalkingList';
@@ -78,6 +79,8 @@ function App() {
                         <PrivateRoute exact path='/account' component={Account}/>
                         <PrivateRoute exact path='/param' component={Params}/>
                         <PrivateRoute path='/passwordchange' component={PasswordChange}/>
+                        {/*----- Account -----*/}
+                        <Route exact path='/adminplace' component={AdminPlace}/>
 
                 </Switch>
                 <Footer/>
