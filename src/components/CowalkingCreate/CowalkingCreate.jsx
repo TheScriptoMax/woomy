@@ -30,7 +30,7 @@ import {Alert} from "@material-ui/lab";
 
 function CoWalkingCreate() {
 
-  const [selectedDate, handleDateChange] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const goToRef = useRef();
@@ -80,13 +80,13 @@ function CoWalkingCreate() {
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <DateTimePicker
             value={selectedDate}
-            onChange={handleDateChange}
+            onChange={setSelectedDate}
             minutesStep={5}
             />
           </MuiPickersUtilsProvider>
           <div className="button-container">
             <Button disabled={loading} onClick={handleSubmitCowalk} type="submit" variant="contained">Créer</Button>
-            {error && <Alert>{error}</Alert>}
+            {error && <Alert severity="error">{error}</Alert>}
           </div>
         </form>
       </div>
