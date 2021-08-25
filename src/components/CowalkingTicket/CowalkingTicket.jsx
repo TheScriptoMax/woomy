@@ -1,5 +1,8 @@
+/// ----- Import Components ----- ///
 import CowalkingTicketHeader from "../CowalkingTicketHeader/CowalkingTicketHeader";
 import CowalkerList from "../CowalkerList/CowalkerList";
+
+///////////  TICKET D'UN COPIETONNAGE  //////////
 
 function CowalkingTicket () {
 
