@@ -18,7 +18,9 @@ import {database} from '../../firebase';
 
 function CowalkingTicketHeader({cowalk}) {
 
+
     const history = useHistory();
+    const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris", hour:"2-digit",minute:"2-digit"})
 
     function handleDeleteCowalk(ev) {
         ev.preventDefault();
@@ -96,7 +98,7 @@ function CowalkingTicketHeader({cowalk}) {
             </div>
             <div className='cowalkingTicketDeparture'>
                 <h3>Heure de départ:</h3>
-                <p>{cowalk.startTime.toString()}</p>
+                <p>{currentCowalkStartTime}</p>
             </div>
 
         </div>

@@ -5,9 +5,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { format} from 'date-fns'
 /// ----- Import image ----- ///
 import ImageProfil from './profile-pic-placeholder.png'
+
 
 /// ----- CSS ----- ///
 import "./cowalkingCard.css";
@@ -19,10 +19,10 @@ import {Link} from "react-router-dom";
 
 function CowalkingCard ({cowalk,index}) {
     
+    const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris", hour:"2-digit",minute:"2-digit"})
+    
     return(
-        <Link
-            to={`/ticket/${cowalk.id}`}
-            >
+        <Link to="/ticket">
             <li className='cowalkingCard' key={cowalk.id}>
                 <div className='cowalkingCardTitle'>
                     <h3>itinéraire:{index+1}</h3>
@@ -39,7 +39,7 @@ function CowalkingCard ({cowalk,index}) {
                             <span>{cowalk.goTo}</span>
                         </div>
                     </div>
-                    <p>Heure de départ:{format(new Date(cowalk.startFrom),"MM-dd'T'HH:mm")}</p>
+                    <p>Heure de départ:{currentCowalkStartTime}</p>
                 </div>
                 <div className='cowalkingCardFooter'>
                     <div className='cowalkingCardCount'>
