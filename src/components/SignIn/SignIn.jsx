@@ -53,7 +53,7 @@ export default function SignIn () {
                         })
                 })
                 .then(() => {
-                        history.push("/send-email")
+                        history.push("/send-confirm")
                     }
                 );
         } catch
