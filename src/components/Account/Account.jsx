@@ -99,6 +99,9 @@ function Account() {
                     </div>
                 </div>
             </Link>
+            <div className="button-bot-account">
+                <Button variant="contained"> Se deconnecter </Button>
+            </div>
             <Button onClick={clickResetPassword}>Reset</Button>
         </div>
       </div>

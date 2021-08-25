@@ -30,9 +30,7 @@ function NotificationCard() {
             <div className="container-button">
                 <Button variant="contained">Accepter</Button>
             </div>
-            
         </div>
     );
   }
-  
   export default NotificationCard;
