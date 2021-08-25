@@ -41,49 +41,7 @@ import PrivateRoute from './components/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/EmailNotVerifiedRoute";
 
 function App() {
-
-<<<<<<< HEAD
-  return (
-<<<<<<< HEAD
-    
-        
-      <Router>
-        <div>
-          <Header/>
-            <Switch>
-              <Route exact path='/account' component={Account}/>
-              <Route exact path='/param' component={Params}/>
-              <Route exact path='/message' component={Notification}/>
-              <Route exact path='/ticket' component={CowalkingTicket}/>
-              <Route exact path='/create' component={CowalkingCreate}/>
-              <Route exact path='/search' component={CowalkingSearch}/>
-              <Route exact path='/list' component={CowalkingList}/>
-            </Switch>
-          <Footer/>
-        </div>
-      </Router>
-    
-
-=======
-    <Router>
-      <div>
-        <Header/>
-          <Switch>
-            <Route exact path='/ticket' component={CowalkingTicket}/>
-            <Route exact path='/create' component={CowalkingCreate}/>
-            <Route exact path='/search' component={CowalkingSearch}/>
-            <Route exact path='/account' component={Account}/>
-            <Route exact path='/message' component={Notification}/>
-            <Route exact path='/param' component={Params}/>
-            <Route exact path='/list' component={CowalkingList}/>
-            <Route exact path='/login' component={Login}/>
-          </Switch>
-        <Footer/>
-      </div>
-    </Router>
->>>>>>> clemvr
-  );
-=======
+  
     return (
         <Router>
 
@@ -119,7 +77,7 @@ function App() {
             </AuthProvider>
         </Router>
     );
->>>>>>> 27cd578de646a29633238f86180fdac4475c4e3f
+
 }
 
 export default App;
