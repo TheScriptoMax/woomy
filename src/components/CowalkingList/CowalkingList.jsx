@@ -16,6 +16,7 @@ function CowalkingList () {
 
     const [cowalks,setCowalks] = useState([])
 
+
     useEffect(() => {
         database.cowalks
             .get()
@@ -32,18 +33,16 @@ function CowalkingList () {
     }, []);
 
     return (
-
-
         <div className="container">
+
             {cowalks.length ?
+
             <ul className='cowalkingList'>
                 {
                     cowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
                 }
             </ul> : <p>Allez vous faire cuire un oeuf</p> }
         </div>
-
-
     )
 }
 

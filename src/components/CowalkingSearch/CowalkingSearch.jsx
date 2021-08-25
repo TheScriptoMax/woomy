@@ -21,7 +21,7 @@ import DateFnsUtils from '@date-io/date-fns'
 function CoWalkingSearch() {
   const [selectedDate, handleDateChange] = useState(new Date());
     return (
-      <div className="colwalkingsearch-container">
+      <div className=" container colwalkingsearch-container">
          <h2>Rechercher un itinéraire</h2>
          <form className="searchform">
 

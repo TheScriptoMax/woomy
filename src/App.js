@@ -44,6 +44,7 @@ function App() {
 
 <<<<<<< HEAD
   return (
+<<<<<<< HEAD
     
         
       <Router>
@@ -63,6 +64,24 @@ function App() {
       </Router>
     
 
+=======
+    <Router>
+      <div>
+        <Header/>
+          <Switch>
+            <Route exact path='/ticket' component={CowalkingTicket}/>
+            <Route exact path='/create' component={CowalkingCreate}/>
+            <Route exact path='/search' component={CowalkingSearch}/>
+            <Route exact path='/account' component={Account}/>
+            <Route exact path='/message' component={Notification}/>
+            <Route exact path='/param' component={Params}/>
+            <Route exact path='/list' component={CowalkingList}/>
+            <Route exact path='/login' component={Login}/>
+          </Switch>
+        <Footer/>
+      </div>
+    </Router>
+>>>>>>> clemvr
   );
 =======
     return (
