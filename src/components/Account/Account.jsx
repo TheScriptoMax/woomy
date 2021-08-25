@@ -1,7 +1,7 @@
 
 /// ----- Material UI ----- ///
 import {Avatar, Button} from '@material-ui/core';
-
+import Alert from '@material-ui/lab/Alert';
 /// ----- CSS ----- ///
 import './account.css';
 
@@ -23,6 +23,8 @@ function Account() {
     const [error, setError] = useState('');
     const {logout, resetPassword} = useAuth();
 
+    const [isShow, setIsShow] = useState(true);
+
     const history = useHistory();
 
     const {currentUser} = useAuth();
@@ -35,10 +37,11 @@ function Account() {
 
     }, [currentUser.uid])
 
-    async function clickResetPassword(){
+    async function clickResetPassword(e){
         resetPassword(currentUser.email)
             .then(() => {
                 console.log('email envoyé a ' + currentUser.email);
+                setIsShow(!isShow);
             })
             .catch((error) =>{
                 setError('Marche pas')
@@ -57,14 +60,13 @@ function Account() {
     }
 
 
-
     return (
       <div className='container'>
       <div className="account-top">
         <Avatar/>
         <h2>Mon compte</h2>
       </div>
-        <div >
+        <div className="account-list">
             <div className='account-field'>
                 <p>Nom</p>
                 <div className="account-field-result">
@@ -95,6 +97,14 @@ function Account() {
                     <p>{userData.phoneNumber}</p>
                 </div>
             </div>
+            <Button onClick={clickResetPassword}>
+                <div className='account-field'>
+                        <p>Réinitialiser le mot de passe</p>
+                        <div className="account-field-result">
+                        </div>
+                </div>
+            </Button>
+            {!isShow && <Alert severity="info">Un email vous a été envoyé</Alert>}
             <Link to="/param">
                 <div className='account-field'>
                     <p>Parametres</p>
@@ -105,7 +115,6 @@ function Account() {
             <div className="button-bot-account">
                 <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
             </div>
-            <Button onClick={clickResetPassword}>Reset</Button>
         </div>
       </div>
     );
