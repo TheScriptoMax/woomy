@@ -26,9 +26,6 @@ function CowalkerItem () {
                 <ButtonRound>
                     <PhoneIcon/>
                 </ButtonRound>
-                <ButtonRound>
-                    <MessageIcon/>
-                </ButtonRound>
             </div>
         </li>
     )

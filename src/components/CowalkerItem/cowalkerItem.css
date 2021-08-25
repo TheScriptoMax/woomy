@@ -22,7 +22,7 @@
 .cowalkerItemButton{
     max-width: 12.5rem;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     margin: 0 auto;
 }
