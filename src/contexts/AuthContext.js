@@ -19,7 +19,7 @@ export function AuthProvider({children}) {
     }
 
     function reSendEmail(email){
-        return auth.user.sendEmailVerification(email);
+        // return auth.;
     }
 
     function resetPassword(email){

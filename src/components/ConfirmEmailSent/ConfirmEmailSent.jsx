@@ -33,15 +33,15 @@ export default function ConfirmEmailSent () {
     }, [currentUser.uid])
 
 
-    function sendEmail(){
-        const userEmail = auth.currentUser.email;
-
-        reSendEmail(auth.currentUser)
-            .then(
-                console.log('Email envoyé')
-            );
-
-        ;
+    async function sendEmail(){
+        // reSendEmail(currentUser.email)
+        //     .then(() => {
+        //         console.log('email envoyé a ' + currentUser.email);
+        //     })
+        //     .catch((error) =>{
+        //         setError('Marche pas')
+        //     })
+        console.log(currentUser.email)
     }
 
 
@@ -72,7 +72,7 @@ export default function ConfirmEmailSent () {
         </div>
 
         {/* MATERIAL UI BUTTON FOR CLOSE VALIDATION */}
-        <Button>Renvoyer un mail</Button>
+        <Button onClick={sendEmail}>Renvoyer un mail</Button>
 
     </div>
     );
