@@ -1,7 +1,8 @@
 /// ----- Material UI ----- ///
 import { Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-
+import Alert from '@material-ui/lab/Alert';
+import { useState } from 'react';
 /// ----- CSS ----- ///
 import './account.css';
 
@@ -11,13 +12,19 @@ import {Link} from "react-router-dom";
 //////// Page de profile ////////
 
 function Account() {
+        const [isShow, setIsShow] = useState(true);
+      
+        const handleClick = () => {
+          setIsShow(!isShow);
+        };
+
     return (
       <div className='container'>
       <div className="account-top">
         <Avatar/>
         <h2>Mon compte</h2>
       </div>
-        <div >
+        <div className="account-list">
             <div className='account-field'>
                 <p>Nom</p>
                 <div className="account-field-result">
@@ -48,6 +55,14 @@ function Account() {
                     <p>0600000000</p>
                 </div>
             </div>
+            <button onClick={handleClick}>
+                <div className='account-field'>
+                        <p>Réinitialiser le mot de passe</p>
+                        <div className="account-field-result">
+                        </div>
+                </div>
+            </button>
+            {!isShow && <Alert severity="info">Un email vous a été envoyé</Alert>}
             <Link to="/param">
                 <div className='account-field'>
                     <p>Parametres</p>
