@@ -8,29 +8,78 @@ import EditIcon from '@material-ui/icons/Edit';
 /// ----- CSS ----- ///
 
 import './cowalkingTicketHeader.css';
-import {Link} from "react-router-dom";
+
+// IMPORT MODULES
+import {Link, useHistory} from "react-router-dom";
+import {useEffect} from "react";
+import {database} from '../../firebase';
 
 //////// HEADER DU TICKET DE COPIETONNAGE /////////
 
-function CowalkingTicketHeader ({cowalk}) {
+function CowalkingTicketHeader({cowalk}) {
+
+    const history = useHistory();
+
+    function handleDeleteCowalk(ev) {
+        ev.preventDefault();
+        const deletePromises = [];
+
+
+        database.membersPending(cowalk.id)
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    deletePromises.push(
+                        database.membersPending(cowalk.id).doc(doc.id).delete()
+                    )
+                })
+            })
+
+        database.membersApproved(cowalk.id)
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    deletePromises.push(
+                        database.membersApproved(cowalk.id).doc(doc.id).delete()
+                    )
+                })
+            })
+
+
+        deletePromises.push(database.cowalks.doc(cowalk.id)
+            .delete())
+
+        Promise.all(deletePromises)
+            .then(() => {
+                console.log('Docs supprimés')
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+            .finally(() => {
+                history.push("/list")
+            })
+
+
+    }
 
     return (
         <div className="cowalkingTicketHeader">
             <div className='cowalkingTicketHeaderTitle'>
 
-                <ButtonRound aria-label="delete">
+                <ButtonRound onClick={handleDeleteCowalk} aria-label="delete">
                     <DeleteIcon/>
                 </ButtonRound>
                 <h2>Itinéraire:</h2>
 
-            <Link
-                to={`/ticket/edit/${cowalk.id}`}
+                <Link
+                    to={`/ticket/edit/${cowalk.id}`}
                 >
-                <ButtonRound aria-label="edit">
-                    <EditIcon/>
-                </ButtonRound>
+                    <ButtonRound aria-label="edit">
+                        <EditIcon/>
+                    </ButtonRound>
 
-            </Link>
+                </Link>
             </div>
             <div className='cowalkingTicketRoute'>
                 <div>
@@ -49,7 +98,7 @@ function CowalkingTicketHeader ({cowalk}) {
                 <h3>Heure de départ:</h3>
                 <p>{cowalk.startTime.toString()}</p>
             </div>
-            
+
         </div>
     )
 };

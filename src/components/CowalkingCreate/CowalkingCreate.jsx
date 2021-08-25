@@ -52,7 +52,7 @@ function CoWalkingCreate() {
         createdAt: database.getCurrentTimestamp,
         owner: currentUser.uid,
       }).then(()=>{
-            history.push("/login")
+            history.push("/list")
           })
     } catch(error) {
       setError(error.message)

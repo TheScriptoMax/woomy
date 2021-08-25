@@ -55,8 +55,6 @@ function CowalkerList({cowalk}) {
             ).then(() => {
             setIsMember(true)
         })
-
-
     }
 
 
