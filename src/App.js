@@ -72,6 +72,7 @@ function App() {
                         {/*----- Account -----*/}
                         <PrivateRoute exact path='/account' component={Account}/>
                         <PrivateRoute exact path='/param' component={Params}/>
+                        <PrivateRoute path='/passwordchange' component={PasswordChange}/>
 
                 </Switch>
                 <Footer/>
