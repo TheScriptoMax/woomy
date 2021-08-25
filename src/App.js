@@ -10,7 +10,8 @@ import Footer from './components/footer/footer';
 /**** CONNEXION *****/
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
-import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent'
+import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
+import EmailConfirmation from './components/EmailConfirmation/EmailConfirmation';
 
 /**** PROFIL *****/
 import Account from './components/Account/Account';
@@ -25,10 +26,6 @@ import CowalkingSearch from './components/CowalkingSearch/CowalkingSearch';
 /**** NOTIFICATION *****/
 import Notification from './components/Notifications/Notification';
 
-
-    /**** SIGN IN ****/
-    import SignInValidation from './components/SignInValidation/SignInValidation'
-    import SignInConfirm from './components/SignInConfirm/SignInConfirm'
 
 /// ----- CSS ----- ///
 import './App.css';
@@ -57,10 +54,11 @@ function App() {
                         <Route path='/login' component={Login}/>
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
-                        <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+                        {/*<EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>*/}
+                        <EmailNotVerifiedRoute path='/email-confirmation' component={EmailConfirmation}/>
+                    {}
 
-
-                    {/*----- Route private SignInConfirm -----*/}
+                    {/*----- Route private EmailConfirmation -----*/}
 
                         {/*----- Ticket -----*/}
                         <PrivateRoute exact path='/ticket' component={CowalkingTicket}/>
@@ -72,9 +70,6 @@ function App() {
                         {/*----- Account -----*/}
                         <PrivateRoute exact path='/account' component={Account}/>
                         <PrivateRoute exact path='/param' component={Params}/>
-
-
-                    {/*<Route exact path='/confirm' component={SignInConfirm}/>*/}
 
                 </Switch>
                 <Footer/>

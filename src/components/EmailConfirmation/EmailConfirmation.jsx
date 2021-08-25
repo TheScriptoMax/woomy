@@ -2,11 +2,11 @@
 import Button from '@material-ui/core/Button';
 // CSS IMPORT
 
-import './SignInConfirm.css'; 
+import './EmailConfirmation.css';
 
 //PAGE VALIDATION INCRIPTION 
 
-export default function SignInConfirm () {
+export default function EmailConfirmation () {
     return (
 
     <div className='signIn-confirm container'>
