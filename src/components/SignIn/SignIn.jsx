@@ -49,7 +49,7 @@ export default function SignIn () {
                             lastname: lastnameRef.current.value,
                             phoneNumber: phoneRef.current.value,
                             createdAt: database.getCurrentTimestamp,
-                            role: 'user'
+                            admin:false
                         })
                 })
                 .then(() => {
