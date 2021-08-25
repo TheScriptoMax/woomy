@@ -12,6 +12,8 @@
     /**** PROFIL *****/ 
     import Account from './components/Account/Account';
     import Params from './components/Params/Params';
+    import Admin from './components/Admin/Admin'
+    import AdminPlace from './components/AdminPlace/AdminPlace';
 
     /**** CRUD COPIETONNAGE *****/ 
     import CowalkingList from './components/CowalkingList/CowalkingList';
@@ -50,6 +52,8 @@ function App() {
             <Route exact path='/list' component={CowalkingList}/>
             <Route exact path='/signin' component={SignIn}/>
             <Route exact path='/passwordchange' component={PasswordChange}/>
+            <Route exact path='/admin' component={Admin}/>
+            <Route exact path='/adminplace' component={AdminPlace}/>
           </Switch>
         <Footer/>
       </div>
