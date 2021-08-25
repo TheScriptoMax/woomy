@@ -10,13 +10,14 @@ import Button from '@material-ui/core/Button';
 
 // CSS IMPORT
 import './Login.css';
+import {Alert} from "@material-ui/lab";
 
 //PAGE CONNEXION
 export default function Login () {
 
     const emailRef = useRef();
     const passwordRef = useRef();
-    const [errorMessage, setErrorMessage] = useState('');
+    const [error, setError] = useState('');
     const {login} = useAuth();
     const [loading, setLoading] = useState(false);
     const history = useHistory();
@@ -26,12 +27,12 @@ export default function Login () {
 
         try {
             setLoading(true);
-            setErrorMessage('');
-            await login(emailRef.current.value, passwordRef.current.value)
-            history.push('/account');
-            //TODO : rediriger vers dashboard
+            setError('');
+            await login(emailRef.current.value, passwordRef.current.value).then(()=> {
+                history.push('/account');
+            })
         } catch(error) {
-            setErrorMessage(error.message);
+            setError('Echec de connexion');
         }
 
         setLoading(false);
@@ -41,14 +42,14 @@ export default function Login () {
 
     <div className='login container'>
 
+        {error && <Alert severity="error">{error}</Alert> }
         <form className='login-content' onSubmit={handleSubmit}>
 
             {/* MATERIAL UI INPUT TO COMPLETE FOR LOGIN */}
             <TextField inputRef={emailRef} id="standard-basic" label="Entrez votre email" variant="standard" />
 
-            <TextField inputRef={passwordRef} id="standard-basic" label="Entrez votre mot de passe" variant="standard" />
+            <TextField type="password" inputRef={passwordRef} id="standard-basic" label="Entrez votre mot de passe" variant="standard" />
             <p className='forgot-password'>Vous avez oublié votre mot de passe? <a href=''>Cliquez ici</a></p>
-
             <div className='button-container'>
                 <Button disabled={loading} type='submit' variant="contained">S'identifier</Button>
             </div>
