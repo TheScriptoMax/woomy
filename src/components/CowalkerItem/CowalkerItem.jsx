@@ -16,6 +16,7 @@ import './cowalkerItem.css'
 
 function CowalkerItem () {
 
+
     return(
         <li className="cowalkerItem">
             <figure>

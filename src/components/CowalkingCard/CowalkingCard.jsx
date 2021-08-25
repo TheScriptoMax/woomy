@@ -20,7 +20,9 @@ import {Link} from "react-router-dom";
 function CowalkingCard ({cowalk,index}) {
     
     return(
-        <Link to="/ticket">
+        <Link
+            to={`/ticket/${cowalk.id}`}
+            >
             <li className='cowalkingCard' key={cowalk.id}>
                 <div className='cowalkingCardTitle'>
                     <h3>itinéraire:{index+1}</h3>

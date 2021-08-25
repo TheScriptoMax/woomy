@@ -39,6 +39,7 @@ import {
 } from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/EmailNotVerifiedRoute";
+import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
 
 function App() {
   
@@ -60,11 +61,12 @@ function App() {
                     {/*----- Route private AwaitingApprouval -----*/}
 
                         {/*----- Ticket -----*/}
-                        <PrivateRoute exact path='/ticket' component={CowalkingTicket}/>
+                        <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
                         <PrivateRoute exact path='/create' component={CowalkingCreate}/>
                         <PrivateRoute exact path='/search' component={CowalkingSearch}/>
                         <PrivateRoute exact path='/list' component={CowalkingList}/>
                         <PrivateRoute exact path='/message' component={Notification}/>
+                        <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
 
                         {/*----- Account -----*/}
                         <PrivateRoute exact path='/account' component={Account}/>

@@ -51,12 +51,8 @@ function CoWalkingCreate() {
         startTime: selectedDate,
         createdAt: database.getCurrentTimestamp,
         owner: currentUser.uid,
-      }).then((docRef)=> {
-        database.membersApproved(docRef.id).doc(currentUser.uid).set({
-          'boss':currentUser.uid,
-        })
       }).then(()=>{
-            history.push("/login")
+            history.push("/list")
           })
     } catch(error) {
       setError(error.message)
