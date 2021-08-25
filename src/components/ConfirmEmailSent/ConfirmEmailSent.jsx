@@ -1,17 +1,22 @@
 // CSS FIREBASE
 import {useAuth} from "../../contexts/AuthContext";
 import {useState, useEffect} from "react";
+import {auth, database} from "../../firebase";
+
+// REACT ROUTER DOM
+import {Link, useHistory} from "react-router-dom";
+
 
 // MATERIAL UI IMPORT
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
+
 // import {Link} from "react-router-dom";
 
 // CSS IMPORT
 
 import './ConfirmEmailSent.css';
-import {auth, database} from "../../firebase";
 
 //PAGE VALIDATION INCRIPTION 
 
@@ -20,6 +25,8 @@ export default function ConfirmEmailSent () {
     const [userData, setUserData] = useState({});
     const [error, setError] = useState('');
     const {logout, reSendEmail} = useAuth();
+
+    const history = useHistory();
 
     const {currentUser} = useAuth();
 
@@ -40,6 +47,7 @@ export default function ConfirmEmailSent () {
         reSendEmail(currentUser)
             .then(() => {
                 console.log('email envoyé a ' + currentUser.email);
+                history.push('/send-new-validation');
             })
         } catch(error) {
             setError('Marche pas');
@@ -73,7 +81,7 @@ export default function ConfirmEmailSent () {
         </div>
 
         {/* MATERIAL UI BUTTON FOR CLOSE VALIDATION */}
-        <Button onClick={sendEmail}>Renvoyer un mail</Button>
+        <Button component={Link} to={'/send-new-validation'} onClick={sendEmail}>Renvoyer un mail</Button>
 
     </div>
     );

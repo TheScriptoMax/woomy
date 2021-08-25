@@ -12,6 +12,7 @@ import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
 import AwaitingApprouval from './components/AwaitingApprouval/AwaitingApprouval';
+import SendNewValidation from './components/SendNewValidation/SendNewValidation';
 
 /**** PROFIL *****/
 import Account from './components/Account/Account';
@@ -54,7 +55,8 @@ function App() {
                         <Route path='/login' component={Login}/>
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
-                        {/*<EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>*/}
+                        <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+
                         <EmailNotVerifiedRoute path='/awaiting-approuval' component={AwaitingApprouval}/>
 
                     {/*----- Route private AwaitingApprouval -----*/}
