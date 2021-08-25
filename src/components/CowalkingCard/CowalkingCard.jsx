@@ -36,7 +36,7 @@ function CowalkingCard ({cowalk,index}) {
                             <span>{cowalk.goTo}</span>
                         </div>
                     </div>
-                    <p>Heure de départ:{cowalk.startTime.match(/[\d]{2}:[\d]{2}/g)}</p>
+                    <p>Heure de départ:{cowalk.startTime.toString()}</p>
                 </div>
                 <div className='cowalkingCardFooter'>
                     <div className='cowalkingCardCount'>
