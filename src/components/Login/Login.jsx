@@ -29,7 +29,6 @@ export default function Login () {
             setErrorMessage('');
             await login(emailRef.current.value, passwordRef.current.value)
             history.push('/account');
-            //TODO : rediriger vers dashboard
         } catch(error) {
             setErrorMessage(error.message);
         }
@@ -46,7 +45,7 @@ export default function Login () {
             {/* MATERIAL UI INPUT TO COMPLETE FOR LOGIN */}
             <TextField inputRef={emailRef} id="standard-basic" label="Entrez votre email" variant="standard" />
 
-            <TextField inputRef={passwordRef} id="standard-basic" label="Entrez votre mot de passe" variant="standard" />
+            <TextField type="password" inputRef={passwordRef} id="standard-basic" label="Entrez votre mot de passe" variant="standard" />
             <p className='forgot-password'>Vous avez oublié votre mot de passe? <a href=''>Cliquez ici</a></p>
 
             <div className='button-container'>

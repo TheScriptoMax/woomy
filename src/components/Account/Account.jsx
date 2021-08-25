@@ -1,7 +1,6 @@
 
 /// ----- Material UI ----- ///
-import { Avatar } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import {Avatar, Button} from '@material-ui/core';
 
 /// ----- CSS ----- ///
 import './account.css';
@@ -10,6 +9,7 @@ import './account.css';
 import {useAuth} from "../../contexts/AuthContext";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {useHistory} from "react-router-dom";
 
 
 /// ----- Firebase ///
@@ -21,7 +21,9 @@ function Account() {
 
     const [userData, setUserData] = useState({});
     const [error, setError] = useState('');
-    const {logout} = useAuth();
+    const {logout, resetPassword} = useAuth();
+
+    const history = useHistory();
 
     const {currentUser} = useAuth();
     useEffect(()=> {
@@ -33,7 +35,17 @@ function Account() {
 
     }, [currentUser.uid])
 
-    /*
+    async function clickResetPassword(){
+        resetPassword(currentUser.email)
+            .then(() => {
+                console.log('email envoyé a ' + currentUser.email);
+            })
+            .catch((error) =>{
+                setError('Marche pas')
+            })
+    }
+
+
     async function handleLogout() {
         try {
             await logout().then(()=> {
@@ -44,7 +56,6 @@ function Account() {
         }
     }
 
-     */
 
 
     return (
@@ -92,9 +103,9 @@ function Account() {
                 </div>
             </Link>
             <div className="button-bot-account">
-                <Button variant="contained"> Se deconnecter </Button>
+                <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
             </div>
-   
+            <Button onClick={clickResetPassword}>Reset</Button>
         </div>
       </div>
     );
