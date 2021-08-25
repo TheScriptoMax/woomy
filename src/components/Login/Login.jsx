@@ -27,11 +27,12 @@ export default function Login () {
 
         try {
             setLoading(true);
-            
+
             setError('');
             await login(emailRef.current.value, passwordRef.current.value).then(()=> {
                 history.push('/account');
-            })
+                }
+            )
 
         } catch(error) {
             setError('Echec de connexion');

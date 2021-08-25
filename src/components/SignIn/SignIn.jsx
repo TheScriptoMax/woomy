@@ -49,7 +49,7 @@ export default function SignIn () {
                             lastname: lastnameRef.current.value,
                             phoneNumber: phoneRef.current.value,
                             createdAt: database.getCurrentTimestamp,
-                            role: 'user'
+                            admin:false
                         })
                 })
                 .then(() => {
@@ -84,7 +84,7 @@ export default function SignIn () {
             
             <TextField type="password" inputRef={passwordConfirmRef} id="standard-basic" label="Confirmez le mot de passe" variant="standard" />
 
-            {error && <Alert>{error}</Alert>}
+            {error && <Alert severity="error">{error}</Alert>}
 
             <Button disabled={loading} type="submit" variant="contained">S'inscrire</Button>
 
