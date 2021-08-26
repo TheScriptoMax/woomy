@@ -4,11 +4,7 @@ import Alert from '@material-ui/lab/Alert';
 import { database } from '../../firebase';
 
 // REACT IMPORT
-import {useRef, useState} from "react";
-<<<<<<< HEAD
-=======
-import { useEffect } from 'react';
->>>>>>> Sam
+import {useRef, useState, useEffect} from "react";
 
 //ADD A LOCATION
 export default function AdminDistrict () {
@@ -66,10 +62,7 @@ export default function AdminDistrict () {
         }
         
         //TODO: changer la saisie des communes à la main par un select (collection séparée, requête de cette collection dans le textfield)
-<<<<<<< HEAD
-=======
         //TODO: recherche des quartiers
->>>>>>> Sam
     
     }
 
@@ -80,9 +73,7 @@ export default function AdminDistrict () {
          <p className="create-district">Ajout d'un nouveau quartier</p>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
-<<<<<<< HEAD
-            <TextField select inputRef={townRef} label="Commune" variant="outlined"/>
-=======
+
             <TextField select inputRef={townRef} label="Commune" variant="outlined">
             {towns.map((option) => (
             <option key={option.id} value={option.name}>

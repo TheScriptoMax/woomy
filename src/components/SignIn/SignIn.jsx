@@ -1,6 +1,7 @@
 // REACT IMPORT
 import {useRef, useState} from "react";
 import {useHistory} from "react-router-dom";
+import {database} from '../../firebase';
 
 // MATERIAL UI IMPORT
 import TextField from '@material-ui/core/TextField';
@@ -11,7 +12,6 @@ import Button from '@material-ui/core/Button';
 // CSS IMPORT
 import './SignIn.css';
 import {useAuth} from "../../contexts/AuthContext";
-import {database} from "../../firebase";
 import {Alert} from "@material-ui/lab";
 
 //PAGE INSCRIPTION
@@ -29,6 +29,9 @@ export default function SignIn () {
     const history = useHistory();
 
     const {signup} = useAuth()
+
+
+
 
     async function handleSubmit(ev) {
         ev.preventDefault();
@@ -49,8 +52,7 @@ export default function SignIn () {
                             lastname: lastnameRef.current.value,
                             phoneNumber: phoneRef.current.value,
                             createdAt: database.getCurrentTimestamp,
-                            admin:false
-                        })
+                        });
                 })
                 .then(() => {
                         history.push("/send-confirm")
@@ -88,6 +90,8 @@ export default function SignIn () {
 
             <Button disabled={loading} type="submit" variant="contained">S'inscrire</Button>
 
+
+
         </form>
 
 
@@ -105,7 +109,7 @@ export default function SignIn () {
                 <p>Pièce d'identité</p>
                 {/* MATERIAL UI BUTTON FOR DOWLOAD IDENTITY CARD */}
                 <IconButton aria-label="download">
-                    <ArrowDownwardIcon />
+                    <input type="file" hidden />
                 </IconButton>
             </div> 
             
