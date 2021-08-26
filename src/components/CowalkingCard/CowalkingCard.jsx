@@ -14,6 +14,7 @@ import "./cowalkingCard.css";
 
 /// ----- React Modules ----- ///
 import {Link} from "react-router-dom";
+import {database} from "../../firebase";
 
 /////////// CARTE DE COPIETONNAGE //////////////
 
@@ -39,7 +40,7 @@ function CowalkingCard ({cowalk,index}) {
                             <span>{cowalk.goTo}</span>
                         </div>
                     </div>
-                    <p>Heure de départ:{format(new Date(cowalk.startFrom),"MM-dd'T'HH:mm")}</p>
+                    <p>Heure de départ:{cowalk.startTime.toString()}</p>
                 </div>
                 <div className='cowalkingCardFooter'>
                     <div className='cowalkingCardCount'>

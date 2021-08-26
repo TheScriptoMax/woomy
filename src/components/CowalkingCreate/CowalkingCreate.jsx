@@ -73,7 +73,7 @@ function CoWalkingCreate() {
           </TextField>
           <InputLabel className="label">Destination</InputLabel>
           <TextField defaultValue="" inputRef={goToRef} select>
-            <MenuItem value="vealpeaugo" >Velpeau</MenuItem>
+            <MenuItem value="vealpeau" >Velpeau</MenuItem>
             <MenuItem value="spdcgo" >SPDC</MenuItem>
             <MenuItem value="prout" >Prout</MenuItem>
           </TextField>

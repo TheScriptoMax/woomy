@@ -12,11 +12,10 @@ import {RemoveCircle} from "@material-ui/icons";
 ///////// liste des copiétonneuses //////////
 
 function CowalkerList({cowalk}) {
-    const [memberList, setMemberList] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [isMember, setIsMember] = useState(false)
+    const [isMember, setIsMember] = useState()
     const [userData, setUserData] = useState({})
     const {currentUser} = useAuth();
+
 
     useEffect(() => {
         database.users.doc(currentUser.uid)
@@ -25,23 +24,27 @@ function CowalkerList({cowalk}) {
                 setUserData(database.formatDoc(doc))
             })
 
-        database.membersPending(cowalk.id)
+        database.membersPending(cowalk.id).doc(currentUser.uid)
             .get()
-            .then((querySnapshot) => {
-                const tempMembers = [];
-                querySnapshot.forEach(member => {
-                    tempMembers.push(database.formatDoc(member))
-                    setMemberList(tempMembers);
-                    console.log(tempMembers)
-                })
-                setLoading(false)
-            }).then(() => {
-            memberList.forEach(member => {
-                if (member.id === currentUser.uid) {
-                    setIsMember(true)
+            .then((memberPending) => {
+                if (memberPending.exists) {
+                    setIsMember(true);
                 }
+                /*
+                querySnapshot.forEach(member => {
+                    const tempMembers = [];
+                    tempMembers.push(database.formatDoc(member))
+                    console.log(tempMembers)
+                    tempMembers.forEach(member => {
+                        console.log(member.id === currentUser.uid)
+                        if (member.id === currentUser.uid) {
+                            if (!isMember) {
+                                setIsMember(true)
+                            }
+                        }
+                    })
+                }) */
             })
-        })
             .catch(error => {
                 console.log('Error getting collection')
             })

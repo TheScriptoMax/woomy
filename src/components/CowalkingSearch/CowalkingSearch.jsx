@@ -14,39 +14,69 @@ import './cowalkingsearch.css';
 
 /// ----- React Modules ----- ///
 
-import { useState } from 'react';
+import {useRef, useState} from 'react';
 import DateFnsUtils from '@date-io/date-fns'
+import {database} from "../../firebase";
+import Button from "@material-ui/core/Button";
 
 
 function CoWalkingSearch() {
-  const [selectedDate, handleDateChange] = useState(new Date());
+    const startFromRef = useRef();
+
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [resultsList, setResultsList] = useState([])
+
+  function handleSubmitSearch(ev) {
+      ev.preventDefault();
+      const startTimeRange = {
+          rangeStart: new Date(selectedDate - 2*3600*1000),
+          rangeEnd: new Date(selectedDate + 2*3600*1000),
+      }
+      database.cowalks.where("startFrom", "==", startFromRef.current.value).where("startTime", ">=",startTimeRange.rangeStart).where("startTime", "<=",startTimeRange.rangeEnd)
+          .get()
+          .then((queryResults) => {
+              queryResults.forEach(result=> {
+                  console.log(result.id, "=>", result.data())
+              })
+              console.log("Requete envoyée")
+
+          })
+
+
+  }
+
     return (
       <div className=" container colwalkingsearch-container">
          <h2>Rechercher un itinéraire</h2>
-         <form className="searchform">
+         <form onSubmit={handleSubmitSearch} className="searchform">
 
           <InputLabel className="label">Départ</InputLabel>
 
-            <Select labelId="label" id="select" >
-              <MenuItem >Velpeau</MenuItem>
-              <MenuItem >SPDC</MenuItem>
-            </Select>
+            <TextField defaultValue="" inputRef={startFromRef} select labelId="label" id="select" >
+              <MenuItem value="velpeau" >Velpeau</MenuItem>
+                <MenuItem value="spdc" >SPDC</MenuItem>
+                <MenuItem value="prout" >Prout</MenuItem>
+            </TextField>
 
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DateTimePicker
                 value={selectedDate}
-                onChange={handleDateChange}
+                onChange={setSelectedDate}
                 minutesStep={5}
               />
             </MuiPickersUtilsProvider>
 
+             <Button type="submit" variant="contained">Rechercher</Button>
+
           </form>
         <div className="separator"></div>
-        {/* <ul className='cowalkingList'>
+        {
+            /* <ul className='cowalkingList'>
             {
                 cowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
             }
-        </ul> */}
+        </ul> */
+        }
 
       </div>
     );
