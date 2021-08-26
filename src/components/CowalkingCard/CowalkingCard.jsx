@@ -17,7 +17,6 @@ import "./cowalkingCard.css";
 
 /// ----- React Modules ----- ///
 import {Link} from "react-router-dom";
-import {database} from "../../firebase";
 
 /////////// CARTE DE COPIETONNAGE //////////////
 
@@ -31,7 +30,7 @@ function CowalkingCard ({cowalk,index}) {
 
     useEffect(() => {
         currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
-    }, [])
+    }, [cowalk.owner, currentUser.uid])
 
     
     const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})
@@ -56,11 +55,8 @@ function CowalkingCard ({cowalk,index}) {
                             <span>{cowalk.goTo}</span>
                         </div>
                     </div>
-<<<<<<< HEAD
                     <p>Heure de départ:{currentCowalkStartTime}</p>
-=======
-                    <p>Heure de départ:{cowalk.startTime.toString()}</p>
->>>>>>> database_int
+
                 </div>
                 <div className='cowalkingCardFooter'>
                     <div className='cowalkingCardCount'>

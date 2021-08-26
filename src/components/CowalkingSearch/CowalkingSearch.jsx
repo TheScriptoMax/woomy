@@ -1,6 +1,4 @@
 /// ----- Material UI ----- ///
-
-import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/Inputlabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/Textfield';
@@ -37,7 +35,7 @@ function CoWalkingSearch() {
         const rangeEnd = new Date(selectedDate);
         rangeStart.setHours(rangeStart.getHours() - 2);
         rangeEnd.setHours(rangeEnd.getHours() + 2);
-        database.cowalks.where("startFrom", "==", startFromRef.current.value).where("startTime", ">=", rangeStart).where("startTime", "<=", rangeEnd)
+        database.cowalks.where("startFrom", "==", startFromRef.current.value).where("startTime", ">=", rangeStart).where("startTime", "<=", rangeEnd).orderBy("startTime")
             .get()
             .then((queryResults) => {
                 const tempResults = []
