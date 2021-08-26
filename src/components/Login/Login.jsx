@@ -27,12 +27,20 @@ export default function Login () {
 
         try {
             setLoading(true);
+<<<<<<< HEAD
 
             setError('');
             await login(emailRef.current.value, passwordRef.current.value).then(()=> {
                 history.push('/account');
             })
 
+=======
+            setError('');
+            await login(emailRef.current.value, passwordRef.current.value).then(()=> {
+                history.push('/account');
+                }
+            )
+>>>>>>> database_int
         } catch(error) {
             setError('Echec de connexion');
         }
