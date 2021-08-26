@@ -18,6 +18,8 @@ function CowalkerList({cowalk}) {
     const [userData, setUserData] = useState({})
     const {currentUser} = useAuth();
 
+    
+
     useEffect(() => {
         database.users.doc(currentUser.uid)
             .get()
@@ -69,11 +71,16 @@ function CowalkerList({cowalk}) {
 
 
     return (
-        <div className='CowalkerListcontainer'>
+        <div className='cowalkerListcontainer'>
+            <div className="cowalkerAddIcon">
             {!isMember ? <AddCircleIcon onClick={handleJoinCowalk}/> : <RemoveCircle onClick={handleLeaveCowalk}/>}
+            </div>
             <ul className="cowalkerList">
-                <CowalkerItem/>
-                <CowalkerItem/>
+                {
+                    memberList.map((member,index)=>{
+                        return <CowalkerItem member={member} key={index}/>
+                    })
+                }
             </ul>
 
         </div>

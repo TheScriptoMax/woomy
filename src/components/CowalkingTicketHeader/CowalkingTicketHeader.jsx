@@ -11,16 +11,27 @@ import './cowalkingTicketHeader.css';
 
 // IMPORT MODULES
 import {Link, useHistory} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect,useState} from "react";
 import {database} from '../../firebase';
+
+import {useAuth} from "../../contexts/AuthContext";
 
 //////// HEADER DU TICKET DE COPIETONNAGE /////////
 
 function CowalkingTicketHeader({cowalk}) {
 
+    const [isOwner,setIsOwner] = useState(false)
+
+    const {currentUser} = useAuth();
+    
+
+
+    useEffect(() => {
+        currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
+    }, [])
 
     const history = useHistory();
-    const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris", hour:"2-digit",minute:"2-digit"})
+    const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})
 
     function handleDeleteCowalk(ev) {
         ev.preventDefault();
@@ -67,22 +78,25 @@ function CowalkingTicketHeader({cowalk}) {
 
     return (
         <div className="cowalkingTicketHeader">
-            <div className='cowalkingTicketHeaderTitle'>
+        <h2>Itinéraire:</h2>
+        {isOwner&&
+            <div className="cowalkingTicketHeaderButtonWrapper">
+                <div className='cowalkingTicketHeaderButton'>
 
-                <ButtonRound onClick={handleDeleteCowalk} aria-label="delete">
-                    <DeleteIcon/>
-                </ButtonRound>
-                <h2>Itinéraire:</h2>
-
-                <Link
-                    to={`/ticket/edit/${cowalk.id}`}
-                >
-                    <ButtonRound aria-label="edit">
-                        <EditIcon/>
+                    <ButtonRound onClick={handleDeleteCowalk} aria-label="delete">
+                        <DeleteIcon/>
                     </ButtonRound>
 
-                </Link>
-            </div>
+                    <Link
+                        to={`/ticket/edit/${cowalk.id}`}
+                    >
+                        <ButtonRound aria-label="edit">
+                            <EditIcon/>
+                        </ButtonRound>
+
+                    </Link>
+                </div>
+            </div>}
             <div className='cowalkingTicketRoute'>
                 <div>
                     <h3>Départ:</h3>

@@ -3,13 +3,17 @@
     position: relative;
     margin-bottom: 1rem;
 }
+.cowalkingTicketHeader h2{
+    margin-bottom:0;
+}
 
-.cowalkingTicketHeaderTitle{
+.cowalkingTicketHeaderButton{
+    position:relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    margin-bottom: 1.875rem;
+    top:-2.7rem;
 }
 .cowalkingTicketHeader h2{
     font-size: 2rem;

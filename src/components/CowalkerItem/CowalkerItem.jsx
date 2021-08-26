@@ -1,3 +1,6 @@
+/// 
+
+import {useState} from 'react';
 
 /// ----- Material UI ----- ///
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -14,19 +17,26 @@ import './cowalkerItem.css'
 
 ///////// Carte copiétonneuse ///////
 
-function CowalkerItem () {
+function CowalkerItem ({member}) {
+    const [togglePhone, setTogglePhone] = useState(true)
 
+    const handlePhone = (event) =>{
+        event.preventDefault()
+        setTogglePhone(!togglePhone)
+    }
+
+    console.log(member)
 
     return(
         <li className="cowalkerItem">
             <figure>
                 <img src={profilpic} alt="profil"/>
             </figure>
-            <h3>Michelin Machin</h3>
+            <h3>{member.firstname} {member.lastname}</h3>
             <div className="cowalkerItemButton">
-                <ButtonRound>
+                {togglePhone ? (<ButtonRound onClick={(event)=>handlePhone(event)}>
                     <PhoneIcon/>
-                </ButtonRound>
+                </ButtonRound>) : (<a href={`tel:${member.phoneNumber}`}>{member.phoneNumber}</a>)}
             </div>
         </li>
     )
