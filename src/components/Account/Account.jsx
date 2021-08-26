@@ -81,10 +81,9 @@ function Account() {
             },
             () => {
                 uploadTask.snapshot.ref.getDownloadURL().then(url=> {
-                    database.idCardFiles.add({
+                    database.idCardFiles.doc(currentUser.uid).set({
                         url:url,
                         createdAt: database.getCurrentTimestamp,
-                        userId: currentUser.uid
                     })
                         .then(() => {
                             console.log('Fichier envoyé')
