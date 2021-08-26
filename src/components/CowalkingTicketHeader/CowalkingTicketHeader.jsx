@@ -28,7 +28,7 @@ function CowalkingTicketHeader({cowalk}) {
 
     useEffect(() => {
         currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
-    }, [])
+    }, [cowalk.owner,currentUser.uid])
 
     const history = useHistory();
     const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})

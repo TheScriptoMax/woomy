@@ -1,7 +1,5 @@
 
 /// ----- Material UI ---- ///
-
-import  Select from '@material-ui/core/Select';
 import  InputLabel from '@material-ui/core/Inputlabel';
 import  MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -15,7 +13,7 @@ import './cowalkingcreate.css';
 
 /// ----- React Modules ----- ///
 
-import {useEffect, useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import DateFnsUtils from '@date-io/date-fns'
 import {TextField} from "@material-ui/core";
 import {useAuth} from "../../contexts/AuthContext";

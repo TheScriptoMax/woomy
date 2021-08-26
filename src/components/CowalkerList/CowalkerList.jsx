@@ -1,5 +1,4 @@
 /// ----- Import Components ----- ///
-import CowalkerItem from "../CowalkerItem/CowalkerItem";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import './cowalkerList.css'
 
@@ -63,7 +62,7 @@ function CowalkerList({cowalk}) {
             .catch(error => {
                 console.log('Error getting collection')
             })
-    }, [])
+    },[cowalk.id, cowalk.owner, currentUser.uid])
 
 
     function handleJoinCowalk() {
@@ -96,11 +95,7 @@ function CowalkerList({cowalk}) {
             }
             </div>
             <ul className="cowalkerList">
-                {
-                    memberList.map((member,index)=>{
-                        return <CowalkerItem member={member} key={index}/>
-                    })
-                }
+
             </ul>
 
         </div>

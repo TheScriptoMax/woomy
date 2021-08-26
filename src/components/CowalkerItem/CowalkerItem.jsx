@@ -5,7 +5,6 @@ import {useState} from 'react';
 /// ----- Material UI ----- ///
 import PhoneIcon from '@material-ui/icons/Phone';
 import ButtonRound from '@material-ui/core/IconButton';
-import MessageIcon from '@material-ui/icons/Message';
 
 
 /// ----- Import Img ----- ///

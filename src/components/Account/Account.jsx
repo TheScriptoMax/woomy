@@ -34,6 +34,9 @@ function Account() {
             .then(doc => {
                 setUserData(database.formatDoc(doc))
             })
+            .catch(error => {
+                setError(error.message)
+            })
 
     }, [currentUser.uid])
 

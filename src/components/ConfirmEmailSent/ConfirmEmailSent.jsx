@@ -1,15 +1,13 @@
 // CSS FIREBASE
 import {useAuth} from "../../contexts/AuthContext";
 import {useState, useEffect} from "react";
-import {auth, database} from "../../firebase";
+import {database} from "../../firebase";
 
 // REACT ROUTER DOM
 import {Link, useHistory} from "react-router-dom";
 
 
 // MATERIAL UI IMPORT
-import CloseIcon from '@material-ui/icons/Close';
-import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 
 // import {Link} from "react-router-dom";
@@ -17,6 +15,7 @@ import Button from '@material-ui/core/Button';
 // CSS IMPORT
 
 import './ConfirmEmailSent.css';
+import {Alert} from "@material-ui/lab";
 
 //PAGE VALIDATION INCRIPTION 
 
@@ -24,11 +23,10 @@ export default function ConfirmEmailSent () {
 
     const [userData, setUserData] = useState({});
     const [error, setError] = useState('');
-    const {logout, reSendEmail} = useAuth();
+    const {currentUser, reSendEmail} = useAuth();
 
     const history = useHistory();
 
-    const {currentUser} = useAuth();
 
     useEffect(()=> {
         database.users.doc(currentUser.uid)
@@ -36,6 +34,9 @@ export default function ConfirmEmailSent () {
             .then(doc => {
                 setUserData(database.formatDoc(doc))
             })
+            .catch(error => {
+            setError((error.message))
+        })
 
     }, [currentUser.uid])
 
@@ -74,9 +75,11 @@ export default function ConfirmEmailSent () {
     <div className='signIn-Validation container'>
 
         <div className="text-validation">
-            <p>Votre inscription a bien été prise en compte. 
+
+            {error ? <Alert severity="error">{error}</Alert> :
+            <p>{userData.firstname}, votre inscription a bien été prise en compte.
             Un e-mail de confirmation vous a été envoyé, merci de vérifier votre boite mail.
-                Attention, vérifiez si le mail n'est pas dans vos Spams.</p>
+                Attention, vérifiez si le mail n'est pas dans vos Spams.</p>}
 
         </div>
 
