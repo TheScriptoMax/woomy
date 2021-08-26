@@ -5,6 +5,7 @@ import { database } from '../../firebase';
 
 // REACT IMPORT
 import {useRef, useState} from "react";
+import { useEffect } from 'react';
 
 //ADD A LOCATION
 export default function AdminDistrict () {
@@ -14,12 +15,23 @@ export default function AdminDistrict () {
     const [isShow, setIsShow] = useState(false);
     const [districtAdded, setDistrictAdded] = useState(false);
 
+    const [towns, setTowns] = useState([]);
+
     const formRef = useRef();
     const districtNameRef = useRef();
     const townRef = useRef();
 
-    // const townsRef = database.collection('woomy-app', 'towns');
-    // console.log(townsRef);
+    useEffect(() => {
+        database.towns.get().then(towns => {
+            const tempTowns = []
+            towns.forEach(town => {
+                tempTowns.push(database.formatDoc(town))
+            })
+            console.log(tempTowns);
+            setTowns(tempTowns)
+            
+        })
+    }, [])
 
     const addDistrict = (e) => {
         e.preventDefault();
@@ -49,6 +61,7 @@ export default function AdminDistrict () {
         }
         
         //TODO: changer la saisie des communes à la main par un select (collection séparée, requête de cette collection dans le textfield)
+        //TODO: recherche des quartiers
     
     }
 
@@ -59,7 +72,13 @@ export default function AdminDistrict () {
          <p className="create-district">Ajout d'un nouveau quartier</p>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
-            <TextField select inputRef={townRef} label="Commune" variant="outlined"/>
+            <TextField select inputRef={townRef} label="Commune" variant="outlined">
+            {towns.map((option) => (
+            <option key={option.id} value={option.name}>
+              {option.name}
+            </option>
+          ))}
+            </TextField>
 
             <Button disabled={loading} type="submit" variant='contained' className="admin-form-button">Ajouter</Button>
 

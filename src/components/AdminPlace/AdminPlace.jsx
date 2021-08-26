@@ -48,6 +48,7 @@ export default function AdminPlace () {
             });
         }
         
+        //TODO: recherche des lieux
         //TODO: lien google maps/OSM (lieu en paramètres url query string)
         //TODO: changer la saisie des quartiers à la main par un select (collection séparée, requête de cette collection dans le textfield)
     
