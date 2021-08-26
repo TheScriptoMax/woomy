@@ -12,11 +12,25 @@ import {RemoveCircle} from "@material-ui/icons";
 ///////// liste des copiétonneuses //////////
 
 function CowalkerList({cowalk}) {
+    const [isOwner,setIsOwner] = useState(false)
     const [isMember, setIsMember] = useState()
     const [userData, setUserData] = useState({})
     const {currentUser} = useAuth();
 
 
+    const memberList =[{
+        email:"maxime.pinet@hotmail.fr",
+        firstname:"moi",
+        id:"CGxDIKIvHSVcyHCE7PM00TLP9JG2",
+        lastname:"moi",
+        phoneNumber:"0946433443",
+        role:"user"
+    }]
+    
+
+    useEffect(() => {
+        currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
+    }, [])
 
     useEffect(() => {
         database.users.doc(currentUser.uid)
@@ -74,8 +88,12 @@ function CowalkerList({cowalk}) {
 
     return (
         <div className='cowalkerListcontainer'>
-            <div className="cowalkerAddIcon">
-            {!isMember ? <AddCircleIcon onClick={handleJoinCowalk}/> : <RemoveCircle onClick={handleLeaveCowalk}/>}
+            <div>{ !isOwner &&
+
+                <div className="cowalkerAddIcon">
+                {!isMember ? <AddCircleIcon onClick={handleJoinCowalk}/> : <RemoveCircle onClick={handleLeaveCowalk}/>}
+                </div>
+            }
             </div>
             <ul className="cowalkerList">
                 {
