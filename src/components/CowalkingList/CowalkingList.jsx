@@ -18,7 +18,7 @@ function CowalkingList () {
 
 
     useEffect(() => {
-        database.cowalks
+        database.cowalks.orderBy("startTime")
             .get()
             .then((querySnapshot) => {
                 const tempResults = [];

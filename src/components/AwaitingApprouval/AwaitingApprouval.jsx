@@ -8,8 +8,9 @@ import {Link} from "react-router-dom";
 //PAGE VALIDATION INCRIPTION 
 
 export default function AwaitingApprouval () {
-    return (
 
+
+    return (
     <div className='signIn-confirm container'>
         
         <div className="text-confirm">

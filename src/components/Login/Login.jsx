@@ -1,5 +1,4 @@
 /// ----- React Modules ----- ///
-import SignIn from '../SignIn/SignIn'
 import React, {useRef, useState} from "react";
 import {useHistory, Link} from "react-router-dom";
 import {useAuth} from "../../contexts/AuthContext";
@@ -24,14 +23,17 @@ export default function Login () {
 
     async function handleSubmit(ev){
         ev.preventDefault();
-
+        
         try {
             setLoading(true);
+
+
             setError('');
             await login(emailRef.current.value, passwordRef.current.value).then(()=> {
                 history.push('/account');
                 }
             )
+
         } catch(error) {
             setError('Echec de connexion');
         }
@@ -50,7 +52,7 @@ export default function Login () {
             <TextField inputRef={emailRef} id="standard-basic" label="Entrez votre email" variant="standard" />
 
             <TextField type="password" inputRef={passwordRef} id="standard-basic" label="Entrez votre mot de passe" variant="standard" />
-            <p className='forgot-password'>Vous avez oublié votre mot de passe? <a href=''>Cliquez ici</a></p>
+            <p className='forgot-password'>Vous avez oublié votre mot de passe? <Link to="/">Cliquez ici</Link></p>
             <div className='button-container'>
                 <Button disabled={loading} type='submit' variant="contained">S'identifier</Button>
             </div>

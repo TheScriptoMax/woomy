@@ -17,7 +17,6 @@ import '../CowalkingCreate/cowalkingcreate.css';
 import {useEffect, useRef, useState} from 'react';
 import DateFnsUtils from '@date-io/date-fns'
 import {TextField} from "@material-ui/core";
-import {useAuth} from "../../contexts/AuthContext";
 import {useHistory, useParams} from "react-router-dom";
 
 // FIREBASE
@@ -38,13 +37,10 @@ function CowalkingEdit() {
     const goToRef = useRef();
     const startFromRef = useRef();
 
-    const {currentUser} = useAuth();
-
     const history = useHistory();
 
 
     useEffect(() => {
-            console.log(selectedDate)
             database.cowalks.doc(cowalkId)
                 .get()
                 .then((doc) => {
@@ -60,7 +56,7 @@ function CowalkingEdit() {
                 .catch((error) => {
                     console.log("Error getting document:", error);
                 })
-        }, []
+        }, [cowalkId]
     );
 
 

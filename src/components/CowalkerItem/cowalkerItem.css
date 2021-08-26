@@ -20,11 +20,16 @@
 }
 
 .cowalkerItemButton{
-    max-width: 12.5rem;
+    width:3.625rem;
+    height:3.625rem;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+}
+.cowalkerItemButton svg{
+    width:3.625rem;
+    height:3.625rem;
 }
 
 
