@@ -41,7 +41,7 @@ function CowalkingList () {
                 {
                     cowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
                 }
-            </ul> : <p>Allez vous faire cuire un oeuf</p> }
+            </ul> : <p>Allez vous faire cuire un oeuf chez les papous d'en face</p> }
         </div>
     )
 }
