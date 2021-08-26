@@ -4,8 +4,7 @@ import Alert from '@material-ui/lab/Alert';
 import { database } from '../../firebase';
 
 // REACT IMPORT
-import {useRef, useState} from "react";
-import { useEffect } from 'react';
+import {useRef, useState, useEffect} from "react";
 
 //ADD A LOCATION
 export default function AdminDistrict () {
@@ -43,7 +42,7 @@ export default function AdminDistrict () {
             }
         } else {
 
-            database.district.add({
+            database.districts.add({
                 name: districtNameRef.current.value,
                 town: townRef.current.value,
                 createdAt: database.getCurrentTimestamp
@@ -53,14 +52,15 @@ export default function AdminDistrict () {
                 if (isShow) {
                     setIsShow(!isShow);
                 }
-                setDistrictAdded(!districtAdded);
+                if (!districtAdded){
+                    setDistrictAdded(!districtAdded);
+                }
             })
             .catch((error) => {
                 setError('Quelque chose s\'est mal passé :(');
             });
         }
-        
-        //TODO: changer la saisie des communes à la main par un select (collection séparée, requête de cette collection dans le textfield)
+
         //TODO: recherche des quartiers
     
     }
@@ -80,7 +80,7 @@ export default function AdminDistrict () {
           ))}
             </TextField>
 
-            <Button disabled={loading} type="submit" variant='contained' className="admin-form-button">Ajouter</Button>
+            <Button disabled={loading} type="submit" variant='contained' color="secondary"  className="admin-form-btn">Ajouter</Button>
 
             {error && <Alert severity="error">{error}</Alert> }
             {districtAdded && <Alert severity="success">Le quartier a été ajouté</Alert>}
