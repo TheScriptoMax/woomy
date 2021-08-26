@@ -1,5 +1,6 @@
 /// ----- COMPONENTS ----- ///
 
+
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
@@ -19,7 +20,9 @@ import PasswordChange from './components/PasswordChange/PasswordChange';
 import Account from './components/Account/Account';
 import Params from './components/Params/Params';
 
-
+/**** ADMIN *****/
+import AdminPlace from "./components/AdminPlace/AdminPlace";
+import AdminDistrict from "./components/AdminDistrict/AdminDistrict";
 
 /**** CRUD COPIETONNAGE *****/ 
 import CowalkingList from './components/CowalkingList/CowalkingList';
@@ -78,12 +81,17 @@ function App() {
                         <PrivateRoute exact path='/param' component={Params}/>
                         <PrivateRoute path='/passwordchange' component={PasswordChange}/>
 
+                        {/*----- Admin -----*/}
+                        <Route exact path='/adminplace' component={AdminPlace}/>
+                        <Route exact path='/admindistrict' component={AdminDistrict}/>
+
                 </Switch>
                 <Footer/>
 
             </AuthProvider>
         </Router>
     );
+
 
 }
 

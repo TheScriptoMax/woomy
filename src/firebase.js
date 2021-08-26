@@ -20,6 +20,8 @@ export const database = {
     users: firestore.collection('users'),
     cowalks: firestore.collection('cowalks'),
     locations: firestore.collection('locations'),
+    districts: firestore.collection('districts'),
+    towns: firestore.collection('towns'),
     membersPending: cowalkId => {
         return firestore.collection('cowalks').doc(cowalkId).collection('membersPending');
     },
