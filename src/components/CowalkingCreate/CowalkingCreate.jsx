@@ -1,7 +1,5 @@
 
 /// ----- Material UI ---- ///
-
-import  Select from '@material-ui/core/Select';
 import  InputLabel from '@material-ui/core/Inputlabel';
 import  MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -15,7 +13,7 @@ import './cowalkingcreate.css';
 
 /// ----- React Modules ----- ///
 
-import {useEffect, useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import DateFnsUtils from '@date-io/date-fns'
 import {TextField} from "@material-ui/core";
 import {useAuth} from "../../contexts/AuthContext";
@@ -30,7 +28,7 @@ import {Alert} from "@material-ui/lab";
 
 function CoWalkingCreate() {
 
-  const [selectedDate, handleDateChange] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const goToRef = useRef();
@@ -51,12 +49,8 @@ function CoWalkingCreate() {
         startTime: selectedDate,
         createdAt: database.getCurrentTimestamp,
         owner: currentUser.uid,
-      }).then((docRef)=> {
-        database.membersApproved(docRef.id).doc(currentUser.uid).set({
-          'boss':currentUser.uid,
-        })
       }).then(()=>{
-            history.push("/login")
+            history.push("/list")
           })
     } catch(error) {
       setError(error.message)
@@ -77,20 +71,20 @@ function CoWalkingCreate() {
           </TextField>
           <InputLabel className="label">Destination</InputLabel>
           <TextField defaultValue="" inputRef={goToRef} select>
-            <MenuItem value="vealpeaugo" >Velpeau</MenuItem>
+            <MenuItem value="vealpeau" >Velpeau</MenuItem>
             <MenuItem value="spdcgo" >SPDC</MenuItem>
             <MenuItem value="prout" >Prout</MenuItem>
           </TextField>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <DateTimePicker
             value={selectedDate}
-            onChange={handleDateChange}
+            onChange={setSelectedDate}
             minutesStep={5}
             />
           </MuiPickersUtilsProvider>
           <div className="button-container">
             <Button disabled={loading} onClick={handleSubmitCowalk} type="submit" variant="contained">Créer</Button>
-            {error && <Alert>{error}</Alert>}
+            {error && <Alert severity="error">{error}</Alert>}
           </div>
         </form>
       </div>
