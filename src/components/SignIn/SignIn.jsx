@@ -81,8 +81,7 @@ export default function SignIn () {
             <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Entrez votre numéro de téléphone" variant="standard" />
             
             <TextField type="date" id="standard-basic" label="Entrez votre date de naissance" variant="standard"  InputLabelProps={{
-          shrink: true,
-        }}/>
+                shrink: true,}}/>
 
             <TextField type="password" inputRef={passwordRef} id="standard-basic" label="Entrez un mot de passe" variant="standard" />
             
