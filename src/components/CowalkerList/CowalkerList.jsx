@@ -44,20 +44,6 @@ function CowalkerList({cowalk}) {
                 if (memberPending.exists) {
                     setIsMember(true);
                 }
-                /*
-                querySnapshot.forEach(member => {
-                    const tempMembers = [];
-                    tempMembers.push(database.formatDoc(member))
-                    console.log(tempMembers)
-                    tempMembers.forEach(member => {
-                        console.log(member.id === currentUser.uid)
-                        if (member.id === currentUser.uid) {
-                            if (!isMember) {
-                                setIsMember(true)
-                            }
-                        }
-                    })
-                }) */
             })
             .catch(error => {
                 console.log('Error getting collection')

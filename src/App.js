@@ -74,6 +74,8 @@ function App() {
                         <PrivateRoute exact path='/list' component={CowalkingList}/>
                         <PrivateRoute exact path='/message' component={Notification}/>
                         <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+                        <PrivateRoute exact path='/notification' component={Notification} />
+                        
 
                         {/*----- Account -----*/}
                         <PrivateRoute exact path='/account' component={Account}/>
