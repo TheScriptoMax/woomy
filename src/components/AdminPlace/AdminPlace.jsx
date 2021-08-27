@@ -1,5 +1,6 @@
 import './adminplace.css'
 import {Button, TextField} from '@material-ui/core';
+import { MenuItem } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { database } from '../../firebase';
 
@@ -73,13 +74,16 @@ export default function AdminPlace () {
 
     }
 
+
     return (
       <div class="container container-admin">
          <h1>Lieux</h1>
+
          {/* Ajouter un lien et un composant vers un liste des quartiers */}
          <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/placelist'}>Voir tous les lieux</Link>
 
          <h2 className="placecreate">Création d'un nouveau lieu</h2>
+
          <form onSubmit={addLocation} ref={formRef} className="placeform">
             <TextField inputRef={locationNameRef} label="Lieux" variant="outlined"/>
             <TextField select inputRef={districtRef} label="Quartier" variant="outlined">
@@ -96,6 +100,7 @@ export default function AdminPlace () {
             {error && <Alert severity="error">{error}</Alert> }
             {locationAdded && <Alert severity="success">Le lieu a été ajouté</Alert>}
             {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
+
          </form>
         
 

@@ -11,6 +11,8 @@ export default function PlaceList () {
     const [loading, setLoading] = useState();
     const [locations, setLocations] = useState([]);
 
+    //Pouvoir trier par ordre alphabétique ou quartier ?
+
     useEffect(() => {
         database.locations.get().then(locations => {
             const tempLocations = []

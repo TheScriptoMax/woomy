@@ -68,9 +68,7 @@ export default function AdminDistrict () {
             .catch((error) => {
                 setError('Quelque chose s\'est mal passé :(');
             });
-        }
-    
-    }
+        
 
     return (
       <div class="container container-admin">
@@ -81,7 +79,6 @@ export default function AdminDistrict () {
          <h2 className="create-district">Ajout d'un nouveau quartier</h2>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
-
             <TextField select inputRef={townRef} label="Commune" variant="outlined">
             {towns.map((option) => (
             <option key={option.id} value={option.name}>
@@ -92,6 +89,7 @@ export default function AdminDistrict () {
 
             <Button disabled={loading} type="submit" variant='contained' color="secondary"  className="admin-form-btn">Ajouter</Button>
 
+
             {error && <Alert severity="error">{error}</Alert> }
             {districtAdded && <Alert severity="success">Le quartier a été ajouté</Alert>}
             {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
@@ -101,4 +99,5 @@ export default function AdminDistrict () {
         
      </div>
     )
+}}
 }
