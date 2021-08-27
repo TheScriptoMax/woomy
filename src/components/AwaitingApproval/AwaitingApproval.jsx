@@ -1,6 +1,6 @@
 // REACT IMPORT
 import {Link} from "react-router-dom";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 // FIREBASE IMPORT
 import {database, storage} from "../../firebase";

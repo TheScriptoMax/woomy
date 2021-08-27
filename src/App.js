@@ -44,9 +44,10 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
-import PrivateRoute from './components/PrivateRoute'
-import EmailNotVerifiedRoute from "./components/EmailNotVerifiedRoute";
+import PrivateRoute from './components/Routes/PrivateRoute'
+import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
+import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
 
 
 function App() {
@@ -66,7 +67,7 @@ function App() {
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
 
                     {/*Todo: Changer la route pour les personnes vérifier mais en attente de validation d'un admin*/}
-                        <Route path='/awaiting-approval' component={AwaitingApproval}/>
+                        <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
 
                     {/*----- Route private AwaitingApproval -----*/}
 
@@ -74,7 +75,7 @@ function App() {
                         <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
                         <PrivateRoute exact path='/create' component={CowalkingCreate}/>
                         <PrivateRoute exact path='/search' component={CowalkingSearch}/>
-                        <PrivateRoute exact path='/list' component={CowalkingList}/>
+                        <AwaitingApprovalRoute exact path='/list' component={CowalkingList}/>
                         <PrivateRoute exact path='/message' component={Notification}/>
                         <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
                         <PrivateRoute exact path='/notification' component={Notification} />
