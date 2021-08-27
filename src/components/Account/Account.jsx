@@ -28,6 +28,7 @@ function Account() {
     const history = useHistory();
 
     const {currentUser} = useAuth();
+
     useEffect(()=> {
         database.users.doc(currentUser.uid)
             .get()
@@ -61,7 +62,6 @@ function Account() {
             setError('Woops, on a pas réussi à vous déconnecter')
         }
     }
-
 
 
     return (
@@ -119,6 +119,7 @@ function Account() {
             <div className="button-bot-account">
                 <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
             </div>
+
         </div>
       </div>
     );
