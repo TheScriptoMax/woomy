@@ -13,24 +13,42 @@ import {
 import './cowalkingsearch.css';
 
 /// ----- React Modules ----- ///
+import { useState, useRef, useEffect } from 'react';
+import DateFnsUtils from '@date-io/date-fns';
 
-import { useState } from 'react';
-import DateFnsUtils from '@date-io/date-fns'
+/// ----- Database ----- ///
+import { database } from '../../firebase';
 
 
 function CoWalkingSearch() {
-  const [selectedDate, handleDateChange] = useState(new Date());
+
+    const [locations, setLocations] = useState([]);
+    const locationSearchRef = useRef();
+    const [selectedDate, handleDateChange] = useState(new Date());
+
+    useEffect(() => {
+        database.locations.get().then(locations => {
+            const tempLocations = []
+            locations.forEach(location => {
+                tempLocations.push(database.formatDoc(location))
+            })
+            setLocations(tempLocations)
+            
+        })
+    }, [])
+
     return (
       <div className=" container colwalkingsearch-container">
          <h2>Rechercher un itinéraire</h2>
          <form className="searchform">
 
-          <InputLabel className="label">Départ</InputLabel>
-
-            <Select labelId="label" id="select" >
-              <MenuItem >Velpeau</MenuItem>
-              <MenuItem >SPDC</MenuItem>
-            </Select>
+            <TextField select inputRef={locationSearchRef} label="Départ">
+                {locations.map((option) => (
+                <option key={option.id} value={option.name}>
+                {option.name}
+                </option>
+            ))}
+            </TextField>
 
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DateTimePicker

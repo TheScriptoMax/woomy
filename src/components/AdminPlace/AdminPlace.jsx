@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 //ADD A LOCATION
 export default function AdminPlace () {
 
+    //TODO: ajouter un composant pour afficher la liste des lieux
+
     const [error, setError] = useState();
     const [loading, setLoading] = useState();
     const [isShow, setIsShow] = useState(false);
@@ -28,7 +30,6 @@ export default function AdminPlace () {
                 tempDistricts.push(database.formatDoc(district))
             })
             setDistricts(tempDistricts)
-            
         })
     }, [])
 
@@ -64,13 +65,12 @@ export default function AdminPlace () {
             });
         }
 
-        //TODO: recherche des lieux
-    
     }
 
     return (
       <div class="container container-admin">
          <h1>Lieux</h1>
+         {/* Ajouter un lien et un composant vers un liste des quartiers */}
          <TextField label="Rechercher" variant="outlined"/>
          <p className="placecreate">Création d'un nouveau lieu</p>
          <form onSubmit={addLocation} ref={formRef} className="placeform">

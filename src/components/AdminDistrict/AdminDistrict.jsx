@@ -9,6 +9,8 @@ import {useRef, useState, useEffect} from "react";
 //ADD A LOCATION
 export default function AdminDistrict () {
 
+    //TODO: composant pour la liste des quartiers
+
     const [error, setError] = useState();
     const [loading, setLoading] = useState();
     const [isShow, setIsShow] = useState(false);
@@ -20,13 +22,13 @@ export default function AdminDistrict () {
     const districtNameRef = useRef();
     const townRef = useRef();
 
+
     useEffect(() => {
         database.towns.get().then(towns => {
             const tempTowns = []
             towns.forEach(town => {
                 tempTowns.push(database.formatDoc(town))
             })
-            console.log(tempTowns);
             setTowns(tempTowns)
             
         })
@@ -60,14 +62,14 @@ export default function AdminDistrict () {
                 setError('Quelque chose s\'est mal passé :(');
             });
         }
-
-        //TODO: recherche des quartiers
     
     }
 
     return (
       <div class="container container-admin">
          <h1>Quartiers</h1>
+
+         {/* Ajouter un lien et un composant vers un liste des quartiers */}
          <TextField label="Rechercher" variant="outlined"/>
          <p className="create-district">Ajout d'un nouveau quartier</p>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
