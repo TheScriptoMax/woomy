@@ -100,49 +100,7 @@ function CoWalkingSearch() {
 
                 }
             </ul>
-// =======
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     return (
-//         <div className=" container colwalkingsearch-container">
-//             <h2>Rechercher un itinéraire</h2>
-//             <form  className="searchform">
-
-//                 <InputLabel className="label">Départ</InputLabel>
-
-//                 <TextField defaultValue="" inputRef={} select labelId="label" id="select">
-//                     <MenuItem value="velpeau">Velpeau</MenuItem>
-//                     <MenuItem value="spdc">SPDC</MenuItem>
-//                     <MenuItem value="prout">Prout</MenuItem>
-//                 </TextField>
-
-//                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-//                     <DateTimePicker
-//                         value={selectedDate}
-//                         onChange={setSelectedDate}
-//                         minutesStep={5}
-//                     />
-//                 </MuiPickersUtilsProvider>
-
-                
-
-//             </form>
-
-            
-// >>>>>>> dev
             }
 
         </div>
