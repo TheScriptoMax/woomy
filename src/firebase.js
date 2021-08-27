@@ -29,6 +29,11 @@ export const database = {
         return firestore.collection('cowalks').doc(cowalkId).collection('membersPending');
     },
 
+
+    notifications: userId => {
+        return firestore.collection('users').doc(userId).collection('notifications');
+    },
+
     membersApproved: cowalkId => {
         return firestore.collection('cowalks').doc(cowalkId).collection('membersApproved');
     },
