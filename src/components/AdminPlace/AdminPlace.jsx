@@ -77,8 +77,9 @@ export default function AdminPlace () {
       <div class="container container-admin">
          <h1>Lieux</h1>
          {/* Ajouter un lien et un composant vers un liste des quartiers */}
-         <TextField label="Rechercher" variant="outlined"/>
-         <p className="placecreate">Création d'un nouveau lieu</p>
+         <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/placelist'}>Voir tous les lieux</Link>
+
+         <h2 className="placecreate">Création d'un nouveau lieu</h2>
          <form onSubmit={addLocation} ref={formRef} className="placeform">
             <TextField inputRef={locationNameRef} label="Lieux" variant="outlined"/>
             <TextField select inputRef={districtRef} label="Quartier" variant="outlined">

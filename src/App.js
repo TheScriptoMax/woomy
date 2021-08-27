@@ -22,6 +22,7 @@ import Params from './components/Params/Params';
 /**** ADMIN *****/
 import AdminPlace from "./components/AdminPlace/AdminPlace";
 import AdminDistrict from "./components/AdminDistrict/AdminDistrict";
+import PlaceList from "./components/PlaceList/PlaceList";
 
 /**** CRUD COPIETONNAGE *****/ 
 import CowalkingList from './components/CowalkingList/CowalkingList';
@@ -46,6 +47,7 @@ import {
 import PrivateRoute from './components/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/EmailNotVerifiedRoute";
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
+
 
 function App() {
   
@@ -82,6 +84,7 @@ function App() {
                         {/*----- Admin -----*/}
                         <Route exact path='/adminplace' component={AdminPlace}/>
                         <Route exact path='/admindistrict' component={AdminDistrict}/>
+                        <Route exact path='/placelist' component={PlaceList}/>
 
                 </Switch>
                 <Footer/>

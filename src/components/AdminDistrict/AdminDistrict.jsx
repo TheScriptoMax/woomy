@@ -5,6 +5,7 @@ import { database } from '../../firebase';
 
 // REACT IMPORT
 import {useRef, useState, useEffect} from "react";
+import { Link } from 'react-router-dom';
 
 //ADD A LOCATION
 export default function AdminDistrict () {
@@ -77,7 +78,7 @@ export default function AdminDistrict () {
 
          {/* Ajouter un lien et un composant vers un liste des quartiers */}
          <TextField label="Rechercher" variant="outlined"/>
-         <p className="create-district">Ajout d'un nouveau quartier</p>
+         <h2 className="create-district">Ajout d'un nouveau quartier</h2>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
 
@@ -95,6 +96,8 @@ export default function AdminDistrict () {
             {districtAdded && <Alert severity="success">Le quartier a été ajouté</Alert>}
             {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
          </form>
+
+         <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/adminplace'}>Ajouter un lieu</Link>
         
      </div>
     )
