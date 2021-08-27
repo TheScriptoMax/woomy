@@ -23,6 +23,7 @@ import Params from './components/Params/Params';
 import AdminPlace from "./components/AdminPlace/AdminPlace";
 import AdminDistrict from "./components/AdminDistrict/AdminDistrict";
 import PlaceList from "./components/PlaceList/PlaceList";
+import DistrictList from "./components/DistrictList/DistrictList";
 
 /**** CRUD COPIETONNAGE *****/ 
 import CowalkingList from './components/CowalkingList/CowalkingList';
@@ -85,6 +86,7 @@ function App() {
                         <Route exact path='/adminplace' component={AdminPlace}/>
                         <Route exact path='/admindistrict' component={AdminDistrict}/>
                         <Route exact path='/placelist' component={PlaceList}/>
+                        <Route exact path='/districtlist' component={DistrictList}/>
 
                 </Switch>
                 <Footer/>

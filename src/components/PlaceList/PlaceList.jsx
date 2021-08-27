@@ -4,25 +4,22 @@ import { database } from '../../firebase';
 import {useState, useEffect} from "react";
 import { Link } from 'react-router-dom';
 
+// CARD COMPONENT IMPORT
+import PlaceCard from '../PlaceCard/PlaceCard';
+
+// MATERIAL UI IMPORT
+import { Button } from '@material-ui/core';
+
 //LIST ALL LOCATION
 export default function PlaceList () {
 
-    const [error, setError] = useState();
-    const [loading, setLoading] = useState();
     const [locations, setLocations] = useState([]);
 
-    //Pouvoir trier par ordre alphabétique ou quartier ?
-
     useEffect(() => {
-        database.locations.get().then(locations => {
+        database.locations.orderBy('name').get().then(locations => {
             const tempLocations = []
             locations.forEach(location => {
                 tempLocations.push(database.formatDoc(location))
-            })
-            tempLocations.sort(function(a, b){
-                if(a.name < b.name) { return -1; }
-                if(a.name > b.name) { return 1; }
-                return 0;
             })
             setLocations(tempLocations)
             
@@ -32,12 +29,13 @@ export default function PlaceList () {
     return (
       <div class="container container-admin">
          <h1>Lieux existants</h1>
+         <Link to={'/adminplace'}><Button variant='contained'>Retour</Button></Link>
 
-          {/* LOOP POUR AFFICHER LES LIEUX */}
-          {/* COUCOU C'EST LE COMMIT DE TEST */}
-
-         <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/adminplace'}>Retour</Link>
-        
+            <ul className='place-list'>
+                {
+                    locations.map((location) => <PlaceCard location={location} />)
+                }
+            </ul>
      </div>
     )
 }
