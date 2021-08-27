@@ -13,7 +13,7 @@ import './cowalkingcreate.css';
 
 /// ----- React Modules ----- ///
 
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import DateFnsUtils from '@date-io/date-fns'
 import {TextField} from "@material-ui/core";
 import {useAuth} from "../../contexts/AuthContext";
@@ -29,6 +29,7 @@ import {Alert} from "@material-ui/lab";
 function CoWalkingCreate() {
 
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [userData, setUserData] = useState({})
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const goToRef = useRef();
@@ -37,6 +38,14 @@ function CoWalkingCreate() {
   const {currentUser} = useAuth();
 
   const history = useHistory();
+
+  useEffect(() => {
+    database.users.doc(currentUser.uid)
+        .get()
+        .then(doc => {
+          setUserData(database.formatDoc(doc))
+        })
+  }, []);
 
   async function handleSubmitCowalk(ev) {
     ev.preventDefault();
@@ -49,7 +58,9 @@ function CoWalkingCreate() {
         startTime: selectedDate,
         createdAt: database.getCurrentTimestamp,
         owner: currentUser.uid,
-      }).then(()=>{
+        contactPhone: userData.phoneNumber
+      })
+          .then(()=>{
             history.push("/list")
           })
     } catch(error) {

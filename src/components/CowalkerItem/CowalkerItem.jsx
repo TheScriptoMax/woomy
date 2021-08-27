@@ -24,8 +24,6 @@ function CowalkerItem ({member}) {
         setTogglePhone(!togglePhone)
     }
 
-    console.log(member)
-
     return(
         <li className="cowalkerItem">
             <figure>
