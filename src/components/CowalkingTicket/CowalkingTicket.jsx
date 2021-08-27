@@ -12,7 +12,6 @@ import {useEffect, useState} from "react";
 
 function CowalkingTicket () {
     const [currentCowalk, setCurrentCowalk] = useState({});
-    const [memberList, setMemberList] = useState([])
     const [loading, setLoading] = useState(true)
     const {cowalkId} = useParams();
 
@@ -31,7 +30,7 @@ function CowalkingTicket () {
                 .catch((error) => {
                     console.log("Error getting document:", error);
                 })
-        }, []
+        }, [cowalkId]
     );
 
 

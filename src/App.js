@@ -1,5 +1,6 @@
 /// ----- COMPONENTS ----- ///
 
+
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
@@ -11,15 +12,17 @@ import Footer from './components/footer/footer';
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
-import AwaitingApprouval from './components/AwaitingApprouval/AwaitingApprouval';
+import AwaitingApproval from './components/AwaitingApproval/AwaitingApproval';
 import SendNewValidation from './components/SendNewValidation/SendNewValidation';
-import PasswordChange from './components/PasswordChange/PasswordChange';
 
 /**** PROFIL *****/
 import Account from './components/Account/Account';
 import Params from './components/Params/Params';
 
-
+/**** ADMIN *****/
+import AdminPlace from "./components/AdminPlace/AdminPlace";
+import AdminDistrict from "./components/AdminDistrict/AdminDistrict";
+import PlaceList from "./components/PlaceList/PlaceList";
 
 /**** CRUD COPIETONNAGE *****/ 
 import CowalkingList from './components/CowalkingList/CowalkingList';
@@ -45,6 +48,7 @@ import PrivateRoute from './components/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/EmailNotVerifiedRoute";
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
 
+
 function App() {
   
     return (
@@ -61,9 +65,10 @@ function App() {
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
 
-                        <EmailNotVerifiedRoute path='/awaiting-approuval' component={AwaitingApprouval}/>
+                    {/*Todo: Changer la route pour les personnes vérifier mais en attente de validation d'un admin*/}
+                        <Route path='/awaiting-approval' component={AwaitingApproval}/>
 
-                    {/*----- Route private AwaitingApprouval -----*/}
+                    {/*----- Route private AwaitingApproval -----*/}
 
                         {/*----- Ticket -----*/}
                         <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
@@ -72,11 +77,17 @@ function App() {
                         <PrivateRoute exact path='/list' component={CowalkingList}/>
                         <PrivateRoute exact path='/message' component={Notification}/>
                         <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+                        <PrivateRoute exact path='/notification' component={Notification} />
+                        
 
                         {/*----- Account -----*/}
                         <PrivateRoute exact path='/account' component={Account}/>
                         <PrivateRoute exact path='/param' component={Params}/>
-                        <PrivateRoute path='/passwordchange' component={PasswordChange}/>
+
+                        {/*----- Admin -----*/}
+                        <Route exact path='/adminplace' component={AdminPlace}/>
+                        <Route exact path='/admindistrict' component={AdminDistrict}/>
+                        <Route exact path='/placelist' component={PlaceList}/>
 
                 </Switch>
                 <Footer/>
@@ -84,6 +95,7 @@ function App() {
             </AuthProvider>
         </Router>
     );
+
 
 }
 

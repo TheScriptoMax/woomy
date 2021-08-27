@@ -1,17 +1,15 @@
 // CSS FIREBASE
 import {useAuth} from "../../contexts/AuthContext";
 import {useState, useEffect} from "react";
+import {database} from "../../firebase";
 
 // MATERIAL UI IMPORT
-import CloseIcon from '@material-ui/icons/Close';
-import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
-// import {Link} from "react-router-dom";
 
 // CSS IMPORT
 
 import './SendNewValidation.css';
-import {auth, database} from "../../firebase";
+import {Alert} from "@material-ui/lab";
 
 //PAGE VALIDATION INCRIPTION
 
@@ -19,9 +17,8 @@ export default function SendNewValidation () {
 
     const [userData, setUserData] = useState({});
     const [error, setError] = useState('');
-    const {logout, reSendEmail} = useAuth();
-
-    const {currentUser} = useAuth();
+    const [message, setMessage] = useState('');
+    const {reSendEmail, currentUser} = useAuth();
 
     useEffect(()=> {
         database.users.doc(currentUser.uid)
@@ -39,22 +36,22 @@ export default function SendNewValidation () {
         try{
             reSendEmail(currentUser)
                 .then(() => {
-                    console.log('email envoyé a ' + currentUser.email);
+                    setMessage('email envoyé a ' + currentUser.email);
                 })
         } catch(error) {
-            setError('Marche pas');
+            setError('Quelque chose n\' pas fonctionné ...');
         }
+        console.log(message)
     }
 
     return (
 
         <div className='signIn-Validation container'>
-
-            <div className="text-validation">
-                <p>Un e-mail de confirmation vous a été renvoyé, merci de vérifier votre boite mail.
-                    Attention, vérifiez si le mail n'est pas dans vos Spams.</p>
-
-            </div>
+            {error ? <Alert severity="error">{error}</Alert> :
+                <div className="text-validation">
+                    <p>{userData.firstname}, un e-mail de confirmation vous a été renvoyé, merci de vérifier votre boite mail à l'adresse {currentUser.email}
+                        Attention, vérifiez si le mail n'est pas dans vos Spams.</p>
+                </div>}
 
             {/* MATERIAL UI BUTTON FOR CLOSE VALIDATION */}
             <Button onClick={sendEmail}>Renvoyer un mail</Button>
