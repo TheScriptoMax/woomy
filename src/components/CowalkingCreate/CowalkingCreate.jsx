@@ -67,6 +67,10 @@ function CoWalkingCreate() {
             setError(error.message)
         }
 
+        setLoading(false);
+    }
+
+
 
         return (
             <div className="container">
