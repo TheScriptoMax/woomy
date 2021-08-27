@@ -72,7 +72,7 @@ export default function AdminPlace () {
       <div class="container container-admin">
          <h1>Lieux</h1>
 
-         <Link to={'/placelist'}><Button variant='contained'>Voir tous les lieux</Button></Link>
+         <Link to={'/place-list'}><Button variant='contained'>Voir tous les lieux</Button></Link>
 
          <h2 className="placecreate">Création d'un nouveau lieu</h2>
 
@@ -96,7 +96,7 @@ export default function AdminPlace () {
          </form>
         
 
-        <Link to={'/admindistrict'}><Button variant='contained'>Ajouter un quartier</Button></Link>
+        <Link to={'/admin-district'}><Button variant='contained'>Ajouter un quartier</Button></Link>
      </div>
     )
 }

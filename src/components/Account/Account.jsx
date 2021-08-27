@@ -13,7 +13,7 @@ import {useHistory} from "react-router-dom";
 
 
 /// ----- Firebase ///
-import {database} from "../../firebase";
+import {database, storage} from "../../firebase";
 
 //////// Page de profile ////////
 
@@ -28,6 +28,7 @@ function Account() {
     const history = useHistory();
 
     const {currentUser} = useAuth();
+
     useEffect(()=> {
         database.users.doc(currentUser.uid)
             .get()
@@ -118,6 +119,7 @@ function Account() {
             <div className="button-bot-account">
                 <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
             </div>
+
         </div>
       </div>
     );

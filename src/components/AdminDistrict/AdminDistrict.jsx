@@ -10,8 +10,6 @@ import { Link } from 'react-router-dom';
 //ADD A LOCATION
 export default function AdminDistrict() {
 
-    //TODO: composant pour la liste des quartiers
-
     const [error, setError] = useState();
     const [loading, setLoading] = useState();
     const [isShow, setIsShow] = useState(false);
@@ -63,20 +61,22 @@ export default function AdminDistrict() {
             .catch((error) => {
                 setError('Quelque chose s\'est mal passé :(');
             });
+
         }
     }
-        
+
 
     return (
       <div class="container container-admin">
          <h1>Quartiers</h1>
 
-         <Link to={'/districtlist'}><Button variant='contained'>Voir tous les quartiers</Button></Link>
+         <Link to={'/district-list'}><Button variant='contained'>Voir tous les quartiers</Button></Link>
 
 
          <h2 className="create-district">Ajout d'un nouveau quartier</h2>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
+
             <TextField select inputRef={townRef} label="Commune" variant="outlined">
             {towns.map((option) => (
             <option key={option.id} value={option.name}>
@@ -94,7 +94,7 @@ export default function AdminDistrict() {
          </form>
 
 
-         <Link to={'/adminplace'}><Button variant='contained'>Ajouter un lieu</Button></Link>
+         <Link to={'/admin-place'}><Button variant='contained'>Ajouter un lieu</Button></Link>
         
      </div>
     )

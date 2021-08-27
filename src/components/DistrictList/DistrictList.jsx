@@ -29,7 +29,7 @@ export default function DistrictList () {
     return (
       <div class="container container-admin">
          <h1>Quartiers existants</h1>
-         <Link to={'/admindistrict'}><Button variant='contained'>Retour</Button></Link>
+         <Link to={'/admin-district'}><Button variant='contained'>Retour</Button></Link>
 
             <ul className='district-list'>
                 {
