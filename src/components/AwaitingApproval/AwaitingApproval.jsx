@@ -8,27 +8,28 @@ import {useAuth} from "../../contexts/AuthContext";
 
 // MATERIAL UI IMPORT
 import Button from '@material-ui/core/Button';
-import IconButton from "@material-ui/core/IconButton";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import {CheckRounded} from "@material-ui/icons";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // CSS IMPORT
 import './AwaitingApproval.css';
-import {CheckRounded} from "@material-ui/icons";
 
-//PAGE VALIDATION INCRIPTION 
+//PAGE VALIDATION INCRIPTION
 
 export default function AwaitingApproval () {
 
     const [error, setError] = useState('');
-    const cardRef = useRef();
-    const pictureRef = useRef();
 
     const {currentUser} = useAuth();
 
-    let [uploadPicture, uploadCard] = useState();
+    const [iconCard, setIconCard] = useState(false);
+    const [cardLoading, setCardLoading] = useState(false);
+    const [urlCard, setUrlCard] = useState('');
 
-    const [iconPicture, setIconPicture] = useState(false)
-    const [iconCard, setIconCard] = useState(false)
+    const [iconPicture, setIconPicture] = useState(false);
+    const [pictureLoading, setPictureLoading] = useState(false);
+    const [urlPicture, setUrlPicture] = useState('');
 
 
     function handleIdCardUpload(ev) {
@@ -38,31 +39,12 @@ export default function AwaitingApproval () {
         }
         const filename = idCardFile.name;
         const idCardPath = `files/idCards/${currentUser.uid}.${filename.substring(filename.lastIndexOf('.')+1, filename.length)}`
-        uploadCard = storage
+        const uploadCard = storage
             .ref(idCardPath)
             .put(idCardFile)
-        setIconCard(true);
-    }
-
-    async function handleIdPictureUpload(ev){
-        const idPictureFile = ev.target.files[0];
-        if (!idPictureFile) {
-            return setError('Vous devez soumettre une photo de vous');
-        }
-        const filename = idPictureFile.name;
-        const idCardPath = `files/idPictures/${currentUser.uid}.${filename.substring(filename.lastIndexOf('.')+1, filename.length)}`
-        uploadPicture = storage
-            .ref(idCardPath)
-            .put(idPictureFile)
-        setIconPicture(true)
-    }
-
-    async function handleSubmit(ev){
-        ev.preventDefault();
-
-        //Pour la carte d'id
         uploadCard.on('state_changed',
             snapshot => {
+                setCardLoading(true)
             },
             error => {
                 console.log(error.message)
@@ -74,15 +56,29 @@ export default function AwaitingApproval () {
                             url:url,
                             createdAt: database.getCurrentTimestamp,
                         })
-                            .then(() => {
-                                console.log('Fichier envoyé')
-                            })
+                        .then(() => {
+                            setUrlCard(url)
+                            setCardLoading(false)
+                            setIconCard(true);
+                        })
                     })
             })
+    }
 
-        //Pour la photo
+    function handleIdPictureUpload(ev){
+        const idPictureFile = ev.target.files[0];
+        if (!idPictureFile) {
+            return setError('Vous devez soumettre une photo de vous');
+        }
+        const filename = idPictureFile.name;
+        const idCardPartPath = `files/idPictures/${currentUser.uid}`
+        const idCardPath = `${idCardPartPath}.${filename.substring(filename.lastIndexOf('.')+1, filename.length)}`
+        const uploadPicture = storage
+            .ref(idCardPath)
+            .put(idPictureFile);
         uploadPicture.on('state_changed',
             snapshot => {
+                setPictureLoading(true);
             },
             error => {
                 console.log(error.message)
@@ -95,7 +91,9 @@ export default function AwaitingApproval () {
                             createdAt: database.getCurrentTimestamp,
                         })
                             .then(() => {
-                                console.log('Fichier envoyé')
+                                setUrlPicture(url)
+                                setPictureLoading(false);
+                                setIconPicture(true);
                             })
                     })
             })
@@ -113,40 +111,49 @@ export default function AwaitingApproval () {
             </p>
 
             <div className='confirm-id'>
-                <form onSubmit={handleSubmit}>
-                    <div className='identity-confirm'>
-                        <p>Pièce d'identité</p>
-                        {/* MATERIAL UI BUTTON FOR LOGIN */}
-                        <input
-                            style={{ display: 'none' }}
-                            id="raised-button-file-card"
-                            type="file"
-                            onChange={handleIdCardUpload}
-                        />
-                        <label htmlFor="raised-button-file-card">
-                            <Button variant="raised" component="span">
-                                {iconCard ? <CheckRounded /> : <ArrowDownwardIcon />}
-                            </Button>
-                        </label>
+                <div className='identity-confirm'>
+                    <p>Pièce d'identité</p>
+                    {/* MATERIAL UI BUTTON FOR LOGIN */}
+                    <input
+                        style={{ display: 'none' }}
+                        id="raised-button-file-card"
+                        type="file"
+                        onChange={handleIdCardUpload}
+                    />
+                    <div className='container-img'>
+                        <img className='img-card' src={urlCard}/>
                     </div>
+                    <label htmlFor="raised-button-file-card">
+                        <Button variant="raised" component="span">
+                            {cardLoading ?
+                                <CircularProgress hidden /> :
+                                iconCard ?
+                                    <CheckRounded /> : <ArrowDownwardIcon /> }
+                        </Button>
+                    </label>
+                </div>
 
-                    <div className='photo-confirm'>
-                        <p>Photo</p>
-                        {/* MATERIAL UI BUTTON FOR DOWLOAD PICTURE PORTRAIT */}
-                        <input
-                            style={{ display: 'none' }}
-                            id="raised-button-file-picture"
-                            type="file"
-                            onChange={handleIdPictureUpload}
-                        />
-                        <label htmlFor="raised-button-file-picture">
-                            <Button variant="raised" component="span">
-                                {iconPicture ? <CheckRounded /> : <ArrowDownwardIcon />}
-                            </Button>
-                        </label>
+                <div className='photo-confirm'>
+                    <p>Photo</p>
+                    {/* MATERIAL UI BUTTON FOR DOWLOAD PICTURE PORTRAIT */}
+                    <input
+                        style={{ display: 'none' }}
+                        id="raised-button-file-picture"
+                        type="file"
+                        onChange={handleIdPictureUpload}
+                    />
+                    <div className='container-img'>
+                        <img className='img-picture' src={urlPicture}/>
                     </div>
-                    <Button type="submit" variant="contained">Envoyer</Button>
-                </form>
+                    <label htmlFor="raised-button-file-picture">
+                        <Button variant="raised" component="span">
+                            {pictureLoading ?
+                                <CircularProgress hidden /> :
+                                iconPicture ?
+                                    <CheckRounded /> : <ArrowDownwardIcon /> }
+                        </Button>
+                    </label>
+                </div>
             </div>
 
         </div>
