@@ -61,7 +61,8 @@ function CowalkerList({cowalk}) {
                     .add({
                         cowalkRequested: cowalk.id,
                         guest: currentUser.uid,
-                        status:'approval request'
+                        status:'approval request',
+                        requestDate:new Date()
                     })
                     .then(() => {
                         console.log('Notif envoyée')
@@ -79,6 +80,21 @@ function CowalkerList({cowalk}) {
             .then(() => {
                 setIsMember(false)
             })
+            .then(()=>{
+                database.notifications(cowalk.owner).where("guest", "==", currentUser.uid).where("cowalkRequested", "==", cowalk.id)
+                .get()
+                .then(onSnapshot => {
+                    onSnapshot.forEach(doc => {
+                        console.log(database.formatDoc(doc))
+                    })
+                })
+
+               // .delete()
+                .then(()=>{
+                    console.log('Notif supprimée')
+                })   
+            })
+        
 
     }
 
