@@ -44,6 +44,7 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
+import PublicRoute from './components/PublicRoute'
 import PrivateRoute from './components/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/EmailNotVerifiedRoute";
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
@@ -59,8 +60,8 @@ function App() {
                 <Switch>
                     {/*----- Route public -----*/}
 
-                        <Route path='/signin' component={SignIn}/>
-                        <Route path='/login' component={Login}/>
+                        <PublicRoute path='/signin' component={SignIn}/>
+                        <PublicRoute path='/login' component={Login}/>
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
