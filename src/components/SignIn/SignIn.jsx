@@ -82,6 +82,10 @@ export default function SignIn () {
 
             <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Entrez votre numéro de téléphone" variant="standard" />
             
+            <TextField type="date" id="standard-basic" label="Entrez votre date de naissance" variant="standard"  InputLabelProps={{
+          shrink: true,
+        }}/>
+
             <TextField type="password" inputRef={passwordRef} id="standard-basic" label="Entrez un mot de passe" variant="standard" />
             
             <TextField type="password" inputRef={passwordConfirmRef} id="standard-basic" label="Confirmez le mot de passe" variant="standard" />
@@ -93,27 +97,6 @@ export default function SignIn () {
 
 
         </form>
-
-
-        <div className='confirm-id'>
-
-            <div className='photo-confirm'>
-                <p>Photo</p>
-                {/* MATERIAL UI BUTTON FOR DOWLOAD PICTURE PORTRAIT */}
-                <IconButton aria-label="download">
-                    <ArrowDownwardIcon />
-                </IconButton>
-            </div>
-
-            <div className='identity-confirm'>
-                <p>Pièce d'identité</p>
-                {/* MATERIAL UI BUTTON FOR DOWLOAD IDENTITY CARD */}
-                <IconButton aria-label="download">
-                    <input type="file" hidden />
-                </IconButton>
-            </div> 
-            
-        </div>
 
         <div className='valid-signIn'>
                 <p>Une pièce d’identité + une photo de vous sont nécessaires pour établir votre propre sécurité et celles avec qui vous ferez du copiétonnage. Après chaque vérification nous détruisont celles ci.

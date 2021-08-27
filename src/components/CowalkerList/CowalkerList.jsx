@@ -7,25 +7,39 @@ import {useAuth} from "../../contexts/AuthContext";
 import {useEffect, useState} from "react";
 import {database} from '../../firebase'
 import {RemoveCircle} from "@material-ui/icons";
+import CowalkerItem from "../CowalkerItem/CowalkerItem";
 
 ///////// liste des copiétonneuses //////////
 
 function CowalkerList({cowalk}) {
-    const [isOwner,setIsOwner] = useState(false)
-    const [isMember, setIsMember] = useState()
-    const [userData, setUserData] = useState({})
+    const [isOwner, setIsOwner] = useState(false);
+    const [isMember, setIsMember] = useState();
+    const [owner, setOwner] = useState({})
+    const [membersList, setMembersList] = useState([]);
+    const [userData, setUserData] = useState({});
     const {currentUser} = useAuth();
 
+    useEffect(() => {
+        database.users.doc(cowalk.owner)
+            .get()
+            .then((owner) => {
+                setOwner(database.formatDoc(owner))
+            })
+            .catch(() => {
+                console.log('Couldnt retrieve the owner')
+            })
+    }, [])
 
-    const memberList =[{
-        email:"maxime.pinet@hotmail.fr",
-        firstname:"moi",
-        id:"CGxDIKIvHSVcyHCE7PM00TLP9JG2",
-        lastname:"moi",
-        phoneNumber:"0946433443",
-        role:"user"
-    }]
-    
+    useEffect(() => {
+        return database.membersPending(cowalk.id).onSnapshot((querySnapshot) => {
+            const tempMembers = [];
+            querySnapshot.forEach((doc) => {
+                tempMembers.push(database.formatDoc(doc))
+            })
+            setMembersList(tempMembers)
+        });
+    }, [])
+
 
     useEffect(() => {
         currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
@@ -48,7 +62,7 @@ function CowalkerList({cowalk}) {
             .catch(error => {
                 console.log('Error getting collection')
             })
-    },[cowalk.id, cowalk.owner, currentUser.uid])
+    }, [cowalk.id, cowalk.owner, currentUser.uid])
 
 
     function handleJoinCowalk() {
@@ -70,7 +84,7 @@ function CowalkerList({cowalk}) {
         })
             .then(()=> {
                 setIsMember(true)
-        })
+            })
     }
 
 
@@ -101,14 +115,19 @@ function CowalkerList({cowalk}) {
 
     return (
         <div className='cowalkerListcontainer'>
-            <div>{ !isOwner &&
+            <div>{!isOwner &&
 
-                <div className="cowalkerAddIcon">
+            <div className="cowalkerAddIcon">
                 {!isMember ? <AddCircleIcon onClick={handleJoinCowalk}/> : <RemoveCircle onClick={handleLeaveCowalk}/>}
-                </div>
+            </div>
             }
             </div>
             <ul className="cowalkerList">
+                <CowalkerItem key={owner.id} member={owner} />
+                {membersList.map(member => {
+                    return <CowalkerItem key={member.id} member={member}/>
+                })}
+
 
             </ul>
 

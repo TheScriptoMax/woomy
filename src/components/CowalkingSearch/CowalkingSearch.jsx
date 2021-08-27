@@ -1,33 +1,50 @@
 /// ----- Material UI ----- ///
 import InputLabel from '@material-ui/core/Inputlabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/Textfield';
 import {
     DateTimePicker,
     MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import {Alert} from "@material-ui/lab";
+import CowalkingCard from "../CowalkingCard/CowalkingCard";
 
 /// ----- CSS ----- ///
 import './cowalkingsearch.css';
 
 /// ----- React Modules ----- ///
-
-import {useRef, useState} from 'react';
-import DateFnsUtils from '@date-io/date-fns'
-import {database} from "../../firebase";
-import Button from "@material-ui/core/Button";
-import CowalkingCard from "../CowalkingCard/CowalkingCard";
+import { useState, useRef, useEffect } from 'react';
+import DateFnsUtils from '@date-io/date-fns';
 import {Link} from 'react-router-dom';
 
+/// ----- Database ----- ///
+import { database } from '../../firebase';
 
 
 function CoWalkingSearch() {
-    const startFromRef = useRef();
 
-    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [locations, setLocations] = useState([]);
+    const startFromRef = useRef();
+    const [selectedDate, handleDateChange] = useState(new Date());
     const [resultsList, setResultsList] = useState([]);
     const [noSearch, setNoSearch] = useState(true)
+
+    useEffect(() => {
+        database.locations.get().then(locations => {
+            const tempLocations = []
+            locations.forEach(location => {
+                tempLocations.push(database.formatDoc(location))
+            })
+            tempLocations.sort(function(a, b){
+                if(a.name < b.name) { return -1; }
+                if(a.name > b.name) { return 1; }
+                return 0;
+            })
+            setLocations(tempLocations)
+            
+        })
+    }, [])
 
     function handleSubmitSearch(ev) {
         ev.preventDefault();
@@ -50,30 +67,31 @@ function CoWalkingSearch() {
     }
 
     return (
-        <div className=" container colwalkingsearch-container">
-            <h2>Rechercher un itinéraire</h2>
-            <form onSubmit={handleSubmitSearch} className="searchform">
+      <div className=" container colwalkingsearch-container">
+         <h2>Rechercher un itinéraire</h2>
+         <form onSubmit={handleSubmitSearch} className="searchform">
 
-                <InputLabel className="label">Départ</InputLabel>
+            <TextField select inputRef={startFromRef} label="Départ">
+                {locations.map((option) => (
+                <option key={option.id} value={option.name}>
+                {option.name}
+                </option>
+            ))}
+            </TextField>
 
-                <TextField defaultValue="" inputRef={startFromRef} select labelId="label" id="select">
-                    <MenuItem value="velpeau">Velpeau</MenuItem>
-                    <MenuItem value="spdc">SPDC</MenuItem>
-                    <MenuItem value="prout">Prout</MenuItem>
-                </TextField>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DateTimePicker
+                value={selectedDate}
+                onChange={handleDateChange}
+                minutesStep={5}
+              />
+            </MuiPickersUtilsProvider>
 
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <DateTimePicker
-                        value={selectedDate}
-                        onChange={setSelectedDate}
-                        minutesStep={5}
-                    />
-                </MuiPickersUtilsProvider>
+            <Button type="submit" variant="contained">Rechercher</Button>
 
-                <Button type="submit" variant="contained">Rechercher</Button>
+          </form>
 
-            </form>
-            <div className="separator"></div>
+          <div className="separator"></div>
             {!noSearch &&
                 <ul className='cowalkingList'>
                 {resultsList.length > 0
@@ -87,6 +105,7 @@ function CoWalkingSearch() {
 
                 }
             </ul>
+
             }
 
         </div>
