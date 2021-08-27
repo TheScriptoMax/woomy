@@ -66,16 +66,20 @@ export default function AwaitingApproval () {
     }
 
     function handleIdPictureUpload(ev){
+
         const idPictureFile = ev.target.files[0];
         if (!idPictureFile) {
             return setError('Vous devez soumettre une photo de vous');
         }
+
         const filename = idPictureFile.name;
-        const idCardPartPath = `files/idPictures/${currentUser.uid}`
-        const idCardPath = `${idCardPartPath}.${filename.substring(filename.lastIndexOf('.')+1, filename.length)}`
+        const idPicturePartPath = `files/idPictures/${currentUser.uid}`
+        const idPicturePath = `${idPicturePartPath}.${filename.substring(filename.lastIndexOf('.')+1, filename.length)}`
+
         const uploadPicture = storage
-            .ref(idCardPath)
+            .ref(idPicturePath)
             .put(idPictureFile);
+
         uploadPicture.on('state_changed',
             snapshot => {
                 setPictureLoading(true);
