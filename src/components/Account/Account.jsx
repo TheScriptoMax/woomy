@@ -119,7 +119,11 @@ function Account() {
             <div className="button-bot-account">
                 <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
             </div>
-
+            <div className="button-bot-account">
+                <Link to="/admin">
+                    <Button variant="contained" >Admin</Button>
+                </Link>
+            </div>
         </div>
       </div>
     );
