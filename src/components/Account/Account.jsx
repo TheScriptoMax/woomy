@@ -13,7 +13,7 @@ import {useHistory} from "react-router-dom";
 
 
 /// ----- Firebase ///
-import {database} from "../../firebase";
+import {database, storage} from "../../firebase";
 
 //////// Page de profile ////////
 
@@ -60,6 +60,37 @@ function Account() {
         } catch {
             setError('Woops, on a pas réussi à vous déconnecter')
         }
+    }
+
+    function handleIdCardUpload(ev) {
+        const idCardFile = ev.target.files[0];
+        if (!idCardFile) {
+            return setError('Vous devez soumettre une copie du recto de votre carte d\'identité');
+        }
+        const filename = idCardFile.name;
+        const idCardPath = `files/idCards/${currentUser.uid}.${filename.substring(filename.lastIndexOf('.')+1, filename.length)}`
+        const uploadTask = storage
+            .ref(idCardPath)
+            .put(idCardFile)
+
+        uploadTask.on('state_changed',
+            snapshot => {
+            },
+            error => {
+            console.log(error.message)
+            },
+            () => {
+                uploadTask.snapshot.ref.getDownloadURL().then(url=> {
+                    database.idCardFiles.doc(currentUser.uid).set({
+                        url:url,
+                        createdAt: database.getCurrentTimestamp,
+                    })
+                        .then(() => {
+                            console.log('Fichier envoyé')
+                        })
+                })
+            })
+
     }
 
 
@@ -118,6 +149,17 @@ function Account() {
             <div className="button-bot-account">
                 <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
             </div>
+            <input
+                style={{ display: 'none' }}
+                id="raised-button-file"
+                type="file"
+                onChange={handleIdCardUpload}
+            />
+            <label htmlFor="raised-button-file">
+                <Button variant="raised" component="span">
+                    Upload
+                </Button>
+            </label>
         </div>
       </div>
     );

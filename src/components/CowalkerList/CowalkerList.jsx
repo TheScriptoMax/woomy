@@ -55,8 +55,20 @@ function CowalkerList({cowalk}) {
         database.membersPending(cowalk.id).doc(currentUser.uid)
             .set(
                 userData
-            ).then(() => {
-            setIsMember(true)
+            )
+            .then(() => {
+                database.notifications(cowalk.owner)
+                    .add({
+                        cowalkRequested: cowalk.id,
+                        guest: currentUser.uid,
+                        status:'approval request'
+                    })
+                    .then(() => {
+                        console.log('Notif envoyée')
+                    })
+        })
+            .then(()=> {
+                setIsMember(true)
         })
     }
 
