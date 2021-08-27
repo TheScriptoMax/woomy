@@ -1,6 +1,5 @@
 // MATERIAL UI IMPORT
 import MessageCard from "../MessageCard/messageCard";
-import NotificationCard from "../MessageCard/messageCard";
 
 // CSS IMPORT
 import './notification.css'
