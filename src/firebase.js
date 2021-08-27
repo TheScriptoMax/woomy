@@ -22,6 +22,7 @@ export const database = {
     locations: firestore.collection('locations'),
     districts: firestore.collection('districts'),
     towns: firestore.collection('towns'),
+
     membersPending: cowalkId => {
         return firestore.collection('cowalks').doc(cowalkId).collection('membersPending');
     },

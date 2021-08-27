@@ -15,8 +15,8 @@ export default function AdminDistrict () {
     const [loading, setLoading] = useState();
     const [isShow, setIsShow] = useState(false);
     const [districtAdded, setDistrictAdded] = useState(false);
-
     const [towns, setTowns] = useState([]);
+
 
     const formRef = useRef();
     const districtNameRef = useRef();
@@ -33,6 +33,7 @@ export default function AdminDistrict () {
             
         })
     }, [])
+
 
     const addDistrict = (e) => {
         e.preventDefault();
@@ -74,6 +75,7 @@ export default function AdminDistrict () {
          <p className="create-district">Ajout d'un nouveau quartier</p>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
+
             <TextField select inputRef={townRef} label="Commune" variant="outlined">
             {towns.map((option) => (
             <option key={option.id} value={option.name}>

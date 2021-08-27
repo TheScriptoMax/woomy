@@ -1,13 +1,14 @@
 /// ----- Material UI ----- ///
-
-import  Select from '@material-ui/core/Select';
-import  InputLabel from '@material-ui/core/Inputlabel';
-import  MenuItem from '@material-ui/core/MenuItem';
-import  TextField from '@material-ui/core/Textfield';
+import InputLabel from '@material-ui/core/Inputlabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from "@material-ui/core/Button";
+import TextField from '@material-ui/core/Textfield';
 import {
-  DateTimePicker,
-  MuiPickersUtilsProvider,
+    DateTimePicker,
+    MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
+import {Alert} from "@material-ui/lab";
+import CowalkingCard from "../CowalkingCard/CowalkingCard";
 
 /// ----- CSS ----- ///
 import './cowalkingsearch.css';
@@ -15,6 +16,7 @@ import './cowalkingsearch.css';
 /// ----- React Modules ----- ///
 import { useState, useRef, useEffect } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
+import {Link} from 'react-router-dom';
 
 /// ----- Database ----- ///
 import { database } from '../../firebase';
@@ -23,8 +25,10 @@ import { database } from '../../firebase';
 function CoWalkingSearch() {
 
     const [locations, setLocations] = useState([]);
-    const locationSearchRef = useRef();
+    const startFromRef = useRef();
     const [selectedDate, handleDateChange] = useState(new Date());
+    const [resultsList, setResultsList] = useState([]);
+    const [noSearch, setNoSearch] = useState(true)
 
     useEffect(() => {
         database.locations.get().then(locations => {
@@ -37,12 +41,32 @@ function CoWalkingSearch() {
         })
     }, [])
 
+    function handleSubmitSearch(ev) {
+        ev.preventDefault();
+        const rangeStart = new Date(selectedDate);
+        const rangeEnd = new Date(selectedDate);
+        rangeStart.setHours(rangeStart.getHours() - 2);
+        rangeEnd.setHours(rangeEnd.getHours() + 2);
+        database.cowalks.where("startFrom", "==", startFromRef.current.value).where("startTime", ">=", rangeStart).where("startTime", "<=", rangeEnd).orderBy("startTime")
+            .get()
+            .then((queryResults) => {
+                const tempResults = []
+                queryResults.forEach(result => {
+                    tempResults.push(database.formatDoc(result))
+                })
+                setResultsList(tempResults);
+                setNoSearch(false);
+                console.log(tempResults)
+                console.log("Requete envoyée")
+            })
+    }
+
     return (
       <div className=" container colwalkingsearch-container">
          <h2>Rechercher un itinéraire</h2>
-         <form className="searchform">
+         <form onSubmit={handleSubmitSearch} className="searchform">
 
-            <TextField select inputRef={locationSearchRef} label="Départ">
+            <TextField select inputRef={startFromRef} label="Départ">
                 {locations.map((option) => (
                 <option key={option.id} value={option.name}>
                 {option.name}
@@ -58,16 +82,71 @@ function CoWalkingSearch() {
               />
             </MuiPickersUtilsProvider>
 
+            <Button type="submit" variant="contained">Rechercher</Button>
+
           </form>
-        <div className="separator"></div>
-        {/* <ul className='cowalkingList'>
-            {
-                cowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
+
+          <div className="separator"></div>
+            {!noSearch &&
+                <ul className='cowalkingList'>
+                {resultsList.length > 0
+                    ? resultsList.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
+                    : <>
+                        <Alert severity="warning">Pas de copiétonnages. Pourquoi ne pas en ajouter un ?</Alert>
+                        <Link to="/create">
+                        <Button variant="contained">Créer un copiétonnage</Button>
+                        </Link>
+                    </>
+
+                }
+            </ul>
+// =======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//     return (
+//         <div className=" container colwalkingsearch-container">
+//             <h2>Rechercher un itinéraire</h2>
+//             <form  className="searchform">
+
+//                 <InputLabel className="label">Départ</InputLabel>
+
+//                 <TextField defaultValue="" inputRef={} select labelId="label" id="select">
+//                     <MenuItem value="velpeau">Velpeau</MenuItem>
+//                     <MenuItem value="spdc">SPDC</MenuItem>
+//                     <MenuItem value="prout">Prout</MenuItem>
+//                 </TextField>
+
+//                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
+//                     <DateTimePicker
+//                         value={selectedDate}
+//                         onChange={setSelectedDate}
+//                         minutesStep={5}
+//                     />
+//                 </MuiPickersUtilsProvider>
+
+                
+
+//             </form>
+
+            
+// >>>>>>> dev
             }
-        </ul> */}
 
-      </div>
+        </div>
     );
-  }
+}
 
-  export default CoWalkingSearch;
+export default CoWalkingSearch;
