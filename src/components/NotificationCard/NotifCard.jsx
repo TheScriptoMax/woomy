@@ -1,5 +1,7 @@
 import {database} from '../../firebase';
-import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react';
+import {useAuth} from "../../contexts/AuthContext";
+
 
 // MATERIAL UI IMPORT
 import MessageIcon from '@material-ui/icons/Message';
@@ -12,8 +14,9 @@ import './notifCard.css';
 //PAGE NOTIFICATION CARTE COPIETONNEUSE
 function NotifCard({notif}) {
     const [userData, setUserData] = useState({})
-  
-    
+
+    const {currentUser} = useAuth();
+
 
     useEffect(() => {
         database.users.doc(notif.guest)
@@ -23,6 +26,26 @@ function NotifCard({notif}) {
             })
         
     },[])
+
+    function onGuestApproval () {
+        database.membersApproved(notif.cowalkRequested).doc(notif.guest)
+            .set(
+                userData
+            ) 
+            .then(()=>{
+                database.membersPending(notif.cowalkRequested).doc(notif.guest)
+                    .delete()
+                    .then(()=>{
+                        database.notifications(currentUser.uid).doc(notif.id)
+                        .delete()
+                        .then(()=> {
+                             console.log('notif delete')
+                        })
+                    })
+            })
+            
+
+    }
     return (
 
         <li className="card-notif">
@@ -42,7 +65,7 @@ function NotifCard({notif}) {
             </div>
 
             <div className="container-button">
-                <Button variant="contained">Accepter</Button>
+                <Button variant="contained" onClick={(event)=>onGuestApproval()}>Accepter</Button>
             </div>
         </li>
     );

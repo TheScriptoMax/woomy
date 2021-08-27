@@ -79,6 +79,7 @@ function App() {
                         <AwaitingApprovalRoute exact path='/list' component={CowalkingList}/>
                         <PrivateRoute exact path='/message' component={Notification}/>
                         <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+
                         
 
                         {/*----- Account -----*/}
