@@ -12,7 +12,7 @@ import Footer from './components/footer/footer';
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
-import AwaitingApprouval from './components/AwaitingApprouval/AwaitingApprouval';
+import AwaitingApproval from './components/AwaitingApproval/AwaitingApproval';
 import SendNewValidation from './components/SendNewValidation/SendNewValidation';
 
 /**** PROFIL *****/
@@ -63,9 +63,10 @@ function App() {
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
 
-                        <EmailNotVerifiedRoute path='/awaiting-approuval' component={AwaitingApprouval}/>
+                    {/*Todo: Changer la route pour les personnes vérifier mais en attente de validation d'un admin*/}
+                        <Route path='/awaiting-approval' component={AwaitingApproval}/>
 
-                    {/*----- Route private AwaitingApprouval -----*/}
+                    {/*----- Route private AwaitingApproval -----*/}
 
                         {/*----- Ticket -----*/}
                         <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>

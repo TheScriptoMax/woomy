@@ -95,25 +95,25 @@ export default function SignIn () {
         </form>
 
 
-        <div className='confirm-id'>
+        {/*<div className='confirm-id'>*/}
 
-            <div className='photo-confirm'>
-                <p>Photo</p>
-                {/* MATERIAL UI BUTTON FOR DOWLOAD PICTURE PORTRAIT */}
-                <IconButton aria-label="download">
-                    <ArrowDownwardIcon />
-                </IconButton>
-            </div>
+        {/*    <div className='photo-confirm'>*/}
+        {/*        <p>Photo</p>*/}
+        {/*        /!* MATERIAL UI BUTTON FOR DOWLOAD PICTURE PORTRAIT *!/*/}
+        {/*        <IconButton aria-label="download">*/}
+        {/*            <ArrowDownwardIcon />*/}
+        {/*        </IconButton>*/}
+        {/*    </div>*/}
 
-            <div className='identity-confirm'>
-                <p>Pièce d'identité</p>
-                {/* MATERIAL UI BUTTON FOR DOWLOAD IDENTITY CARD */}
-                <IconButton aria-label="download">
-                    <input type="file" hidden />
-                </IconButton>
-            </div> 
-            
-        </div>
+        {/*    <div className='identity-confirm'>*/}
+        {/*        <p>Pièce d'identité</p>*/}
+        {/*        /!* MATERIAL UI BUTTON FOR DOWLOAD IDENTITY CARD *!/*/}
+        {/*        <IconButton aria-label="download">*/}
+        {/*            <input type="file" hidden />*/}
+        {/*        </IconButton>*/}
+        {/*    </div> */}
+        {/*    */}
+        {/*</div>*/}
 
         <div className='valid-signIn'>
                 <p>Une pièce d’identité + une photo de vous sont nécessaires pour établir votre propre sécurité et celles avec qui vous ferez du copiétonnage. Après chaque vérification nous détruisont celles ci.
