@@ -1,7 +1,11 @@
+.placeform{
+    margin-bottom: 1rem;
+}
+
 .placeform div,.placecreate{
     margin-top:1rem;
 }
 
-.container-admin .admin-form-button{
-    margin-top: 1rem;;
+.container-admin .admin-form-btn{
+    margin-top: 1rem;
 }

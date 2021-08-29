@@ -13,7 +13,7 @@ import './cowalkingcreate.css';
 
 /// ----- React Modules ----- ///
 
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import DateFnsUtils from '@date-io/date-fns'
 import {TextField} from "@material-ui/core";
 import {useAuth} from "../../contexts/AuthContext";
@@ -26,55 +26,75 @@ import {Alert} from "@material-ui/lab";
 ///////// PAGE DE CREATION DES COPIETONNAGE //////////
 
 
-function CoWalkingCreate() {
+function CowalkingCreate () {
 
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const goToRef = useRef();
-  const startFromRef = useRef();
+    const [locations, setLocations] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
+    const goToRef = useRef();
+    const startFromRef = useRef();
 
-  const {currentUser} = useAuth();
+    const {currentUser} = useAuth();
 
-  const history = useHistory();
+    const history = useHistory();
 
-  async function handleSubmitCowalk(ev) {
-    ev.preventDefault();
-    try {
-      setError('');
-      setLoading(true)
-      await database.cowalks.add({
-        startFrom: startFromRef.current.value,
-        goTo: goToRef.current.value,
-        startTime: selectedDate,
-        createdAt: database.getCurrentTimestamp,
-        owner: currentUser.uid,
-      }).then(()=>{
-            history.push("/list")
-          })
-    } catch(error) {
-      setError(error.message)
+    useEffect(() => {
+        database.locations.orderBy('name').get().then(locations => {
+            const tempLocations = []
+            locations.forEach(location => {
+                tempLocations.push(database.formatDoc(location))
+            })
+            setLocations(tempLocations)
+            
+        })
+    }, [])
+
+    async function handleSubmitCowalk(ev) {
+        ev.preventDefault();
+        try {
+            setError('');
+            setLoading(true)
+        await database.cowalks.add({
+            startFrom: startFromRef.current.value,
+            goTo: goToRef.current.value,
+            startTime: selectedDate,
+            createdAt: database.getCurrentTimestamp,
+            owner: currentUser.uid,
+        }).then(()=>{
+                history.push("/list")
+            })
+        } catch(error) {
+        setError(error.message)
+        }
+        setLoading(false);
     }
-    setLoading(false);
-  }
+
+   
+
 
 
     return (
       <div className="container">
         <h2>Créer votre itinéraire</h2>
         <form className="createform">
-          <InputLabel className="label">Départ</InputLabel>
-          <TextField defaultValue="" inputRef={startFromRef} select>
-            <MenuItem value="spdc" >SPDC</MenuItem>
-            <MenuItem value="prout" >Prout</MenuItem>
-            <MenuItem value="velpeau" >Velpeau</MenuItem>
-          </TextField>
-          <InputLabel className="label">Destination</InputLabel>
-          <TextField defaultValue="" inputRef={goToRef} select>
-            <MenuItem value="vealpeau" >Velpeau</MenuItem>
-            <MenuItem value="spdcgo" >SPDC</MenuItem>
-            <MenuItem value="prout" >Prout</MenuItem>
-          </TextField>
+        <TextField select inputRef={startFromRef} label="Départ">
+                {locations.map((option) => (
+                <option key={option.id} value={option.name}>
+                {option.name}
+                </option>
+            ))}
+            </TextField>
+
+
+            <TextField select inputRef={goToRef} label="Destination">
+                {locations.map((option) => (
+                <option key={option.id} value={option.name}>
+                {option.name}
+                </option>
+            ))}
+            </TextField>
+
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <DateTimePicker
             value={selectedDate}
@@ -88,8 +108,10 @@ function CoWalkingCreate() {
           </div>
         </form>
       </div>
-    );
-  }
+    )
+}
 
-export default CoWalkingCreate;
+
+export default CowalkingCreate;
+
 

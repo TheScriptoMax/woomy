@@ -22,3 +22,7 @@ h2{
     height:2px;
     background-color: #BD1347;
 }
+
+.searchform div{
+    margin-bottom: 1rem;
+}

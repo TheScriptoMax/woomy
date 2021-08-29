@@ -24,10 +24,16 @@ export const database = {
     districts: firestore.collection('districts'),
     towns: firestore.collection('towns'),
     idCardFiles: firestore.collection('idCardFiles'),
-
+    idPictureFiles: firestore.collection('idPictureFiles'),
     membersPending: cowalkId => {
         return firestore.collection('cowalks').doc(cowalkId).collection('membersPending');
     },
+
+
+    notifications: userId => {
+        return firestore.collection('users').doc(userId).collection('notifications');
+    },
+   
 
     membersApproved: cowalkId => {
         return firestore.collection('cowalks').doc(cowalkId).collection('membersApproved');

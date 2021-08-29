@@ -1,8 +1,8 @@
 import React from "react";
 import {Redirect, Route} from "react-router-dom";
-import {useAuth} from "../contexts/AuthContext";
+import {useAuth} from "../../contexts/AuthContext";
 
-export default function PrivateRoute({component: Component, ...rest})
+export default function EmailNotVerifiedRoute({component: Component, ...rest})
 {
     const {currentUser} = useAuth();
 
@@ -11,14 +11,15 @@ export default function PrivateRoute({component: Component, ...rest})
             {...rest}
             render={props => {
                 if (currentUser && currentUser.emailVerified) {
-                    return <Component {...props} />
+                    return <Redirect to="/account" />
                 } else if (currentUser && !currentUser.emailVerified) {
-                    return <Redirect to="/send-new-validation" />
+                    return <Component {...props} />
                 } else {
                     return <Redirect to="/login" />
                 }
             }}
         >
+
         </Route>
     )
 }
