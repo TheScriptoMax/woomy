@@ -8,6 +8,10 @@ import {AuthProvider} from "./contexts/AuthContext";
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
 
+
+/**** LEGAL *****/
+import Conditions from "./components/Conditions/Conditions";
+
 /**** CONNEXION *****/
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
@@ -63,6 +67,7 @@ function App() {
 
                         <Route path='/signin' component={SignIn}/>
                         <Route path='/login' component={Login}/>
+                    <Route path='/conditions' component={Conditions} />
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
