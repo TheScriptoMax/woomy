@@ -1,10 +1,4 @@
 
-// CSS IMPORT
-
-import './SendNewValidation.css';
-
-//PAGE VALIDATION INCRIPTION
-
 export default function Conditions () {
     return (
 
