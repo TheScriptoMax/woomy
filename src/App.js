@@ -104,13 +104,6 @@ function App() {
                                 <PrivateRoute exact path='/param' component={Params}/>
                         <Footer/>
                     </div>
-                        
-
-                        {/*----- Admin -----*/}
-                        <Route exact path='/adminplace' component={AdminPlace}/>
-                        <Route exact path='/admindistrict' component={AdminDistrict}/>
-                        <Route exact path='/placelist' component={PlaceList}/>
-                        <Route exact path='/admin' component={Admin}/>
 
                 </Switch>
 
