@@ -38,10 +38,10 @@ export default function AdminDistrict() {
 
     const addDistrict = (e) => {
         e.preventDefault();
-        
-        if(districtNameRef.current.value.length < 1 || townRef.current.value.length < 1){
+
+        if (districtNameRef.current.value.length < 1 || townRef.current.value.length < 1) {
             setIsShow(!isShow);
-            if(districtAdded){
+            if (districtAdded) {
                 setDistrictAdded(!districtAdded);
             }
         } else {
@@ -51,19 +51,18 @@ export default function AdminDistrict() {
                 town: townRef.current.value,
                 createdAt: database.getCurrentTimestamp
             })
-            .then((docRef) => {
-                formRef.current.reset();
-                if (isShow) {
-                    setIsShow(!isShow);
-                }
-                if (!districtAdded){
-                    setDistrictAdded(!districtAdded);
-                }
-            })
-            .catch((error) => {
-                setError('Quelque chose s\'est mal passé :(');
-            });
-
+                .then((docRef) => {
+                    formRef.current.reset();
+                    if (isShow) {
+                        setIsShow(!isShow);
+                    }
+                    if (!districtAdded) {
+                        setDistrictAdded(!districtAdded);
+                    }
+                })
+                .catch((error) => {
+                    setError('Quelque chose s\'est mal passé :(');
+                });
         }
     }
 
@@ -101,5 +100,4 @@ export default function AdminDistrict() {
         
      </div>
     )
-
 }
