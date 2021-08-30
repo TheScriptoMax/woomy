@@ -17,7 +17,7 @@ export default function ChangeAccount () {
     const [userData, setUserData] = useState({});
     const [error, setError] = useState('');
     const [loading, setLoading] = useState();
-    const [isShow, setIsShow] = useState(true);
+    const [pageLoading, setPageLoading] = useState(true);
 
     const history = useHistory();
 
@@ -26,14 +26,15 @@ export default function ChangeAccount () {
     const firstnameRef = useRef();
     const lastnameRef = useRef();
     const phoneRef = useRef();
+    const birthdateRef = useRef();
 
-    const {signup} = useAuth()
 
     useEffect(()=> {
         database.users.doc(currentUser.uid)
             .get()
             .then(doc => {
                 setUserData(database.formatDoc(doc))
+                setPageLoading(false)
             })
             .catch(error => {
                 setError(error.message)
@@ -43,55 +44,68 @@ export default function ChangeAccount () {
 
     async function handleSubmit(ev) {
         ev.preventDefault();
-        try {
-            // // setLoading(true);
-            // // setError('');
-            // // console.log(emailRef.current.value)
-            // // await signup(emailRef.current.value, passwordRef.current.value)
-            // //     .then((authUser) => {
-            // //         database.users
-            // //             .doc(authUser.user.uid)
-            // //             .set({
-            // //                 email: emailRef.current.value,
-            // //                 firstname: firstnameRef.current.value,
-            // //                 lastname: lastnameRef.current.value,
-            // //                 phoneNumber: phoneRef.current.value,
-            // //                 createdAt: database.getCurrentTimestamp,
-            // //             });
-            //     })
-            //     .then(() => {
-            //             history.push("/send-confirm")
-            //         }
-            //     );
-        } catch
-            (error) {
-            setError(error.message)
+
+        const promises = [];
+        setLoading(true);
+        setError('');
+
+        if (lastnameRef.current.value !== userData.lastname) {
+            promises.push(database.users.doc(currentUser.uid).update({
+                lastname: lastnameRef.current.value,
+            }))
         }
-        setLoading(false);
+        if (firstnameRef.current.value !== userData.firstname) {
+            promises.push(database.users.doc(currentUser.uid).update({
+                firstname: firstnameRef.current.value,
+            }))
+        }
+        if (phoneRef.current.value !== userData.phoneNumber) {
+            promises.push(database.users.doc(currentUser.uid).update({
+                phoneNumber: phoneRef.current.value,
+            }))
+        }
+        if (birthdateRef.current.value !== userData.birthdate) {
+            promises.push(database.users.doc(currentUser.uid).update({
+                birthdate: birthdateRef.current.value,
+            }))
+        }
+
+        Promise.all(promises)
+            .then(() => {
+                console.log('Edit updated successfully');
+            })
+            .catch((error) => {
+                setError(error);
+            })
+            .finally(() => {
+                setLoading(false);
+                history.push('/account');
+            })
     }
 
 
     return (
 
         <div className='changeAccount container'>
+        {!pageLoading &&
 
-            <form onSubmit={handleSubmit} className='changeAccount-content'>
+        <form onSubmit={handleSubmit} className='changeAccount-content'>
 
-                {/* MATERIAL UI INPUT TO COMPLETE FOR CHANGEACCOUNT */}
+            {/* MATERIAL UI INPUT TO COMPLETE FOR CHANGEACCOUNT */}
 
-                <TextField inputRef={firstnameRef} id="standard-basic" label={userData.firstname} variant="standard"/>
+            <TextField inputRef={lastnameRef} id="standard-basic" defaultValue={userData.lastname} variant="standard"/>
 
-                <TextField inputRef={lastnameRef} id="standard-basic" label={userData.lastname} variant="standard" />
+            <TextField inputRef={firstnameRef} id="standard-basic" label="Prénom" defaultValue={userData.firstname} variant="standard" />
 
-                <TextField type="tel" inputRef={phoneRef} id="standard-basic" label={userData.phoneNumber} variant="standard" />
+            <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Numéro de téléphone" defaultValue={userData.phoneNumber} variant="standard" />
 
-                <TextField type="date" id="standard-basic" label={userData.firstname} variant="standard"  InputLabelProps={{
-                    shrink: true,
-                }}/>
+            <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Date de naissance" defaultValue={userData.birthdate} variant="standard"  InputLabelProps={{
+                shrink: true,
+            }}/>
 
-                <Button disabled={loading} type="submit" variant="contained">Envoyer</Button>
+            <Button disabled={loading} type="submit" variant="contained">Envoyer</Button>
 
-            </form>
+        </form>}
 
         </div>
     );

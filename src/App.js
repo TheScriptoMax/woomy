@@ -68,7 +68,7 @@ function App() {
                 <Switch>
                     {/*----- Route public -----*/}
 
-                        <PublicRoute path='/signin' component={SignIn}/>
+                        <Route path='/signin' component={SignIn}/>
                         <PublicRoute path='/login' component={Login}/>
                         <PublicRoute path='/cgu' component={Conditions}/>
                         <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
@@ -77,7 +77,7 @@ function App() {
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
-                        <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
+                        <Route path='/awaiting-approval' component={AwaitingApproval}/>
 
                     {/*----- Profil connecté et approuvé -----*/}
                         {/*----- Ticket -----*/}
