@@ -17,6 +17,7 @@ function CowalkingList () {
     const [initialCowalks, setInitialCowalks] = useState([])
     const [updatedCowalks,setUpdatedCowalks] = useState([])
     const [lastInitialDate, setLastInitialDate] = useState(new Date())
+    const [pageLoading, setPageLoading] = useState(true);
     const [completeCowalksList, setCompleteCowalksList] = useState([])
 
 
@@ -49,22 +50,24 @@ function CowalkingList () {
                     console.log(tempResults);
                 }
             })
+        setPageLoading(false)
     }, []);
 
     return (
         <div className="container">
 
-            {initialCowalks.length ?
+            {pageLoading ? <p>Loading</p> :
+                initialCowalks.length > 0 ?
 
-            <ul className='cowalkingList'>
-                {
-                    initialCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />)
-                }
+                        <ul className='cowalkingList'>
+                            {
+                                initialCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />)
+                            }
 
-                { updatedCowalks.length > 0 &&
-                    updatedCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />)
-                }
-            </ul> : <p>Loading</p> }
+                            { updatedCowalks.length > 0 &&
+                            updatedCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />)
+                            }
+                        </ul> : <p>Aucun résultat</p> }
         </div>
     )
 }
