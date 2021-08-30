@@ -16,6 +16,7 @@ function CowalkerList({cowalk}) {
     const [isMember, setIsMember] = useState();
     const [owner, setOwner] = useState({})
     const [membersList, setMembersList] = useState([]);
+    const [loading, setLoading] = useState(true)
     const [userData, setUserData] = useState({});
     const {currentUser} = useAuth();
 
@@ -24,6 +25,7 @@ function CowalkerList({cowalk}) {
             .get()
             .then((owner) => {
                 setOwner(database.formatDoc(owner))
+                setLoading(false)
             })
             .catch(() => {
                 console.log('Couldnt retrieve the owner')
@@ -31,12 +33,12 @@ function CowalkerList({cowalk}) {
     }, [])
 
     useEffect(() => {
-        return database.membersPending(cowalk.id).onSnapshot((querySnapshot) => {
-            const tempMembers = [];
+        return database.membersApproved(cowalk.id).onSnapshot((querySnapshot) => {
+            const approvedMembers = [];
             querySnapshot.forEach((doc) => {
-                tempMembers.push(database.formatDoc(doc))
+                approvedMembers.push(database.formatDoc(doc))
             })
-            setMembersList(tempMembers)
+            setMembersList(approvedMembers)
         });
     }, [])
 
@@ -99,21 +101,21 @@ function CowalkerList({cowalk}) {
                 .get()
                 .then(onSnapshot => {
                     onSnapshot.forEach(doc => {
-                        console.log(database.formatDoc(doc))
+                        console.log(database.formatDoc(doc))            
+                        database.notifications(cowalk.owner).doc(doc.id)
+                        .delete()
+                        .then(()=>{
+                            console.log('Notif supprimée')
+                        })   
                     })
-                })
-
-               // .delete()
-                .then(()=>{
-                    console.log('Notif supprimée')
                 })   
             })
-        
-
     }
 
 
     return (
+        <>
+        {!loading && 
         <div className='cowalkerListcontainer'>
             <div>{!isOwner &&
 
@@ -132,6 +134,8 @@ function CowalkerList({cowalk}) {
             </ul>
 
         </div>
+        }
+        </>
     )
 };
 

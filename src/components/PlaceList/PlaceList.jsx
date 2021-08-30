@@ -34,6 +34,7 @@ export default function PlaceList () {
          <h1>Lieux existants</h1>
 
           {/* LOOP POUR AFFICHER LES LIEUX */}
+          {/* COUCOU C'EST LE COMMIT DE TEST */}
 
          <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/adminplace'}>Retour</Link>
         
