@@ -57,14 +57,14 @@ function CowalkingList () {
             {initialCowalks.length ?
 
             <ul className='cowalkingList'>
-                {   initialCowalks.length > 0 &&
+                {
                     initialCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />)
                 }
 
                 { updatedCowalks.length > 0 &&
                     updatedCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />)
                 }
-            </ul> : <p>Allez vous faire cuire un oeuf chez les papous d'en face</p> }
+            </ul> : <p>Loading</p> }
         </div>
     )
 }
