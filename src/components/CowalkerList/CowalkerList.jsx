@@ -64,6 +64,16 @@ function CowalkerList({cowalk}) {
             .catch(error => {
                 console.log('Error getting collection')
             })
+        database.membersApproved(cowalk.id).doc(currentUser.uid)
+            .get()
+            .then((memberApproved) => {
+                if (memberApproved.exists) {
+                    setIsMember(true);
+                }
+            })
+            .catch(error => {
+                console.log('Error getting collection')
+            })
     }, [cowalk.id, cowalk.owner, currentUser.uid])
 
 
@@ -77,7 +87,7 @@ function CowalkerList({cowalk}) {
                     .add({
                         cowalkRequested: cowalk.id,
                         guest: currentUser.uid,
-                        status:'approval request',
+                        status:'pending request',
                         requestDate:new Date()
                     })
                     .then(() => {
@@ -110,6 +120,12 @@ function CowalkerList({cowalk}) {
                     })
                 })   
             })
+        database.membersApproved(cowalk.id).doc(currentUser.uid)
+            .delete()
+            .then(() => {
+                setIsMember(false)
+            })
+        
     }
 
 
@@ -129,10 +145,7 @@ function CowalkerList({cowalk}) {
                 {membersList.map(member => {
                     return <CowalkerItem key={member.id} member={member}/>
                 })}
-
-
             </ul>
-
         </div>
         }
         </>
