@@ -1,28 +1,42 @@
+import {database} from '../../firebase';
+import {useState, useEffect} from 'react'
+
 // MATERIAL UI IMPORT
 import MessageIcon from '@material-ui/icons/Message';
 import Button from '@material-ui/core/Button';
 import { Avatar } from '@material-ui/core';
 
 // CSS IMPORT
-import './notif-card.css';
+import './notifCard.css';
 
 //PAGE NOTIFICATION CARTE COPIETONNEUSE
-function NotificationCard() {
+function NotifCard({notif}) {
+    const [userData, setUserData] = useState({})
+  
+    
 
+    useEffect(() => {
+        database.users.doc(notif.guest)
+            .get()
+            .then(doc => {
+                setUserData(database.formatDoc(doc))
+            })
+        
+    },[])
     return (
 
-        <div className="card-notif">
+        <li className="card-notif">
 
             <div className="separator-dark"></div>
 
             <div className="card-notif-top">
                 <Avatar/>
                 <div className="card-notif-md notif-part">
-                    <p className="first">Barnadette Michel</p>
+                    <p className="first">{userData.firstname} {userData.lastname}</p>
                     <p className="grey">Requete de copietonnage</p>
                 </div>
                 <div className="card-notif-bot notif-part first">
-                    <p className="grey">Il y a une heure</p>
+                    <p className="grey">Il y a </p>
                     <MessageIcon/>
                 </div>
             </div>
@@ -30,7 +44,7 @@ function NotificationCard() {
             <div className="container-button">
                 <Button variant="contained">Accepter</Button>
             </div>
-        </div>
+        </li>
     );
   }
-  export default NotificationCard;
+  export default NotifCard;

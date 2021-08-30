@@ -13,7 +13,7 @@ import './cowalkingcreate.css';
 
 /// ----- React Modules ----- ///
 
-import {useRef, useState, useEffect} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import DateFnsUtils from '@date-io/date-fns'
 import {TextField} from "@material-ui/core";
 import {useAuth} from "../../contexts/AuthContext";
@@ -114,4 +114,5 @@ function CoWalkingCreate() {
   }
 
 export default CoWalkingCreate;
+
 
