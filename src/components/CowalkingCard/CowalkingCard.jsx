@@ -7,6 +7,7 @@ import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 import RemoveIcon from '@material-ui/icons/Remove';
 /// ----- Import image ----- ///
 import ImageProfil from './profile-pic-placeholder.png'
+import {database} from '../../firebase';
 
 
 import {useAuth} from "../../contexts/AuthContext";
@@ -23,14 +24,26 @@ import {Link} from "react-router-dom";
 function CowalkingCard ({cowalk,index}) {
 
     const [isOwner,setIsOwner] = useState(false)
+    const [membersList, setMembersList] = useState([]);
+
 
     const {currentUser} = useAuth();
-    console.log(currentUser.uid)
+    
 
 
     useEffect(() => {
         currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
     }, [cowalk.owner, currentUser.uid])
+
+    useEffect(() => {
+        return database.membersApproved(cowalk.id).onSnapshot((querySnapshot) => {
+            const approvedMembers = [];
+            querySnapshot.forEach((doc) => {
+                approvedMembers.push(database.formatDoc(doc))
+            })
+            setMembersList(approvedMembers)
+        });
+    }, [cowalk])
 
     
     const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})
@@ -64,7 +77,7 @@ function CowalkingCard ({cowalk,index}) {
                             <img src={ImageProfil} alt="profil" />
                         </figure>
                         <ul>
-                            <li><span>+3</span></li>
+                            <li><span>+{membersList.length+1}</span></li>
                         </ul>
                         
                     </div>

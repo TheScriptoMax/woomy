@@ -30,7 +30,7 @@ function CowalkerList({cowalk}) {
             .catch(() => {
                 console.log('Couldnt retrieve the owner')
             })
-    }, [])
+    }, [cowalk])
 
     useEffect(() => {
         return database.membersApproved(cowalk.id).onSnapshot((querySnapshot) => {
@@ -40,12 +40,12 @@ function CowalkerList({cowalk}) {
             })
             setMembersList(approvedMembers)
         });
-    }, [])
+    }, [cowalk])
 
 
     useEffect(() => {
         currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
-    }, [])
+    }, [currentUser,cowalk])
 
     useEffect(() => {
         database.users.doc(currentUser.uid)

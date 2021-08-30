@@ -1,6 +1,5 @@
 import './adminplace.css'
 import {Button, TextField} from '@material-ui/core';
-import { MenuItem } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { database } from '../../firebase';
 
@@ -13,7 +12,6 @@ export default function AdminPlace () {
 
 
     const [error, setError] = useState();
-    const [loading, setLoading] = useState();
     const [isShow, setIsShow] = useState(false);
     const [locationAdded, setLocationAdded] = useState(false);
     const [districts, setDistricts] = useState([]);
@@ -92,7 +90,7 @@ export default function AdminPlace () {
         </TextField>
         <TextField inputRef={adressRef} label="Adresse" variant="outlined"/>
 
-        <Button disabled={loading} type="submit" color="secondary" variant='contained' className="admin-form-btn">Ajouter</Button>
+        <Button type="submit" color="secondary" variant='contained' className="admin-form-btn">Ajouter</Button>
 
         {error && <Alert severity="error">{error}</Alert> }
         {locationAdded && <Alert severity="success">Le lieu a été ajouté</Alert>}

@@ -15,7 +15,6 @@ import {database} from "../../firebase";
 export default function ChangeAccount () {
 
     const [userData, setUserData] = useState({});
-    const [error, setError] = useState('');
     const [loading, setLoading] = useState();
     const [pageLoading, setPageLoading] = useState(true);
 
@@ -37,7 +36,7 @@ export default function ChangeAccount () {
                 setPageLoading(false)
             })
             .catch(error => {
-                setError(error.message)
+                console.log(error.message)
             })
 
     }, [currentUser.uid])
@@ -47,7 +46,7 @@ export default function ChangeAccount () {
 
         const promises = [];
         setLoading(true);
-        setError('');
+        console.log('');
 
         if (lastnameRef.current.value !== userData.lastname) {
             promises.push(database.users.doc(currentUser.uid).update({
@@ -75,7 +74,7 @@ export default function ChangeAccount () {
                 console.log('Edit updated successfully');
             })
             .catch((error) => {
-                setError(error);
+                console.log(error);
             })
             .finally(() => {
                 setLoading(false);

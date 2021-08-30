@@ -13,7 +13,6 @@ import { Link } from 'react-router-dom';
 export default function AdminDistrict() {
 
     const [error, setError] = useState();
-    const [loading, setLoading] = useState();
     const [isShow, setIsShow] = useState(false);
     const [districtAdded, setDistrictAdded] = useState(false);
     const [towns, setTowns] = useState([]);
@@ -30,8 +29,7 @@ export default function AdminDistrict() {
             towns.forEach(town => {
                 tempTowns.push(database.formatDoc(town))
             })
-            setTowns(tempTowns)
-            
+            setTowns(tempTowns) 
         })
     }, [])
 
@@ -88,7 +86,7 @@ export default function AdminDistrict() {
           ))}
             </TextField>
 
-            <Button disabled={loading} type="submit" variant='contained' color="secondary"  className="admin-form-btn">Ajouter</Button>
+            <Button type="submit" variant='contained' color="secondary"  className="admin-form-btn">Ajouter</Button>
 
 
             {error && <Alert severity="error">{error}</Alert> }

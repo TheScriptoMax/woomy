@@ -1,6 +1,6 @@
 // REACT IMPORT
-import {Link} from "react-router-dom";
-import {useEffect, useRef, useState} from "react";
+
+import {useEffect,useState} from "react";
 
 // FIREBASE IMPORT
 import {database, storage} from "../../firebase";
@@ -19,7 +19,6 @@ import './awaitingapproval.css';
 
 export default function AwaitingApproval () {
 
-    const [error, setError] = useState('');
 
     const {currentUser} = useAuth();
 
@@ -45,7 +44,7 @@ export default function AwaitingApproval () {
                 }
             })
             .catch((error) => {
-                setError(error.message)
+                console.log(error.message)
             })
 
         //On regarde si il y'a déja une photo
@@ -60,14 +59,14 @@ export default function AwaitingApproval () {
                 }
         })
             .catch((error) => {
-                setError(error.message)
+                console.log(error.message)
             })
     }, [])
 
     function handleIdCardUpload(ev) {
         const idCardFile = ev.target.files[0];
         if (!idCardFile) {
-            return setError('Vous devez soumettre une copie du recto de votre carte d\'identité');
+            console.log('Vous devez soumettre une copie du recto de votre carte d\'identité');
         }
         const filename = idCardFile.name;
         const idCardPath = `files/idCards/${currentUser.uid}.${filename.substring(filename.lastIndexOf('.')+1, filename.length)}`
@@ -101,7 +100,7 @@ export default function AwaitingApproval () {
 
         const idPictureFile = ev.target.files[0];
         if (!idPictureFile) {
-            return setError('Vous devez soumettre une photo de vous');
+            console.log('Vous devez soumettre une photo de vous');
         }
 
         const filename = idPictureFile.name;
@@ -157,7 +156,7 @@ export default function AwaitingApproval () {
                         onChange={handleIdCardUpload}
                     />
                     <div className='container-img'>
-                        <img className='img-card' src={urlCard}/>
+                        <img className='img-card' src={urlCard} alt="profil"/>
                     </div>
                     <label htmlFor="raised-button-file-card">
                         <Button variant="raised" component="span">
@@ -179,7 +178,7 @@ export default function AwaitingApproval () {
                         onChange={handleIdPictureUpload}
                     />
                     <div className='container-img'>
-                        <img className='img-picture' src={urlPicture}/>
+                        <img className='img-picture' src={urlPicture} alt="profil"/>
                     </div>
                     <label htmlFor="raised-button-file-picture">
                         <Button variant="raised" component="span">

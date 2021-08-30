@@ -11,7 +11,7 @@ import { useState,useEffect } from 'react';
 //FIREBASE
 import {database} from '../../firebase'
 
-import {useAuth} from "../../contexts/AuthContext";
+
 
 
 function CowalkingList () {
@@ -19,10 +19,10 @@ function CowalkingList () {
     const [initialCowalks, setInitialCowalks] = useState([])
     const [updatedCowalks,setUpdatedCowalks] = useState([])
     const [lastInitialDate, setLastInitialDate] = useState(new Date())
-    const [completeCowalksList, setCompleteCowalksList] = useState([]);
+ /*    const [completeCowalksList, setCompleteCowalksList] = useState([]); */
     const [pageLoading, setPageLoading] = useState(true);
 
-    const {currentUser} = useAuth();
+    
 
 
     useEffect(() => {
@@ -48,9 +48,9 @@ function CowalkingList () {
                     })
                     const lastCreatedAt = new Date(Math.max(...tempResults.map(e => e.createdAt.seconds)) * 1000)
                     setLastInitialDate(lastCreatedAt);
-                    console.log(lastCreatedAt)
+                    
                     setInitialCowalks(tempResults);
-                    console.log(tempResults);
+                    
                     setPageLoading(false)
             })
     }, []);

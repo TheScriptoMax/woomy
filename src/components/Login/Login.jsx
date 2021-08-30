@@ -1,5 +1,5 @@
 /// ----- React Modules ----- ///
-import React, {useRef, useState} from "react";
+import React, {useState} from "react";
 import {useHistory, Link} from "react-router-dom";
 import {useAuth} from "../../contexts/AuthContext";
 
@@ -16,8 +16,8 @@ export default function Login () {
 
     /* const emailRef = useRef();
     const passwordRef = useRef(); */
-    const [email,setEmail] = useState (null)
-    const [password,setPassword] = useState (null)
+    const [email,setEmail] = useState ("")
+    const [password,setPassword] = useState ("")
     const [error, setError] = useState('');
     const {login} = useAuth();
     const [loading, setLoading] = useState(false);
@@ -64,7 +64,7 @@ export default function Login () {
             </div>
 
         {error && <Alert severity="error">{error}</Alert> }
-        <form className='login-content' onSubmit={(e)=>handleSubmit(e)}>
+        <form className='login-content' onSubmit={handleSubmit}>
 
             {/* MATERIAL UI INPUT TO COMPLETE FOR LOGIN */}
             <TextField value={email} onChange={(e)=>setEmail(e.target.value)} id="email" label="Entrez votre email" variant="standard" />
