@@ -1,4 +1,5 @@
 .account-field{
+    box-sizing: border-box;
     width: 100%;
     background-color:#DCD9D9;
     display: flex;

@@ -108,13 +108,7 @@ function Account() {
                     </div>
                 </div>
             </Link>
-            <Button onClick={clickResetPassword}>
-                <div className='account-field'>
-                        <p>Réinitialiser le mot de passe</p>
-                        <div className="account-field-result">
-                        </div>
-                </div>
-            </Button>
+            <Button variant="contained" onClick={clickResetPassword}>Réinitialiser le mot de passe</Button>
             {!isShow && <Alert severity="info">Un email vous a été envoyé</Alert>}
             <Link to="/param">
                 <div className='account-field'>
