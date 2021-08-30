@@ -43,10 +43,10 @@ function CowalkingCard ({cowalk,index}) {
                 <div className='cowalkingCardTitle'>
                 <p className='cowalk-start'>Heure de départ:{currentCowalkStartTime}</p>
                     {/* <h3>itinéraire:{index+1}</h3> */}
-                    <div>
-                        <div>
+                    <div className="main-card">
+                        <div className="cowalk-bar">
                             <div className="dot"></div>
-                            <div classname="bar"></div>
+                            <div className="bar"></div>
                             <div className="dot"></div>
                         </div>
                             <div className='cowalkingCardRoute'>
@@ -69,7 +69,6 @@ function CowalkingCard ({cowalk,index}) {
                         <ul>
                             <li><span>+3</span></li>
                         </ul>
-                        
                     </div>
                     <div className='cowalkingCardButtons'>
                     {isOwner && 

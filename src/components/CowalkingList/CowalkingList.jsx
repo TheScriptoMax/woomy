@@ -1,4 +1,3 @@
-
 /// ----- Import Components ---- ///
 import CowalkingCard from "../CowalkingCard/CowalkingCard";
 
@@ -17,7 +16,8 @@ function CowalkingList () {
     const [initialCowalks, setInitialCowalks] = useState([])
     const [updatedCowalks,setUpdatedCowalks] = useState([])
     const [lastInitialDate, setLastInitialDate] = useState(new Date())
-    const [completeCowalksList, setCompleteCowalksList] = useState([])
+    const [completeCowalksList, setCompleteCowalksList] = useState([]);
+    const [pageLoading, setPageLoading] = useState(true);
 
 
     useEffect(() => {
@@ -35,7 +35,6 @@ function CowalkingList () {
             .orderBy('startTime')
             .get()
             .then((querySnapshot) => {
-                if (querySnapshot.length > 0) {
                     const tempResults = [];
                     querySnapshot.forEach((doc) => {
                         tempResults.push(
@@ -47,24 +46,24 @@ function CowalkingList () {
                     console.log(lastCreatedAt)
                     setInitialCowalks(tempResults);
                     console.log(tempResults);
-                }
+                    setPageLoading(false)
             })
     }, []);
 
     return (
         <div className="container">
 
-            {initialCowalks.length ?
-
             <ul className='cowalkingList'>
-                {   initialCowalks.length > 0 &&
-                    initialCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />)
-                }
+                { pageLoading ? <p>Loading</p> : (initialCowalks.length>0 ?
+
+                    initialCowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />) : <p>Aucun résultat</p>) }
+
 
                 { updatedCowalks.length > 0 &&
-                    updatedCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />)
+                    updatedCowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
+
                 }
-            </ul> : <p>Loading</p> }
+            </ul>
         </div>
     )
 }
