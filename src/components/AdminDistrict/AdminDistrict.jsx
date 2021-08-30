@@ -1,6 +1,11 @@
+// IMPORT CSS
 import './admindistrict.css'
+
+// IMPORT MATERIAL
 import {Button, TextField} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+
+// IMPORT FIREBASE
 import { database } from '../../firebase';
 
 // REACT IMPORT

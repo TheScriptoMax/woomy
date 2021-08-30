@@ -1,12 +1,10 @@
-
 /// ----- Material UI ---- ///
-import  InputLabel from '@material-ui/core/Inputlabel';
-import  MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import {
   DateTimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
+import {Alert} from "@material-ui/lab";
 
 /// ----- CSS ----- ///
 import './cowalkingcreate.css';
@@ -21,7 +19,6 @@ import {useAuth} from "../../contexts/AuthContext";
 // FIREBASE
 import {database} from '../../firebase'
 import {useHistory} from "react-router-dom";
-import {Alert} from "@material-ui/lab";
 
 ///////// PAGE DE CREATION DES COPIETONNAGE //////////
 

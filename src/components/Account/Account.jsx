@@ -1,4 +1,3 @@
-import ChangeAccount from '../ChangeAccount/ChangeAccount';
 /// ----- Material UI ----- ///
 import {Avatar, Button} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
@@ -6,7 +5,7 @@ import Alert from '@material-ui/lab/Alert';
 /// ----- CSS ----- ///
 import './account.css';
 
-/// ----- React modules ///
+/// ----- React modules ----- ///
 import {useAuth} from "../../contexts/AuthContext";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";

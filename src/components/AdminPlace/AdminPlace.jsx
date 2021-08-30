@@ -1,7 +1,11 @@
+// IMPORT CSS
 import './adminplace.css'
+
+// IMPORT MATERIAL
 import {Button, TextField} from '@material-ui/core';
-import { MenuItem } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+
+// FIREBASE IMPORT
 import { database } from '../../firebase';
 
 // REACT IMPORT
