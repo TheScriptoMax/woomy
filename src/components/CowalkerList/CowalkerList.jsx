@@ -120,6 +120,7 @@ function CowalkerList({cowalk}) {
                     })
                 })   
             })
+
         database.membersApproved(cowalk.id).doc(currentUser.uid)
             .delete()
             .then(() => {

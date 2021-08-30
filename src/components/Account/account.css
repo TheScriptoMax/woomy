@@ -3,6 +3,7 @@
     margin: auto;
 }
 .account-field{
+    box-sizing: border-box;
     width: 100%;
     background-color:#670652;
     display: flex;

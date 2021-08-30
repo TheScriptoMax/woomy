@@ -28,6 +28,7 @@ function NotifCard({notif}) {
 
     },[notif])
 
+
     function handleDeleteNotif (e) {
         e.preventDefault();
         database.notifications(currentUser.uid).doc(notif.id)
@@ -52,6 +53,7 @@ function NotifCard({notif}) {
                         .then(()=> {
                              console.log('notif delete')
                         })
+
                         database.notifications(notif.guest)
                             .add({
                                 cowalkRequested: notif.cowalkRequested,
@@ -100,6 +102,7 @@ function NotifCard({notif}) {
             </div></>
             
             )}
+
         </li>
     );
   }
