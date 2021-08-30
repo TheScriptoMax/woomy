@@ -50,6 +50,7 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
+import PublicRoute from './components/Routes/PublicRoute'
 import PrivateRoute from './components/Routes/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
@@ -65,13 +66,14 @@ function App() {
                 <Header/>
                 <Switch>
                     {/*----- Route public -----*/}
-                    <Route path='/signin' component={SignIn}/>
-                    <Route path='/login' component={Login}/>
                     <Route path='/cgu' component={Conditions}/>
                     <Route path='/confidentialite' component={PrivacyPolicy}/>
 
-                    <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
-                    <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+                        <PublicRoute path='/signin' component={SignIn}/>
+                        <PublicRoute path='/login' component={Login}/>
+
+                        <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
+                        <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
 
                     {/*Todo: Changer la route pour les personnes vérifier mais en attente de validation d'un admin*/}
                     <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>

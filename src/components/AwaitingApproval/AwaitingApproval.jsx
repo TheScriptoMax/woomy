@@ -32,6 +32,38 @@ export default function AwaitingApproval () {
     const [urlPicture, setUrlPicture] = useState('');
 
 
+    useEffect(()=>{
+        //On regarde si il y'a déja une carte d'identité
+        database.idCardFiles.doc(currentUser.uid)
+            .get()
+            .then((doc) =>{
+                if(doc.exists){
+                    setUrlCard(doc.data().url)
+                }
+                else {
+                    console.log('ça existe pas')
+                }
+            })
+            .catch((error) => {
+                setError(error.message)
+            })
+
+        //On regarde si il y'a déja une photo
+        database.idPictureFiles.doc(currentUser.uid)
+            .get()
+            .then((doc) =>{
+                if(doc.exists){
+                    setUrlPicture(doc.data().url)
+                }
+                else {
+                    console.log('ça existe pas')
+                }
+        })
+            .catch((error) => {
+                setError(error.message)
+            })
+    }, [])
+
     function handleIdCardUpload(ev) {
         const idCardFile = ev.target.files[0];
         if (!idCardFile) {

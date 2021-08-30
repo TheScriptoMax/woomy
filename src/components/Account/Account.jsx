@@ -63,7 +63,6 @@ function Account() {
         }
     }
 
-
     return (
       <div className='container'>
       <div className="account-top">
@@ -119,7 +118,6 @@ function Account() {
             <div className="button-bot-account">
                 <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
             </div>
-
         </div>
       </div>
     );
