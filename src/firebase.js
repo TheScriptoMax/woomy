@@ -7,6 +7,10 @@ import 'firebase/storage';
 
 
 const app = firebase.initializeApp({
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7e8196729d005e17c139939f9960b48e93bac7ee
     apiKey: "AIzaSyDqXSbXW5dTrpubT1gyI3AJ9opFcmisksw",
     authDomain: "woomy-app.firebaseapp.com",
     projectId: "woomy-app",
