@@ -47,7 +47,6 @@ export default function ChangeAccount () {
 
         const promises = [];
         setLoading(true);
-        setError('');
 
         if (lastnameRef.current.value !== userData.lastname) {
             promises.push(database.users.doc(currentUser.uid).update({
@@ -87,25 +86,25 @@ export default function ChangeAccount () {
     return (
 
         <div className='changeAccount container'>
-        {!pageLoading &&
+            {!pageLoading &&
 
-        <form onSubmit={handleSubmit} className='changeAccount-content'>
+            <form onSubmit={handleSubmit} className='changeAccount-content'>
 
-            {/* MATERIAL UI INPUT TO COMPLETE FOR CHANGEACCOUNT */}
+                {/* MATERIAL UI INPUT TO COMPLETE FOR CHANGEACCOUNT */}
 
-            <TextField inputRef={lastnameRef} id="standard-basic" defaultValue={userData.lastname} variant="standard"/>
+                <TextField inputRef={lastnameRef} id="standard-basic" defaultValue={userData.lastname} variant="standard"/>
 
-            <TextField inputRef={firstnameRef} id="standard-basic" label="Prénom" defaultValue={userData.firstname} variant="standard" />
+                <TextField inputRef={firstnameRef} id="standard-basic" label="Prénom" defaultValue={userData.firstname} variant="standard" />
 
-            <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Numéro de téléphone" defaultValue={userData.phoneNumber} variant="standard" />
+                <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Numéro de téléphone" defaultValue={userData.phoneNumber} variant="standard" />
 
-            <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Date de naissance" defaultValue={userData.birthdate} variant="standard"  InputLabelProps={{
-                shrink: true,
-            }}/>
+                <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Date de naissance" defaultValue={userData.birthdate} variant="standard"  InputLabelProps={{
+                    shrink: true,
+                }}/>
 
-            <Button disabled={loading} type="submit" variant="contained">Envoyer</Button>
+                <Button disabled={loading} type="submit" variant="contained">Envoyer</Button>
 
-        </form>}
+            </form>}
 
         </div>
     );
