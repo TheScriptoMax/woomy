@@ -1,9 +1,12 @@
 import {database} from '../../firebase';
-import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react';
+import {useAuth} from "../../contexts/AuthContext";
+
 
 // MATERIAL UI IMPORT
 import MessageIcon from '@material-ui/icons/Message';
 import Button from '@material-ui/core/Button';
+import Clear from '@material-ui/icons/Clear';
 import { Avatar } from '@material-ui/core';
 
 // CSS IMPORT
@@ -12,8 +15,9 @@ import './notifCard.css';
 //PAGE NOTIFICATION CARTE COPIETONNEUSE
 function NotifCard({notif}) {
     const [userData, setUserData] = useState({})
-  
-    
+
+    const {currentUser} = useAuth();
+
 
     useEffect(() => {
         database.users.doc(notif.guest)
@@ -23,11 +27,47 @@ function NotifCard({notif}) {
             })
         
     },[])
+
+    function handleDeleteNotif (e) {
+        e.preventDefault();
+        database.notifications(currentUser.uid).doc(notif.id)
+        .delete()
+        .then(()=>
+            console.log('notif Clear')
+        )
+    }
+
+    function onGuestApproval () {
+        database.membersApproved(notif.cowalkRequested).doc(notif.guest)
+            .set(
+                userData
+            ) 
+            .then(()=>{
+                database.membersPending(notif.cowalkRequested).doc(notif.guest)
+                    .delete()
+                    .then(()=>{
+                        database.notifications(currentUser.uid).doc(notif.id)
+                        .delete()
+                        .then(()=> {
+                             console.log('notif delete')
+                        })
+                        database.notifications(notif.guest)
+                            .add({
+                                cowalkRequested: notif.cowalkRequested,
+                                guest: notif.guest,
+                                status:'approval request',
+                                requestDate:new Date()
+                            })
+                    })
+            })
+            
+
+    }
     return (
 
         <li className="card-notif">
-
-            <div className="separator-dark"></div>
+            { notif.status !== 'approval request' ? (
+            <><div className="separator-dark"></div>
 
             <div className="card-notif-top">
                 <Avatar/>
@@ -36,14 +76,27 @@ function NotifCard({notif}) {
                     <p className="grey">Requete de copietonnage</p>
                 </div>
                 <div className="card-notif-bot notif-part first">
-                    <p className="grey">Il y a </p>
-                    <MessageIcon/>
+                    <Button onClick={(event)=>handleDeleteNotif(event)}><Clear/></Button>
                 </div>
             </div>
 
             <div className="container-button">
-                <Button variant="contained">Accepter</Button>
-            </div>
+                <Button variant="contained" onClick={(event)=>onGuestApproval()}>Accepter</Button>
+            </div></>):(
+                <><div className="separator-dark"></div>
+
+            <div className="card-notif-top">
+                <div className="card-notif-md notif-part">                
+                    <p className="first">Vous avez bien était accepter dans le copiétonnage de :</p>
+                    <p className="grey">{userData.firstname} {userData.lastname}</p>
+                </div>
+                
+                <Avatar/>
+                <Button onClick={(event)=>handleDeleteNotif(event)}><Clear/></Button>
+                
+            </div></>
+            
+            )}
         </li>
     );
   }

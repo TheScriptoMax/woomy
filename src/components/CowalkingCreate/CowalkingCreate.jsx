@@ -26,7 +26,7 @@ import {Alert} from "@material-ui/lab";
 ///////// PAGE DE CREATION DES COPIETONNAGE //////////
 
 
-function CoWalkingCreate() {
+function CowalkingCreate () {
 
     const [locations, setLocations] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -40,15 +40,10 @@ function CoWalkingCreate() {
     const history = useHistory();
 
     useEffect(() => {
-        database.locations.get().then(locations => {
+        database.locations.orderBy('name').get().then(locations => {
             const tempLocations = []
             locations.forEach(location => {
                 tempLocations.push(database.formatDoc(location))
-            })
-            tempLocations.sort(function(a, b){
-                if(a.name < b.name) { return -1; }
-                if(a.name > b.name) { return 1; }
-                return 0;
             })
             setLocations(tempLocations)
             
@@ -58,8 +53,8 @@ function CoWalkingCreate() {
     async function handleSubmitCowalk(ev) {
         ev.preventDefault();
         try {
-        setError('');
-        setLoading(true)
+            setError('');
+            setLoading(true)
         await database.cowalks.add({
             startFrom: startFromRef.current.value,
             goTo: goToRef.current.value,
@@ -75,9 +70,12 @@ function CoWalkingCreate() {
         setLoading(false);
     }
 
+   
+
+
 
     return (
-      <div className="container">
+      <div className="create-walk container">
         <h2>Créer votre itinéraire</h2>
         <form className="createform">
         <TextField select inputRef={startFromRef} label="Départ">
@@ -110,9 +108,10 @@ function CoWalkingCreate() {
           </div>
         </form>
       </div>
-    );
-  }
+    )
+}
 
-export default CoWalkingCreate;
+
+export default CowalkingCreate;
 
 

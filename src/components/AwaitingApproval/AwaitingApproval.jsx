@@ -1,6 +1,6 @@
 // REACT IMPORT
 import {Link} from "react-router-dom";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 // FIREBASE IMPORT
 import {database, storage} from "../../firebase";
@@ -13,7 +13,7 @@ import {CheckRounded} from "@material-ui/icons";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // CSS IMPORT
-import './AwaitingApproval.css';
+import './awaitingapproval.css';
 
 //PAGE VALIDATION INCRIPTION
 
@@ -31,6 +31,38 @@ export default function AwaitingApproval () {
     const [pictureLoading, setPictureLoading] = useState(false);
     const [urlPicture, setUrlPicture] = useState('');
 
+
+    useEffect(()=>{
+        //On regarde si il y'a déja une carte d'identité
+        database.idCardFiles.doc(currentUser.uid)
+            .get()
+            .then((doc) =>{
+                if(doc.exists){
+                    setUrlCard(doc.data().url)
+                }
+                else {
+                    console.log('ça existe pas')
+                }
+            })
+            .catch((error) => {
+                setError(error.message)
+            })
+
+        //On regarde si il y'a déja une photo
+        database.idPictureFiles.doc(currentUser.uid)
+            .get()
+            .then((doc) =>{
+                if(doc.exists){
+                    setUrlPicture(doc.data().url)
+                }
+                else {
+                    console.log('ça existe pas')
+                }
+        })
+            .catch((error) => {
+                setError(error.message)
+            })
+    }, [])
 
     function handleIdCardUpload(ev) {
         const idCardFile = ev.target.files[0];

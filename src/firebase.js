@@ -1,12 +1,15 @@
 import firebase from 'firebase/app';
+import 'firebase/storage';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 
 
+
 const app = firebase.initializeApp({
     apiKey: "AIzaSyA7_ykSQCDK0BCNJt5AZujTrOnN-NoaHSc",
     authDomain: "moowy-d0120.firebaseapp.com",
+    databaseURL: "https://moowy-d0120-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "moowy-d0120",
     storageBucket: "moowy-d0120.appspot.com",
     messagingSenderId: "203513909591",
@@ -25,6 +28,7 @@ export const database = {
     towns: firestore.collection('towns'),
     idCardFiles: firestore.collection('idCardFiles'),
     idPictureFiles: firestore.collection('idPictureFiles'),
+
     membersPending: cowalkId => {
         return firestore.collection('cowalks').doc(cowalkId).collection('membersPending');
     },
@@ -48,6 +52,8 @@ export const database = {
     },
 }
 
+
 export const storage = app.storage();
 
 export default app;
+
