@@ -3,7 +3,7 @@
 import CowalkingCard from "../CowalkingCard/CowalkingCard";
 
 /// ----- CSS ----- ///
-import './cowalkingList.css'
+import './lastcowalks.css'
 
 /// ----- React Modules ----- ///
 import { useState,useEffect } from 'react';
@@ -12,7 +12,7 @@ import { useState,useEffect } from 'react';
 import {database} from '../../firebase'
 
 
-function CowalkingList () {
+function LastCowalks () {
 
     const [initialCowalks, setInitialCowalks] = useState([])
     const [updatedCowalks,setUpdatedCowalks] = useState([])
@@ -32,22 +32,19 @@ function CowalkingList () {
 
     useEffect(() => {
         database.cowalks
-            .orderBy('startTime')
             .get()
             .then((querySnapshot) => {
-                if (querySnapshot.length > 0) {
-                    const tempResults = [];
-                    querySnapshot.forEach((doc) => {
-                        tempResults.push(
-                            database.formatDoc(doc)
-                        )
-                    })
-                    const lastCreatedAt = new Date(Math.max(...tempResults.map(e => e.createdAt.seconds)) * 1000)
-                    setLastInitialDate(lastCreatedAt);
-                    console.log(lastCreatedAt)
-                    setInitialCowalks(tempResults);
-                    console.log(tempResults);
-                }
+                const tempResults = [];
+                querySnapshot.forEach((doc) => {
+                    tempResults.push(
+                        database.formatDoc(doc)
+                    )
+                })
+                const lastCreatedAt = new Date(Math.max(...tempResults.map(e => e.createdAt.seconds)) * 1000)
+                setLastInitialDate(lastCreatedAt);
+                console.log(lastCreatedAt)
+                setInitialCowalks(tempResults);
+                console.log(tempResults);
             })
     }, []);
 
@@ -57,16 +54,16 @@ function CowalkingList () {
             {initialCowalks.length ?
 
             <ul className='cowalkingList'>
-                {   initialCowalks.length > 0 &&
-                    initialCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />)
+                {
+                    initialCowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
                 }
 
                 { updatedCowalks.length > 0 &&
-                    updatedCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />)
+                    updatedCowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
                 }
             </ul> : <p>Allez vous faire cuire un oeuf chez les papous d'en face</p> }
         </div>
     )
 }
 
-export default CowalkingList;
+export default LastCowalks;

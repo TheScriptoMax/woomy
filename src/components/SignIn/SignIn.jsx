@@ -5,8 +5,6 @@ import {database} from '../../firebase';
 
 // MATERIAL UI IMPORT
 import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import Button from '@material-ui/core/Button';
 
 // CSS IMPORT
@@ -53,7 +51,8 @@ export default function SignIn () {
                             lastname: lastnameRef.current.value,
                             phoneNumber: phoneRef.current.value,
                             createdAt: database.getCurrentTimestamp,
-                        });
+                        })
+                        ;
                 })
                 .catch((error) => {
                     console.log(error.message)
@@ -77,7 +76,6 @@ export default function SignIn () {
         <form onSubmit={handleSubmit} className='signIn-content'>
 
             {/* MATERIAL UI INPUT TO COMPLETE FOR SIGNIN */}
-    
             <TextField inputRef={firstnameRef} id="standard-basic" label="Entrez votre nom" variant="standard" />
             
             <TextField inputRef={lastnameRef} id="standard-basic" label="Entrez votre prénom" variant="standard" />
@@ -85,7 +83,7 @@ export default function SignIn () {
             <TextField type="email" inputRef={emailRef} id="standard-basic" label="Entrez votre email" variant="standard" />
 
             <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Entrez votre numéro de téléphone" variant="standard" />
-            
+
             <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Entrez votre date de naissance" variant="standard"  InputLabelProps={{
           shrink: true,
         }}/>
