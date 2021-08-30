@@ -15,7 +15,7 @@ import {database} from "../../firebase";
 export default function ChangeAccount () {
 
     const [userData, setUserData] = useState({});
-    const [erorr, setError] = useState('');
+    const [setError] = useState('');
     const [loading, setLoading] = useState();
     const [pageLoading, setPageLoading] = useState(true);
 
