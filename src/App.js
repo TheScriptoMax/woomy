@@ -5,8 +5,8 @@
 import {AuthProvider} from "./contexts/AuthContext";
 
 /**** HEADER & FOOTER *****/
-import Header from './components/header/header';
-import Footer from './components/footer/footer';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 
 /**** LEGAL *****/
@@ -23,6 +23,7 @@ import SendNewValidation from './components/SendNewValidation/SendNewValidation'
 /**** PROFIL *****/
 import Account from './components/Account/Account';
 import Params from './components/Params/Params';
+import ChangeAccount from './components/ChangeAccount/ChangeAccount';
 
 /**** ADMIN *****/
 import AdminPlace from "./components/AdminPlace/AdminPlace";
@@ -50,6 +51,7 @@ import {
     Switch,
     Route,
 } from "react-router-dom";
+import PublicRoute from './components/Routes/PublicRoute'
 import PrivateRoute from './components/Routes/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
@@ -66,41 +68,40 @@ function App() {
                 <Switch>
                     {/*----- Route public -----*/}
 
-                    <Route path='/signin' component={SignIn}/>
-                    <Route path='/login' component={Login}/>
-                    <Route path='/cgu' component={Conditions}/>
-                    <Route path='/confidentialite' component={PrivacyPolicy}/>
+                        <Route path='/signin' component={SignIn}/>
+                        <PublicRoute path='/login' component={Login}/>
+                        <PublicRoute path='/cgu' component={Conditions}/>
+                        <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
 
-                    <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
-                    <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+                    {/*----- Route private Attente validation Email et AwaitingApproval -----*/}
 
-                    {/*Todo: Changer la route pour les personnes vérifier mais en attente de validation d'un admin*/}
-                    <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
+                        <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
+                        <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+                        <Route path='/awaiting-approval' component={AwaitingApproval}/>
 
-                    {/*----- Route private AwaitingApproval -----*/}
+                    {/*----- Profil connecté et approuvé -----*/}
+                        {/*----- Ticket -----*/}
+                            <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
+                            <PrivateRoute exact path='/create' component={CowalkingCreate}/>
+                            <PrivateRoute exact path='/search' component={CowalkingSearch}/>
+                            <PrivateRoute exact path='/list' component={CowalkingList}/>
+                            <PrivateRoute exact path='/message' component={Notification}/>
+                            <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit}/>
 
-                    {/*----- Ticket -----*/}
-                    <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
-                    <PrivateRoute exact path='/create' component={CowalkingCreate}/>
-                    <PrivateRoute exact path='/search' component={CowalkingSearch}/>
-                    <AwaitingApprovalRoute exact path='/list' component={CowalkingList}/>
-                    <PrivateRoute exact path='/message' component={Notification}/>
-                    <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit}/>
 
+                        {/*----- Account -----*/}
+                            <PrivateRoute exact path='/account' component={Account}/>
+                            <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
+                            <PrivateRoute exact path='/param' component={Params}/>
 
-                    {/*----- Account -----*/}
-                    <PrivateRoute exact path='/account' component={Account}/>
-                    <PrivateRoute exact path='/param' component={Params}/>
-
-                    {/*----- Admin -----*/}
-                    <Route exact path='/admin-place' component={AdminPlace}/>
-                    <Route exact path='/admin-district' component={AdminDistrict}/>
-                    <Route exact path='/place-list' component={PlaceList}/>
-                    <Route exact path='/district-list' component={DistrictList}/>
+                        {/*----- Admin -----*/}
+                            <Route exact path='/admin-place' component={AdminPlace}/>
+                            <Route exact path='/admin-district' component={AdminDistrict}/>
+                            <Route exact path='/place-list' component={PlaceList}/>
+                            <Route exact path='/district-list' component={DistrictList}/>
 
                 </Switch>
                 <Footer/>
-
             </AuthProvider>
         </Router>
     );

@@ -27,6 +27,8 @@ export default function ConfirmEmailSent () {
 
     const history = useHistory();
 
+    const {logout} = useAuth();
+
 
     useEffect(()=> {
         database.users.doc(currentUser.uid)
@@ -55,7 +57,6 @@ export default function ConfirmEmailSent () {
         }
     }
 
-    /*
     async function handleLogout() {
         try {
             await logout().then(()=> {
@@ -65,9 +66,6 @@ export default function ConfirmEmailSent () {
             setError('Woops, on a pas réussi à vous déconnecter')
         }
     }
-
-     */
-
 
 
     return (
@@ -85,6 +83,10 @@ export default function ConfirmEmailSent () {
 
         {/* MATERIAL UI BUTTON FOR CLOSE VALIDATION */}
         <Button component={Link} to={'/send-new-validation'} onClick={sendEmail}>Renvoyer un mail</Button>
+
+        <div className="button-bot-account">
+            <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
+        </div>
 
     </div>
     );

@@ -27,6 +27,7 @@ export function AuthProvider({children}) {
         return auth.sendPasswordResetEmail(email)
     }
 
+
     function login(email, password) {
         return auth.signInWithEmailAndPassword(email, password)
     }

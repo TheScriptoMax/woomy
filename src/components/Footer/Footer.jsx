@@ -5,7 +5,7 @@ import Add from "@material-ui/icons/Add";
 import MessageIcon from '@material-ui/icons/Message';
 
 /// ----- CSS ----- ///
-import "./footer.css"
+import "./Footer.css"
 
 /// ----- React Modules ----- /// 
 import {Link}from "react-router-dom";
