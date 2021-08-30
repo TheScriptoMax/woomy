@@ -24,18 +24,13 @@ export default function PlaceList () {
                 if(a.name > b.name) { return 1; }
                 return 0;
             })
-            setLocations(tempLocations)
-            
+            setLocations(tempLocations)            
         })
     }, [])
 
     return (
       <div class="container container-admin">
          <h1>Lieux existants</h1>
-
-          {/* LOOP POUR AFFICHER LES LIEUX */}
-          {/* COUCOU C'EST LE COMMIT DE TEST */}
-
          <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/adminplace'}>Retour</Link>
         
      </div>
