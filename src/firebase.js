@@ -12,7 +12,8 @@ const app = firebase.initializeApp({
     storageBucket: "test-rules-woomy.appspot.com",  
     messagingSenderId: "976311694336",  
     appId: "1:976311694336:web:e16a8ec4bcc2eab446d4e5",  
-    measurementId: "G-69DRBYJJ8B" 
+    measurementId: "G-69DRBYJJ8B"
+  
 });
 
 export const auth = app.auth();
