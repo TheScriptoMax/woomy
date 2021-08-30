@@ -93,7 +93,6 @@ export default function AdminDistrict() {
             {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
          </form>
 
-
          <Link to={'/admin-place'}><Button variant='contained'>Ajouter un lieu</Button></Link>
         
      </div>

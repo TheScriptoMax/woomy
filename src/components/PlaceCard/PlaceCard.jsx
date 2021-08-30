@@ -1,15 +1,46 @@
 import './placecard.css';
-import React from 'react';
+import { useState } from 'react';
+
+import { database } from '../../firebase';
+
+import { Button } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
+
 
 function PlaceCard ({location}) {
+
+    const [buttonIsDisabled, setButtonIsDisabled] = useState(false);
+    const [locationDeleted, setLocationDeleted] = useState(false);
+
+    const deletePlace = () => {
+        database.locations.doc(location.id).delete()
+            .then(() => {
+                setButtonIsDisabled(true);
+                setLocationDeleted(true);
+                console.log(location.name + " supprimé");
+            })
+            .catch((error) => {
+                console.error("Une erreur est survenue : " + error)
+            })
+    }
+
     return (
         <div className="place-card">
-            <p className="location-name">{location.name}</p>
-            <p className="location-district">{location.district}</p>
-            <p className="location-adress">{location.adress}</p>
+            <div className="place-card-container">
+                <div className="place-card-text">
+                    <p className="location-name">{location.name}</p>
+                    <p className="location-district">{location.district}</p>
+                    <p className="location-adress">{location.adress}</p>
+                </div>
+                <div className="place-card-btn">
+                    <Button disabled={buttonIsDisabled} color="secondary" variant="contained" onClick={deletePlace}>Supprimer</Button>
+                </div>
+            </div>
+            {locationDeleted && <div>
+                <Alert severity="success">Le lieu a été supprimé, il ne s'affichera plus au rechargement de la page</Alert>
+            </div>}
         </div>
-    )
-
+    ) 
 }
 
 export default PlaceCard;
