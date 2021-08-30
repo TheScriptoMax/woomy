@@ -62,16 +62,15 @@ export default function AdminDistrict() {
                 setError('Quelque chose s\'est mal passé :(');
             });
 
+
         }
     }
 
-
     return (
       <div class="container container-admin">
-         <h1>Quartiers</h1>
+         <h2>Quartiers</h2>
 
-         <Link to={'/district-list'}><Button variant='contained'>Voir tous les quartiers</Button></Link>
-
+         <TextField label="Rechercher" variant="outlined"/>
 
          <h2 className="create-district">Ajout d'un nouveau quartier</h2>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
@@ -86,7 +85,6 @@ export default function AdminDistrict() {
             </TextField>
 
             <Button disabled={loading} type="submit" variant='contained' color="secondary"  className="admin-form-btn">Ajouter</Button>
-
 
             {error && <Alert severity="error">{error}</Alert> }
             {districtAdded && <Alert severity="success">Le quartier a été ajouté</Alert>}
