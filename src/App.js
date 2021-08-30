@@ -25,6 +25,7 @@ import Account from './components/Account/Account';
 import Params from './components/Params/Params';
 
 /**** ADMIN *****/
+import Admin from "./components/Admin/Admin";
 import AdminPlace from "./components/AdminPlace/AdminPlace";
 import AdminDistrict from "./components/AdminDistrict/AdminDistrict";
 import PlaceList from "./components/PlaceList/PlaceList";
@@ -98,6 +99,7 @@ function App() {
 
 
                         {/*----- Admin -----*/}
+                    <Route exact path='/admin' component={Admin} />
                         <Route exact path='/admin-place' component={AdminPlace}/>
                         <Route exact path='/admin-district' component={AdminDistrict}/>
                         <Route exact path='/place-list' component={PlaceList}/>
