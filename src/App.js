@@ -70,7 +70,7 @@ function App() {
                 <Switch>
                     {/*----- Route public -----*/}
 
-                        <Route path='/signin' component={SignIn}/>
+                    <Route path='/signin' component={SignIn}/>
                         <PublicRoute path='/login' component={Login}/>
                         <PublicRoute path='/cgu' component={Conditions}/>
                         <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
