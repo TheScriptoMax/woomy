@@ -67,31 +67,32 @@ function CoWalkingSearch() {
     }
 
     return (
-      <div className=" container colwalkingsearch-container">
-         <h2>Rechercher un itinéraire</h2>
-         <form onSubmit={handleSubmitSearch} className="searchform">
+        <div className="container colwalkingsearch-container">
+            <h2>Rechercher un itinéraire</h2>
+            <form onSubmit={handleSubmitSearch} className="searchform ">
 
-            <TextField select inputRef={startFromRef} label="Départ">
-                {locations.map((option) => (
-                <option key={option.id} value={option.name}>
-                {option.name}
-                </option>
-            ))}
-            </TextField>
+                <InputLabel className="label">Départ</InputLabel>
 
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DateTimePicker
-                value={selectedDate}
-                onChange={handleDateChange}
-                minutesStep={5}
-              />
-            </MuiPickersUtilsProvider>
+                <TextField defaultValue="" inputRef={startFromRef} select labelId="label" id="select">
+                    {locations.map((option) => (
+                        <option key={option.id} value={option.name}>
+                        {option.name}
+                        </option>
+                    ))} 
+                </TextField>
 
-            <Button type="submit" variant="contained">Rechercher</Button>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <DateTimePicker
+                        value={selectedDate}
+                        onChange={setSelectedDate}
+                        minutesStep={5}
+                    />
+                </MuiPickersUtilsProvider>
 
-          </form>
+                <Button type="submit" variant="contained">Rechercher</Button>
 
-          <div className="separator"></div>
+            </form>
+            <div className="separator"></div>
             {!noSearch &&
                 <ul className='cowalkingList'>
                 {resultsList.length > 0

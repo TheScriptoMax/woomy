@@ -47,11 +47,15 @@ import {
 import PrivateRoute from './components/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/EmailNotVerifiedRoute";
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
+import CowalkerList from "./components/CowalkerList/CowalkerList";
+import CowalkerItem from "./components/CowalkerItem/CowalkerItem";
+import CowalkingCard from "./components/CowalkingCard/CowalkingCard";
 
 
 function App() {
   
     return (
+        
         <Router>
 
             <AuthProvider>

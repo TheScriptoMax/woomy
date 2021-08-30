@@ -11,9 +11,20 @@
 .button-container{
     display: grid;
     row-gap: 2rem;
-    margin-top: 2rem;
     text-align: center;
     padding: 0 4rem;
+}
+
+.button-container button, .button-container a{
+    background-color: #670652;
+    border: solid white .1rem;
+    box-shadow: none;
+    color: white;
+    text-transform: uppercase;
+}
+
+.button-container p{
+    margin-top: 2rem;
 }
 
 .login-content .forgot-password{
@@ -30,4 +41,22 @@
 
 label{
     position:block;
+}
+
+.logo-woomy-login svg{
+    display: flex;
+    margin: 2rem auto;
+}
+
+.noAccount{
+    background-color: #670652;
+    padding-bottom: 2rem;
+    border-radius: 1.5rem 1.5rem 0rem 0rem;
+    color: white;
+    margin-top: 2rem;
+    
+}
+
+.noAccount p {
+    font-size: 1rem;
 }
