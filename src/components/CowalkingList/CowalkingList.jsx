@@ -17,8 +17,8 @@ function CowalkingList () {
     const [initialCowalks, setInitialCowalks] = useState([])
     const [updatedCowalks,setUpdatedCowalks] = useState([])
     const [lastInitialDate, setLastInitialDate] = useState(new Date())
+    const [completeCowalksList, setCompleteCowalksList] = useState([]);
     const [pageLoading, setPageLoading] = useState(true);
-    const [completeCowalksList, setCompleteCowalksList] = useState([])
 
 
     useEffect(() => {
@@ -36,7 +36,6 @@ function CowalkingList () {
             .orderBy('startTime')
             .get()
             .then((querySnapshot) => {
-                if (querySnapshot.length > 0) {
                     const tempResults = [];
                     querySnapshot.forEach((doc) => {
                         tempResults.push(
@@ -48,26 +47,24 @@ function CowalkingList () {
                     console.log(lastCreatedAt)
                     setInitialCowalks(tempResults);
                     console.log(tempResults);
-                }
+                    setPageLoading(false)
             })
-        setPageLoading(false)
     }, []);
 
     return (
         <div className="container">
 
-            {pageLoading ? <p>Loading</p> :
-                initialCowalks.length > 0 ?
+            <ul className='cowalkingList'>
+                { pageLoading ? <p>Loading</p> : (initialCowalks.length>0 ?
 
-                        <ul className='cowalkingList'>
-                            {
-                                initialCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />)
-                            }
+                    initialCowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />) : <p>Aucun résultat</p>) }
 
-                            { updatedCowalks.length > 0 &&
-                            updatedCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />)
-                            }
-                        </ul> : <p>Aucun résultat</p> }
+
+                { updatedCowalks.length > 0 &&
+                    updatedCowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
+
+                }
+            </ul>
         </div>
     )
 }

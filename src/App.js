@@ -81,7 +81,7 @@ function App() {
                         <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
 
 
-                    {/*----- AdminUsers -----*/}
+                    {/*----- AdminCowalks -----*/}
                     <Route exact path='/admin' component={AdminDashboard} />
                     <Route exact path='/admin-users' component={AdminUsers} />
                     <Route exact path='/admin-place' component={AdminPlace}/>
