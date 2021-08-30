@@ -4,8 +4,10 @@ import Alert from '@material-ui/lab/Alert';
 import { database } from '../../firebase';
 
 // REACT IMPORT
+
 import {useRef, useState, useEffect} from "react";
 import { Link } from 'react-router-dom';
+
 
 //ADD A LOCATION
 export default function AdminDistrict() {
@@ -36,10 +38,10 @@ export default function AdminDistrict() {
 
     const addDistrict = (e) => {
         e.preventDefault();
-        
-        if(districtNameRef.current.value.length < 1 || townRef.current.value.length < 1){
+
+        if (districtNameRef.current.value.length < 1 || townRef.current.value.length < 1) {
             setIsShow(!isShow);
-            if(districtAdded){
+            if (districtAdded) {
                 setDistrictAdded(!districtAdded);
             }
         } else {
@@ -76,10 +78,11 @@ export default function AdminDistrict() {
              </div>
          </Link>
 
+         <TextField label="Rechercher" variant="outlined"/>
+
          <h2 className="create-district">Ajout d'un nouveau quartier</h2>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
-
             <TextField select inputRef={townRef} label="Commune" variant="outlined">
             {towns.map((option) => (
             <option key={option.id} value={option.name}>
@@ -99,5 +102,4 @@ export default function AdminDistrict() {
         
      </div>
     )
-
 }

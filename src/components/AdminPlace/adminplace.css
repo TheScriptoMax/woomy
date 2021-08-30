@@ -3,6 +3,7 @@ h1{
 }
 
 .create-place-title{
+
     margin-bottom: 1rem;
 }
 
@@ -23,6 +24,7 @@ h1{
 }
 .place-list-btn button:hover{
     background-color: #c51162;
+
 }
 
 .placeform button, .container-admin a{

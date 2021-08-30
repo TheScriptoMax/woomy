@@ -1,8 +1,8 @@
 import firebase from 'firebase/app';
+import 'firebase/storage';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
-
 
 
 const app = firebase.initializeApp({
@@ -12,7 +12,6 @@ const app = firebase.initializeApp({
     storageBucket: "woomy-app.appspot.com",
     messagingSenderId: "796599799860",
     appId: "1:796599799860:web:a74f9a63a9322d86f1ba61"
-
 });
 
 export const auth = app.auth();
@@ -27,6 +26,7 @@ export const database = {
     towns: firestore.collection('towns'),
     idCardFiles: firestore.collection('idCardFiles'),
     idPictureFiles: firestore.collection('idPictureFiles'),
+
     membersPending: cowalkId => {
         return firestore.collection('cowalks').doc(cowalkId).collection('membersPending');
     },
