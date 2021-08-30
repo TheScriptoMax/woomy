@@ -120,15 +120,17 @@ function CowalkerList({cowalk}) {
             <div>{!isOwner &&
 
             <div className="cowalkerAddIcon">
-                {!isMember ? <AddCircleIcon onClick={handleJoinCowalk}/> : <RemoveCircle onClick={handleLeaveCowalk}/>}
+                {!isMember ? <AddCircleIcon onClick={handleJoinCowalk}/> : <><p>MEMBER </p><RemoveCircle onClick={handleLeaveCowalk}/></>}
             </div>
             }
             </div>
             <ul className="cowalkerList">
                 <CowalkerItem key={owner.id} member={owner} />
+
                 {membersList.map(member => {
                     return <CowalkerItem key={member.id} member={member}/>
-                })}
+                    })
+                }
 
 
             </ul>
