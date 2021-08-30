@@ -55,7 +55,6 @@ function App() {
         <Router>
 
             <AuthProvider>
-                <Header/>
                 <Switch>
                     {/*----- Route public -----*/}
 
@@ -69,22 +68,25 @@ function App() {
                         <Route path='/awaiting-approval' component={AwaitingApproval}/>
 
                     {/*----- Route private AwaitingApproval -----*/}
-
-                        {/*----- Ticket -----*/}
-                        <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
-                        <PrivateRoute exact path='/create' component={CowalkingCreate}/>
-                        <PrivateRoute exact path='/search' component={CowalkingSearch}/>
-                        <PrivateRoute exact path='/list' component={CowalkingList}/>
-                        <PrivateRoute exact path='/message' component={Notification}/>
-                        <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+                    <div>
+                        <Header/>
+                                {/*----- Ticket -----*/}
+                                <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
+                                <PrivateRoute exact path='/create' component={CowalkingCreate}/>
+                                <PrivateRoute exact path='/search' component={CowalkingSearch}/>
+                                <PrivateRoute exact path='/list' component={CowalkingList}/>
+                                <PrivateRoute exact path='/message' component={Notification}/>
+                                <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+                                {/*----- Account -----*/}
+                                <PrivateRoute exact path='/account' component={Account}/>
+                                <PrivateRoute exact path='/param' component={Params}/>
+                        <Footer/>
+                    </div>
                         
                      
 
                         
 
-                        {/*----- Account -----*/}
-                        <PrivateRoute exact path='/account' component={Account}/>
-                        <PrivateRoute exact path='/param' component={Params}/>
 
                         {/*----- Admin -----*/}
                         <Route exact path='/adminplace' component={AdminPlace}/>
@@ -92,7 +94,6 @@ function App() {
                         <Route exact path='/placelist' component={PlaceList}/>
 
                 </Switch>
-                <Footer/>
 
             </AuthProvider>
         </Router>
