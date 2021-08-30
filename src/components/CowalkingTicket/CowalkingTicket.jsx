@@ -35,6 +35,7 @@ function CowalkingTicket () {
 
 
     return(
+
         <div className="container">
             {!loading && <> <CowalkingTicketHeader cowalk={currentCowalk}/> <CowalkerList cowalk={currentCowalk} /> </>}
         </div>

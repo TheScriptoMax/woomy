@@ -4,8 +4,8 @@
 import {AuthProvider} from "./contexts/AuthContext";
 
 /**** HEADER & FOOTER *****/
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 
 /**** LEGAL *****/
@@ -25,10 +25,12 @@ import Params from './components/Params/Params';
 import ChangeAccount from './components/ChangeAccount/ChangeAccount';
 
 /**** ADMIN *****/
+import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import AdminPlace from "./components/AdminPlace/AdminPlace";
 import AdminDistrict from "./components/AdminDistrict/AdminDistrict";
 import PlaceList from "./components/PlaceList/PlaceList";
 import DistrictList from "./components/DistrictList/DistrictList";
+import AdminUsers from "./components/AdminUsers/AdminUsers";
 
 /**** CRUD COPIETONNAGE *****/
 import CowalkingList from './components/CowalkingList/CowalkingList';
@@ -76,10 +78,24 @@ function App() {
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
-                        <Route path='/awaiting-approval' component={AwaitingApproval}/>
+                        
 
 
                     {/*----- Route private AwaitingApproval -----*/}
+
+                        <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
+
+
+                    {/*----- AdminCowalks -----*/}
+                    <Route exact path='/admin' component={AdminDashboard} />
+                    <Route exact path='/admin-users' component={AdminUsers} />
+                    <Route exact path='/admin-place' component={AdminPlace}/>
+                    <Route exact path='/admin-district' component={AdminDistrict}/>
+                    <Route exact path='/place-list' component={PlaceList}/>
+                    <Route exact path='/district-list' component={DistrictList}/>
+
+                    {/*----- Profil connecté et approuvé -----*/}
+
                     <div>
                         <Header/>
                                 {/*----- Ticket -----*/}
@@ -96,8 +112,6 @@ function App() {
                                 <PrivateRoute exact path='/param' component={Params}/>
                         <Footer/>
                     </div>
-
-
                         {/*----- Admin -----*/}
                             <Route exact path='/admin-place' component={AdminPlace}/>
                             <Route exact path='/admin-district' component={AdminDistrict}/>
@@ -105,6 +119,7 @@ function App() {
                             <Route exact path='/district-list' component={DistrictList}/>
 
                 </Switch>
+
 
             </AuthProvider>
         </Router>
