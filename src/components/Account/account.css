@@ -1,6 +1,11 @@
+.account-list{
+    width: max-content;
+    margin: auto;
+}
 .account-field{
+    box-sizing: border-box;
     width: 100%;
-    background-color:#DCD9D9;
+    background-color:#670652;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -9,6 +14,10 @@
     padding-bottom:0.5rem;
     padding-left:0.5rem;
     padding-right:0.5rem;
+} 
+
+.account-list div.account-field{
+    background-color: #670652;
 }
 
 .account-field-result{
@@ -22,6 +31,7 @@
 
 .account-field p{
     margin:0;
+    color: white;
 }
 
 .account-top{
@@ -30,13 +40,14 @@
     align-items: center;
 }
  
-
-.button-bot-account{
-    margin-top:1rem;
+.account-list button{
+    display: flex;
+    align-items: center;
 }
 
+
 .account-list button{
-    width: 100%;
+    /* width: 100%;
     background-color:#DCD9D9;
     display: flex;
     justify-content: space-between;
@@ -47,10 +58,28 @@
     padding-left:0.5rem;
     padding-right:0.5rem;
     border-radius: 0;
-    border:none;
+    border:none; */
+    background-color: #670652;
+    border: solid white .1rem;
+    width: max-content;
+    box-shadow: none;
+    color: white;
+    text-transform: uppercase;
+    margin: auto;
+    margin-top: 1rem;
+    
+}
+
+.account-list button .account-field{
+    background-color: #670652;
 }
 
 .MuiButton-label .account-field{
     margin-top:0rem;
     padding:0;
+}
+
+.account-top h2{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }

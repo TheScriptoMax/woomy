@@ -48,10 +48,12 @@ export default function SignIn () {
                             phoneNumber: phoneRef.current.value,
                             birthdate: birthdateRef.current.value,
                             createdAt: database.getCurrentTimestamp,
-                        });
+                        })
+                        ;
                 })
                 .catch((error) => {
                     console.log("Message d'erreur: " + error.message)
+
                 })
                 .then(() => {
                         history.push("/send-confirm")
@@ -67,21 +69,22 @@ export default function SignIn () {
 
     return (
 
-    <div className='signIn container'>
+    <div className='sign-in container'>
 
-        <form onSubmit={handleSubmit} className='signIn-content'>
+        <form onSubmit={handleSubmit} className='sign-in-content'>
 
             {/* MATERIAL UI INPUT TO COMPLETE FOR SIGNIN */}
-    
             <TextField inputRef={firstnameRef} id="standard-basic" label="Entrez votre nom" variant="standard" />
             
             <TextField inputRef={lastnameRef} id="standard-basic" label="Entrez votre prénom" variant="standard" />
             
             <TextField inputRef={emailRef} type='email' id="standard-basic" label="Entrez votre email" variant="standard" />
 
-            <TextField inputRef={phoneRef} type="tel" id="standard-basic" label="Entrez votre numéro de téléphone" variant="standard" />
-            
-            <TextField inputRef={birthdateRef} type="date" id="standard-basic" label="Entrez votre date de naissance" variant="standard"  InputLabelProps={{
+
+            <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Entrez votre numéro de téléphone" variant="standard" />
+
+            <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Entrez votre date de naissance" variant="standard"  InputLabelProps={{
+
           shrink: true,
         }}/>
 
@@ -97,10 +100,9 @@ export default function SignIn () {
 
         </form>
 
-        <div className='valid-signIn'>
-                <p>Une pièce d’identité + une photo de vous sont nécessaires pour établir votre propre sécurité et celles avec qui vous ferez du copiétonnage. Après chaque vérification nous détruisont celles ci.
+        <div className='valid-sign-in'>
+                <p>Une pièce d’identité et une photo de vous, seront demandées, car nécessaires pour établir votre propre sécurité et celles avec qui vous ferez du copiétonnage. Après chaque vérification, nous détruirons celles-ci.
                 </p>
-                {/* MATERIAL UI CALL TO ACTION FOR SIGNIN */}
         </div>
 
     </div>

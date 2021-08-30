@@ -1,6 +1,5 @@
 /// ----- COMPONENTS ----- ///
 
-
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
@@ -25,10 +24,14 @@ import Params from './components/Params/Params';
 import ChangeAccount from './components/ChangeAccount/ChangeAccount';
 
 /**** ADMIN *****/
+import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import AdminPlace from "./components/AdminPlace/AdminPlace";
 import AdminDistrict from "./components/AdminDistrict/AdminDistrict";
 import PlaceList from "./components/PlaceList/PlaceList";
+
 import DistrictList from "./components/DistrictList/DistrictList";
+import AdminUsers from "./components/AdminUsers/AdminUsers";
+
 
 /**** CRUD COPIETONNAGE *****/
 import CowalkingList from './components/CowalkingList/CowalkingList';
@@ -56,13 +59,22 @@ import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
 
 
+import CowalkerList from "./components/CowalkerList/CowalkerList";
+import CowalkerItem from "./components/CowalkerItem/CowalkerItem";
+import CowalkingCard from "./components/CowalkingCard/CowalkingCard";
+
+import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
+
+
+
+
 function App() {
 
     return (
+        
         <Router>
 
             <AuthProvider>
-                <Header/>
                 <Switch>
                     {/*----- Route public -----*/}
 
@@ -75,31 +87,47 @@ function App() {
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
-                        {/*<Route path='/awaiting-approval' component={AwaitingApproval}/>*/}
+
+
+                        
+
+
+                    {/*----- Route private AwaitingApproval -----*/}
+
+
+                        <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
+
+
+                    {/*----- AdminCowalks -----*/}
+
+                    <Route exact path='/admin' component={AdminDashboard} />
+                    <Route exact path='/admin-users' component={AdminUsers} />
+                    <Route exact path='/admin-place' component={AdminPlace}/>
+                    <Route exact path='/admin-district' component={AdminDistrict}/>
+                    <Route exact path='/place-list' component={PlaceList}/>
+                    <Route exact path='/district-list' component={DistrictList}/>
+
 
                     {/*----- Profil connecté et approuvé -----*/}
-                        {/*----- Ticket -----*/}
-                            <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
-                            <PrivateRoute exact path='/create' component={CowalkingCreate}/>
-                            <PrivateRoute exact path='/search' component={CowalkingSearch}/>
-                            <PrivateRoute exact path='/list' component={CowalkingList}/>
-                            <PrivateRoute exact path='/message' component={Notification}/>
-                            <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit}/>
 
-
-                        {/*----- Account -----*/}
-                            <PrivateRoute exact path='/account' component={Account}/>
-                            <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
-                            <PrivateRoute exact path='/param' component={Params}/>
-
-                        {/*----- Admin -----*/}
-                            <Route exact path='/admin-place' component={AdminPlace}/>
-                            <Route exact path='/admin-district' component={AdminDistrict}/>
-                            <Route exact path='/place-list' component={PlaceList}/>
-                            <Route exact path='/district-list' component={DistrictList}/>
+                    <div>
+                        <Header/>
+                                {/*----- Ticket -----*/}
+                                <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
+                                <PrivateRoute exact path='/create' component={CowalkingCreate}/>
+                                <PrivateRoute exact path='/search' component={CowalkingSearch}/>
+                                <PrivateRoute exact path='/list' component={CowalkingList}/>
+                                <PrivateRoute exact path='/message'component={Notification} />
+                                <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+                                {/*----- Account -----*/}
+                                <PrivateRoute exact path='/account' component={Account}/>
+                                <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
+                                <PrivateRoute exact path='/param' component={Params}/>
+                        <Footer/>
+                    </div>
 
                 </Switch>
-                <Footer/>
+
             </AuthProvider>
         </Router>
     );

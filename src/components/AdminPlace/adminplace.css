@@ -1,11 +1,43 @@
-.placeform{
+h1{
+    text-align: center;
+}
+
+
+.create-place-title{
+    margin-top: 1rem;
+
     margin-bottom: 1rem;
 }
 
-.placeform div,.placecreate{
-    margin-top:1rem;
+.place-list-link{
+    text-decoration: none;
 }
 
-.container-admin .admin-form-btn{
-    margin-top: 1rem;
+
+.place-list-btn{
+    display: flex;
+    justify-content: center;
+
 }
+
+.place-list-btn button{
+    background-color: #670652;
+    border: solid white .1rem;
+    box-shadow: none;
+    color: white;
+}
+
+.place-list-btn button:hover{
+    background-color: #c51162;
+}
+
+.place-form button{
+    background-color: #670652;
+    border: solid white .1rem;
+    box-shadow: none;
+    color: white;
+    text-transform: uppercase;
+
+    margin-bottom: 1rem;
+}
+

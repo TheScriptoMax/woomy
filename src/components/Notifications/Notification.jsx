@@ -3,7 +3,6 @@ import {useState, useEffect} from 'react';
 import {database} from '../../firebase'
 import NotifCard from '../NotificationCard/NotifCard'
 
-// MATERIAL UI IMPORT
 
 // CSS IMPORT
 import './notification.css';
@@ -15,6 +14,7 @@ function Notification() {
   const [notifs, setNotifs] = useState([])
   
   const {currentUser} = useAuth();
+
             
   useEffect(() => {
     database.notifications(currentUser.uid).onSnapshot((querySnapshot)=>{
@@ -37,7 +37,6 @@ function Notification() {
       <div className="container">
           <div className="notif-header">
               <p>Notifications : {notifs.length}</p>
-              <p>Messages : </p>
           </div>
           <ul>
           {notifs&&

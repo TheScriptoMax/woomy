@@ -72,7 +72,7 @@ function CowalkingCreate () {
 
 
     return (
-      <div className="container">
+      <div className="create-walk container">
         <h2>Créer votre itinéraire</h2>
         <form className="createform">
         <TextField select inputRef={startFromRef} label="Départ">

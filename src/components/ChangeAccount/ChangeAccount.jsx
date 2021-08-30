@@ -15,9 +15,8 @@ import {database} from "../../firebase";
 export default function ChangeAccount () {
 
     const [userData, setUserData] = useState({});
-    const [setError] = useState('');
-    const [loading, setLoading] = useState();
     const [pageLoading, setPageLoading] = useState(true);
+
 
     const history = useHistory();
 
@@ -37,7 +36,8 @@ export default function ChangeAccount () {
                 setPageLoading(false)
             })
             .catch(error => {
-                setError(error.message)
+                console.log(error.message)
+
             })
 
     }, [currentUser.uid, setError])
@@ -45,8 +45,10 @@ export default function ChangeAccount () {
     async function handleSubmit(ev) {
         ev.preventDefault();
 
+
         const promises = [];
         setLoading(true);
+
 
         if (lastnameRef.current.value !== userData.lastname) {
             promises.push(database.users.doc(currentUser.uid).update({
@@ -74,19 +76,24 @@ export default function ChangeAccount () {
                 console.log('Edit updated successfully');
             })
             .catch((error) => {
-                setError(error);
+                console.log(error);
             })
             .finally(() => {
                 setLoading(false);
                 history.push('/account');
             })
+
+        
+        setLoading(false);
     }
 
 
     return (
 
         <div className='changeAccount container'>
+
             {!pageLoading &&
+
 
             <form onSubmit={handleSubmit} className='changeAccount-content'>
 
@@ -102,9 +109,10 @@ export default function ChangeAccount () {
                     shrink: true,
                 }}/>
 
-                <Button disabled={loading} type="submit" variant="contained">Envoyer</Button>
+                <Button  type="submit" variant="contained">Envoyer</Button>
 
             </form>}
+
 
         </div>
     );

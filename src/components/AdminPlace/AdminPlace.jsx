@@ -16,8 +16,8 @@ import { Link } from 'react-router-dom';
 export default function AdminPlace () {
 
 
-    const [error, setError] = useState();
-    const [loading] = useState();
+
+
     const [isShow, setIsShow] = useState(false);
     const [locationAdded, setLocationAdded] = useState(false);
     const [districts, setDistricts] = useState([]);
@@ -65,41 +65,45 @@ export default function AdminPlace () {
                 }
             })
             .catch((error) => {
-                setError('Quelque chose s\'est mal passé :(');
+                console.log('Quelque chose s\'est mal passé :(');
             });
         }
 
     }
 
-
     return (
-      <div class="container container-admin">
+
+      <div className="container container-admin">
          <h1>Lieux</h1>
+         <Link className="place-list-link" to={'/place-list'}>
+             <div className="place-list-btn">
+                <Button variant="contained">Voir tous les lieux</Button>
+             </div>
+         </Link>
+         <h2 className="create-place-title">Création d'un nouveau lieu</h2>
 
-         <Link to={'/place-list'}><Button variant='contained'>Voir tous les lieux</Button></Link>
+        <form onSubmit={addLocation} ref={formRef} className="place-form">
 
-         <h2 className="placecreate">Création d'un nouveau lieu</h2>
+        <TextField inputRef={locationNameRef} label="Lieux" variant="outlined"/>
+        <TextField select inputRef={districtRef} label="Quartier" variant="outlined">
+            {districts.map((option) => (
+            <option key={option.id} value={option.name}>
+            {option.name}
+            </option>
+        ))}
+        </TextField>
+        <TextField inputRef={adressRef} label="Adresse" variant="outlined"/>
 
-         <form onSubmit={addLocation} ref={formRef} className="placeform">
-            <TextField inputRef={locationNameRef} label="Lieux" variant="outlined"/>
-            <TextField select inputRef={districtRef} label="Quartier" variant="outlined">
-                {districts.map((option) => (
-                <option key={option.id} value={option.name}>
-                {option.name}
-                </option>
-            ))}
-            </TextField>
-            <TextField inputRef={adressRef} label="Adresse" variant="outlined"/>
 
-            <Button disabled={loading} type="submit" color="secondary" variant='contained' className="admin-form-btn">Ajouter</Button>
+        <Button type="submit" color="secondary" variant='contained'>Ajouter</Button>
 
-            {error && <Alert severity="error">{error}</Alert> }
-            {locationAdded && <Alert severity="success">Le lieu a été ajouté</Alert>}
-            {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
 
-         </form>
+        {error && <Alert severity="error">{error}</Alert> }
+        {locationAdded && <Alert severity="success">Le lieu a été ajouté</Alert>}
+        {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
+
+        </form>
         
-
         <Link to={'/admin-district'}><Button variant='contained'>Ajouter un quartier</Button></Link>
      </div>
     )

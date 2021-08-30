@@ -70,14 +70,14 @@ export default function ConfirmEmailSent () {
 
     return (
 
-    <div className='signIn-Validation container'>
+    <div className='sign-in-validation container'>
 
         <div className="text-validation">
 
             {error ? <Alert severity="error">{error}</Alert> :
-            <p>{userData.firstname}, votre inscription a bien été prise en compte.
+            <p>{userData.firstname}Votre inscription a bien été prise en compte.
             Un e-mail de confirmation vous a été envoyé, merci de vérifier votre boite mail.
-                Attention, vérifiez si le mail n'est pas dans vos Spams.</p>}
+                <br></br>Attention, vérifiez si le mail n'est pas dans vos Spams.</p>}
 
         </div>
 
