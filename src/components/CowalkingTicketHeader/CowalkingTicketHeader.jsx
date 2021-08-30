@@ -27,11 +27,6 @@ function CowalkingTicketHeader({cowalk}) {
 
     const {currentUser} = useAuth();
     
-    //TODO: Mettre les lieux en tant que lien du mapUrl de la location
-
-    // let startFromUrl = database.locations.where("name", "==", cowalk.startFrom).get();
-    // let goToUrl = database.locations.where("name", "==", cowalk.goTo).get();
-
 
     useEffect(() => {
         currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false);

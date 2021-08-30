@@ -21,3 +21,9 @@
     font-size: 1.2rem;
     font-weight: 700;
 }
+
+.confirm-btns{
+    margin-top: .5rem;
+    display: flex;
+    justify-content: space-evenly;
+}

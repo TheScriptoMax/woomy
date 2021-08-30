@@ -9,7 +9,12 @@ import { Alert } from '@material-ui/lab';
 function DistrictCard ({district}) {
 
     const [buttonIsDisabled, setButtonIsDisabled] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
     const [districtDeleted, setDistrictDeleted] = useState(false);
+
+    const showConfirmAction = () => {
+        setShowConfirm(!showConfirm);
+    }
 
     const updateLocationsDistrict = () => {
         database.locations.where("district", "==", district.name).get()
@@ -32,6 +37,7 @@ function DistrictCard ({district}) {
             .then(() => {
                 setButtonIsDisabled(true);
                 setDistrictDeleted(true);
+                setShowConfirm(false);
                 console.log(district.name + " supprimé");
                 updateLocationsDistrict();
             })
@@ -48,9 +54,22 @@ function DistrictCard ({district}) {
                     <p className="district-town">{district.town}</p>
                 </div>
                 <div className="district-card-btn">
-                    <Button disabled={buttonIsDisabled} color="secondary" variant="contained" onClick={deleteDistrict}>Supprimer</Button>
+                <Button disabled={showConfirm} color="secondary" variant="contained" onClick={showConfirmAction}>Supprimer</Button>
                 </div>
             </div>
+            {showConfirm && 
+                <div>
+                    <Alert severity="warning">Voulez-vous vraiment supprimer ce quartier ? Cette action est irréversible !</Alert>
+                    <div className="confirm-btns">
+                        <span>
+                            <Button disabled={buttonIsDisabled} color="secondary" variant="contained" onClick={deleteDistrict}>Supprimer</Button>
+                        </span>
+                        <span>
+                            <Button disabled={buttonIsDisabled} variant="contained" onClick={showConfirmAction}>Annuler</Button>
+                        </span>
+                    </div>
+                </div>
+                }
 
                 {districtDeleted && <div>
                 <Alert severity="success">Le quartier a été supprimé, il ne s'affichera plus au rechargement de la page</Alert></div>}
