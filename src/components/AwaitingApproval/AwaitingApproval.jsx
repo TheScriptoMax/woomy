@@ -63,7 +63,7 @@ export default function AwaitingApproval () {
                 console.log(error.message)
 
             })
-    }, [currentUser.uid])
+    }, [])
 
     function handleIdCardUpload(ev) {
         const idCardFile = ev.target.files[0];

@@ -35,7 +35,7 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
             }).catch(error => {
             console.log(error.message)
         })
-    }, []);
+    }, [user]);
 
     function handleApproveUser() {
 
@@ -48,7 +48,7 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
             <p>{user.lastname}</p>
             <a href={`mailto:${user.email}`}>{user.email}</a>
             <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a>
-            {urlPicture ? <img src={urlPicture} alt="Photo de pose"/> : <p>Pas encore de photo de pose</p>}
+            {urlPicture ? <img src={urlPicture} alt="Profil"/> : <p>Pas encore de photo de pose</p>}
             {urlCard ? <img src={urlCard} alt="Carte d'identité"/> : <p>Pas encore de carte d'identité</p>}
             <Button variant="contained" onClick={handleApproveUser}>Coucou</Button>
         </div>

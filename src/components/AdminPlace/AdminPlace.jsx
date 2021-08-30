@@ -15,12 +15,10 @@ import { Link } from 'react-router-dom';
 //ADD A LOCATION
 export default function AdminPlace () {
 
-
-
-
     const [isShow, setIsShow] = useState(false);
     const [locationAdded, setLocationAdded] = useState(false);
     const [districts, setDistricts] = useState([]);
+    const [error,setError] = useState()
 
     const formRef = useRef();
     const locationNameRef = useRef();
@@ -65,7 +63,7 @@ export default function AdminPlace () {
                 }
             })
             .catch((error) => {
-                console.log('Quelque chose s\'est mal passé :(');
+                setError('Quelque chose s\'est mal passé :(');
             });
         }
 

@@ -21,7 +21,6 @@ import {useAuth} from "../../contexts/AuthContext";
 function CowalkingTicketHeader({cowalk}) {
 
     const [isOwner,setIsOwner] = useState(false);
-    /* const [locations, setLocations] = useState([]); */
     const [startFromUrl, setStartFromUrl] = useState([]);
     const [goToUrl, setGoToUrl] = useState([]);
 
@@ -51,7 +50,7 @@ function CowalkingTicketHeader({cowalk}) {
                 setGoToUrl(tempSnapshot[0].mapUrl)
             })
             
-        }, [cowalk,currentUser])
+        }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const history = useHistory();
     const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})

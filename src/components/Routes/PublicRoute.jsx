@@ -17,7 +17,7 @@ export default function PublicRoute({component: Component, ...rest}) {
                 })
         }
         setLoading(false)
-    }, [])
+    }, [currentUser])
 
     return (
         <>

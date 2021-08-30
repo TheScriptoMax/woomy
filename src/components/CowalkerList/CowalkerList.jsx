@@ -31,7 +31,7 @@ function CowalkerList({cowalk}) {
                 console.log('Couldnt retrieve the owner')
             })
 
-    }, [cowalk])
+    }, [cowalk]) 
 
 
     useEffect(() => {
@@ -43,14 +43,14 @@ function CowalkerList({cowalk}) {
             setMembersList(approvedMembers)
         });
 
-    }, [cowalk])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
 
     useEffect(() => {
         currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
 
-    }, [currentUser,cowalk])
+    }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
 
 
     useEffect(() => {
@@ -80,7 +80,7 @@ function CowalkerList({cowalk}) {
             .catch(error => {
                 console.log('Error getting collection')
             })
-    }, [cowalk.id, cowalk.owner, currentUser.uid])
+    }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
 
 
     function handleJoinCowalk() {

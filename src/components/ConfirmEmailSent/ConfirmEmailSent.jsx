@@ -40,7 +40,7 @@ export default function ConfirmEmailSent () {
             setError((error.message))
         })
 
-    }, [currentUser.uid])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
     async function sendEmail(ev){

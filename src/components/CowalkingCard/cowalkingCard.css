@@ -12,6 +12,7 @@
 
 .cowalkingCardTitle{
     padding: 1.125rem 0 0 0;
+    height:9.75rem;
 }
 .cowalkingCardTitle h3{
     font-size: 1.125rem;
@@ -35,6 +36,8 @@
     justify-content: space-between;
     align-items: center;
     background-color: #670652;
+    padding:0 0.75rem;
+    height:3.625rem;
 }
 .cowalkingCardFooter svg{
     fill:white;
@@ -98,11 +101,12 @@
 
 .cowalkingCardButtons{
     display: flex;
+    
 }
 
 .buttons-owner{
     display: flex;
-    padding-right: 80px;
+    padding-right: 2.5rem;
 }
 .buttons-owner button{
     padding:0;

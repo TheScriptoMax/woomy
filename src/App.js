@@ -39,6 +39,8 @@ import CowalkingList from './components/CowalkingList/CowalkingList';
 import CowalkingTicket from './components/CowalkingTicket/CowalkingTicket';
 import CowalkingCreate from './components/CowalkingCreate/CowalkingCreate';
 import CowalkingSearch from './components/CowalkingSearch/CowalkingSearch';
+import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
+
 
 
 /**** NOTIFICATION *****/
@@ -57,12 +59,7 @@ import {
 import PublicRoute from './components/Routes/PublicRoute'
 import PrivateRoute from './components/Routes/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
-import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
 
-
-import CowalkerList from "./components/CowalkerList/CowalkerList";
-import CowalkerItem from "./components/CowalkerItem/CowalkerItem";
-import CowalkingCard from "./components/CowalkingCard/CowalkingCard";
 
 import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
 
@@ -75,8 +72,8 @@ function App() {
         
         <Router>
 
-            <AuthProvider>
-                <Switch>
+            <Switch>
+                <AuthProvider>
                     {/*----- Route public -----*/}
 
                     <Route path='/signin' component={SignIn}/>
@@ -96,7 +93,7 @@ function App() {
                     {/*----- Route private AwaitingApproval -----*/}
 
 
-                        <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
+                        <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApprovalRoute}/>
 
 
                     {/*----- AdminCowalks -----*/}
@@ -112,7 +109,7 @@ function App() {
 
                     {/*----- Profil connecté et approuvé -----*/}
 
-                    <div>
+                    <>
                         <Header/>
                                 {/*----- Ticket -----*/}
                                 <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
@@ -127,11 +124,11 @@ function App() {
                                 <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
                                 <PrivateRoute exact path='/param' component={Params}/>
                         <Footer/>
-                    </div>
+                    </>
 
-                </Switch>
+                </AuthProvider>
+            </Switch>
 
-            </AuthProvider>
         </Router>
     );
 

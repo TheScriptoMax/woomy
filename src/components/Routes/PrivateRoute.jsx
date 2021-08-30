@@ -10,13 +10,14 @@ export default function PrivateRoute({component: Component, ...rest})
     const {currentUser} = useAuth();
 
     useEffect(() => {
+        if (currentUser){
         database.users.doc(currentUser.uid)
             .get()
             .then(doc => {
                 setIsAccepted(doc.data().accepted)
                 setLoading(false)
-            })
-    }, [])
+            })}
+    }, [currentUser])
 
     return (
         <>

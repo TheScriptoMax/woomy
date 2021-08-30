@@ -16,7 +16,7 @@ export default function EmailNotVerifiedRoute({component: Component, ...rest})
                 setIsAccepted(doc.data().accepted)
                 setLoading(false)
             })
-    }, [])
+    }, [currentUser])
 
     return (
         <>

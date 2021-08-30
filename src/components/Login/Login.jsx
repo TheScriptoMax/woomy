@@ -14,8 +14,7 @@ import {Alert} from "@material-ui/lab";
 //PAGE CONNEXION
 export default function Login () {
 
-    /* const emailRef = useRef();
-    const passwordRef = useRef(); */
+
     const [email,setEmail] = useState ("")
     const [password,setPassword] = useState ("")
     const [error, setError] = useState('');

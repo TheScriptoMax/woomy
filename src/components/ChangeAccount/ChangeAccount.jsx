@@ -40,15 +40,11 @@ export default function ChangeAccount () {
 
             })
 
-    }, [currentUser.uid, setError])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     async function handleSubmit(ev) {
         ev.preventDefault();
-
-
         const promises = [];
-        setLoading(true);
-
 
         if (lastnameRef.current.value !== userData.lastname) {
             promises.push(database.users.doc(currentUser.uid).update({
@@ -79,12 +75,8 @@ export default function ChangeAccount () {
                 console.log(error);
             })
             .finally(() => {
-                setLoading(false);
                 history.push('/account');
             })
-
-        
-        setLoading(false);
     }
 
 

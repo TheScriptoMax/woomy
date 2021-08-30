@@ -20,17 +20,6 @@ function CowalkingList () {
     const [cowalks, setCowalks] = useState([])
     const [pageLoading, setPageLoading] = useState(true);
 
-    const [initialCowalks, setInitialCowalks] = useState([])
-    const [updatedCowalks,setUpdatedCowalks] = useState([])
-    const [lastInitialDate, setLastInitialDate] = useState(new Date())
-
-
-   
-
-    
-
-
-
 
     useEffect(() => {
         return database.cowalks.onSnapshot((querySnapshot) => {
@@ -55,7 +44,6 @@ function CowalkingList () {
                         )
                     })
                 setCowalks(tempResults);
-                    console.log(tempResults);
                     setPageLoading(false)
 
             })

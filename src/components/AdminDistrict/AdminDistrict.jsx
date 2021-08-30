@@ -22,6 +22,7 @@ export default function AdminDistrict() {
     const [isShow, setIsShow] = useState(false);
     const [districtAdded, setDistrictAdded] = useState(false);
     const [towns, setTowns] = useState([]);
+    const [error,setError] = useState()
 
 
     const formRef = useRef();
@@ -65,7 +66,7 @@ export default function AdminDistrict() {
                 }
             })
             .catch((error) => {
-                console.Log('Quelque chose s\'est mal passé :(');
+                setError('Quelque chose s\'est mal passé :(');
             });
 
 

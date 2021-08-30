@@ -31,8 +31,7 @@ export default function SendNewValidation () {
             .then(doc => {
                 setUserData(database.formatDoc(doc))
             })
-
-    }, [currentUser.uid])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
     async function sendEmail(ev){

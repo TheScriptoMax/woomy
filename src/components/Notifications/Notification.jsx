@@ -17,19 +17,16 @@ function Notification() {
 
             
   useEffect(() => {
-    database.notifications(currentUser.uid).onSnapshot((querySnapshot)=>{
+    return database.notifications(currentUser.uid).onSnapshot((querySnapshot)=>{
       let notif = []
       querySnapshot.forEach((doc)=>{
         notif.push(database.formatDoc(doc))
       })
       setNotifs(notif)
-      console.log(notif)
     },(error)=>{
       console.log(error)
     })
-  }, [currentUser.uid])
-
-  console.log(notifs)
+  },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
   
 

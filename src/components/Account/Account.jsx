@@ -13,7 +13,8 @@ import {useHistory} from "react-router-dom";
 
 
 /// ----- Firebase ///
-import {database} from "../../firebase";
+import {database,storage} from "../../firebase";
+
 
 //////// Page de profile ////////
 
@@ -21,7 +22,6 @@ function Account() {
 
     const [userData, setUserData] = useState({});
 
-    const {logout, resetPassword} = useAuth();
 
     const [isShow, setIsShow] = useState(true);
     const [urlPicture, setUrlPicture] = useState('');
