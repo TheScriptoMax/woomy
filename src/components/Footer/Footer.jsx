@@ -10,10 +10,7 @@ import "./Footer.css"
 /// ----- React Modules ----- /// 
 import {Link}from "react-router-dom";
 
-
-
 ////// FOOTER //////
-
 
 function Footer() {
     return (

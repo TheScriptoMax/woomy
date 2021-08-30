@@ -86,12 +86,9 @@ export default function AdminDistrict() {
           ))}
             </TextField>
 
-<<<<<<< HEAD
-            <Button type="submit" variant='contained' color="secondary"  className="admin-form-btn">Ajouter</Button>
-=======
 
-            <Button disabled={loading} type="submit" variant='contained' color="secondary"  className="admin-form-btn">Ajouter</Button>
->>>>>>> 7e8196729d005e17c139939f9960b48e93bac7ee
+            <Button type="submit" variant='contained' color="secondary"  className="admin-form-btn">Ajouter</Button>
+
 
 
             {error && <Alert severity="error">{error}</Alert> }

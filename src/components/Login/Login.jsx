@@ -58,6 +58,7 @@ export default function Login () {
                 <linearGradient id="paint0_linear" x1="101" y1="6.83224e-06" x2="3.56042e-06" y2="85" gradientUnits="userSpaceOnUse">
                 <stop stopColor="#F21323"/>
                 <stop offset="1" stopColor="#DD0081"/>
+
                 </linearGradient>
                 </defs>
                 </svg>

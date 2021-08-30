@@ -1,4 +1,6 @@
 
+
+
 .placeform{
     margin-bottom: 1rem;
 }
@@ -9,6 +11,7 @@
 
 .container-admin .admin-form-btn{
     margin-top: 1rem;
+
 }
 
 .placecreate{
@@ -25,5 +28,6 @@
     box-shadow: none;
     color: white;
     text-transform: uppercase;
+
 
 }

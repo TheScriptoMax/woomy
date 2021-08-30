@@ -32,6 +32,7 @@ function AdminUsers() {
 
     }
 
+
     function handleIdSearch(ev) {
         ev.preventDefault()
         database.users.doc(userIdRef.current.value)
@@ -68,6 +69,7 @@ function AdminUsers() {
     }
 
     function viewLastUsers() {
+
         database.users.orderBy('createdAt', 'desc').limit(20)
             .get()
             .then((querySnapshot) => {

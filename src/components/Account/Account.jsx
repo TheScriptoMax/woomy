@@ -1,4 +1,4 @@
-
+import ChangeAccount from '../ChangeAccount/ChangeAccount';
 /// ----- Material UI ----- ///
 import {Avatar, Button} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
@@ -124,11 +124,6 @@ function Account() {
             </Link>
             <div className="button-bot-account">
                 <Button variant="contained" onClick={handleLogout}> Se déconnecter </Button>
-            </div>
-            <div className="button-bot-account">
-                <Link to="/admin">
-                    <Button variant="contained" >Admin</Button>
-                </Link>
             </div>
         </div>
       </div>

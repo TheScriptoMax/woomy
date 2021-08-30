@@ -25,6 +25,7 @@ function NotifCard({notif}) {
             .then(doc => {
                 setUserData(database.formatDoc(doc))
             })
+
     },[notif])
 
     function handleDeleteNotif (e) {
@@ -35,6 +36,7 @@ function NotifCard({notif}) {
             console.log('notif Clear')
         )
     }
+
 
     function onGuestApproval () {
         database.membersApproved(notif.cowalkRequested).doc(notif.guest)
@@ -57,6 +59,7 @@ function NotifCard({notif}) {
                                 status:'approval request',
                                 requestDate:new Date()
                             })
+
                     })
             })
             
@@ -81,6 +84,7 @@ function NotifCard({notif}) {
 
             <div className="container-button">
                 <Button variant="contained" onClick={(event)=>onGuestApproval()}>Accepter</Button>
+
             </div></>):(
                 <><div className="separator-dark"></div>
 

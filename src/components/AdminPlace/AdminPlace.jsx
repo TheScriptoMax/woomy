@@ -67,12 +67,12 @@ export default function AdminPlace () {
 
 
     return (
+
         <>
 
         <Link to={'/place-list'}><Button variant='contained'>Voir tous les lieux</Button></Link>
 
         <h2 className="placecreate">Création d'un nouveau lieu</h2>
-
 
     <div className="container container-admin">
         <h2>Lieux</h2>
@@ -89,6 +89,7 @@ export default function AdminPlace () {
         ))}
         </TextField>
         <TextField inputRef={adressRef} label="Adresse" variant="outlined"/>
+
 
         <Button type="submit" color="secondary" variant='contained' className="admin-form-btn">Ajouter</Button>
 

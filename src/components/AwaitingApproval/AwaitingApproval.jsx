@@ -1,6 +1,8 @@
 // REACT IMPORT
 
+
 import {useEffect,useState} from "react";
+
 
 // FIREBASE IMPORT
 import {database, storage} from "../../firebase";
@@ -60,6 +62,7 @@ export default function AwaitingApproval () {
         })
             .catch((error) => {
                 console.log(error.message)
+
             })
     }, [])
 

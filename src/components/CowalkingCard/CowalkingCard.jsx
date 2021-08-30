@@ -48,28 +48,31 @@ function CowalkingCard ({cowalk,index}) {
     
     const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})
     
-    return( 
+    return(
         <Link
             to={`/ticket/${cowalk.id}`}
-            > 
+            >
             <li className='cowalkingCard' key={cowalk.id}>
                 <div className='cowalkingCardTitle'>
-                    <h3>itinéraire:{index+1}</h3>
-                    <div className='cowalkingCardRoute'>
-                        <div className="cowalkingCardDeparture">
-                            <p>Départ:</p>
-                            <span>{cowalk.startFrom}</span>
+                <p className='cowalk-start'>Heure de départ:{currentCowalkStartTime}</p>
+                    {/* <h3>itinéraire:{index+1}</h3> */}
+                    <div className="main-card">
+                        <div className="cowalk-bar">
+                            <div className="dot"></div>
+                            <div className="bar"></div>
+                            <div className="dot"></div>
                         </div>
-                        <span>
-                            <TrendingFlatIcon/>
-                        </span>
-                        <div className="cowalkingCardDestination">
-                            <p>Destination:</p>
-                            <span>{cowalk.goTo}</span>
+                            <div className='cowalkingCardRoute'>
+                                <div className="cowalkingCardDeparture">
+                                    <p>Départ:  </p>
+                                    <p>{cowalk.startFrom}</p>
+                                </div>
+                            <div className="cowalkingCardDestination">
+                                <p>Destination:  </p>
+                                <p>{cowalk.goTo}</p>
+                            </div>
                         </div>
                     </div>
-                    <p>Heure de départ:{currentCowalkStartTime}</p>
-
                 </div>
                 <div className='cowalkingCardFooter'>
                     <div className='cowalkingCardCount'>
@@ -79,9 +82,10 @@ function CowalkingCard ({cowalk,index}) {
                         <ul>
                             <li><span>+{membersList.length+1}</span></li>
                         </ul>
-                        
                     </div>
-                    {isOwner &&<div className='cowalkingCardButtons'>
+                    <div className='cowalkingCardButtons'>
+                    {isOwner && 
+                    <div className='buttons-owner'>
                         <ButtonRound aria-label="delete" onClick={(e) => { 
                             e.preventDefault();
                             console.log('onClick'); }}>
@@ -92,16 +96,18 @@ function CowalkingCard ({cowalk,index}) {
                             console.log('onClick2'); }}>
                             <EditIcon/>
                         </ButtonRound>
-                    </div>}
+                    </div>
+                    }
                     {!isOwner &&<ButtonRound aria-label="remove" onClick={(e) => { 
                         e.preventDefault();
                         console.log('remove'); }}>
                         <RemoveIcon/>
                     </ButtonRound>}
+                    </div>
                 </div>
             </li>
         </Link>
-    ) 
+    )
 }
 
 

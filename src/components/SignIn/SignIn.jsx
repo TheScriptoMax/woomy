@@ -53,6 +53,7 @@ export default function SignIn () {
                 })
                 .catch((error) => {
                     console.log("Message d'erreur: " + error.message)
+
                 })
                 .then(() => {
                         history.push("/send-confirm")

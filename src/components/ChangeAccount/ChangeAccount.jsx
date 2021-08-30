@@ -18,6 +18,7 @@ export default function ChangeAccount () {
     const [loading, setLoading] = useState();
     const [pageLoading, setPageLoading] = useState(true);
 
+
     const history = useHistory();
 
     const {currentUser} = useAuth();
@@ -37,12 +38,14 @@ export default function ChangeAccount () {
             })
             .catch(error => {
                 console.log(error.message)
+
             })
 
     }, [currentUser.uid])
 
     async function handleSubmit(ev) {
         ev.preventDefault();
+
 
         const promises = [];
         setLoading(true);
@@ -80,12 +83,16 @@ export default function ChangeAccount () {
                 setLoading(false);
                 history.push('/account');
             })
+
+        
+        setLoading(false);
     }
 
 
     return (
 
         <div className='changeAccount container'>
+
         {!pageLoading &&
 
         <form onSubmit={handleSubmit} className='changeAccount-content'>
@@ -105,6 +112,7 @@ export default function ChangeAccount () {
             <Button disabled={loading} type="submit" variant="contained">Envoyer</Button>
 
         </form>}
+
 
         </div>
     );

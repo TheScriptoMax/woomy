@@ -1,4 +1,3 @@
-
 /// ----- Import Components ---- ///
 import CowalkingCard from "../CowalkingCard/CowalkingCard";
 
@@ -19,10 +18,12 @@ function CowalkingList () {
     const [initialCowalks, setInitialCowalks] = useState([])
     const [updatedCowalks,setUpdatedCowalks] = useState([])
     const [lastInitialDate, setLastInitialDate] = useState(new Date())
+
  /*    const [completeCowalksList, setCompleteCowalksList] = useState([]); */
     const [pageLoading, setPageLoading] = useState(true);
 
     
+
 
 
     useEffect(() => {
@@ -47,10 +48,8 @@ function CowalkingList () {
                         )
                     })
                     const lastCreatedAt = new Date(Math.max(...tempResults.map(e => e.createdAt.seconds)) * 1000)
-                    setLastInitialDate(lastCreatedAt);
-                    
+                    setLastInitialDate(lastCreatedAt);    
                     setInitialCowalks(tempResults);
-                    
                     setPageLoading(false)
             })
     }, []);
