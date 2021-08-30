@@ -5,6 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 import RemoveIcon from '@material-ui/icons/Remove';
+
 /// ----- Import image ----- ///
 import ImageProfil from './profile-pic-placeholder.png'
 import {database} from '../../firebase';

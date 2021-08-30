@@ -15,7 +15,6 @@ import {database} from "../../firebase";
 export default function ChangeAccount () {
 
     const [userData, setUserData] = useState({});
-    const [loading, setLoading] = useState();
     const [pageLoading, setPageLoading] = useState(true);
 
 
@@ -41,7 +40,7 @@ export default function ChangeAccount () {
 
             })
 
-    }, [currentUser.uid])
+    }, [currentUser.uid, setError])
 
     async function handleSubmit(ev) {
         ev.preventDefault();
@@ -49,7 +48,7 @@ export default function ChangeAccount () {
 
         const promises = [];
         setLoading(true);
-        console.log('');
+
 
         if (lastnameRef.current.value !== userData.lastname) {
             promises.push(database.users.doc(currentUser.uid).update({
@@ -93,25 +92,26 @@ export default function ChangeAccount () {
 
         <div className='changeAccount container'>
 
-        {!pageLoading &&
+            {!pageLoading &&
 
-        <form onSubmit={handleSubmit} className='changeAccount-content'>
 
-            {/* MATERIAL UI INPUT TO COMPLETE FOR CHANGEACCOUNT */}
+            <form onSubmit={handleSubmit} className='changeAccount-content'>
 
-            <TextField inputRef={lastnameRef} id="standard-basic" defaultValue={userData.lastname} variant="standard"/>
+                {/* MATERIAL UI INPUT TO COMPLETE FOR CHANGEACCOUNT */}
 
-            <TextField inputRef={firstnameRef} id="standard-basic" label="Prénom" defaultValue={userData.firstname} variant="standard" />
+                <TextField inputRef={lastnameRef} id="standard-basic" defaultValue={userData.lastname} variant="standard"/>
 
-            <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Numéro de téléphone" defaultValue={userData.phoneNumber} variant="standard" />
+                <TextField inputRef={firstnameRef} id="standard-basic" label="Prénom" defaultValue={userData.firstname} variant="standard" />
 
-            <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Date de naissance" defaultValue={userData.birthdate} variant="standard"  InputLabelProps={{
-                shrink: true,
-            }}/>
+                <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Numéro de téléphone" defaultValue={userData.phoneNumber} variant="standard" />
 
-            <Button disabled={loading} type="submit" variant="contained">Envoyer</Button>
+                <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Date de naissance" defaultValue={userData.birthdate} variant="standard"  InputLabelProps={{
+                    shrink: true,
+                }}/>
 
-        </form>}
+                <Button  type="submit" variant="contained">Envoyer</Button>
+
+            </form>}
 
 
         </div>

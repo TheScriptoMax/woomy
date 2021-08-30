@@ -15,6 +15,10 @@ import {database} from '../../firebase'
 
 function CowalkingList () {
 
+
+    const [cowalks, setCowalks] = useState([])
+    const [pageLoading, setPageLoading] = useState(true);
+
     const [initialCowalks, setInitialCowalks] = useState([])
     const [updatedCowalks,setUpdatedCowalks] = useState([])
     const [lastInitialDate, setLastInitialDate] = useState(new Date())
@@ -26,13 +30,14 @@ function CowalkingList () {
 
 
 
+
     useEffect(() => {
-        return database.cowalks.where("createdAt",">=",lastInitialDate).onSnapshot((querySnapshot) => {
+        return database.cowalks.onSnapshot((querySnapshot) => {
             const tempResults = [];
             querySnapshot.forEach((doc) => {
                 tempResults.push(database.formatDoc(doc))
             })
-            setUpdatedCowalks(tempResults)
+            setCowalks(tempResults)
         });
     }, [])
 
@@ -41,16 +46,18 @@ function CowalkingList () {
             .orderBy('startTime')
             .get()
             .then((querySnapshot) => {
-                    const tempResults = [];
-                    querySnapshot.forEach((doc) => {
-                        tempResults.push(
-                            database.formatDoc(doc)
-                        )
-                    })
-                    const lastCreatedAt = new Date(Math.max(...tempResults.map(e => e.createdAt.seconds)) * 1000)
-                    setLastInitialDate(lastCreatedAt);    
-                    setInitialCowalks(tempResults);
-                    setPageLoading(false)
+
+                const tempResults = [];
+                querySnapshot.forEach((doc) => {
+                    tempResults.push(
+                        database.formatDoc(doc)
+                    )
+                }
+                const lastCreatedAt = new Date(Math.max(...tempResults.map(e => e.createdAt.seconds)) * 1000)
+                setLastInitialDate(lastCreatedAt);    
+                setInitialCowalks(tempResults);
+                setPageLoading(false)
+
             })
     }, []);
 
@@ -58,9 +65,11 @@ function CowalkingList () {
         <div className="container">
 
             <ul className='cowalkingList'>
+
+
                 { pageLoading ? <p>Loading</p> : (initialCowalks.length>0 ?
 
-                    initialCowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />) : <p>Aucun résultat</p>) }
+                    initialCowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />) : <p>Aucun résultat</p>) }
 
 
                 { updatedCowalks.length > 0 &&

@@ -14,7 +14,7 @@ function Notification() {
   const [notifs, setNotifs] = useState([])
   
   const {currentUser} = useAuth();
-        
+
             
   useEffect(() => {
     database.notifications(currentUser.uid).onSnapshot((querySnapshot)=>{
@@ -27,7 +27,7 @@ function Notification() {
     },(error)=>{
       console.log(error)
     })
-  }, [])
+  }, [currentUser.uid])
 
   console.log(notifs)
 

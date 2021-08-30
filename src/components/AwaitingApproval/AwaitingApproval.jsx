@@ -1,6 +1,5 @@
 // REACT IMPORT
 
-
 import {useEffect,useState} from "react";
 
 
@@ -64,7 +63,7 @@ export default function AwaitingApproval () {
                 console.log(error.message)
 
             })
-    }, [])
+    }, [currentUser.uid])
 
     function handleIdCardUpload(ev) {
         const idCardFile = ev.target.files[0];
@@ -159,7 +158,9 @@ export default function AwaitingApproval () {
                         onChange={handleIdCardUpload}
                     />
                     <div className='container-img'>
-                        <img className='img-card' src={urlCard} alt="profil"/>
+
+                        <img className='img-card' src={urlCard} alt="Votre carte d'identité"/>
+
                     </div>
                     <label htmlFor="raised-button-file-card">
                         <Button variant="raised" component="span">
@@ -181,7 +182,9 @@ export default function AwaitingApproval () {
                         onChange={handleIdPictureUpload}
                     />
                     <div className='container-img'>
-                        <img className='img-picture' src={urlPicture} alt="profil"/>
+
+                        <img className='img-picture' src={urlPicture} alt="Votre photo"/>
+
                     </div>
                     <label htmlFor="raised-button-file-picture">
                         <Button variant="raised" component="span">

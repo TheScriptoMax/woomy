@@ -16,7 +16,6 @@ import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
-import AwaitingApproval from './components/AwaitingApproval/AwaitingApproval';
 import SendNewValidation from './components/SendNewValidation/SendNewValidation';
 
 /**** PROFIL *****/
@@ -59,11 +58,13 @@ import PrivateRoute from './components/Routes/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
 
+
 import CowalkerList from "./components/CowalkerList/CowalkerList";
 import CowalkerItem from "./components/CowalkerItem/CowalkerItem";
 import CowalkingCard from "./components/CowalkingCard/CowalkingCard";
 
 import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
+
 
 
 
@@ -87,6 +88,7 @@ function App() {
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
 
+
                         
 
 
@@ -104,6 +106,7 @@ function App() {
                     <Route exact path='/admin-district' component={AdminDistrict}/>
                     <Route exact path='/place-list' component={PlaceList}/>
                     <Route exact path='/district-list' component={DistrictList}/>
+
 
                     {/*----- Profil connecté et approuvé -----*/}
 

@@ -1,6 +1,8 @@
+// Import React
+import {useState, useEffect} from "react";
+
 // CSS FIREBASE
 import {useAuth} from "../../contexts/AuthContext";
-import {useState, useEffect} from "react";
 import {database} from "../../firebase";
 
 // REACT ROUTER DOM
@@ -9,8 +11,6 @@ import {Link, useHistory} from "react-router-dom";
 
 // MATERIAL UI IMPORT
 import Button from '@material-ui/core/Button';
-
-// import {Link} from "react-router-dom";
 
 // CSS IMPORT
 

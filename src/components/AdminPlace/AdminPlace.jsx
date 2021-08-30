@@ -1,6 +1,11 @@
+// IMPORT CSS
 import './adminplace.css'
+
+// IMPORT MATERIAL
 import {Button, TextField} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+
+// FIREBASE IMPORT
 import { database } from '../../firebase';
 
 // REACT IMPORT
@@ -11,7 +16,8 @@ import { Link } from 'react-router-dom';
 export default function AdminPlace () {
 
 
-    const [error, setError] = useState();
+
+
     const [isShow, setIsShow] = useState(false);
     const [locationAdded, setLocationAdded] = useState(false);
     const [districts, setDistricts] = useState([]);
@@ -59,7 +65,7 @@ export default function AdminPlace () {
                 }
             })
             .catch((error) => {
-                setError('Quelque chose s\'est mal passé :(');
+                console.log('Quelque chose s\'est mal passé :(');
             });
         }
 
