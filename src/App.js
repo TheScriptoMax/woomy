@@ -85,14 +85,15 @@ function App() {
                                 {/*----- Account -----*/}
                                 <PrivateRoute exact path='/account' component={Account}/>
                                 <PrivateRoute exact path='/param' component={Params}/>
+                                {/*----- Admin -----*/}
+                                <Route exact path='/admin-place' component={AdminPlace}/>
+                                <Route exact path='/admin-district' component={AdminDistrict}/>
+                                <Route exact path='/place-list' component={PlaceList}/>
+                                <Route exact path='/district-list' component={DistrictList}/>
                         <Footer/>
                     </div>
                         
-                        {/*----- Admin -----*/}
-                        <Route exact path='/admin-place' component={AdminPlace}/>
-                        <Route exact path='/admin-district' component={AdminDistrict}/>
-                        <Route exact path='/place-list' component={PlaceList}/>
-                        <Route exact path='/district-list' component={DistrictList}/>
+                        
 
                 </Switch>
 

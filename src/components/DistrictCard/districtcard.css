@@ -1,5 +1,6 @@
 .district-card{
-    background-color: #c8c8c8;
+    border: solid 2px #670652;
+    color: #670652;
     border-radius: 15px;
     text-align: start;
     padding: .5rem;
@@ -18,8 +19,12 @@
 }
 
 .district-name{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 700;
+}
+
+.district-town{
+    font-size: 1rem;
 }
 
 .confirm-btns{

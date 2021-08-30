@@ -70,9 +70,15 @@ export default function AdminPlace () {
 
     return (
       <div className="container container-admin">
-         <h2>Lieux</h2>
-         <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/placelist'}>Voir tous les lieux</Link>
-         <p className="placecreate">Création d'un nouveau lieu</p>
+         <h1>Lieux</h1>
+         <Link className="place-list-link" to={'/place-list'}>
+             <div className="place-list-btn">
+                <Button variant="contained">Voir tous les lieux</Button>
+             </div>
+         </Link>
+
+
+         <h2 className="create-place-title">Création d'un nouveau lieu</h2>
 
          <form onSubmit={addLocation} ref={formRef} className="placeform">
             <TextField inputRef={locationNameRef} label="Lieux" variant="outlined"/>
@@ -85,15 +91,13 @@ export default function AdminPlace () {
             </TextField>
             <TextField inputRef={adressRef} label="Adresse" variant="outlined"/>
 
-            <Button disabled={loading} type="submit" color="secondary" variant='contained' className="admin-form-btn">Ajouter</Button>
+            <Button disabled={loading} type="submit" color="secondary" variant='contained'>Ajouter</Button>
 
             {error && <Alert severity="error">{error}</Alert> }
             {locationAdded && <Alert severity="success">Le lieu a été ajouté</Alert>}
             {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
-
          </form>
         
-
         <Link to={'/admin-district'}><Button variant='contained'>Ajouter un quartier</Button></Link>
      </div>
     )

@@ -1,5 +1,6 @@
 .place-card{
-    background-color: #c8c8c8;
+    border: solid 2px #670652;
+    color: #670652;
     border-radius: 15px;
     text-align: start;
     padding: .5rem;
@@ -19,11 +20,15 @@
 }
 
 .location-name{
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 700;
 }
 
+.location-district{
+    font-size: 1.1rem;
+}
+
 .location-adress{
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 500;
 }

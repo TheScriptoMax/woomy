@@ -1,21 +1,28 @@
-/* <<<<<<< HEAD
-.placeform{
+h1{
+    text-align: center;
+}
+
+.create-place-title{
     margin-bottom: 1rem;
 }
 
-.placeform div,.placecreate{
-    margin-top:1rem;
+.place-list-link{
+    text-decoration: none;
 }
 
-.container-admin .admin-form-btn{
-    margin-top: 1rem;
-======= */
-.placecreate{
-    margin-bottom: 1rem;
+.place-list-btn{
+    display: flex;
+    justify-content: center;
 }
 
-.container-admin .admin-form-btn{
-    margin-top: 1rem;;
+.place-list-btn button{
+    background-color: #670652;
+    border: solid white .1rem;
+    box-shadow: none;
+    color: white;
+}
+.place-list-btn button:hover{
+    background-color: #c51162;
 }
 
 .placeform button, .container-admin a{
@@ -24,5 +31,5 @@
     box-shadow: none;
     color: white;
     text-transform: uppercase;
-
+    margin-bottom: 1rem;
 }
