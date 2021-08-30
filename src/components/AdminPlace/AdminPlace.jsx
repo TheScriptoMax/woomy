@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 //ADD A LOCATION
 export default function AdminPlace () {
 
-    //TODO: ajouter un composant pour afficher la liste des lieux
 
     const [error, setError] = useState();
     const [loading, setLoading] = useState();
@@ -25,17 +24,11 @@ export default function AdminPlace () {
     const adressRef = useRef();
 
     useEffect(() => {
-        database.districts.get().then(districts => {
+        database.districts.orderBy('name').get().then(districts => {
             const tempDistricts = []
             districts.forEach(district => {
                 tempDistricts.push(database.formatDoc(district))
             })
-            tempDistricts.sort(function(a, b){
-                if(a.name < b.name) { return -1; }
-                if(a.name > b.name) { return 1; }
-                return 0;
-            })
-
             setDistricts(tempDistricts)
         })
     }, [])
@@ -79,8 +72,7 @@ export default function AdminPlace () {
       <div class="container container-admin">
          <h1>Lieux</h1>
 
-         {/* Ajouter un lien et un composant vers un liste des quartiers */}
-         <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/placelist'}>Voir tous les lieux</Link>
+         <Link to={'/place-list'}><Button variant='contained'>Voir tous les lieux</Button></Link>
 
          <h2 className="placecreate">Création d'un nouveau lieu</h2>
 
@@ -104,7 +96,7 @@ export default function AdminPlace () {
          </form>
         
 
-        <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/admindistrict'}>Ajouter un quartier</Link>
+        <Link to={'/admin-district'}><Button variant='contained'>Ajouter un quartier</Button></Link>
      </div>
     )
 }

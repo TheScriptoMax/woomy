@@ -19,6 +19,7 @@ export default function SendNewValidation () {
     const [userData, setUserData] = useState({});
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+
     const {reSendEmail, currentUser} = useAuth();
 
     const history = useHistory();

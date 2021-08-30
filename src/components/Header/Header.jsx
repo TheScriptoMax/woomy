@@ -4,7 +4,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import {Link}from "react-router-dom";
 
 // CSS IMPORT
-import './header.css'
+import './Header.css'
 
 // HEADER
 function Header() {
