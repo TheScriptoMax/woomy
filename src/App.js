@@ -1,5 +1,6 @@
 /// ----- COMPONENTS ----- ///
 
+
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
@@ -11,21 +12,27 @@ import Footer from './components/footer/footer';
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
-import EmailConfirmation from './components/EmailConfirmation/EmailConfirmation';
+import AwaitingApproval from './components/AwaitingApproval/AwaitingApproval';
+import SendNewValidation from './components/SendNewValidation/SendNewValidation';
 
 /**** PROFIL *****/
 import Account from './components/Account/Account';
 import Params from './components/Params/Params';
 
-/**** CRUD COPIETONNAGE *****/
+/**** ADMIN *****/
+import AdminPlace from "./components/AdminPlace/AdminPlace";
+import AdminDistrict from "./components/AdminDistrict/AdminDistrict";
+import PlaceList from "./components/PlaceList/PlaceList";
+
+/**** CRUD COPIETONNAGE *****/ 
 import CowalkingList from './components/CowalkingList/CowalkingList';
 import CowalkingTicket from './components/CowalkingTicket/CowalkingTicket';
 import CowalkingCreate from './components/CowalkingCreate/CowalkingCreate';
 import CowalkingSearch from './components/CowalkingSearch/CowalkingSearch';
-
-/**** NOTIFICATION *****/
+   
+    
+/**** NOTIFICATION *****/ 
 import Notification from './components/Notifications/Notification';
-
 
 /// ----- CSS ----- ///
 import './App.css';
@@ -39,6 +46,8 @@ import {
 } from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/EmailNotVerifiedRoute";
+import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
+
 
 function App() {
   
@@ -54,22 +63,31 @@ function App() {
                         <Route path='/login' component={Login}/>
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
-                        {/*<EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>*/}
-                        <EmailNotVerifiedRoute path='/email-confirmation' component={EmailConfirmation}/>
-                    {}
+                        <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
 
-                    {/*----- Route private EmailConfirmation -----*/}
+                    {/*Todo: Changer la route pour les personnes vérifier mais en attente de validation d'un admin*/}
+                        <Route path='/awaiting-approval' component={AwaitingApproval}/>
+
+                    {/*----- Route private AwaitingApproval -----*/}
 
                         {/*----- Ticket -----*/}
-                        <PrivateRoute exact path='/ticket' component={CowalkingTicket}/>
+                        <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
                         <PrivateRoute exact path='/create' component={CowalkingCreate}/>
                         <PrivateRoute exact path='/search' component={CowalkingSearch}/>
                         <PrivateRoute exact path='/list' component={CowalkingList}/>
                         <PrivateRoute exact path='/message' component={Notification}/>
+                        <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+                        <PrivateRoute exact path='/notification' component={Notification} />
+                        
 
                         {/*----- Account -----*/}
                         <PrivateRoute exact path='/account' component={Account}/>
                         <PrivateRoute exact path='/param' component={Params}/>
+
+                        {/*----- Admin -----*/}
+                        <Route exact path='/adminplace' component={AdminPlace}/>
+                        <Route exact path='/admindistrict' component={AdminDistrict}/>
+                        <Route exact path='/placelist' component={PlaceList}/>
 
                 </Switch>
                 <Footer/>
@@ -77,6 +95,7 @@ function App() {
             </AuthProvider>
         </Router>
     );
+
 
 }
 

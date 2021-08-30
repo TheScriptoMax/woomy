@@ -34,3 +34,23 @@
 .button-bot-account{
     margin-top:1rem;
 }
+
+.account-list button{
+    width: 100%;
+    background-color:#DCD9D9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top:1rem;
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+    padding-left:0.5rem;
+    padding-right:0.5rem;
+    border-radius: 0;
+    border:none;
+}
+
+.MuiButton-label .account-field{
+    margin-top:0rem;
+    padding:0;
+}

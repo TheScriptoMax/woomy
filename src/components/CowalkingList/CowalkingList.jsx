@@ -14,8 +14,21 @@ import {database} from '../../firebase'
 
 function CowalkingList () {
 
-    const [cowalks,setCowalks] = useState([])
+    const [initialCowalks, setInitialCowalks] = useState([])
+    const [updatedCowalks,setUpdatedCowalks] = useState([])
+    const [lastInitialDate, setLastInitialDate] = useState(new Date())
+    const [completeCowalksList, setCompleteCowalksList] = useState([])
 
+
+    useEffect(() => {
+        return database.cowalks.where("createdAt",">=",lastInitialDate).onSnapshot((querySnapshot) => {
+            const tempResults = [];
+            querySnapshot.forEach((doc) => {
+                tempResults.push(database.formatDoc(doc))
+            })
+            setUpdatedCowalks(tempResults)
+        });
+    }, [])
 
     useEffect(() => {
         database.cowalks
@@ -27,7 +40,10 @@ function CowalkingList () {
                         database.formatDoc(doc)
                     )
                 })
-                setCowalks(tempResults);
+                const lastCreatedAt = new Date(Math.max(...tempResults.map(e => e.createdAt.seconds)) * 1000)
+                setLastInitialDate(lastCreatedAt);
+                console.log(lastCreatedAt)
+                setInitialCowalks(tempResults);
                 console.log(tempResults);
             })
     }, []);
@@ -35,13 +51,17 @@ function CowalkingList () {
     return (
         <div className="container">
 
-            {cowalks.length ?
+            {initialCowalks.length ?
 
             <ul className='cowalkingList'>
                 {
-                    cowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
+                    initialCowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
                 }
-            </ul> : <p>Allez vous faire cuire un oeuf</p> }
+
+                { updatedCowalks.length > 0 &&
+                    updatedCowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
+                }
+            </ul> : <p>Allez vous faire cuire un oeuf chez les papous d'en face</p> }
         </div>
     )
 }
