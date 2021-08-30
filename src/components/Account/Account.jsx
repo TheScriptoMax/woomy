@@ -13,7 +13,7 @@ import {useHistory} from "react-router-dom";
 
 
 /// ----- Firebase ///
-import {database} from "../../firebase";
+import {database, storage} from "../../firebase";
 
 //////// Page de profile ////////
 
@@ -21,9 +21,10 @@ function Account() {
 
     const [userData, setUserData] = useState({});
     const [setError] = useState('');
-    const {logout, resetPassword} = useAuth();
-
     const [isShow, setIsShow] = useState(true);
+    const [urlPicture, setUrlPicture] = useState('');
+
+    const {logout, resetPassword} = useAuth();
 
     const history = useHistory();
 
@@ -61,6 +62,40 @@ function Account() {
         } catch {
             setError('Woops, on a pas réussi à vous déconnecter')
         }
+    }
+
+    async function handlePicture(ev){
+        ev.preventDefault();
+
+        const idPicture = ev.target.files[0];
+
+        const filename = idPicture.name;
+        const idPicturePartPath = `files/idPictureProfiles/${currentUser.uid}`;
+        const idPicturePath = `${idPicturePartPath}.${filename.substring(filename.lastIndexOf('.') + 1, filename.length)}`
+
+        const uploadPicture = storage
+            .ref(idPicturePath)
+            .put(idPicture)
+        uploadPicture.on('state_changed',
+            snapchot => {
+
+            },
+            error => {
+                console.log(error.message)
+            },
+            () => {
+                uploadPicture.snapshot.ref.getDownloadURL()
+                    .then((url) => {
+                        database.users.doc(currentUser.uid).update({
+                            profilPic: url
+                        })
+                        .then(() => {
+                            setUrlPicture(url)
+
+                        })
+                    })
+            }
+            )
     }
 
     return (
@@ -107,6 +142,23 @@ function Account() {
                     </div>
                 </div>
             </Link>
+            <div className='account-field'>
+                <div className="button-bot-account">
+                    <input
+                        style={{ display: 'none' }}
+                        id="raised-button-file-picture"
+                        type="file"
+                        onChange={handlePicture}
+                    />
+                    {/*<div className='container-img'>*/}
+                    {/*    <img className='img-picture' alt="Votre photo"/>*/}
+                    {/*</div>*/}
+                    <label htmlFor="raised-button-file-picture">
+                        <Button variant="raised" component="span">Changer votre photo
+                        </Button>
+                    </label>
+                </div>
+            </div>
             <Button onClick={clickResetPassword}>
                 <div className='account-field'>
                         <p>Réinitialiser le mot de passe</p>
