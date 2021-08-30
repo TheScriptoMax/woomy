@@ -65,7 +65,6 @@ function App() {
                 <Header/>
                 <Switch>
                     {/*----- Route public -----*/}
-
                     <Route path='/signin' component={SignIn}/>
                     <Route path='/login' component={Login}/>
                     <Route path='/cgu' component={Conditions}/>
