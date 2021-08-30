@@ -26,7 +26,7 @@ import {Alert} from "@material-ui/lab";
 ///////// PAGE DE CREATION DES COPIETONNAGE //////////
 
 
-function CoWalkingCreate() {
+function CowalkingCreate () {
 
     const [locations, setLocations] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -58,8 +58,8 @@ function CoWalkingCreate() {
     async function handleSubmitCowalk(ev) {
         ev.preventDefault();
         try {
-        setError('');
-        setLoading(true)
+            setError('');
+            setLoading(true)
         await database.cowalks.add({
             startFrom: startFromRef.current.value,
             goTo: goToRef.current.value,
@@ -74,6 +74,9 @@ function CoWalkingCreate() {
         }
         setLoading(false);
     }
+
+   
+
 
 
     return (
@@ -110,9 +113,10 @@ function CoWalkingCreate() {
           </div>
         </form>
       </div>
-    );
-  }
+    )
+}
 
-export default CoWalkingCreate;
+
+export default CowalkingCreate;
 
 
