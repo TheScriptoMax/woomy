@@ -16,6 +16,7 @@ function CowalkerList({cowalk}) {
     const [isMember, setIsMember] = useState();
     const [owner, setOwner] = useState({})
     const [membersList, setMembersList] = useState([]);
+    const [loading, setLoading] = useState(true)
     const [userData, setUserData] = useState({});
     const {currentUser} = useAuth();
 
@@ -24,6 +25,7 @@ function CowalkerList({cowalk}) {
             .get()
             .then((owner) => {
                 setOwner(database.formatDoc(owner))
+                setLoading(false)
             })
             .catch(() => {
                 console.log('Couldnt retrieve the owner')
@@ -106,13 +108,14 @@ function CowalkerList({cowalk}) {
                             console.log('Notif supprimée')
                         })   
                     })
-                })
-                   
+                })   
             })
     }
 
 
     return (
+        <>
+        {!loading && 
         <div className='cowalkerListcontainer'>
             <div>{!isOwner &&
 
@@ -131,6 +134,8 @@ function CowalkerList({cowalk}) {
             </ul>
 
         </div>
+        }
+        </>
     )
 };
 
