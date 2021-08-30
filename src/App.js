@@ -12,7 +12,7 @@ import Footer from './components/footer/footer';
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
-import AwaitingApprouval from './components/AwaitingApprouval/AwaitingApprouval';
+import AwaitingApproval from './components/AwaitingApproval/AwaitingApproval';
 import SendNewValidation from './components/SendNewValidation/SendNewValidation';
 
 /**** PROFIL *****/
@@ -22,6 +22,7 @@ import Params from './components/Params/Params';
 /**** ADMIN *****/
 import AdminPlace from "./components/AdminPlace/AdminPlace";
 import AdminDistrict from "./components/AdminDistrict/AdminDistrict";
+import PlaceList from "./components/PlaceList/PlaceList";
 
 /**** CRUD COPIETONNAGE *****/ 
 import CowalkingList from './components/CowalkingList/CowalkingList';
@@ -50,6 +51,7 @@ import CowalkerList from "./components/CowalkerList/CowalkerList";
 import CowalkerItem from "./components/CowalkerItem/CowalkerItem";
 import CowalkingCard from "./components/CowalkingCard/CowalkingCard";
 
+
 function App() {
   
     return (
@@ -57,7 +59,6 @@ function App() {
         <Router>
 
             <AuthProvider>
-                <Header/>
                 <Switch>
                     {/*----- Route public -----*/}
 
@@ -67,27 +68,36 @@ function App() {
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
 
-                        <EmailNotVerifiedRoute path='/awaiting-approuval' component={AwaitingApprouval}/>
+                    {/*Todo: Changer la route pour les personnes vérifier mais en attente de validation d'un admin*/}
+                        <Route path='/awaiting-approval' component={AwaitingApproval}/>
 
-                    {/*----- Route private AwaitingApprouval -----*/}
+                    {/*----- Route private AwaitingApproval -----*/}
+                    <div>
+                        <Header/>
+                                {/*----- Ticket -----*/}
+                                <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
+                                <PrivateRoute exact path='/create' component={CowalkingCreate}/>
+                                <PrivateRoute exact path='/search' component={CowalkingSearch}/>
+                                <PrivateRoute exact path='/list' component={CowalkingList}/>
+                                <PrivateRoute exact path='/message' component={Notification}/>
+                                <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+                                {/*----- Account -----*/}
+                                <PrivateRoute exact path='/account' component={Account}/>
+                                <PrivateRoute exact path='/param' component={Params}/>
+                        <Footer/>
+                    </div>
+                        
+                     
 
-                        {/*----- Ticket -----*/}
-                        <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
-                        <PrivateRoute exact path='/create' component={CowalkingCreate}/>
-                        <PrivateRoute exact path='/search' component={CowalkingSearch}/>
-                        <PrivateRoute exact path='/list' component={CowalkingList}/>
-                        <PrivateRoute exact path='/message' component={Notification}/>
-                        <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+                        
 
-                        {/*----- Account -----*/}
-                        <PrivateRoute exact path='/account' component={Account}/>
-                        <PrivateRoute exact path='/param' component={Params}/>
 
                         {/*----- Admin -----*/}
                         <Route exact path='/adminplace' component={AdminPlace}/>
                         <Route exact path='/admindistrict' component={AdminDistrict}/>
+                        <Route exact path='/placelist' component={PlaceList}/>
+
                 </Switch>
-                <Footer/>
 
             </AuthProvider>
         </Router>
