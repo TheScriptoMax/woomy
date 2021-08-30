@@ -6,14 +6,12 @@ import 'firebase/storage';
 
 
 const app = firebase.initializeApp({
-    apiKey: "AIzaSyDWSx1k8S5ZK4jdsxXaddWXh-zSHhs-w1s",
-    authDomain: "test-rules-woomy.firebaseapp.com",  
-    projectId: "test-rules-woomy",  
-    storageBucket: "test-rules-woomy.appspot.com",  
-    messagingSenderId: "976311694336",  
-    appId: "1:976311694336:web:e16a8ec4bcc2eab446d4e5",  
-    measurementId: "G-69DRBYJJ8B"
-  
+    apiKey: "AIzaSyDqXSbXW5dTrpubT1gyI3AJ9opFcmisksw",
+    authDomain: "woomy-app.firebaseapp.com",  
+    projectId: "woomy-app",  
+    storageBucket: "woomy-app.appspot.com",  
+    messagingSenderId: "796599799860",  
+    appId: "1:796599799860:web:a74f9a63a9322d86f1ba61"  
 });
 
 export const auth = app.auth();
