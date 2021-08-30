@@ -20,15 +20,38 @@ import {useAuth} from "../../contexts/AuthContext";
 
 function CowalkingTicketHeader({cowalk}) {
 
-    const [isOwner,setIsOwner] = useState(false)
+    const [isOwner,setIsOwner] = useState(false);
+    const [locations, setLocations] = useState([]);
+    const [startFromUrl, setStartFromUrl] = useState([]);
+    const [goToUrl, setGoToUrl] = useState([]);
 
     const {currentUser} = useAuth();
     
 
-
     useEffect(() => {
-        currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
-    }, [cowalk.owner,currentUser.uid])
+        currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false);
+
+        database.locations.where("name", "==", cowalk.startFrom)
+            .get()
+            .then((querySnapshot) => {
+                const tempSnapshot = []
+                querySnapshot.forEach(result => {
+                    tempSnapshot.push(database.formatDoc(result))
+                })
+                setStartFromUrl(tempSnapshot[0].mapUrl)
+            });
+
+            database.locations.where("name", "==", cowalk.goTo)
+            .get()
+            .then((querySnapshot) => {
+                const tempSnapshot = []
+                querySnapshot.forEach(result => {
+                    tempSnapshot.push(database.formatDoc(result))
+                })
+                setGoToUrl(tempSnapshot[0].mapUrl)
+            })
+            
+        }, [cowalk.owner,currentUser.uid])
 
     const history = useHistory();
     const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})
@@ -101,6 +124,7 @@ function CowalkingTicketHeader({cowalk}) {
                 <div>
                     <h3>Départ:</h3>
                     <p>{cowalk.startFrom}</p>
+                    <a href={startFromUrl} target="_blank">Voir sur la carte</a>
                 </div>
                 <span>
                     <TrendingFlatIcon/>
@@ -108,6 +132,7 @@ function CowalkingTicketHeader({cowalk}) {
                 <div>
                     <h3>Destination:</h3>
                     <p>{cowalk.goTo}</p>
+                    <a href={goToUrl} target="_blank">Voir sur la carte</a>
                 </div>
             </div>
             <div className='cowalkingTicketDeparture'>

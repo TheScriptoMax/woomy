@@ -1,3 +1,4 @@
+
 .district-form{
     margin-bottom: 1rem;
 }
@@ -6,6 +7,19 @@
     margin-top:1rem;
 }
 
+.create-district{
+    margin-bottom: 1rem;
+
+}
+
 .container-admin .admin-form-btn{
     margin-top: 1rem;;
+}
+
+.district-form button{
+    background-color: #670652;
+    border: solid white .1rem;
+    box-shadow: none;
+    color: white;
+    text-transform: uppercase;
 }

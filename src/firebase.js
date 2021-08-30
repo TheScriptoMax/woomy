@@ -5,6 +5,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 
 
+
 const app = firebase.initializeApp({
     apiKey: "AIzaSyDqXSbXW5dTrpubT1gyI3AJ9opFcmisksw",
     authDomain: "woomy-app.firebaseapp.com",
@@ -50,6 +51,8 @@ export const database = {
     },
 }
 
+
 export const storage = app.storage();
 
 export default app;
+

@@ -11,11 +11,15 @@ import { useState,useEffect } from 'react';
 //FIREBASE
 import {database} from '../../firebase'
 
+import {useAuth} from "../../contexts/AuthContext";
+
 
 function CowalkingList () {
 
     const [cowalks, setCowalks] = useState([])
     const [pageLoading, setPageLoading] = useState(true);
+
+    const {currentUser} = useAuth();
 
 
     useEffect(() => {

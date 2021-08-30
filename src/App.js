@@ -1,6 +1,5 @@
 /// ----- COMPONENTS ----- ///
 
-
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
@@ -64,6 +63,7 @@ import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
 function App() {
 
     return (
+        
         <Router>
 
             <AuthProvider>
@@ -79,6 +79,11 @@ function App() {
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+                        
+
+
+                    {/*----- Route private AwaitingApproval -----*/}
+
                         <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
 
 
@@ -92,6 +97,7 @@ function App() {
                     <Route exact path='/district-list' component={DistrictList}/>
 
                     {/*----- Profil connecté et approuvé -----*/}
+
                     <div>
                         <Header/>
                                 {/*----- Ticket -----*/}
@@ -99,11 +105,13 @@ function App() {
                                 <PrivateRoute exact path='/create' component={CowalkingCreate}/>
                                 <PrivateRoute exact path='/search' component={CowalkingSearch}/>
                                 <PrivateRoute exact path='/list' component={CowalkingList}/>
-                                <PrivateRoute exact path='/message' component={Notification}/>
+                                <PrivateRoute exact path='/message'component={Notification} />
+                                 
                                 <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
 
                                 {/*----- Account -----*/}
                                 <PrivateRoute exact path='/account' component={Account}/>
+                                <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
                                 <PrivateRoute exact path='/param' component={Params}/>
                         <Footer/>
                     </div>

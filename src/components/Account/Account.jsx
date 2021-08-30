@@ -92,7 +92,7 @@ function Account() {
             <div className='account-field'>
                 <p>Date de naissance</p>
                 <div className="account-field-result">
-                    <p>{userData.phoneNumber}</p>
+                    <p>{userData.birthdate}</p>
                 </div>
             </div>
             <div className='account-field'>

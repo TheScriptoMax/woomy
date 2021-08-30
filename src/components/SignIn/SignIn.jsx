@@ -29,9 +29,6 @@ export default function SignIn () {
 
     const {signup} = useAuth()
 
-
-
-
     async function handleSubmit(ev) {
         ev.preventDefault();
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
@@ -40,7 +37,6 @@ export default function SignIn () {
         try {
             setLoading(true);
             setError('');
-            console.log(emailRef.current.value)
             await signup(emailRef.current.value, passwordRef.current.value)
                 .then((authUser) => {
                     database.users
@@ -50,6 +46,7 @@ export default function SignIn () {
                             firstname: firstnameRef.current.value,
                             lastname: lastnameRef.current.value,
                             phoneNumber: phoneRef.current.value,
+                            birthdate: birthdateRef.current.value,
                             createdAt: database.getCurrentTimestamp,
                             accepted:false,
                             admin:false
@@ -57,7 +54,7 @@ export default function SignIn () {
                         ;
                 })
                 .catch((error) => {
-                    console.log(error.message)
+                    console.log("Message d'erreur: " + error.message)
                 })
                 .then(() => {
                         history.push("/send-confirm")
@@ -82,11 +79,13 @@ export default function SignIn () {
             
             <TextField inputRef={lastnameRef} id="standard-basic" label="Entrez votre prénom" variant="standard" />
             
-            <TextField type="email" inputRef={emailRef} id="standard-basic" label="Entrez votre email" variant="standard" />
+            <TextField inputRef={emailRef} type='email' id="standard-basic" label="Entrez votre email" variant="standard" />
+
 
             <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Entrez votre numéro de téléphone" variant="standard" />
 
             <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Entrez votre date de naissance" variant="standard"  InputLabelProps={{
+
           shrink: true,
         }}/>
 
