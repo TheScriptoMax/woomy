@@ -51,6 +51,8 @@ export default function SignIn () {
                             lastname: lastnameRef.current.value,
                             phoneNumber: phoneRef.current.value,
                             createdAt: database.getCurrentTimestamp,
+                            accepted:false,
+                            admin:false
                         })
                         ;
                 })
