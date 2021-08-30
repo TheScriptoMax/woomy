@@ -13,14 +13,14 @@ import {useHistory} from "react-router-dom";
 
 
 /// ----- Firebase ///
-import {database, storage} from "../../firebase";
+import {database} from "../../firebase";
 
 //////// Page de profile ////////
 
 function Account() {
 
     const [userData, setUserData] = useState({});
-    const [error, setError] = useState('');
+    const [setError] = useState('');
     const {logout, resetPassword} = useAuth();
 
     const [isShow, setIsShow] = useState(true);
@@ -39,7 +39,7 @@ function Account() {
                 setError(error.message)
             })
 
-    }, [currentUser.uid])
+    }, [currentUser.uid, setError])
 
     async function clickResetPassword(e){
         resetPassword(currentUser.email)
@@ -48,7 +48,7 @@ function Account() {
                 setIsShow(!isShow);
             })
             .catch((error) =>{
-                setError('Marche pas')
+                setError('Marche pas');
             })
     }
 

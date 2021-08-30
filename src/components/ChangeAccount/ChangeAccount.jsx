@@ -15,7 +15,7 @@ import {database} from "../../firebase";
 export default function ChangeAccount () {
 
     const [userData, setUserData] = useState({});
-    const [error, setError] = useState('');
+    const [setError] = useState('');
     const [loading, setLoading] = useState();
     const [pageLoading, setPageLoading] = useState(true);
 
@@ -40,7 +40,7 @@ export default function ChangeAccount () {
                 setError(error.message)
             })
 
-    }, [currentUser.uid])
+    }, [currentUser.uid, setError])
 
     async function handleSubmit(ev) {
         ev.preventDefault();

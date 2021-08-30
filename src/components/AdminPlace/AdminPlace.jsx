@@ -17,7 +17,7 @@ export default function AdminPlace () {
 
 
     const [error, setError] = useState();
-    const [loading, setLoading] = useState();
+    const [loading] = useState();
     const [isShow, setIsShow] = useState(false);
     const [locationAdded, setLocationAdded] = useState(false);
     const [districts, setDistricts] = useState([]);

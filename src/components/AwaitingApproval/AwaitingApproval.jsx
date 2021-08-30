@@ -18,7 +18,7 @@ import './AwaitingApproval.css';
 
 export default function AwaitingApproval () {
 
-    const [error, setError] = useState('');
+    const [setError] = useState('');
 
     const {currentUser} = useAuth();
 
@@ -61,7 +61,7 @@ export default function AwaitingApproval () {
             .catch((error) => {
                 setError(error.message)
             })
-    }, [])
+    }, [currentUser.uid])
 
     function handleIdCardUpload(ev) {
         const idCardFile = ev.target.files[0];
@@ -156,7 +156,7 @@ export default function AwaitingApproval () {
                         onChange={handleIdCardUpload}
                     />
                     <div className='container-img'>
-                        <img className='img-card' src={urlCard}/>
+                        <img className='img-card' src={urlCard} alt="Votre carte d'identité"/>
                     </div>
                     <label htmlFor="raised-button-file-card">
                         <Button variant="raised" component="span">
@@ -178,7 +178,7 @@ export default function AwaitingApproval () {
                         onChange={handleIdPictureUpload}
                     />
                     <div className='container-img'>
-                        <img className='img-picture' src={urlPicture}/>
+                        <img className='img-picture' src={urlPicture} alt="Votre photo"/>
                     </div>
                     <label htmlFor="raised-button-file-picture">
                         <Button variant="raised" component="span">

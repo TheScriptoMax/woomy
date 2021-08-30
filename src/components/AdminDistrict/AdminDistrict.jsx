@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 export default function AdminDistrict() {
 
     const [error, setError] = useState();
-    const [loading, setLoading] = useState();
+    const [loading] = useState();
     const [isShow, setIsShow] = useState(false);
     const [districtAdded, setDistrictAdded] = useState(false);
     const [towns, setTowns] = useState([]);

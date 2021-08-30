@@ -17,7 +17,6 @@ import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
-import AwaitingApproval from './components/AwaitingApproval/AwaitingApproval';
 import SendNewValidation from './components/SendNewValidation/SendNewValidation';
 
 /**** PROFIL *****/
@@ -55,7 +54,6 @@ import PublicRoute from './components/Routes/PublicRoute'
 import PrivateRoute from './components/Routes/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
-import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
 
 
 function App() {
@@ -77,7 +75,7 @@ function App() {
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
-                        <Route path='/awaiting-approval' component={AwaitingApproval}/>
+                        {/*<Route path='/awaiting-approval' component={AwaitingApproval}/>*/}
 
                     {/*----- Profil connecté et approuvé -----*/}
                         {/*----- Ticket -----*/}

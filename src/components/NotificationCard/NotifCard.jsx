@@ -2,7 +2,6 @@ import {database} from '../../firebase';
 import {useState, useEffect} from 'react';
 import {useAuth} from "../../contexts/AuthContext";
 
-
 // MATERIAL UI IMPORT
 import MessageIcon from '@material-ui/icons/Message';
 import Button from '@material-ui/core/Button';
@@ -25,7 +24,7 @@ function NotifCard({notif}) {
                 setUserData(database.formatDoc(doc))
             })
         
-    },[])
+    },[notif.guest])
 
     function onGuestApproval () {
         database.membersApproved(notif.cowalkRequested).doc(notif.guest)
