@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 //ADD A LOCATION
 export default function AdminPlace () {
 
-    //TODO: ajouter un composant pour afficher la liste des lieux
 
     const [error, setError] = useState();
     const [loading, setLoading] = useState();
@@ -25,17 +24,11 @@ export default function AdminPlace () {
     const adressRef = useRef();
 
     useEffect(() => {
-        database.districts.get().then(districts => {
+        database.districts.orderBy('name').get().then(districts => {
             const tempDistricts = []
             districts.forEach(district => {
                 tempDistricts.push(database.formatDoc(district))
             })
-            tempDistricts.sort(function(a, b){
-                if(a.name < b.name) { return -1; }
-                if(a.name > b.name) { return 1; }
-                return 0;
-            })
-
             setDistricts(tempDistricts)
         })
     }, [])
@@ -76,32 +69,40 @@ export default function AdminPlace () {
 
 
     return (
+        <>
 
-      <div className="container container-admin">
-         <h2>Lieux</h2>
-         <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/placelist'}>Voir tous les lieux</Link>
-         <p className="placecreate">Création d'un nouveau lieu</p>
-         <form onSubmit={addLocation} ref={formRef} className="placeform">
-            <TextField inputRef={locationNameRef} label="Lieux" variant="outlined"/>
-            <TextField select inputRef={districtRef} label="Quartier" variant="outlined">
-                {districts.map((option) => (
-                <option key={option.id} value={option.name}>
-                {option.name}
-                </option>
-            ))}
-            </TextField>
-            <TextField inputRef={adressRef} label="Adresse" variant="outlined"/>
+        <Link to={'/place-list'}><Button variant='contained'>Voir tous les lieux</Button></Link>
 
-            <Button disabled={loading} type="submit" color="secondary" variant='contained' className="admin-form-btn">Ajouter</Button>
+        <h2 className="placecreate">Création d'un nouveau lieu</h2>
 
-            {error && <Alert severity="error">{error}</Alert> }
-            {locationAdded && <Alert severity="success">Le lieu a été ajouté</Alert>}
-            {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
 
-         </form>
+    <div className="container container-admin">
+        <h2>Lieux</h2>
+        <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/placelist'}>Voir tous les lieux</Link>
+        <p className="placecreate">Création d'un nouveau lieu</p>
+
+        <form onSubmit={addLocation} ref={formRef} className="placeform">
+        <TextField inputRef={locationNameRef} label="Lieux" variant="outlined"/>
+        <TextField select inputRef={districtRef} label="Quartier" variant="outlined">
+            {districts.map((option) => (
+            <option key={option.id} value={option.name}>
+            {option.name}
+            </option>
+        ))}
+        </TextField>
+        <TextField inputRef={adressRef} label="Adresse" variant="outlined"/>
+
+        <Button disabled={loading} type="submit" color="secondary" variant='contained' className="admin-form-btn">Ajouter</Button>
+
+        {error && <Alert severity="error">{error}</Alert> }
+        {locationAdded && <Alert severity="success">Le lieu a été ajouté</Alert>}
+        {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
+
+        </form>
         
 
-        <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/admindistrict'}>Ajouter un quartier</Link>
+        <Link to={'/admin-district'}><Button variant='contained'>Ajouter un quartier</Button></Link>
      </div>
+    </>
     )
 }

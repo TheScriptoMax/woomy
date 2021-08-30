@@ -1,5 +1,15 @@
+
+.district-form{
+    margin-bottom: 1rem;
+}
+
+.district-form div,.create-district{
+    margin-top:1rem;
+}
+
 .create-district{
     margin-bottom: 1rem;
+
 }
 
 .container-admin .admin-form-btn{

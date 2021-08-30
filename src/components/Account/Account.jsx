@@ -1,7 +1,8 @@
-
+import ChangeAccount from '../ChangeAccount/ChangeAccount';
 /// ----- Material UI ----- ///
 import {Avatar, Button} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+
 /// ----- CSS ----- ///
 import './account.css';
 
@@ -63,7 +64,6 @@ function Account() {
         }
     }
 
-
     return (
       <div className='container'>
       <div className="account-top">
@@ -92,7 +92,7 @@ function Account() {
             <div className='account-field'>
                 <p>Date de naissance</p>
                 <div className="account-field-result">
-                    <p>08 08 1954</p>
+                    <p>{userData.birthdate}</p>
                 </div>
             </div>
             <div className='account-field'>
@@ -101,6 +101,13 @@ function Account() {
                     <p>{userData.phoneNumber}</p>
                 </div>
             </div>
+            <Link to="/change-profile">
+                <div className='account-field'>
+                    <p>Changer vos informations</p>
+                    <div className="account-field-result">
+                    </div>
+                </div>
+            </Link>
             <Button onClick={clickResetPassword}>
                 <div className='account-field'>
                         <p>Réinitialiser le mot de passe</p>
@@ -119,7 +126,11 @@ function Account() {
             <div className="button-bot-account">
                 <Button variant="contained" onClick={handleLogout}> Se déconnecter </Button>
             </div>
-
+            <div className="button-bot-account">
+                <Link to="/admin">
+                    <Button variant="contained" >Admin</Button>
+                </Link>
+            </div>
         </div>
       </div>
     );
