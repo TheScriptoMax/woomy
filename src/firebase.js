@@ -1,16 +1,17 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
 
 
 
 const app = firebase.initializeApp({
-    apiKey: "AIzaSyA7_ykSQCDK0BCNJt5AZujTrOnN-NoaHSc",
-    authDomain: "moowy-d0120.firebaseapp.com",
-    projectId: "moowy-d0120",
-    storageBucket: "moowy-d0120.appspot.com",
-    messagingSenderId: "203513909591",
-    appId: "1:203513909591:web:7859633d663d3bcc922e12"
+    apiKey: "AIzaSyDqXSbXW5dTrpubT1gyI3AJ9opFcmisksw",
+    authDomain: "woomy-app.firebaseapp.com",
+    projectId: "woomy-app",
+    storageBucket: "woomy-app.appspot.com",
+    messagingSenderId: "796599799860",
+    appId: "1:796599799860:web:a74f9a63a9322d86f1ba61"
 });
 
 export const auth = app.auth();

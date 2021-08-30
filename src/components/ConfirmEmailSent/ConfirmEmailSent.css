@@ -1,4 +1,4 @@
-.signIn-Validation{
+.sign-in-validation{
     display: flex;
     flex-direction: column;
 }
@@ -10,15 +10,19 @@
 }
 
 .text-validation p{
-    font-size: 1.25rem;
-    text-align: justify;
+    font-size: 1.125rem;
+    text-align: left;
+    color: white;
 }
 
-.signIn-Validation button {
-    display: inline;
-    top: -4.625rem;
-    border: 1px grey solid;
-    width: 2em;
-    height: 2em;
+.sign-in-validation a {
+    background-color: #670652;
+    border: solid white .1rem;
+    width: max-content;
+    box-shadow: none;
+    color: white;
+    text-transform: uppercase;
     margin: auto;
+    display: inline;
+    top: -4rem;
 }

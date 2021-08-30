@@ -46,11 +46,11 @@ export default function SendNewValidation () {
 
     return (
 
-        <div className='signIn-Validation container'>
+        <div className='sign-in-validation container'>
             {error ? <Alert severity="error">{error}</Alert> :
                 <div className="text-validation">
-                    <p>{userData.firstname}, un e-mail de confirmation vous a été renvoyé, merci de vérifier votre boite mail à l'adresse {currentUser.email}
-                        Attention, vérifiez si le mail n'est pas dans vos Spams.</p>
+                    <p>{userData.firstname}Un e-mail de confirmation vous a été renvoyé, merci de vérifier votre boite mail à l'adresse {currentUser.email}
+                        <br></br>Attention, vérifiez si le mail n'est pas dans vos Spams.</p>
                 </div>}
 
             {/* MATERIAL UI BUTTON FOR CLOSE VALIDATION */}
