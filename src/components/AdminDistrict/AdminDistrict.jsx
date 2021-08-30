@@ -8,7 +8,6 @@ import { database } from '../../firebase';
 import {useRef, useState, useEffect} from "react";
 import { Link } from 'react-router-dom';
 
-
 //ADD A LOCATION
 export default function AdminDistrict() {
 
@@ -51,6 +50,7 @@ export default function AdminDistrict() {
                 town: townRef.current.value,
                 createdAt: database.getCurrentTimestamp
             })
+
                 .then((docRef) => {
                     formRef.current.reset();
                     if (isShow) {
@@ -66,20 +66,20 @@ export default function AdminDistrict() {
         }
     }
 
-
-
     return (
       <div class="container container-admin">
          <h2>Quartiers</h2>
 
-         <Link to={'/district-list'}><Button variant='contained'>Voir tous les quartiers</Button></Link>
 
+         <Link to={'/district-list'}><Button variant='contained'>Voir tous les quartiers</Button></Link>
 
          <TextField label="Rechercher" variant="outlined"/>
 
          <h2 className="create-district">Ajout d'un nouveau quartier</h2>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
+
+
             <TextField select inputRef={townRef} label="Commune" variant="outlined">
             {towns.map((option) => (
             <option key={option.id} value={option.name}>
@@ -87,6 +87,7 @@ export default function AdminDistrict() {
             </option>
           ))}
             </TextField>
+
 
             <Button disabled={loading} type="submit" variant='contained' color="secondary"  className="admin-form-btn">Ajouter</Button>
 
@@ -96,8 +97,15 @@ export default function AdminDistrict() {
             {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
          </form>
 
+
+
+         <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/adminplace'}>Ajouter un lieu</Link>
+
+
+
          <Link to={'/admin-place'}><Button variant='contained'>Ajouter un lieu</Button></Link>
         
+
      </div>
     )
 }

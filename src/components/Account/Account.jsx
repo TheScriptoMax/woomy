@@ -78,7 +78,7 @@ function Account() {
                 </div>
             </div>
             <div className='account-field'>
-                <p>Prenom</p>
+                <p>Prénom</p>
                 <div className="account-field-result">
                     <p>{userData.firstname}</p>
                 </div>
@@ -118,13 +118,13 @@ function Account() {
             {!isShow && <Alert severity="info">Un email vous a été envoyé</Alert>}
             <Link to="/param">
                 <div className='account-field'>
-                    <p>Parametres</p>
+                    <p>Paramètres</p>
                     <div className="account-field-result">
                     </div>
                 </div>
             </Link>
             <div className="button-bot-account">
-                <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
+                <Button variant="contained" onClick={handleLogout}> Se déconnecter </Button>
             </div>
             <div className="button-bot-account">
                 <Link to="/admin">
