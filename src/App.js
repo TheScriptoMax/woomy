@@ -23,6 +23,7 @@ import SendNewValidation from './components/SendNewValidation/SendNewValidation'
 /**** PROFIL *****/
 import Account from './components/Account/Account';
 import Params from './components/Params/Params';
+import ChangeAccount from './components/ChangeAccount/ChangeAccount';
 
 /**** ADMIN *****/
 import Admin from "./components/Admin/Admin";
@@ -66,19 +67,26 @@ function App() {
             <AuthProvider>
                 <Switch>
                     {/*----- Route public -----*/}
-                    <Route path='/cgu' component={Conditions}/>
-                    <Route path='/confidentialite' component={PrivacyPolicy}/>
 
                         <PublicRoute path='/signin' component={SignIn}/>
                         <PublicRoute path='/login' component={Login}/>
+                        <PublicRoute path='/cgu' component={Conditions}/>
+                        <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
+
+                    {/*----- Route private Attente validation Email et AwaitingApproval -----*/}
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+                        <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
 
-                    {/*Todo: Changer la route pour les personnes vérifier mais en attente de validation d'un admin*/}
-                    <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
-
-                    {/*----- Route private AwaitingApproval -----*/}
+                    {/*----- Profil connecté et approuvé -----*/}
+                        {/*----- Ticket -----*/}
+                            <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
+                            <PrivateRoute exact path='/create' component={CowalkingCreate}/>
+                            <PrivateRoute exact path='/search' component={CowalkingSearch}/>
+                            <PrivateRoute exact path='/list' component={CowalkingList}/>
+                            <PrivateRoute exact path='/message' component={Notification}/>
+                            <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit}/>
 
                     <div>
                         <Header/>
@@ -106,6 +114,7 @@ function App() {
                         <Route exact path='/district-list' component={DistrictList}/>
 
                 </Switch>
+
 
             </AuthProvider>
         </Router>

@@ -26,6 +26,7 @@ export default function SignIn () {
     const firstnameRef = useRef();
     const lastnameRef = useRef();
     const phoneRef = useRef();
+    const birthdateRef = useRef();
     const history = useHistory();
 
     const {signup} = useAuth()
@@ -53,6 +54,9 @@ export default function SignIn () {
                             phoneNumber: phoneRef.current.value,
                             createdAt: database.getCurrentTimestamp,
                         });
+                })
+                .catch((error) => {
+                    console.log(error.message)
                 })
                 .then(() => {
                         history.push("/send-confirm")
@@ -82,7 +86,7 @@ export default function SignIn () {
 
             <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Entrez votre numéro de téléphone" variant="standard" />
             
-            <TextField type="date" id="standard-basic" label="Entrez votre date de naissance" variant="standard"  InputLabelProps={{
+            <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Entrez votre date de naissance" variant="standard"  InputLabelProps={{
           shrink: true,
         }}/>
 
