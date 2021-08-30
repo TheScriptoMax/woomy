@@ -1,6 +1,5 @@
 import './adminplace.css'
 import {Button, TextField} from '@material-ui/core';
-import { MenuItem } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { database } from '../../firebase';
 
@@ -77,7 +76,7 @@ export default function AdminPlace () {
          </Link>
          <h2 className="create-place-title">Création d'un nouveau lieu</h2>
 
-        <form onSubmit={addLocation} ref={formRef} className="placeform">
+        <form onSubmit={addLocation} ref={formRef} className="place-form">
         <TextField inputRef={locationNameRef} label="Lieux" variant="outlined"/>
         <TextField select inputRef={districtRef} label="Quartier" variant="outlined">
             {districts.map((option) => (

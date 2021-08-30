@@ -78,9 +78,7 @@ export default function AdminDistrict() {
              </div>
          </Link>
 
-         <TextField label="Rechercher" variant="outlined"/>
-
-         <h2 className="create-district">Ajout d'un nouveau quartier</h2>
+         <h2 className="create-district-title">Ajout d'un nouveau quartier</h2>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
             <TextField select inputRef={townRef} label="Commune" variant="outlined">
