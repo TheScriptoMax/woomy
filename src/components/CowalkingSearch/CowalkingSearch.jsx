@@ -26,7 +26,7 @@ function CoWalkingSearch() {
 
     const [locations, setLocations] = useState([]);
     const startFromRef = useRef();
-    const [selectedDate, handleDateChange] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const [resultsList, setResultsList] = useState([]);
     const [noSearch, setNoSearch] = useState(true)
 
