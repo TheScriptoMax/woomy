@@ -60,7 +60,7 @@ function CoWalkingCreate() {
 
 
     return (
-      <div className="container">
+      <div className="create-walk container">
         <h2>Créer votre itinéraire</h2>
         <form className="createform">
           <InputLabel className="label">Départ</InputLabel>

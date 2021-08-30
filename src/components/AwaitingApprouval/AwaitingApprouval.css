@@ -4,19 +4,22 @@
 }
 
 .text-confirm{
-    background-color: rgb(207, 206, 206);
+    background-color: #670652;
     padding: 5rem 2rem 3rem 2rem;
-    border-radius: 10%;
+    border-radius: 1.563rem;
     margin-top: 3rem;
 }
 
 .text-confirm p{
-    font-size: 1.8rem;
-    text-align: justify;
+    font-size: 1.4rem;
     margin-bottom: 3rem;
+    color: white;
 }
 
-.signIn-confirm button{
-    display: flex;
-    margin: auto;
+.text-confirm a{
+    background-color: #670652;
+    border: solid white .1rem;
+    box-shadow: none;
+    color: white;
+    text-transform: uppercase;
 }

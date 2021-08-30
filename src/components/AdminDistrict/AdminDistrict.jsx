@@ -5,10 +5,7 @@ import { database } from '../../firebase';
 
 // REACT IMPORT
 import {useRef, useState} from "react";
-<<<<<<< HEAD
-=======
 import { useEffect } from 'react';
->>>>>>> Sam
 
 //ADD A LOCATION
 export default function AdminDistrict () {
@@ -63,26 +60,18 @@ export default function AdminDistrict () {
             .catch((error) => {
                 setError('Quelque chose s\'est mal passé :(');
             });
-        }
+        }}
         
         //TODO: changer la saisie des communes à la main par un select (collection séparée, requête de cette collection dans le textfield)
-<<<<<<< HEAD
-=======
         //TODO: recherche des quartiers
->>>>>>> Sam
-    
-    }
 
     return (
       <div class="container container-admin">
-         <h1>Quartiers</h1>
+         <h2>Quartiers</h2>
          <TextField label="Rechercher" variant="outlined"/>
          <p className="create-district">Ajout d'un nouveau quartier</p>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
-<<<<<<< HEAD
-            <TextField select inputRef={townRef} label="Commune" variant="outlined"/>
-=======
             <TextField select inputRef={townRef} label="Commune" variant="outlined">
             {towns.map((option) => (
             <option key={option.id} value={option.name}>
@@ -90,7 +79,7 @@ export default function AdminDistrict () {
             </option>
           ))}
             </TextField>
->>>>>>> Sam
+
 
             <Button disabled={loading} type="submit" variant='contained' className="admin-form-button">Ajouter</Button>
 
@@ -98,7 +87,7 @@ export default function AdminDistrict () {
             {districtAdded && <Alert severity="success">Le quartier a été ajouté</Alert>}
             {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
          </form>
-        
+           
      </div>
     )
 }

@@ -13,7 +13,12 @@ header{
 }
 
 header div svg path{
-    color: #8A55A3;
+    color: white;
+}
+
+header{
+    box-shadow: none;
+    background: linear-gradient(#DD0081, #F21323);
 }
 
 .logoWoomy svg{
@@ -21,8 +26,13 @@ header div svg path{
     height: min-content;
 }
 
-button{
+.accountIcon svg, .searchIcon svg{
+    width: 2rem;
+    height: 2rem;
+}
+
+/* button{
     border: 1px solid black;
     background-color: chocolate;
     border-radius: 50%;
-}
+} */

@@ -50,9 +50,9 @@ function CoWalkingSearch() {
     }
 
     return (
-        <div className=" container colwalkingsearch-container">
+        <div className="container colwalkingsearch-container">
             <h2>Rechercher un itinéraire</h2>
-            <form onSubmit={handleSubmitSearch} className="searchform">
+            <form onSubmit={handleSubmitSearch} className="searchform ">
 
                 <InputLabel className="label">Départ</InputLabel>
 

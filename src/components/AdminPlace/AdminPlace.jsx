@@ -55,8 +55,8 @@ export default function AdminPlace () {
     }
 
     return (
-      <div class="container container-admin">
-         <h1>Lieux</h1>
+      <div className="container container-admin">
+         <h2>Lieux</h2>
          <TextField label="Rechercher" variant="outlined"/>
          <p className="placecreate">Création d'un nouveau lieu</p>
          <form onSubmit={addLocation} ref={formRef} className="placeform">
