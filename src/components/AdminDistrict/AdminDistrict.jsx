@@ -1,6 +1,11 @@
+// IMPORT CSS
 import './admindistrict.css'
+
+// IMPORT MATERIAL
 import {Button, TextField} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+
+// IMPORT FIREBASE
 import { database } from '../../firebase';
 
 // REACT IMPORT
@@ -8,12 +13,12 @@ import { database } from '../../firebase';
 import {useRef, useState, useEffect} from "react";
 import { Link } from 'react-router-dom';
 
-
 //ADD A LOCATION
 export default function AdminDistrict() {
 
-    const [error, setError] = useState();
-    const [loading, setLoading] = useState();
+
+  
+
     const [isShow, setIsShow] = useState(false);
     const [districtAdded, setDistrictAdded] = useState(false);
     const [towns, setTowns] = useState([]);
@@ -30,8 +35,7 @@ export default function AdminDistrict() {
             towns.forEach(town => {
                 tempTowns.push(database.formatDoc(town))
             })
-            setTowns(tempTowns)
-            
+            setTowns(tempTowns) 
         })
     }, [])
 
@@ -51,35 +55,38 @@ export default function AdminDistrict() {
                 town: townRef.current.value,
                 createdAt: database.getCurrentTimestamp
             })
-                .then((docRef) => {
-                    formRef.current.reset();
-                    if (isShow) {
-                        setIsShow(!isShow);
-                    }
-                    if (!districtAdded) {
-                        setDistrictAdded(!districtAdded);
-                    }
-                })
-                .catch((error) => {
-                    setError('Quelque chose s\'est mal passé :(');
-                });
+            .then((docRef) => {
+                formRef.current.reset();
+                if (isShow) {
+                    setIsShow(!isShow);
+                }
+                if (!districtAdded){
+                    setDistrictAdded(!districtAdded);
+                }
+            })
+            .catch((error) => {
+                console.Log('Quelque chose s\'est mal passé :(');
+            });
+
+
         }
     }
 
-
-
     return (
       <div class="container container-admin">
-         <h2>Quartiers</h2>
+         <h1>Quartiers</h1>
+        
+         <Link className="district-list-link" to={'/district-list'}>
+            <div className="place-list-btn">
+                <Button variant="contained" >Voir tous les quartiers</Button>
+             </div>
+         </Link>
 
-         <Link to={'/district-list'}><Button variant='contained'>Voir tous les quartiers</Button></Link>
-
-
-         <TextField label="Rechercher" variant="outlined"/>
-
-         <h2 className="create-district">Ajout d'un nouveau quartier</h2>
+         <h2 className="create-district-title">Ajout d'un nouveau quartier</h2>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
+
+
             <TextField select inputRef={townRef} label="Commune" variant="outlined">
             {towns.map((option) => (
             <option key={option.id} value={option.name}>
@@ -88,7 +95,7 @@ export default function AdminDistrict() {
           ))}
             </TextField>
 
-            <Button disabled={loading} type="submit" variant='contained' color="secondary"  className="admin-form-btn">Ajouter</Button>
+            <Button type="submit" variant='contained' color="secondary">Ajouter</Button>
 
 
             {error && <Alert severity="error">{error}</Alert> }
@@ -96,8 +103,15 @@ export default function AdminDistrict() {
             {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
          </form>
 
+
+
+         <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/adminplace'}>Ajouter un lieu</Link>
+
+
+
          <Link to={'/admin-place'}><Button variant='contained'>Ajouter un lieu</Button></Link>
         
+
      </div>
     )
 }

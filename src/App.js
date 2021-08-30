@@ -16,7 +16,6 @@ import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
-import AwaitingApproval from './components/AwaitingApproval/AwaitingApproval';
 import SendNewValidation from './components/SendNewValidation/SendNewValidation';
 
 /**** PROFIL *****/
@@ -29,9 +28,11 @@ import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import AdminPlace from "./components/AdminPlace/AdminPlace";
 import AdminDistrict from "./components/AdminDistrict/AdminDistrict";
 import PlaceList from "./components/PlaceList/PlaceList";
+
 import DistrictList from "./components/DistrictList/DistrictList";
 import AdminUsers from "./components/AdminUsers/AdminUsers";
 import AdminAcceptUsers from "./components/AdminAcceptUsers/AdminAcceptUsers";
+
 
 /**** CRUD COPIETONNAGE *****/
 import CowalkingList from './components/CowalkingList/CowalkingList';
@@ -57,7 +58,15 @@ import PublicRoute from './components/Routes/PublicRoute'
 import PrivateRoute from './components/Routes/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
+
+
+import CowalkerList from "./components/CowalkerList/CowalkerList";
+import CowalkerItem from "./components/CowalkerItem/CowalkerItem";
+import CowalkingCard from "./components/CowalkingCard/CowalkingCard";
+
 import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
+
+
 
 
 function App() {
@@ -79,15 +88,19 @@ function App() {
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+
+
                         
 
 
                     {/*----- Route private AwaitingApproval -----*/}
 
+
                         <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
 
 
                     {/*----- AdminCowalks -----*/}
+
                     <Route exact path='/admin' component={AdminDashboard} />
                     <Route exact path='/admin-accept-users' component={AdminAcceptUsers} />
                     <Route exact path='/admin-users' component={AdminUsers} />
@@ -95,6 +108,7 @@ function App() {
                     <Route exact path='/admin-district' component={AdminDistrict}/>
                     <Route exact path='/place-list' component={PlaceList}/>
                     <Route exact path='/district-list' component={DistrictList}/>
+
 
                     {/*----- Profil connecté et approuvé -----*/}
 
@@ -106,7 +120,6 @@ function App() {
                                 <PrivateRoute exact path='/search' component={CowalkingSearch}/>
                                 <PrivateRoute exact path='/list' component={CowalkingList}/>
                                 <PrivateRoute exact path='/message'component={Notification} />
-                                 
                                 <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
 
                                 {/*----- Account -----*/}
@@ -117,7 +130,6 @@ function App() {
                     </div>
 
                 </Switch>
-
 
             </AuthProvider>
         </Router>

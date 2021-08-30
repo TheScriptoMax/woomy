@@ -1,11 +1,8 @@
 import {useAuth} from "../../contexts/AuthContext";
 import {useState, useEffect} from 'react';
 import {database} from '../../firebase'
-import { doc, onSnapshot } from "firebase/firestore";
 import NotifCard from '../NotificationCard/NotifCard'
 
-// MATERIAL UI IMPORT
-import MessageCard from "../MessageCard/messageCard";
 
 // CSS IMPORT
 import './notification.css';
@@ -17,7 +14,7 @@ function Notification() {
   const [notifs, setNotifs] = useState([])
   
   const {currentUser} = useAuth();
-        
+
             
   useEffect(() => {
     database.notifications(currentUser.uid).onSnapshot((querySnapshot)=>{
@@ -30,7 +27,7 @@ function Notification() {
     },(error)=>{
       console.log(error)
     })
-  }, [])
+  }, [currentUser.uid])
 
   console.log(notifs)
 

@@ -17,7 +17,8 @@ export default function AwaitingApprovalRoute({component: Component, ...rest})
                 setIsAccepted(doc.data().accepted)
                 setLoading(false)
             })
-    }, [])
+    }, [currentUser.uid])
+
 
     return (
         <>

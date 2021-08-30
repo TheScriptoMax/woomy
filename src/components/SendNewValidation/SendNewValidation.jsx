@@ -5,11 +5,11 @@ import {database} from "../../firebase";
 
 // MATERIAL UI IMPORT
 import Button from '@material-ui/core/Button';
+import {Alert} from "@material-ui/lab";
 
 // CSS IMPORT
 
 import './SendNewValidation.css';
-import {Alert} from "@material-ui/lab";
 import {useHistory} from "react-router-dom";
 
 //PAGE VALIDATION INCRIPTION
@@ -61,9 +61,10 @@ export default function SendNewValidation () {
 
     return (
 
-        <div className='signIn-Validation container'>
+        <div className='sign-in-validation container'>
             {error ? <Alert severity="error">{error}</Alert> :
                 <div className="text-validation">
+
                     <p>{userData.firstname}, un e-mail de confirmation vous a été renvoyé, merci de vérifier votre boite mail à l'adresse {currentUser.email}.<br/>
                         Attention, vérifiez si le mail n'est pas dans vos Spams.</p>
                 </div>}
