@@ -48,8 +48,15 @@ export default function SignIn () {
                             phoneNumber: phoneRef.current.value,
                             birthdate: birthdateRef.current.value,
                             createdAt: database.getCurrentTimestamp,
+                            accepted:false,
+                            admin:false
                         })
-                        ;
+                        .then(() => {
+                            console.log('Crée dans la database')
+                        })
+                        .catch((error)=> {
+                            console.log(error.message)
+                        });
                 })
                 .catch((error) => {
                     console.log("Message d'erreur: " + error.message)

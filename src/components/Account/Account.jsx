@@ -42,7 +42,10 @@ function Account() {
                 console.log(error.message)
             })
 
-    }, [currentUser.uid, setError])
+    }, [currentUser])
+
+
+
 
     async function clickResetPassword(e){
         resetPassword(currentUser.email)

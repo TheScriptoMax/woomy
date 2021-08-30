@@ -31,6 +31,7 @@ import PlaceList from "./components/PlaceList/PlaceList";
 
 import DistrictList from "./components/DistrictList/DistrictList";
 import AdminUsers from "./components/AdminUsers/AdminUsers";
+import AdminAcceptUsers from "./components/AdminAcceptUsers/AdminAcceptUsers";
 
 
 /**** CRUD COPIETONNAGE *****/
@@ -78,7 +79,7 @@ function App() {
                 <Switch>
                     {/*----- Route public -----*/}
 
-                        <Route path='/signin' component={SignIn}/>
+                    <Route path='/signin' component={SignIn}/>
                         <PublicRoute path='/login' component={Login}/>
                         <PublicRoute path='/cgu' component={Conditions}/>
                         <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
@@ -101,6 +102,7 @@ function App() {
                     {/*----- AdminCowalks -----*/}
 
                     <Route exact path='/admin' component={AdminDashboard} />
+                    <Route exact path='/admin-accept-users' component={AdminAcceptUsers} />
                     <Route exact path='/admin-users' component={AdminUsers} />
                     <Route exact path='/admin-place' component={AdminPlace}/>
                     <Route exact path='/admin-district' component={AdminDistrict}/>
@@ -119,6 +121,7 @@ function App() {
                                 <PrivateRoute exact path='/list' component={CowalkingList}/>
                                 <PrivateRoute exact path='/message'component={Notification} />
                                 <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+
                                 {/*----- Account -----*/}
                                 <PrivateRoute exact path='/account' component={Account}/>
                                 <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
