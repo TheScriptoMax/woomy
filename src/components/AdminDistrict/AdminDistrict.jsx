@@ -10,9 +10,7 @@ import { Link } from 'react-router-dom';
 
 
 //ADD A LOCATION
-export default function AdminDistrict () {
-
-    //TODO: composant pour la liste des quartiers
+export default function AdminDistrict() {
 
     const [error, setError] = useState();
     const [loading, setLoading] = useState();
@@ -27,15 +25,10 @@ export default function AdminDistrict () {
 
 
     useEffect(() => {
-        database.towns.get().then(towns => {
+        database.towns.orderBy('name').get().then(towns => {
             const tempTowns = []
             towns.forEach(town => {
                 tempTowns.push(database.formatDoc(town))
-            })
-            tempTowns.sort(function(a, b){
-                if(a.name < b.name) { return -1; }
-                if(a.name > b.name) { return 1; }
-                return 0;
             })
             setTowns(tempTowns)
             
@@ -71,13 +64,20 @@ export default function AdminDistrict () {
                 setError('Quelque chose s\'est mal passé :(');
             });
 
+        }
+    }
+
 
 
     return (
       <div class="container container-admin">
          <h2>Quartiers</h2>
 
+         <Link to={'/district-list'}><Button variant='contained'>Voir tous les quartiers</Button></Link>
+
+
          <TextField label="Rechercher" variant="outlined"/>
+
          <h2 className="create-district">Ajout d'un nouveau quartier</h2>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
@@ -97,9 +97,9 @@ export default function AdminDistrict () {
             {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
          </form>
 
-         <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/adminplace'}>Ajouter un lieu</Link>
+         <Link to={'/admin-place'}><Button variant='contained'>Ajouter un lieu</Button></Link>
         
      </div>
     )
-}}
+
 }

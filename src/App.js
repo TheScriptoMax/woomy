@@ -22,6 +22,7 @@ import Params from './components/Params/Params';
 import AdminPlace from "./components/AdminPlace/AdminPlace";
 import AdminDistrict from "./components/AdminDistrict/AdminDistrict";
 import PlaceList from "./components/PlaceList/PlaceList";
+import DistrictList from "./components/DistrictList/DistrictList";
 
 /**** CRUD COPIETONNAGE *****/ 
 import CowalkingList from './components/CowalkingList/CowalkingList';
@@ -83,16 +84,12 @@ function App() {
                                 <PrivateRoute exact path='/param' component={Params}/>
                         <Footer/>
                     </div>
-                        
-                     
-
-                        
-
 
                         {/*----- Admin -----*/}
-                        <Route exact path='/adminplace' component={AdminPlace}/>
-                        <Route exact path='/admindistrict' component={AdminDistrict}/>
-                        <Route exact path='/placelist' component={PlaceList}/>
+                        <Route exact path='/admin-place' component={AdminPlace}/>
+                        <Route exact path='/admin-district' component={AdminDistrict}/>
+                        <Route exact path='/place-list' component={PlaceList}/>
+                        <Route exact path='/district-list' component={DistrictList}/>
 
                 </Switch>
 

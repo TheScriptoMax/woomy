@@ -31,15 +31,10 @@ function CoWalkingSearch() {
     const [noSearch, setNoSearch] = useState(true)
 
     useEffect(() => {
-        database.locations.get().then(locations => {
+        database.locations.orderBy('name').get().then(locations => {
             const tempLocations = []
             locations.forEach(location => {
                 tempLocations.push(database.formatDoc(location))
-            })
-            tempLocations.sort(function(a, b){
-                if(a.name < b.name) { return -1; }
-                if(a.name > b.name) { return 1; }
-                return 0;
             })
             setLocations(tempLocations)
             
