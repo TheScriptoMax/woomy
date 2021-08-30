@@ -4,7 +4,7 @@ import {useAuth} from "../../contexts/AuthContext";
 
 
 // MATERIAL UI IMPORT
-import MessageIcon from '@material-ui/icons/Message';
+
 import Button from '@material-ui/core/Button';
 import Clear from '@material-ui/icons/Clear';
 import { Avatar } from '@material-ui/core';
@@ -25,8 +25,8 @@ function NotifCard({notif}) {
             .then(doc => {
                 setUserData(database.formatDoc(doc))
             })
-        
-    },[])
+
+    },[notif])
 
 
     function handleDeleteNotif (e) {
@@ -37,6 +37,7 @@ function NotifCard({notif}) {
             console.log('notif Clear')
         )
     }
+
 
     function onGuestApproval () {
         database.membersApproved(notif.cowalkRequested).doc(notif.guest)

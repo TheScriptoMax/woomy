@@ -12,7 +12,6 @@ export default function AdminPlace () {
 
 
     const [error, setError] = useState();
-    const [loading, setLoading] = useState();
     const [isShow, setIsShow] = useState(false);
     const [locationAdded, setLocationAdded] = useState(false);
     const [districts, setDistricts] = useState([]);
@@ -67,6 +66,7 @@ export default function AdminPlace () {
     }
 
     return (
+
       <div className="container container-admin">
          <h1>Lieux</h1>
          <Link className="place-list-link" to={'/place-list'}>
@@ -77,6 +77,7 @@ export default function AdminPlace () {
          <h2 className="create-place-title">Création d'un nouveau lieu</h2>
 
         <form onSubmit={addLocation} ref={formRef} className="place-form">
+
         <TextField inputRef={locationNameRef} label="Lieux" variant="outlined"/>
         <TextField select inputRef={districtRef} label="Quartier" variant="outlined">
             {districts.map((option) => (
@@ -87,7 +88,9 @@ export default function AdminPlace () {
         </TextField>
         <TextField inputRef={adressRef} label="Adresse" variant="outlined"/>
 
-        <Button disabled={loading} type="submit" color="secondary" variant='contained'>Ajouter</Button>
+
+        <Button type="submit" color="secondary" variant='contained'>Ajouter</Button>
+
 
         {error && <Alert severity="error">{error}</Alert> }
         {locationAdded && <Alert severity="success">Le lieu a été ajouté</Alert>}

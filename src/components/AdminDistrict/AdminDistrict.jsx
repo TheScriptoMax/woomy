@@ -8,12 +8,10 @@ import { database } from '../../firebase';
 import {useRef, useState, useEffect} from "react";
 import { Link } from 'react-router-dom';
 
-
 //ADD A LOCATION
 export default function AdminDistrict() {
 
-    const [error, setError] = useState();
-    const [loading, setLoading] = useState();
+  
     const [isShow, setIsShow] = useState(false);
     const [districtAdded, setDistrictAdded] = useState(false);
     const [towns, setTowns] = useState([]);
@@ -30,8 +28,7 @@ export default function AdminDistrict() {
             towns.forEach(town => {
                 tempTowns.push(database.formatDoc(town))
             })
-            setTowns(tempTowns)
-            
+            setTowns(tempTowns) 
         })
     }, [])
 
@@ -61,7 +58,7 @@ export default function AdminDistrict() {
                 }
             })
             .catch((error) => {
-                setError('Quelque chose s\'est mal passé :(');
+                console.Log('Quelque chose s\'est mal passé :(');
             });
 
 
@@ -81,6 +78,8 @@ export default function AdminDistrict() {
          <h2 className="create-district-title">Ajout d'un nouveau quartier</h2>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
+
+
             <TextField select inputRef={townRef} label="Commune" variant="outlined">
             {towns.map((option) => (
             <option key={option.id} value={option.name}>
@@ -89,15 +88,23 @@ export default function AdminDistrict() {
           ))}
             </TextField>
 
-            <Button disabled={loading} type="submit" variant='contained' color="secondary">Ajouter</Button>
+            <Button type="submit" variant='contained' color="secondary">Ajouter</Button>
+
 
             {error && <Alert severity="error">{error}</Alert> }
             {districtAdded && <Alert severity="success">Le quartier a été ajouté</Alert>}
             {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
          </form>
 
+
+
+         <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/adminplace'}>Ajouter un lieu</Link>
+
+
+
          <Link to={'/admin-place'}><Button variant='contained'>Ajouter un lieu</Button></Link>
         
+
      </div>
     )
 }

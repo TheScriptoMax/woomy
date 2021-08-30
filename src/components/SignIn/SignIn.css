@@ -1,8 +1,23 @@
 
-.signIn-content{
+.sign-in-content{
     display: grid;
     row-gap: 2rem;
   
+}
+
+.sign-in-content button{
+    background-color: #670652;
+    border: solid white .1rem;
+    width: max-content;
+    box-shadow: none;
+    color: white;
+    text-transform: uppercase;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+.sign-in-content .MuiInputBase-root {
+    margin-bottom: 0rem;
 }
 
 .confirm-id{
@@ -17,7 +32,7 @@
     align-items: center;
 }
 
-.valid-signIn p{
+.valid-sign-in p{
     font-weight: 400;
     font-size: .7rem;
     text-transform: initial;
@@ -25,9 +40,10 @@
     margin-bottom: 2rem;
 }
 
-.valid-signIn{
+.valid-sign-in{
     height: 8rem;
     display: block;
     margin: 0 auto;
     text-align: center;
 }
+

@@ -8,11 +8,13 @@
     margin-bottom: .5rem;
 }
 
+
 .district-card-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 
 .district-card p{
     line-height: 1.4rem;
@@ -21,6 +23,7 @@
 .district-name{
     font-size: 1.3rem;
     font-weight: 700;
+
 }
 
 .district-town{
@@ -31,4 +34,5 @@
     margin-top: .5rem;
     display: flex;
     justify-content: space-evenly;
+
 }

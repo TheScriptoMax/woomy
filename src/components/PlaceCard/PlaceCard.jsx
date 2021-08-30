@@ -60,6 +60,7 @@ function PlaceCard ({location}) {
             </div>}
         </div>
     ) 
+
 }
 
 export default PlaceCard;

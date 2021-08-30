@@ -2,8 +2,10 @@ h1{
     text-align: center;
 }
 
+
 .create-place-title{
     margin-top: 1rem;
+
     margin-bottom: 1rem;
 }
 
@@ -11,9 +13,11 @@ h1{
     text-decoration: none;
 }
 
+
 .place-list-btn{
     display: flex;
     justify-content: center;
+
 }
 
 .place-list-btn button{
@@ -33,5 +37,7 @@ h1{
     box-shadow: none;
     color: white;
     text-transform: uppercase;
+
     margin-bottom: 1rem;
 }
+

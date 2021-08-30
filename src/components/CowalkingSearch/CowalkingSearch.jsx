@@ -1,6 +1,5 @@
 /// ----- Material UI ----- ///
 import InputLabel from '@material-ui/core/Inputlabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/Textfield';
 import {
@@ -56,7 +55,7 @@ function CoWalkingSearch() {
                 })
                 setResultsList(tempResults);
                 setNoSearch(false);
-                console.log(tempResults)
+                
                 console.log("Requete envoyée")
             })
     }

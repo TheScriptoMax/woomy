@@ -14,14 +14,13 @@ import {useHistory} from "react-router-dom";
 
 
 /// ----- Firebase ///
-import {database, storage} from "../../firebase";
+import {database} from "../../firebase";
 
 //////// Page de profile ////////
 
 function Account() {
 
     const [userData, setUserData] = useState({});
-    const [error, setError] = useState('');
     const {logout, resetPassword} = useAuth();
 
     const [isShow, setIsShow] = useState(true);
@@ -37,7 +36,7 @@ function Account() {
                 setUserData(database.formatDoc(doc))
             })
             .catch(error => {
-                setError(error.message)
+                console.log(error.message)
             })
 
     }, [currentUser.uid])
@@ -49,7 +48,7 @@ function Account() {
                 setIsShow(!isShow);
             })
             .catch((error) =>{
-                setError('Marche pas')
+                console.log('Marche pas')
             })
     }
 
@@ -60,7 +59,7 @@ function Account() {
                 history.push("/login");
             })
         } catch {
-            setError('Woops, on a pas réussi à vous déconnecter')
+            console.log('Woops, on a pas réussi à vous déconnecter')
         }
     }
 
@@ -78,7 +77,7 @@ function Account() {
                 </div>
             </div>
             <div className='account-field'>
-                <p>Prenom</p>
+                <p>Prénom</p>
                 <div className="account-field-result">
                     <p>{userData.firstname}</p>
                 </div>
@@ -112,18 +111,13 @@ function Account() {
             {!isShow && <Alert severity="info">Un email vous a été envoyé</Alert>}
             <Link to="/param">
                 <div className='account-field'>
-                    <p>Parametres</p>
+                    <p>Paramètres</p>
                     <div className="account-field-result">
                     </div>
                 </div>
             </Link>
             <div className="button-bot-account">
-                <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
-            </div>
-            <div className="button-bot-account">
-                <Link to="/admin">
-                    <Button variant="contained" >Admin</Button>
-                </Link>
+                <Button variant="contained" onClick={handleLogout}> Se déconnecter </Button>
             </div>
         </div>
       </div>
