@@ -68,7 +68,16 @@ function AdminUsers () {
     }
 
     function viewLastUsers() {
-         database.users.orderBy('createdAt').limit()
+         database.users.orderBy('createdAt','desc').limit(20)
+             .get()
+             .then((querySnapshot) => {
+                 const membersRetrieved = [];
+                 querySnapshot.forEach(doc => {
+                     membersRetrieved.push(database.formatDoc(doc))
+                 })
+                 setSearchResults(membersRetrieved);
+                 console.log(membersRetrieved)
+             })
     }
 
 
@@ -77,7 +86,7 @@ function AdminUsers () {
 
      <div className="container container-admin">
          <h1>Administration des utilisatrices</h1>
-         <Button onClick={viewLastUsers}>Voir les dernières utilisatrices</Button>
+         <Button onClick={viewLastUsers}>Voir les 20 dernières utilisatrices</Button>
           <form onSubmit={handleNameSearch}>
                <h2>Chercher une utilisatrice</h2>
                <h3>Par nom et prénom</h3>
