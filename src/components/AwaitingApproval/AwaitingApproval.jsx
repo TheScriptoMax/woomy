@@ -13,7 +13,7 @@ import {CheckRounded} from "@material-ui/icons";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // CSS IMPORT
-import './AwaitingApproval.css';
+import './awaitingapproval.css';
 
 //PAGE VALIDATION INCRIPTION
 

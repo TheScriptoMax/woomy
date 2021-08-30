@@ -1,6 +1,5 @@
 /// ----- COMPONENTS ----- ///
 
-
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
@@ -26,10 +25,12 @@ import Params from './components/Params/Params';
 import ChangeAccount from './components/ChangeAccount/ChangeAccount';
 
 /**** ADMIN *****/
+import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import AdminPlace from "./components/AdminPlace/AdminPlace";
 import AdminDistrict from "./components/AdminDistrict/AdminDistrict";
 import PlaceList from "./components/PlaceList/PlaceList";
 import DistrictList from "./components/DistrictList/DistrictList";
+import AdminUsers from "./components/AdminUsers/AdminUsers";
 
 /**** CRUD COPIETONNAGE *****/
 import CowalkingList from './components/CowalkingList/CowalkingList';
@@ -61,10 +62,10 @@ import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
 function App() {
 
     return (
+        
         <Router>
 
             <AuthProvider>
-                <Header/>
                 <Switch>
                     {/*----- Route public -----*/}
 
@@ -77,23 +78,40 @@ function App() {
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
-                        <Route path='/awaiting-approval' component={AwaitingApproval}/>
+                        
+
+
+                    {/*----- Route private AwaitingApproval -----*/}
+
+                        <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
+
+
+                    {/*----- AdminCowalks -----*/}
+                    <Route exact path='/admin' component={AdminDashboard} />
+                    <Route exact path='/admin-users' component={AdminUsers} />
+                    <Route exact path='/admin-place' component={AdminPlace}/>
+                    <Route exact path='/admin-district' component={AdminDistrict}/>
+                    <Route exact path='/place-list' component={PlaceList}/>
+                    <Route exact path='/district-list' component={DistrictList}/>
 
                     {/*----- Profil connecté et approuvé -----*/}
-                        {/*----- Ticket -----*/}
-                            <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
-                            <PrivateRoute exact path='/create' component={CowalkingCreate}/>
-                            <PrivateRoute exact path='/search' component={CowalkingSearch}/>
-                            <PrivateRoute exact path='/list' component={CowalkingList}/>
-                            <PrivateRoute exact path='/message' component={Notification}/>
-                            <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit}/>
 
-
-                        {/*----- Account -----*/}
-                            <PrivateRoute exact path='/account' component={Account}/>
-                            <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
-                            <PrivateRoute exact path='/param' component={Params}/>
-
+                    <div>
+                        <Header/>
+                                {/*----- Ticket -----*/}
+                                <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
+                                <PrivateRoute exact path='/create' component={CowalkingCreate}/>
+                                <PrivateRoute exact path='/search' component={CowalkingSearch}/>
+                                <PrivateRoute exact path='/list' component={CowalkingList}/>
+                                <PrivateRoute exact path='/message'component={Notification} />
+                                 
+                                <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+                                {/*----- Account -----*/}
+                                <PrivateRoute exact path='/account' component={Account}/>
+                                <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
+                                <PrivateRoute exact path='/param' component={Params}/>
+                        <Footer/>
+                    </div>
                         {/*----- Admin -----*/}
                             <Route exact path='/admin-place' component={AdminPlace}/>
                             <Route exact path='/admin-district' component={AdminDistrict}/>
@@ -101,7 +119,8 @@ function App() {
                             <Route exact path='/district-list' component={DistrictList}/>
 
                 </Switch>
-                <Footer/>
+
+
             </AuthProvider>
         </Router>
     );

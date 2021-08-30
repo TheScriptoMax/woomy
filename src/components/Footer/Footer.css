@@ -1,15 +1,18 @@
 footer{
     display: flex;
-    justify-content:space-around;
+    align-items: center;
+    justify-content: space-around;
     background-color: white;
     width: 100%;
     position: fixed;
     bottom: 0;
     text-align: center;
     z-index: 2;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
 }
 
-footer .div{
+footer div{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,10 +25,16 @@ footer a {
 footer p{
     margin-top:10px;
     margin-bottom:10px;
-    font-size: 16px;
-    color: #080808;
+    font-size: 1.125rem;
+    color: #BD1347;
+    text-transform: uppercase;
 }
 
 footer div svg path{
-    color: #8A55A3;
+    color: #670652;
+}
+
+.createIcon svg, .itinIcon svg, .messageIcon svg{
+        width: 1.7rem;
+        height: 1.7rem;
 }

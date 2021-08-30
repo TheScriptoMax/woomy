@@ -17,8 +17,6 @@ function Notification() {
   const [notifs, setNotifs] = useState([])
   
   const {currentUser} = useAuth();
-
-  
         
             
   useEffect(() => {
@@ -42,7 +40,6 @@ function Notification() {
       <div className="container">
           <div className="notif-header">
               <p>Notifications : {notifs.length}</p>
-              <p>Messages : </p>
           </div>
           <ul>
           {notifs&&

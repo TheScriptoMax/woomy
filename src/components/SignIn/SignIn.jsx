@@ -48,7 +48,8 @@ export default function SignIn () {
                             phoneNumber: phoneRef.current.value,
                             birthdate: birthdateRef.current.value,
                             createdAt: database.getCurrentTimestamp,
-                        });
+                        })
+                        ;
                 })
                 .catch((error) => {
                     console.log("Message d'erreur: " + error.message)
@@ -72,16 +73,17 @@ export default function SignIn () {
         <form onSubmit={handleSubmit} className='signIn-content'>
 
             {/* MATERIAL UI INPUT TO COMPLETE FOR SIGNIN */}
-    
             <TextField inputRef={firstnameRef} id="standard-basic" label="Entrez votre nom" variant="standard" />
             
             <TextField inputRef={lastnameRef} id="standard-basic" label="Entrez votre prénom" variant="standard" />
             
             <TextField inputRef={emailRef} type='email' id="standard-basic" label="Entrez votre email" variant="standard" />
 
-            <TextField inputRef={phoneRef} type="tel" id="standard-basic" label="Entrez votre numéro de téléphone" variant="standard" />
-            
-            <TextField inputRef={birthdateRef} type="date" id="standard-basic" label="Entrez votre date de naissance" variant="standard"  InputLabelProps={{
+
+            <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Entrez votre numéro de téléphone" variant="standard" />
+
+            <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Entrez votre date de naissance" variant="standard"  InputLabelProps={{
+
           shrink: true,
         }}/>
 
