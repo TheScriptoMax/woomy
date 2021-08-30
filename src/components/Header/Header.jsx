@@ -4,7 +4,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import {Link}from "react-router-dom";
 
 // CSS IMPORT
-import './header.css'
+import './Header.css'
 
 // HEADER
 function Header() {

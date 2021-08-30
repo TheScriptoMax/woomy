@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 // CSS IMPORT
-import './Login.css';
+import './login.css';
 import {Alert} from "@material-ui/lab";
 
 //PAGE CONNEXION

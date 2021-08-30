@@ -9,9 +9,7 @@ import { Link } from 'react-router-dom';
 
 
 //ADD A LOCATION
-export default function AdminDistrict () {
-
-    //TODO: composant pour la liste des quartiers
+export default function AdminDistrict() {
 
     const [error, setError] = useState();
     const [loading, setLoading] = useState();
@@ -26,15 +24,10 @@ export default function AdminDistrict () {
 
 
     useEffect(() => {
-        database.towns.get().then(towns => {
+        database.towns.orderBy('name').get().then(towns => {
             const tempTowns = []
             towns.forEach(town => {
                 tempTowns.push(database.formatDoc(town))
-            })
-            tempTowns.sort(function(a, b){
-                if(a.name < b.name) { return -1; }
-                if(a.name > b.name) { return 1; }
-                return 0;
             })
             setTowns(tempTowns)
             
@@ -44,10 +37,10 @@ export default function AdminDistrict () {
 
     const addDistrict = (e) => {
         e.preventDefault();
-        
-        if(districtNameRef.current.value.length < 1 || townRef.current.value.length < 1){
+
+        if (districtNameRef.current.value.length < 1 || townRef.current.value.length < 1) {
             setIsShow(!isShow);
-            if(districtAdded){
+            if (districtAdded) {
                 setDistrictAdded(!districtAdded);
             }
         } else {
@@ -57,24 +50,29 @@ export default function AdminDistrict () {
                 town: townRef.current.value,
                 createdAt: database.getCurrentTimestamp
             })
-            .then((docRef) => {
-                formRef.current.reset();
-                if (isShow) {
-                    setIsShow(!isShow);
-                }
-                if (!districtAdded){
-                    setDistrictAdded(!districtAdded);
-                }
-            })
-            .catch((error) => {
-                setError('Quelque chose s\'est mal passé :(');
-            });
+                .then((docRef) => {
+                    formRef.current.reset();
+                    if (isShow) {
+                        setIsShow(!isShow);
+                    }
+                    if (!districtAdded) {
+                        setDistrictAdded(!districtAdded);
+                    }
+                })
+                .catch((error) => {
+                    setError('Quelque chose s\'est mal passé :(');
+                });
+        }
+    }
+
 
     return (
       <div class="container container-admin">
          <h2>Quartiers</h2>
 
          <TextField label="Rechercher" variant="outlined"/>
+
+         <Link to={'/district-list'}><Button variant='contained'>Voir tous les quartiers</Button></Link>
          <h2 className="create-district">Ajout d'un nouveau quartier</h2>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
@@ -94,11 +92,8 @@ export default function AdminDistrict () {
             {districtAdded && <Alert severity="success">Le quartier a été ajouté</Alert>}
             {isShow && <Alert severity="warning">Tous les champs doivent être remplis !</Alert>}
          </form>
-
-
          <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/adminplace'}>Ajouter un lieu</Link>
-        
+
      </div>
     )
-}}
 }
