@@ -1,3 +1,4 @@
+
 .placeform{
     margin-bottom: 1rem;
 }
@@ -8,4 +9,20 @@
 
 .container-admin .admin-form-btn{
     margin-top: 1rem;
+
+.placecreate{
+    margin-bottom: 1rem;
+}
+
+.container-admin .admin-form-btn{
+    margin-top: 1rem;;
+}
+
+.placeform button, .container-admin a{
+    background-color: #670652;
+    border: solid white .1rem;
+    box-shadow: none;
+    color: white;
+    text-transform: uppercase;
+
 }

@@ -29,6 +29,7 @@ export default function PlaceList () {
     return (
       <div class="container container-admin">
          <h1>Lieux existants</h1>
+
          <Link to={'/admin-place'}><Button variant='contained'>Retour</Button></Link>
          
             <ul className='place-list'>
@@ -36,6 +37,7 @@ export default function PlaceList () {
                     locations.map((location) => <PlaceCard location={location} />)
                 }
             </ul>
+
      </div>
     )
 }

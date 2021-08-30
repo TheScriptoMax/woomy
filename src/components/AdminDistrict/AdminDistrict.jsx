@@ -4,8 +4,10 @@ import Alert from '@material-ui/lab/Alert';
 import { database } from '../../firebase';
 
 // REACT IMPORT
+
 import {useRef, useState, useEffect} from "react";
 import { Link } from 'react-router-dom';
+
 
 //ADD A LOCATION
 export default function AdminDistrict() {
@@ -66,17 +68,19 @@ export default function AdminDistrict() {
     }
 
 
+
     return (
       <div class="container container-admin">
-         <h1>Quartiers</h1>
+         <h2>Quartiers</h2>
 
          <Link to={'/district-list'}><Button variant='contained'>Voir tous les quartiers</Button></Link>
 
 
+         <TextField label="Rechercher" variant="outlined"/>
+
          <h2 className="create-district">Ajout d'un nouveau quartier</h2>
          <form onSubmit={addDistrict} ref={formRef} className="district-form">
             <TextField inputRef={districtNameRef} label="Quartier" variant="outlined"/>
-
             <TextField select inputRef={townRef} label="Commune" variant="outlined">
             {towns.map((option) => (
             <option key={option.id} value={option.name}>

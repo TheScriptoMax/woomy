@@ -1,6 +1,5 @@
 /// ----- COMPONENTS ----- ///
 
-
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
@@ -53,10 +52,10 @@ import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
 function App() {
   
     return (
+        
         <Router>
 
             <AuthProvider>
-                <Header/>
                 <Switch>
                     {/*----- Route public -----*/}
 
@@ -70,19 +69,21 @@ function App() {
                         <Route path='/awaiting-approval' component={AwaitingApproval}/>
 
                     {/*----- Route private AwaitingApproval -----*/}
-
-                        {/*----- Ticket -----*/}
-                        <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
-                        <PrivateRoute exact path='/create' component={CowalkingCreate}/>
-                        <PrivateRoute exact path='/search' component={CowalkingSearch}/>
-                        <PrivateRoute exact path='/list' component={CowalkingList}/>
-                        <PrivateRoute exact path='/message' component={Notification}/>
-                        <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
-                        
-
-                        {/*----- Account -----*/}
-                        <PrivateRoute exact path='/account' component={Account}/>
-                        <PrivateRoute exact path='/param' component={Params}/>
+                    <div>
+                        <Header/>
+                                {/*----- Ticket -----*/}
+                                <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
+                                <PrivateRoute exact path='/create' component={CowalkingCreate}/>
+                                <PrivateRoute exact path='/search' component={CowalkingSearch}/>
+                                <PrivateRoute exact path='/list' component={CowalkingList}/>
+                                <PrivateRoute exact path='/message'component={Notification} />
+                                 
+                                <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+                                {/*----- Account -----*/}
+                                <PrivateRoute exact path='/account' component={Account}/>
+                                <PrivateRoute exact path='/param' component={Params}/>
+                        <Footer/>
+                    </div>
 
                         {/*----- Admin -----*/}
                         <Route exact path='/admin-place' component={AdminPlace}/>
@@ -91,7 +92,6 @@ function App() {
                         <Route exact path='/district-list' component={DistrictList}/>
 
                 </Switch>
-                <Footer/>
 
             </AuthProvider>
         </Router>

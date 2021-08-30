@@ -11,6 +11,8 @@ import { useState,useEffect } from 'react';
 //FIREBASE
 import {database} from '../../firebase'
 
+import {useAuth} from "../../contexts/AuthContext";
+
 
 function CowalkingList () {
 
@@ -18,6 +20,8 @@ function CowalkingList () {
     const [updatedCowalks,setUpdatedCowalks] = useState([])
     const [lastInitialDate, setLastInitialDate] = useState(new Date())
     const [completeCowalksList, setCompleteCowalksList] = useState([])
+
+    const {currentUser} = useAuth();
 
 
     useEffect(() => {

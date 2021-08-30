@@ -16,6 +16,7 @@ function CowalkerList({cowalk}) {
     const [isMember, setIsMember] = useState();
     const [owner, setOwner] = useState({})
     const [membersList, setMembersList] = useState([]);
+    const [loading, setLoading] = useState(true)
     const [userData, setUserData] = useState({});
     const {currentUser} = useAuth();
 
@@ -24,6 +25,7 @@ function CowalkerList({cowalk}) {
             .get()
             .then((owner) => {
                 setOwner(database.formatDoc(owner))
+                setLoading(false)
             })
             .catch(() => {
                 console.log('Couldnt retrieve the owner')
@@ -31,12 +33,12 @@ function CowalkerList({cowalk}) {
     }, [])
 
     useEffect(() => {
-        return database.membersPending(cowalk.id).onSnapshot((querySnapshot) => {
-            const tempMembers = [];
+        return database.membersApproved(cowalk.id).onSnapshot((querySnapshot) => {
+            const approvedMembers = [];
             querySnapshot.forEach((doc) => {
-                tempMembers.push(database.formatDoc(doc))
+                approvedMembers.push(database.formatDoc(doc))
             })
-            setMembersList(tempMembers)
+            setMembersList(approvedMembers)
         });
     }, [])
 
@@ -62,6 +64,16 @@ function CowalkerList({cowalk}) {
             .catch(error => {
                 console.log('Error getting collection')
             })
+        database.membersApproved(cowalk.id).doc(currentUser.uid)
+            .get()
+            .then((memberApproved) => {
+                if (memberApproved.exists) {
+                    setIsMember(true);
+                }
+            })
+            .catch(error => {
+                console.log('Error getting collection')
+            })
     }, [cowalk.id, cowalk.owner, currentUser.uid])
 
 
@@ -75,7 +87,7 @@ function CowalkerList({cowalk}) {
                     .add({
                         cowalkRequested: cowalk.id,
                         guest: currentUser.uid,
-                        status:'approval request',
+                        status:'pending request',
                         requestDate:new Date()
                     })
                     .then(() => {
@@ -99,21 +111,27 @@ function CowalkerList({cowalk}) {
                 .get()
                 .then(onSnapshot => {
                     onSnapshot.forEach(doc => {
-                        console.log(database.formatDoc(doc))
+                        console.log(database.formatDoc(doc))            
+                        database.notifications(cowalk.owner).doc(doc.id)
+                        .delete()
+                        .then(()=>{
+                            console.log('Notif supprimée')
+                        })   
                     })
-                })
-
-               // .delete()
-                .then(()=>{
-                    console.log('Notif supprimée')
                 })   
             })
+        database.membersApproved(cowalk.id).doc(currentUser.uid)
+            .delete()
+            .then(() => {
+                setIsMember(false)
+            })
         
-
     }
 
 
     return (
+        <>
+        {!loading && 
         <div className='cowalkerListcontainer'>
             <div>{!isOwner &&
 
@@ -127,11 +145,10 @@ function CowalkerList({cowalk}) {
                 {membersList.map(member => {
                     return <CowalkerItem key={member.id} member={member}/>
                 })}
-
-
             </ul>
-
         </div>
+        }
+        </>
     )
 };
 
