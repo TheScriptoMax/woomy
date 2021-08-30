@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './adminacceptusers.css'
 import {database} from "../../firebase";
-import UserCard from "../UserCard/UserCard";
+import AdminUsersAwaitingApprovalCard from "../AdminUsersAwaitingApprovalCard/AdminUsersAwaitingApprovalCard";
 
 export default function AdminAcceptUsers() {
     const [waitingForApprovalUsers, setWaitingForApprovalUsers] = useState([]);
@@ -28,7 +28,7 @@ export default function AdminAcceptUsers() {
                 {pageLoading ? <p>Loading</p> :
                     <ul>
                         {waitingForApprovalUsers.map((user) => {
-                            return <UserCard key={user.id} user={user}/>
+                            return <AdminUsersAwaitingApprovalCard key={user.id} user={user}/>
                         })}
                     </ul>
                 }

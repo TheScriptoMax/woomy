@@ -51,7 +51,12 @@ export default function SignIn () {
                             accepted:false,
                             admin:false
                         })
-                        ;
+                        .then(() => {
+                            console.log('Crée dans la database')
+                        })
+                        .catch((error)=> {
+                            console.log(error.message)
+                        });
                 })
                 .catch((error) => {
                     console.log("Message d'erreur: " + error.message)

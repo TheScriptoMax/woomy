@@ -39,7 +39,6 @@ function Account() {
             .catch(error => {
                 setError(error.message)
             })
-
     }, [currentUser.uid])
 
     async function clickResetPassword(e){

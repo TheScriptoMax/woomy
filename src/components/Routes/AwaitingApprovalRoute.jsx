@@ -26,10 +26,10 @@ export default function AwaitingApprovalRoute({component: Component, ...rest})
                 {...rest}
                 render={props => {
                     if (currentUser && currentUser.emailVerified && isAccepted) {
+                        return <Redirect to="/account" />
+                    } else if (currentUser && currentUser.emailVerified && !isAccepted) {
                         return <Component {...props} />
-                    } else if (currentUser && currentUser.emailVerified) {
-                        return <Redirect to="/awaiting-approval" />
-                    } else if (currentUser){
+                    } else if (currentUser && !currentUser.emailVerified){
                         return <Redirect to="/send-new-validation" />
                     } else {
                         return <Redirect to="/login" />
