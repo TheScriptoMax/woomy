@@ -1,9 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Button} from "@material-ui/core";
 import {database, storage} from "../../firebase";
+import {Alert} from "@material-ui/lab";
 
 
 export default function UserCard({user}) {
+
+    const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
 
     function handleDeleteUser() {
         const deletePromises = []
@@ -53,7 +57,7 @@ export default function UserCard({user}) {
                 deletePromises.push(file.delete())
             })
         }).catch(error => {
-            console.log('Something went wrong' + error.message)
+            console.log(error.message)
         })
 
         // Image de pose
@@ -64,6 +68,14 @@ export default function UserCard({user}) {
         }).catch(error => {
             console.log('Something went wrong' + error.message)
         })
+        // Référence à l'image de pose dans la bdd
+        database.idPictureFiles.doc(user.id)
+            .get()
+            .then(doc => {
+                if (doc.exists) {
+                    deletePromises.push(database.idPictureFiles.doc(user.id).delete())
+                }
+            })
 
         // Carte d'identité
         storage.ref(`/files/idCards/${user.id}/`).listAll().then((files) => {
@@ -73,24 +85,36 @@ export default function UserCard({user}) {
         }).catch(error => {
             console.log('Something went wrong' + error.message)
         })
+        // Référence à la carte d'identité bdd
+        database.idCardFiles.doc(user.id)
+            .get()
+            .then(doc => {
+                if (doc.exists) {
+                    deletePromises.push(database.idCardFiles.doc(user.id).delete())
+                }
+            })
 
 
         // Résolution des promesses
         Promise.all(deletePromises)
             .then(()=> {
-                console.log('Utilisateur supprimé de la base de donnée, à supprimer égaement dans l\'authentification')
+                setMessage('Utilisateur supprimé de la base de donnée, à supprimer égaement dans l\'authentification')
             })
             .catch(()=> {
-                console.log('Woops ...')
+                setError('Erreur à la suppression de l\'utilisateur');
             })
     }
 
     return (
         <div>
-            <p>{user.firstname}</p>
-            <p>{user.lastname}</p>
-            <p>{user.email}</p>
-            <Button variant="contained" onClick={handleDeleteUser}>Coucou</Button>
+            {user.profilPic && <img src={user.profilPic} alt="Profile" /> }
+            <h3>{user.firstname} {user.lastname}</h3>
+            <p>utilisatrice inscrite - {user.createdAt.toString()}</p>
+            <a href={`mailto:${user.email}`}>{user.email}</a>
+            <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a>
+            <Button variant="contained" onClick={handleDeleteUser}>Supprimer l'utilisateur</Button>
+            {message && <Alert severity="success">{message}</Alert> }
+            {error && <Alert severity="error">{error}</Alert> }
         </div>
     )
 }

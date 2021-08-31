@@ -25,7 +25,8 @@ export default function AdminAcceptUsers() {
 
         <div className="container container-admin">
             <div>
-                {pageLoading ? <p>Loading</p> :
+                <h1>Approbation des utilisatrices</h1>
+                {pageLoading ? <p>Loading</p> : waitingForApprovalUsers.length === 0 ? <p>Pas d'utilisatrice à approuver</p> :
                     <ul>
                         {waitingForApprovalUsers.map((user) => {
                             return <AdminUsersAwaitingApprovalCard key={user.id} user={user}/>

@@ -69,7 +69,7 @@ function App() {
                 <AuthProvider>
                     {/*----- Route public -----*/}
 
-                    <Route path='/signin' component={SignIn}/>
+                    <PublicRoute path='/signin' component={SignIn}/>
                     <PublicRoute path='/login' component={Login}/>
                     <PublicRoute path='/cgu' component={Conditions}/>
                     <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
