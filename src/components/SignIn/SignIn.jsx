@@ -79,9 +79,9 @@ export default function SignIn () {
         <form onSubmit={handleSubmit} className='sign-in-content'>
 
             {/* MATERIAL UI INPUT TO COMPLETE FOR SIGNIN */}
-            <TextField inputRef={firstnameRef} id="standard-basic" label="Entrez votre nom" variant="standard" />
+            <TextField inputRef={firstnameRef} id="standard-basic" label="Entrez votre prénom" variant="standard" />
             
-            <TextField inputRef={lastnameRef} id="standard-basic" label="Entrez votre prénom" variant="standard" />
+            <TextField inputRef={lastnameRef} id="standard-basic" label="Entrez votre nom" variant="standard" />
             
             <TextField inputRef={emailRef} type='email' id="standard-basic" label="Entrez votre email" variant="standard" />
 

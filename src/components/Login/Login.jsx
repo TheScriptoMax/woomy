@@ -30,10 +30,10 @@ export default function Login () {
             setLoading(true);
             setError('');
             email && password && login(email,password).then(()=> {
-                history.push('/list');
+                history.push('/send-new-validation');
                 }
             )
-                .throw(() => {
+                .catch(() => {
                     setError('Echec de connexion')
                 })
             setEmail('')
