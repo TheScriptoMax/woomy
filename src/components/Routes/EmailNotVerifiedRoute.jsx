@@ -12,7 +12,6 @@ export default function EmailNotVerifiedRoute({component: Component, ...rest})
 
     return (
         <>
-            {!loading &&
             <Route
                 {...rest}
                 render={props => {
@@ -28,7 +27,7 @@ export default function EmailNotVerifiedRoute({component: Component, ...rest})
                 }}
             >
             </Route>
-            }
+
         </>
     )
 }

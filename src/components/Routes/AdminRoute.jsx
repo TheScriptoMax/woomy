@@ -14,7 +14,6 @@ export default function AdminRoute({component: Component, ...rest})
 
     return (
         <>
-            {!loading &&
             <Route
                 {...rest}
                 render={props => {
@@ -32,7 +31,7 @@ export default function AdminRoute({component: Component, ...rest})
                 }}
             >
             </Route>
-            }
+
         </>
     )
 }

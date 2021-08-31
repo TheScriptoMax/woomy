@@ -12,7 +12,6 @@ export default function PrivateRoute({component: Component, ...rest})
 
     return (
         <>
-            {!loading &&
             <Route
                 {...rest}
                 render={props => {
@@ -28,7 +27,7 @@ export default function PrivateRoute({component: Component, ...rest})
                 }}
             >
             </Route>
-            }
+
         </>
     )
 }

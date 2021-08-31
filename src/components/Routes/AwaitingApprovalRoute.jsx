@@ -14,7 +14,6 @@ export default function AwaitingApprovalRoute({component: Component, ...rest})
 
     return (
         <>
-            {!loading &&
             <Route
                 {...rest}
                 render={props => {
@@ -30,7 +29,7 @@ export default function AwaitingApprovalRoute({component: Component, ...rest})
                 }}
             >
             </Route>
-            }
+
         </>
     )
 }
