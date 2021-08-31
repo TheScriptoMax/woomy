@@ -13,6 +13,7 @@ import Conditions from "./components/Conditions/Conditions";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 
 /**** CONNEXION *****/
+import Landing from './components/LandingPage/Landing'
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
@@ -75,8 +76,8 @@ function App() {
             <Switch>
                 <AuthProvider>
                     {/*----- Route public -----*/}
-
-                    <Route path='/signin' component={SignIn}/>
+                        <Route exact path='/landing' component={Landing}/>
+                        <Route path='/signin' component={SignIn}/>
                         <PublicRoute path='/login' component={Login}/>
                         <PublicRoute path='/cgu' component={Conditions}/>
                         <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
@@ -85,9 +86,6 @@ function App() {
 
                         <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                         <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
-
-
-                        
 
 
                     {/*----- Route private AwaitingApproval -----*/}
