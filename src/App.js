@@ -3,11 +3,6 @@
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
-/**** HEADER & FOOTER *****/
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-
-
 /**** LEGAL *****/
 import Conditions from "./components/Conditions/Conditions";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
