@@ -10,11 +10,9 @@ import { useState,useEffect } from 'react';
 //FIREBASE
 import {database} from '../../firebase'
 
-import {useAuth} from "../../contexts/AuthContext";
-
-
 
 function CowalkingList () {
+
 
 
     const [cowalks, setCowalks] = useState([])
@@ -23,6 +21,7 @@ function CowalkingList () {
     const {currentUser} = useAuth();
     let cowalksbleu = database.cowalks
     console.log(cowalksbleu)
+
     useEffect(() => {
         return database.cowalks
             .onSnapshot((querySnapshot) => {
@@ -54,7 +53,8 @@ function CowalkingList () {
             
 
         });
-    }, [])
+
+    }, [])// eslint-disable-line react-hooks/exhaustive-deps
 
 
     return (
@@ -62,7 +62,7 @@ function CowalkingList () {
 
             <ul className='cowalkingList'>
 
-                { pageLoading ? <p>Loading</p> : (cowalks.length>0 ?
+                { pageLoading ? <p>Loading</p> : (cowalks.length > 0 ?
 
                     cowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />) : <p>Aucun résultat</p>) }
 

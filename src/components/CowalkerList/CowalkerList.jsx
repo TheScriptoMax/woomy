@@ -1,13 +1,21 @@
 /// ----- Import Components ----- ///
+
+// IMPORT MATERIAL
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import {RemoveCircle} from "@material-ui/icons";
+
+// IMPORT CSS
 import './cowalkerList.css'
 
-// IMPORT MODULES
-import {useAuth} from "../../contexts/AuthContext";
+// IMPORT REACT
 import {useEffect, useState} from "react";
-import {database} from '../../firebase'
-import {RemoveCircle} from "@material-ui/icons";
+
+// IMPORT COMPONENT
 import CowalkerItem from "../CowalkerItem/CowalkerItem";
+
+// IMPORT FIREBASE
+import {database} from '../../firebase'
+import {useAuth} from "../../contexts/AuthContext";
 
 ///////// liste des copiétonneuses //////////
 

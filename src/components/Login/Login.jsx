@@ -6,10 +6,10 @@ import {useAuth} from "../../contexts/AuthContext";
 // MATERIAL UI IMPORT
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import {Alert} from "@material-ui/lab";
 
 // CSS IMPORT
 import './login.css';
-import {Alert} from "@material-ui/lab";
 
 //PAGE CONNEXION
 export default function Login () {
@@ -30,10 +30,10 @@ export default function Login () {
             setLoading(true);
             setError('');
             email && password && login(email,password).then(()=> {
-                history.push('/list');
+                history.push('/send-new-validation');
                 }
             )
-                .throw(() => {
+                .catch(() => {
                     setError('Echec de connexion')
                 })
             setEmail('')

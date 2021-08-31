@@ -1,7 +1,5 @@
 // REACT IMPORT
-
 import {useEffect,useState} from "react";
-
 
 // FIREBASE IMPORT
 import {database, storage} from "../../firebase";
@@ -185,7 +183,7 @@ export default function AwaitingApproval () {
                     />
                     {urlPicture &&
                     <div className='container-img'>
-                        <img className='img-picture' src={urlPicture} alt="Profil"/>
+                        <img className='img-picture' src={urlPicture} alt="Votre preuve d'identité'"/>
                     </div>}
                     <label htmlFor="raised-button-file-picture">
                         <Button variant="raised" component="span">

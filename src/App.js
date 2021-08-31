@@ -62,6 +62,8 @@ import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
 
 
 import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
+import AdminRoute from "./components/Routes/AdminRoute";
+import AdminCowalks from "./components/AdminCowalks/AdminCowalks";
 
 
 function App() {
@@ -75,10 +77,12 @@ function App() {
 
 
                     {/*----- Route all access -----*/}
-                        <Route path='/cgu' component={Cgu}/>
+                    <Route exact path='/cgu' component={Cgu}/>
+                    {/*<Route path='/' component={Home}/>*/}
 
 
                     {/*----- Route public -----*/}
+
                     <PublicRoute path='/signin' component={SignIn}/>
                     <PublicRoute path='/login' component={Login}/>
                     <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
@@ -92,24 +96,27 @@ function App() {
 
 
 
+
                     {/*----- Route private AwaitingApproval -----*/}
 
 
-                    <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
+                    <AwaitingApprovalRoute exact path='/awaiting-approval' component={AwaitingApproval}/>
 
 
                     {/*----- AdminCowalks -----*/}
 
-                    <Route exact path='/admin' component={AdminDashboard}/>
-                    <Route exact path='/admin-accept-users' component={AdminAcceptUsers}/>
-                    <Route exact path='/admin-users' component={AdminUsers}/>
-                    <Route exact path='/admin-place' component={AdminPlace}/>
-                    <Route exact path='/admin-district' component={AdminDistrict}/>
-                    <Route exact path='/place-list' component={PlaceList}/>
-                    <Route exact path='/district-list' component={DistrictList}/>
+                    <AdminRoute exact path='/admin' component={AdminDashboard}/>
+                    <AdminRoute exact path='/admin-accept-users' component={AdminAcceptUsers}/>
+                    <AdminRoute exact path='/admin-cowalks' component={AdminCowalks}/>
+                    <AdminRoute exact path='/admin-users' component={AdminUsers}/>
+                    <AdminRoute exact path='/admin-place' component={AdminPlace}/>
+                    <AdminRoute exact path='/admin-district' component={AdminDistrict}/>
+                    <AdminRoute exact path='/place-list' component={PlaceList}/>
+                    <AdminRoute exact path='/district-list' component={DistrictList}/>
 
 
                     {/*----- Profil connecté et approuvé -----*/}
+
 
                     
                     
@@ -126,6 +133,7 @@ function App() {
                     <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
                         
                     
+
                     <BandeauWarning/>
                 </AuthProvider>
             </Switch>

@@ -1,6 +1,8 @@
 // MATERIAL UI IMPORT
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
+// IMPORT REACT
 import {Link}from "react-router-dom";
 
 // CSS IMPORT

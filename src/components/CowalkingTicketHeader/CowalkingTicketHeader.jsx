@@ -1,13 +1,10 @@
 /// ----- Material UI ----- ///
-
-import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 import ButtonRound from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import EditIcon from '@material-ui/icons/Edit';
 
 /// ----- CSS ----- ///
-
 import './cowalkingTicketHeader.css';
 
 // IMPORT MODULES
@@ -27,6 +24,9 @@ function CowalkingTicketHeader({cowalk}) {
     const [isOwner,setIsOwner] = useState(false);
     const [startFromUrl, setStartFromUrl] = useState([]);
     const [goToUrl, setGoToUrl] = useState([]);
+
+    const history = useHistory();
+    const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})
 
     const {currentUser} = useAuth();
     
@@ -56,13 +56,9 @@ function CowalkingTicketHeader({cowalk}) {
             
         }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    const history = useHistory();
-    const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})
-
     function handleDeleteCowalk(ev) {
         ev.preventDefault();
         const deletePromises = [];
-
 
         database.membersPending(cowalk.id)
             .get()
@@ -98,7 +94,6 @@ function CowalkingTicketHeader({cowalk}) {
             .finally(() => {
                 history.push("/list")
             })
-        /* setToggleModal(!toggleModal) */
 
     }
 
@@ -111,11 +106,9 @@ function CowalkingTicketHeader({cowalk}) {
         {isOwner&&
             <div className="cowalkingTicketHeaderButtonWrapper">
                 <div className='cowalkingTicketHeaderButton'>
-
                     <ButtonRound onClick={handleDeleteCowalk} aria-label="delete">
                         <DeleteIcon/>
                     </ButtonRound>
-
                     <Link
                         to={`/ticket/edit/${cowalk.id}`}
                     >
@@ -130,22 +123,19 @@ function CowalkingTicketHeader({cowalk}) {
                 <div>
                     <h3>Départ:</h3>
                     <p>{cowalk.startFrom}</p>
-                    <a href={startFromUrl} target="_blank" rel="noreferrer">Voir sur la carte</a>
+                    <a className='cowalk-header-map' href={startFromUrl} target="_blank" rel="noreferrer">Voir sur la carte</a>
                 </div>
-                <span>
-                    <TrendingFlatIcon/>
-                </span>
-                <div>
-                    <h3>Destination:</h3>
-                    <p>{cowalk.goTo}</p>
-                    <a href={goToUrl} target="_blank" rel="noreferrer">Voir sur la carte</a>
+
+                <div className="ticket-to-go">
+                    <h3>Destination :</h3>
+                    <p >{cowalk.goTo}</p>
+                    <a className='cowalk-header-map' href={goToUrl} target="_blank" rel="noreferrer">Voir sur la carte</a>
                 </div>
             </div>
             <div className='cowalkingTicketDeparture'>
                 <h3>Heure de départ:</h3>
                 <p>{currentCowalkStartTime}</p>
             </div>
-
         </div>
     )
 };
