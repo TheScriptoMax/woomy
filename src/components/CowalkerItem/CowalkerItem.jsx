@@ -16,6 +16,7 @@ import './cowalkerItem.css'
 function CowalkerItem ({member}) {
     const [togglePhone, setTogglePhone] = useState(true)
     const [loadingPicture, setLoadingPicture] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const handlePhone = (event) =>{
         event.preventDefault()
@@ -23,26 +24,35 @@ function CowalkerItem ({member}) {
     }
 
     useEffect(() => {
-        if(member.profilPic !== ''){
+        setLoadingPicture(false)
+        if(member.profilPic){
+            console.log(member.profilPic)
             setLoadingPicture(true)
+            setLoading(false)
+        } else {
+            setLoading(false)
         }
     }, [])// eslint-disable-line react-hooks/exhaustive-deps
 
     return(
-        <li className="cowalkerItem">
-            <figure>
-                {loadingPicture ?
-                    <img src={member.profilPic} alt="profil"/> :
-                    <img src={ImageProfil} alt="profil"/>
-                }
-            </figure>
-            <h3>{member.firstname} {member.lastname}</h3>
-            <div className="cowalkerItemButton">
-                {togglePhone ? (<ButtonRound onClick={(event)=>handlePhone(event)}>
-                    <PhoneIcon/>
-                </ButtonRound>) : (<a href={`tel:${member.phoneNumber}`}>{member.phoneNumber}</a>)}
-            </div>
-        </li>
+        <>
+            {!loading &&
+            <li className="cowalkerItem">
+                <figure>
+                    {loadingPicture ?
+                        <img src={member.profilPic} alt="profil"/> :
+                        <img src={ImageProfil} alt="profil"/>
+                    }
+                </figure>
+                <h3>{member.firstname} {member.lastname}</h3>
+                <div className="cowalkerItemButton">
+                    {togglePhone ? (<ButtonRound onClick={(event)=>handlePhone(event)}>
+                        <PhoneIcon/>
+                    </ButtonRound>) : (<a href={`tel:${member.phoneNumber}`}>{member.phoneNumber}</a>)}
+                </div>
+            </li>
+            }
+        </>
     )
 }
 
