@@ -96,6 +96,7 @@ function Account() {
             },
             error => {
                 console.log(error.message)
+                history.push('/account')
             },
             () => {
                 uploadPicture.snapshot.ref.getDownloadURL()
