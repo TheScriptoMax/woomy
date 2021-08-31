@@ -71,7 +71,8 @@ export default function AwaitingApproval () {
             console.log('Vous devez soumettre une copie du recto de votre carte d\'identité');
         }
         const filename = idCardFile.name;
-        const idCardPath = `files/idCards/${currentUser.uid}.${filename.substring(filename.lastIndexOf('.')+1, filename.length)}`
+        const idCardPathPart = `files/idCards/${currentUser.uid}/${currentUser.uid}`
+        const idCardPath = `${idCardPathPart}.${filename.substring(filename.lastIndexOf('.')+1, filename.length)}`
         const uploadCard = storage
             .ref(idCardPath)
             .put(idCardFile)
@@ -106,7 +107,7 @@ export default function AwaitingApproval () {
         }
 
         const filename = idPictureFile.name;
-        const idPicturePartPath = `files/idPictures/${currentUser.uid}`
+        const idPicturePartPath = `files/idPictures/${currentUser.uid}/${currentUser.uid}`
         const idPicturePath = `${idPicturePartPath}.${filename.substring(filename.lastIndexOf('.')+1, filename.length)}`
 
         const uploadPicture = storage
@@ -157,11 +158,12 @@ export default function AwaitingApproval () {
                         type="file"
                         onChange={handleIdCardUpload}
                     />
+                    {urlCard &&
                     <div className='container-img'>
 
                         <img className='img-card' src={urlCard} alt="Votre carte d'identité"/>
 
-                    </div>
+                    </div>}
                     <label htmlFor="raised-button-file-card">
                         <Button variant="raised" component="span">
                             {cardLoading ?
@@ -181,11 +183,10 @@ export default function AwaitingApproval () {
                         type="file"
                         onChange={handleIdPictureUpload}
                     />
+                    {urlPicture &&
                     <div className='container-img'>
-
                         <img className='img-picture' src={urlPicture} alt="Votre photo"/>
-
-                    </div>
+                    </div>}
                     <label htmlFor="raised-button-file-picture">
                         <Button variant="raised" component="span">
                             {pictureLoading ?

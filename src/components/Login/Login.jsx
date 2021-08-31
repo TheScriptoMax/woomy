@@ -28,21 +28,21 @@ export default function Login () {
         
         try {
             setLoading(true);
-
-                 
             setError('');
             email && password && login(email,password).then(()=> {
                 history.push('/list');
                 }
             )
-            setEmail(null)
-            setPassword(null)
+                .throw(() => {
+                    setError('Echec de connexion')
+                })
+            setEmail('')
+            setPassword('')
 
         } catch(error) {
             setError('Echec de connexion');
             
         }
-
         setLoading(false);
     }
 

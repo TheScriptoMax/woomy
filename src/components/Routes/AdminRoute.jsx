@@ -12,13 +12,21 @@ export default function AdminRoute({component: Component, ...rest})
     const {currentUser} = useAuth();
 
     useEffect(() => {
-        database.users.doc(currentUser.uid)
-            .get()
-            .then((doc) => {
-                setIsAdmin(doc.data().admin)
-                setIsAccepted(doc.data().accepted)
-                setLoading(false)
-            })
+        if (currentUser && currentUser.hasOwnProperty("uid")) {
+            database.users.doc(currentUser.uid)
+                .get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        setIsAdmin(doc.data().admin)
+                        setIsAccepted(doc.data().accepted)
+                        setLoading(false)
+                    } else {
+                        setLoading(false)
+                    }
+                })
+        } else {
+            setLoading(false)
+        }
     }, [])
 
     return (

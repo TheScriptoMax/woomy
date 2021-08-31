@@ -4,7 +4,7 @@ import './conditions.css';
 // Auth context
 import {useAuth} from "../../contexts/AuthContext";
 
-// header & footer
+// Header & footer
 import Header from "../Header/Header"
 import Footer from "../Footer/Footer"
 

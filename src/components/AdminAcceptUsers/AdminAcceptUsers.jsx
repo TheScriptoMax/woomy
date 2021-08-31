@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import './adminacceptusers.css'
 import {database} from "../../firebase";
 import AdminUsersAwaitingApprovalCard from "../AdminUsersAwaitingApprovalCard/AdminUsersAwaitingApprovalCard";
+import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 
 export default function AdminAcceptUsers() {
     const [waitingForApprovalUsers, setWaitingForApprovalUsers] = useState([]);
@@ -24,15 +25,15 @@ export default function AdminAcceptUsers() {
     return (
 
         <div className="container container-admin">
-            <div>
-                {pageLoading ? <p>Loading</p> :
+                <BackToAdminDashboardButton />
+                <h1>Approbation des utilisatrices</h1>
+                {pageLoading ? <p>Loading</p> : waitingForApprovalUsers.length === 0 ? <p>Pas d'utilisatrice à approuver</p> :
                     <ul>
                         {waitingForApprovalUsers.map((user) => {
                             return <AdminUsersAwaitingApprovalCard key={user.id} user={user}/>
                         })}
                     </ul>
                 }
-            </div>
         </div>
     )
 }
