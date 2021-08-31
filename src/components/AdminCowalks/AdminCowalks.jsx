@@ -5,81 +5,49 @@ import React, {useRef, useState} from "react";
 import {database} from "../../firebase";
 import UserCard from "../AdminUserCard/AdminUserCard";
 import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
+import {DateTimePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import CowalkingCard from "../CowalkingCard/CowalkingCard";
 
 function AdminCowalks() {
 
-    const firstnameRef = useRef();
-    const lastnameRef = useRef();
-    const userIdRef = useRef();
-    const emailRef = useRef();
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const [searchResults, setSearchResults] = useState([]);
 
-    function handleNameSearch(ev) {
-        ev.preventDefault()
-        database.users.where('firstname', '==', firstnameRef.current.value)
-            .where('lastname', '==', lastnameRef.current.value)
-            .get()
-            .then(querySnapshot => {
-                const membersRetrieved = [];
-                querySnapshot.forEach(doc => {
-                    membersRetrieved.push(database.formatDoc(doc))
-                })
-                setSearchResults(membersRetrieved);
-                console.log(membersRetrieved)
-            })
-            .catch(error => {
-                console.log(error.message);
-            })
 
-
-    }
-
-    function handleIdSearch(ev) {
-        ev.preventDefault()
-        database.users.doc(userIdRef.current.value)
-            .get()
-            .then(doc => {
-                if (doc.exists) {
-                    const membersRetrieved = [];
-                    membersRetrieved.push(database.formatDoc(doc))
-                    setSearchResults(membersRetrieved);
-                    console.log(membersRetrieved)
-                }
-            })
-            .catch(error => {
-                console.log(error.message);
-            })
-    }
-
-
-    function handleEmailSearch(ev) {
+    function handleSubmitSearch(ev) {
         ev.preventDefault();
-        database.users.where('email', '==', emailRef.current.value)
+        const rangeStart = new Date(selectedDate);
+        const rangeEnd = new Date(selectedDate);
+        rangeStart.setHours(rangeStart.getHours() - 2);
+        rangeEnd.setHours(rangeEnd.getHours() + 2);
+        database.cowalks.where("startTime", ">=", rangeStart).where("startTime", "<=", rangeEnd).orderBy("startTime")
             .get()
-            .then(querySnapshot => {
-                const membersRetrieved = [];
-                querySnapshot.forEach(doc => {
-                    membersRetrieved.push(database.formatDoc(doc))
+            .then((queryResults) => {
+                const tempResults = []
+                queryResults.forEach(result => {
+                    tempResults.push(database.formatDoc(result))
                 })
-                setSearchResults(membersRetrieved);
-                console.log(membersRetrieved)
-            })
-            .catch(error => {
-                console.log(error.message);
+                setSearchResults(tempResults);
+
+                console.log("Requete envoyée")
             })
     }
 
-    function viewLastUsers() {
-        database.users.orderBy('createdAt', 'desc').limit(20)
+    function viewLastCowalks() {
+        database.cowalks.orderBy('createdAt', 'desc').limit(20)
             .get()
             .then((querySnapshot) => {
-                const membersRetrieved = [];
+                const cowalksRetrieved = [];
                 querySnapshot.forEach(doc => {
-                    membersRetrieved.push(database.formatDoc(doc))
+                    cowalksRetrieved.push(database.formatDoc(doc))
                 })
-                setSearchResults(membersRetrieved);
-                console.log(membersRetrieved)
+                setSearchResults(cowalksRetrieved);
             })
+    }
+
+    function handleDeleteCowalk() {
+
     }
 
 
@@ -87,35 +55,25 @@ function AdminCowalks() {
 
         <div className="container container-admin">
             <BackToAdminDashboardButton />
-            <h1>Administration des utilisatrices</h1>
-            <Button variant="contained" onClick={viewLastUsers}>Voir les 20 dernières utilisatrices</Button>
-            <form onSubmit={handleNameSearch}>
-                <h2>Chercher une utilisatrice</h2>
-                <h3>Par nom et prénom</h3>
-                <TextField inputRef={firstnameRef} id="standard-basic" label="Prénom de l'utilisatrice"
-                           variant="standard"/>
-                <TextField inputRef={lastnameRef} id="standard-basic" label="Nom de l'utilisatrice" variant="standard"/>
-                <Button type="submit" variant="contained">Rechercher</Button>
-            </form>
-            <br/>
-            <form onSubmit={handleIdSearch}>
-                <h3>Par ID</h3>
-                <TextField inputRef={userIdRef} id="standard-basic" label="Entrez l'id de l'utilisatrice"
-                           variant="standard"/>
-                <Button type="submit" variant="contained">Rechercher</Button>
-            </form>
-
-            <form onSubmit={handleEmailSearch}>
-                <h3>Par Mail</h3>
-                <TextField type="email" inputRef={emailRef} id="standard-basic" label="Entrez l'email de l'utilisatrice"
-                           variant="standard"/>
+            <h1>Administration des copiétonnages</h1>
+            <Button variant="contained" onClick={viewLastCowalks}>Voir les 20 dernières copiétonnages</Button>
+            <form onSubmit={handleSubmitSearch}>
+                <h2>Chercher un cowalk</h2>
+                <h3>Par date</h3>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <DateTimePicker
+                        value={selectedDate}
+                        onChange={setSelectedDate}
+                        minutesStep={5}
+                    />
+                </MuiPickersUtilsProvider>
                 <Button type="submit" variant="contained">Rechercher</Button>
             </form>
 
             <div>
                 <ul>
-                    {searchResults.map((user) => {
-                        return <UserCard key={user.id} user={user}/>
+                    {searchResults.map((cowalk, index) => {
+                        return <><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index}/><Button variant="contained" onClick={handleDeleteCowalk}>Supprimer le copiet</Button></>
                     })}
                 </ul>
             </div>

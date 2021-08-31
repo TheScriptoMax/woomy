@@ -65,6 +65,7 @@ import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
 
 import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
 import AdminRoute from "./components/Routes/AdminRoute";
+import AdminCowalks from "./components/AdminCowalks/AdminCowalks";
 
 
 function App() {
@@ -78,7 +79,7 @@ function App() {
 
                     {/*----- Route all access -----*/}
                     <Route exact path='/cgu' component={Cgu}/>
-                    <Route path='/' component={Home}/>
+                    {/*<Route path='/' component={Home}/>*/}
 
 
                     {/*----- Route public -----*/}
@@ -102,6 +103,7 @@ function App() {
 
                     <AdminRoute exact path='/admin' component={AdminDashboard}/>
                     <AdminRoute exact path='/admin-accept-users' component={AdminAcceptUsers}/>
+                    <AdminRoute exact path='/admin-cowalks' component={AdminCowalks}/>
                     <AdminRoute exact path='/admin-users' component={AdminUsers}/>
                     <AdminRoute exact path='/admin-place' component={AdminPlace}/>
                     <AdminRoute exact path='/admin-district' component={AdminDistrict}/>
