@@ -5,7 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 /// ----- Import image ----- ///
-import ImageProfil from './profile-pic-placeholder.png'
+import ImageProfil from '../../assets/profile-pic-placeholder.png'
 import {database} from '../../firebase';
 
 
@@ -138,7 +138,12 @@ function CowalkingCard ({cowalk,index}) {
                                 }
                             </figure>
                             <ul>
-                                <li><span>+{membersList.length+1}</span></li>
+                                <li>
+                                    {membersList.length > 0 ?
+                                        <span className='members-list'>+{membersList.length}</span> :
+                                        <span className='members-list'>+0</span>
+                                    }
+                                </li>
                             </ul>
                         </div>
                         <div className='cowalkingCardButtons'>

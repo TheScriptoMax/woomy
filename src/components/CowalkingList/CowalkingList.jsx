@@ -67,7 +67,7 @@ function CowalkingList () {
 
             <ul className='cowalkingList'>
 
-                { pageLoading ? <p>Loading</p> : (cowalks.length>0 ?
+                { pageLoading ? <p>Loading</p> : (cowalks.length > 0 ?
 
                     cowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />) : <p>Aucun résultat</p>) }
 

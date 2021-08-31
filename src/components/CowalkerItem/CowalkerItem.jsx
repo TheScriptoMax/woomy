@@ -7,11 +7,10 @@ import ButtonRound from '@material-ui/core/IconButton';
 import {Avatar} from "@material-ui/core";
 
 /// ----- Import Img ----- ///
-import profilpic from './profile-pic-placeholder.png';
+import ImageProfil from '../../assets/profile-pic-placeholder.png'
 
 /// ----- CSS ----- ///
 import './cowalkerItem.css'
-
 
 ///////// Carte copiétonneuse ///////
 
@@ -36,7 +35,7 @@ function CowalkerItem ({member}) {
             <figure>
                 {loadingPicture ?
                     <img src={member.profilPic} alt="profil"/> :
-                    <img src={profilpic} alt="profil"/>
+                    <img src={ImageProfil} alt="profil"/>
                 }
             </figure>
             <h3>{member.firstname} {member.lastname}</h3>
