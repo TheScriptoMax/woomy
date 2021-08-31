@@ -144,7 +144,7 @@ function Account() {
                     <div className='account-field'>
                         <p>E-mail</p>
                         <div className="account-field-result">
-                            <p>{currentUser.email}</p>
+                            <p className="email">{currentUser.email}</p>
                         </div>
                     </div>
                     <div className='account-field'>
@@ -175,13 +175,12 @@ function Account() {
                             onChange={handlePicture}
                         />
                         <label htmlFor="picture-profil-account">
-                            <Button variant="raised" component="span">
+                            <Button variant="contained" >
                                 Changer votre photo
                             </Button>
                         </label>
 
                     </div>
-
                     <Button onClick={clickResetPassword}>
                         <div className='account-field'>
                             <p>Réinitialiser le mot de passe</p>
@@ -189,6 +188,7 @@ function Account() {
                             </div>
                         </div>
                     </Button>
+
 
                     {!isShow && <Alert severity="info">Un email vous a été envoyé</Alert>}
                     <div className="button-bot-account">

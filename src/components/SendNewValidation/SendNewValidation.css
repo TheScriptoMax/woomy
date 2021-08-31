@@ -22,14 +22,19 @@
     box-shadow: none;
     color: white;
     text-transform: uppercase;
-    margin: auto;
+    margin: 0 auto;
     display: inline;
     top: -4rem;
 
 
 }
+.sign-in-validation button:last-child{
+    top:0;
+}
 
 .button-bot-account{
     margin-top:1rem;
+    display:flex;
+    justify-content:center;
 
 }

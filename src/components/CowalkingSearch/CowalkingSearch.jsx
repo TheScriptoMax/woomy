@@ -1,5 +1,5 @@
 /// ----- Material UI ----- ///
-import InputLabel from '@material-ui/core/InputLabel';
+
 import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/TextField';
 import {
@@ -24,7 +24,7 @@ import { database } from '../../firebase';
 function CoWalkingSearch() {
 
     const [locations, setLocations] = useState([]);
-    const [startFrom,setStartFrom] = useState();
+    const [startFrom,setStartFrom] = useState("");
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [resultsList, setResultsList] = useState([]);
     const [noSearch, setNoSearch] = useState(true)
@@ -63,11 +63,12 @@ function CoWalkingSearch() {
     return (
         <div className="container colwalkingsearch-container">
             <h2>Rechercher un itinéraire</h2>
-            <form onSubmit={handleSubmitSearch} className="searchform ">
+            <form className="searchform ">
 
-                <InputLabel className="label">Départ</InputLabel>
+                
 
-                <TextField value={startFrom} onChange={(event)=>setStartFrom(event.targent.value)} select labelId="label" id="select">
+                <TextField select defaultValue="" value={startFrom} onChange={(event)=>setStartFrom(event.target.value)} label="départ" >
+                    <option value="" disabled>Choisissez un lieu de départ</option>
                     {locations.map((option) => (
                         <option key={option.id} value={option.name}>
                         {option.name}
@@ -83,7 +84,7 @@ function CoWalkingSearch() {
                     />
                 </MuiPickersUtilsProvider>
 
-                <Button type="submit" variant="contained">Rechercher</Button>
+                <Button type="submit" onClick={(event)=>handleSubmitSearch(event)} variant="contained">Rechercher</Button>
 
             </form>
             <div className="separator"></div>

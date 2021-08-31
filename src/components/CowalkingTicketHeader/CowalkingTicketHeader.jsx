@@ -102,8 +102,8 @@ function CowalkingTicketHeader({cowalk}) {
     return (
         <div className="cowalkingTicketHeader">
         
-        <h2>Itinéraire:</h2>
-        {isOwner&&
+        <h2>Itinéraire</h2>
+        {isOwner &&
             <div className="cowalkingTicketHeaderButtonWrapper">
                 <div className='cowalkingTicketHeaderButton'>
                     <ButtonRound onClick={handleDeleteCowalk} aria-label="delete">
@@ -119,7 +119,7 @@ function CowalkingTicketHeader({cowalk}) {
                     </Link>
                 </div>
             </div>}
-            <div className='cowalkingTicketRoute'>
+            <div className={isOwner ? 'cowalkingTicketRoute' : 'cowalkingTicketRoute marginTop' }>
                 <div>
                     <h3>Départ:</h3>
                     <p>{cowalk.startFrom}</p>

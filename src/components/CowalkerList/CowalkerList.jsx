@@ -15,6 +15,7 @@ import CowalkerItem from "../CowalkerItem/CowalkerItem";
 
 // IMPORT FIREBASE
 import {database} from '../../firebase'
+import firebase from 'firebase/app';
 import {useAuth} from "../../contexts/AuthContext";
 
 ///////// liste des copiétonneuses //////////
@@ -140,6 +141,12 @@ function CowalkerList({cowalk}) {
             .then(() => {
                 setIsMember(false)
             })
+        database.users.doc(currentUser.uid)
+            .update({
+                approvalCowalk:firebase.firestore.FieldValue.arrayRemove(
+                    cowalk.id
+                )
+            })
     }
 
 
@@ -150,7 +157,7 @@ function CowalkerList({cowalk}) {
             <div>{!isOwner &&
 
             <div className="cowalkerAddIcon">
-                {!isMember ? <AddCircleIcon onClick={handleJoinCowalk}/> : <><p>MEMBER </p><RemoveCircle onClick={handleLeaveCowalk}/></>}
+                {!isMember ? <AddCircleIcon onClick={handleJoinCowalk}/> : <RemoveCircle onClick={handleLeaveCowalk}/>}
             </div>
             }
             </div>

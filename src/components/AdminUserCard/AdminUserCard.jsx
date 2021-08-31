@@ -4,7 +4,7 @@ import React, {useState} from 'react'
 
 // IMPORT MATERIAL
 import {Button} from "@material-ui/core";
-
+import { Avatar } from '@material-ui/core';
 import {Alert} from "@material-ui/lab";
 
 // IMPORT FIREBASE

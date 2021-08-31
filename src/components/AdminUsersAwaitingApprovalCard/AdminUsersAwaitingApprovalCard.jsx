@@ -205,9 +205,9 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
             <p>Téléphone: <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a></p>
         
             <div className="admin-user-card-img-container">
-                    {urlPicture ? <a href={urlPicture} target="_blank">Photo de confirmation: <br/><img src={urlPicture} alt="Profil" className="admin-user-card-img"/></a> : <p>Pas encore de photo de pose</p>}
+                    {urlPicture ? <a href={urlPicture} target="_blank" rel="noreferrer">Photo de confirmation: <br/><img src={urlPicture} alt="Profil" className="admin-user-card-img"/></a> : <p>Pas encore de photo de pose</p>}
 
-                    {urlCard ? <a href={urlCard} target="_blank">Pièce d'identité: <br/><img src={urlCard} alt="Carte d'identité" className="admin-user-card-img"/></a> : <p>Pas encore de carte d'identité</p>}
+                    {urlCard ? <a href={urlCard} target="_blank" rel="noreferrer">Pièce d'identité: <br/><img src={urlCard} alt="Carte d'identité" className="admin-user-card-img"/></a> : <p>Pas encore de carte d'identité</p>}
 
 
             </div>

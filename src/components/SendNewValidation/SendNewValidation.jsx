@@ -71,7 +71,7 @@ export default function SendNewValidation () {
             <Button onClick={sendEmail}>Renvoyer un mail</Button>
 
             <div className="button-bot-account">
-                <Button variant="contained" onClick={handleLogout}> Se deconnecter</Button>
+                <Button variant="contained" onClick={handleLogout}>Connexion</Button>
             </div>
 
         </div>

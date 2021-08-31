@@ -1,6 +1,6 @@
 .account-list{
     width: max-content;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .account-list a{
@@ -21,6 +21,9 @@
     padding-bottom:0.5rem;
     padding-left:0.5rem;
     padding-right:0.5rem;
+}
+.account-field:last-child{
+    text-align:center;
 } 
 
 .account-list div.account-field{
@@ -90,7 +93,7 @@
     text-transform: uppercase;
 }
 
-.img-picture{
+.img-picture-account{
 
     height: 15vh;
     width: 15vh;
@@ -100,4 +103,16 @@
 
 .account-field a {
     text-decoration: none;
+}
+.account-field button {
+    margin-top:0;
+    border:none;
+}
+.account-field label {
+    margin:0 auto;
+}
+.account-field-result .email {
+    font-size:1rem;
+    font-weight:400;
+    text-transform:lowercase;
 }
