@@ -3,7 +3,8 @@ import {Button, TextField} from '@material-ui/core';
 import {Link} from "react-router-dom";
 import React, {useRef, useState} from "react";
 import {database} from "../../firebase";
-import UserCard from "../UserCard/UserCard";
+import UserCard from "../AdminUserCard/AdminUserCard";
+import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 
 function AdminCowalks() {
 
@@ -85,6 +86,7 @@ function AdminCowalks() {
     return (
 
         <div className="container container-admin">
+            <BackToAdminDashboardButton />
             <h1>Administration des utilisatrices</h1>
             <Button variant="contained" onClick={viewLastUsers}>Voir les 20 dernières utilisatrices</Button>
             <form onSubmit={handleNameSearch}>

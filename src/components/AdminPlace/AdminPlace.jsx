@@ -9,8 +9,9 @@ import Alert from '@material-ui/lab/Alert';
 import { database } from '../../firebase';
 
 // REACT IMPORT
-import {useRef, useState, useEffect} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import { Link } from 'react-router-dom';
+import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 
 //ADD A LOCATION
 export default function AdminPlace () {
@@ -72,6 +73,8 @@ export default function AdminPlace () {
     return (
 
       <div className="container container-admin">
+
+          <BackToAdminDashboardButton />
          <h1>Lieux</h1>
          <Link className="place-list-link" to={'/place-list'}>
              <div className="place-list-btn">

@@ -12,18 +12,22 @@ export default function AdminRoute({component: Component, ...rest})
     const {currentUser} = useAuth();
 
     useEffect(() => {
-        database.users.doc(currentUser.uid)
-            .get()
-            .then((doc) => {
-                if (doc.exists) {
-                    setIsAdmin(doc.data().admin)
-                    setIsAccepted(doc.data().accepted)
-                    setLoading(false)
-                } else {
-                    setLoading(false)
-                }
-            })
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+        if (currentUser && currentUser.hasOwnProperty("uid")) {
+            database.users.doc(currentUser.uid)
+                .get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        setIsAdmin(doc.data().admin)
+                        setIsAccepted(doc.data().accepted)
+                        setLoading(false)
+                    } else {
+                        setLoading(false)
+                    }
+                })
+        } else {
+            setLoading(false)
+        }
+    }, [])
 
     return (
         <>
