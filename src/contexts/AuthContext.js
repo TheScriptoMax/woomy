@@ -27,6 +27,7 @@ export function AuthProvider({children}) {
         return auth.sendPasswordResetEmail(email)
     }
 
+
     function login(email, password) {
         return auth.signInWithEmailAndPassword(email, password)
     }
@@ -36,11 +37,10 @@ export function AuthProvider({children}) {
     }
 
     useEffect(()=> {
-        const unsubscribe = auth.onAuthStateChanged(user => {
+        return auth.onAuthStateChanged(user => {
             setCurrentUser(user);
             setLoading(false);
-        })
-        return unsubscribe;
+        });
     }, []);
 
     const value ={

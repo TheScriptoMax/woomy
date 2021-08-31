@@ -1,6 +1,8 @@
+// Import React
+import {useState, useEffect} from "react";
+
 // CSS FIREBASE
 import {useAuth} from "../../contexts/AuthContext";
-import {useState, useEffect} from "react";
 import {database} from "../../firebase";
 
 // REACT ROUTER DOM
@@ -9,8 +11,6 @@ import {Link, useHistory} from "react-router-dom";
 
 // MATERIAL UI IMPORT
 import Button from '@material-ui/core/Button';
-
-// import {Link} from "react-router-dom";
 
 // CSS IMPORT
 
@@ -27,6 +27,8 @@ export default function ConfirmEmailSent () {
 
     const history = useHistory();
 
+    const {logout} = useAuth();
+
 
     useEffect(()=> {
         database.users.doc(currentUser.uid)
@@ -38,7 +40,7 @@ export default function ConfirmEmailSent () {
             setError((error.message))
         })
 
-    }, [currentUser.uid])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
     async function sendEmail(ev){
@@ -55,7 +57,6 @@ export default function ConfirmEmailSent () {
         }
     }
 
-    /*
     async function handleLogout() {
         try {
             await logout().then(()=> {
@@ -66,25 +67,26 @@ export default function ConfirmEmailSent () {
         }
     }
 
-     */
-
-
 
     return (
 
-    <div className='signIn-Validation container'>
+    <div className='sign-in-validation container'>
 
         <div className="text-validation">
 
             {error ? <Alert severity="error">{error}</Alert> :
-            <p>{userData.firstname}, votre inscription a bien été prise en compte.
+            <p>{userData.firstname}Votre inscription a bien été prise en compte.
             Un e-mail de confirmation vous a été envoyé, merci de vérifier votre boite mail.
-                Attention, vérifiez si le mail n'est pas dans vos Spams.</p>}
+                <br></br>Attention, vérifiez si le mail n'est pas dans vos Spams.</p>}
 
         </div>
 
         {/* MATERIAL UI BUTTON FOR CLOSE VALIDATION */}
         <Button component={Link} to={'/send-new-validation'} onClick={sendEmail}>Renvoyer un mail</Button>
+
+        <div className="button-bot-account">
+            <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
+        </div>
 
     </div>
     );

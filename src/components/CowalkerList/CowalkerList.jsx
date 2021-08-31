@@ -16,6 +16,7 @@ function CowalkerList({cowalk}) {
     const [isMember, setIsMember] = useState();
     const [owner, setOwner] = useState({})
     const [membersList, setMembersList] = useState([]);
+    const [loading, setLoading] = useState(true)
     const [userData, setUserData] = useState({});
     const {currentUser} = useAuth();
 
@@ -24,11 +25,14 @@ function CowalkerList({cowalk}) {
             .get()
             .then((owner) => {
                 setOwner(database.formatDoc(owner))
+                setLoading(false)
             })
             .catch(() => {
                 console.log('Couldnt retrieve the owner')
             })
-    }, [])
+
+    }, [cowalk]) 
+
 
     useEffect(() => {
         return database.membersApproved(cowalk.id).onSnapshot((querySnapshot) => {
@@ -38,12 +42,16 @@ function CowalkerList({cowalk}) {
             })
             setMembersList(approvedMembers)
         });
-    }, [])
+
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
 
 
     useEffect(() => {
         currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
-    }, [])
+
+    }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
+
 
     useEffect(() => {
         database.users.doc(currentUser.uid)
@@ -62,7 +70,17 @@ function CowalkerList({cowalk}) {
             .catch(error => {
                 console.log('Error getting collection')
             })
-    }, [cowalk.id, cowalk.owner, currentUser.uid])
+        database.membersApproved(cowalk.id).doc(currentUser.uid)
+            .get()
+            .then((memberApproved) => {
+                if (memberApproved.exists) {
+                    setIsMember(true);
+                }
+            })
+            .catch(error => {
+                console.log('Error getting collection')
+            })
+    }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
 
 
     function handleJoinCowalk() {
@@ -75,7 +93,7 @@ function CowalkerList({cowalk}) {
                     .add({
                         cowalkRequested: cowalk.id,
                         guest: currentUser.uid,
-                        status:'approval request',
+                        status:'pending request',
                         requestDate:new Date()
                     })
                     .then(() => {
@@ -106,31 +124,40 @@ function CowalkerList({cowalk}) {
                             console.log('Notif supprimée')
                         })   
                     })
-                })
-                   
+                })   
+            })
+
+        database.membersApproved(cowalk.id).doc(currentUser.uid)
+            .delete()
+            .then(() => {
+                setIsMember(false)
             })
     }
 
 
     return (
+        <>
+        {!loading && 
         <div className='cowalkerListcontainer'>
             <div>{!isOwner &&
 
             <div className="cowalkerAddIcon">
-                {!isMember ? <AddCircleIcon onClick={handleJoinCowalk}/> : <RemoveCircle onClick={handleLeaveCowalk}/>}
+                {!isMember ? <AddCircleIcon onClick={handleJoinCowalk}/> : <><p>MEMBER </p><RemoveCircle onClick={handleLeaveCowalk}/></>}
             </div>
             }
             </div>
             <ul className="cowalkerList">
                 <CowalkerItem key={owner.id} member={owner} />
+
                 {membersList.map(member => {
                     return <CowalkerItem key={member.id} member={member}/>
+
                 })}
 
-
             </ul>
-
         </div>
+        }
+        </>
     )
 };
 

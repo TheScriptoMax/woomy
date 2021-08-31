@@ -1,4 +1,3 @@
-
 /// ----- Import Components ---- ///
 import CowalkingCard from "../CowalkingCard/CowalkingCard";
 
@@ -12,56 +11,55 @@ import { useState,useEffect } from 'react';
 import {database} from '../../firebase'
 
 
+
+
 function CowalkingList () {
 
-    const [initialCowalks, setInitialCowalks] = useState([])
-    const [updatedCowalks,setUpdatedCowalks] = useState([])
-    const [lastInitialDate, setLastInitialDate] = useState(new Date())
-    const [completeCowalksList, setCompleteCowalksList] = useState([])
+
+
+    const [cowalks, setCowalks] = useState([])
+    const [pageLoading, setPageLoading] = useState(true);
 
 
     useEffect(() => {
-        return database.cowalks.where("createdAt",">=",lastInitialDate).onSnapshot((querySnapshot) => {
+        return database.cowalks.onSnapshot((querySnapshot) => {
             const tempResults = [];
             querySnapshot.forEach((doc) => {
                 tempResults.push(database.formatDoc(doc))
             })
-            setUpdatedCowalks(tempResults)
+            setCowalks(tempResults)
         });
     }, [])
 
     useEffect(() => {
         database.cowalks
+            .orderBy('startTime')
             .get()
             .then((querySnapshot) => {
-                const tempResults = [];
-                querySnapshot.forEach((doc) => {
-                    tempResults.push(
-                        database.formatDoc(doc)
-                    )
-                })
-                const lastCreatedAt = new Date(Math.max(...tempResults.map(e => e.createdAt.seconds)) * 1000)
-                setLastInitialDate(lastCreatedAt);
-                console.log(lastCreatedAt)
-                setInitialCowalks(tempResults);
-                console.log(tempResults);
+
+                    const tempResults = [];
+                    querySnapshot.forEach((doc) => {
+                        tempResults.push(
+                            database.formatDoc(doc)
+                        )
+                    })
+                setCowalks(tempResults);
+                    setPageLoading(false)
+
             })
     }, []);
 
     return (
         <div className="container">
 
-            {initialCowalks.length ?
-
             <ul className='cowalkingList'>
-                {
-                    initialCowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
-                }
 
-                { updatedCowalks.length > 0 &&
-                    updatedCowalks.map((cowalk,index)=><CowalkingCard cowalk={cowalk} index={index} />)
-                }
-            </ul> : <p>Allez vous faire cuire un oeuf chez les papous d'en face</p> }
+                { pageLoading ? <p>Loading</p> : (cowalks.length>0 ?
+
+                    cowalks.map((cowalk,index)=><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index} />) : <p>Aucun résultat</p>) }
+
+
+            </ul>
         </div>
     )
 }

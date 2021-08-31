@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import 'firebase/storage';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
@@ -25,6 +26,7 @@ export const database = {
     towns: firestore.collection('towns'),
     idCardFiles: firestore.collection('idCardFiles'),
     idPictureFiles: firestore.collection('idPictureFiles'),
+
     membersPending: cowalkId => {
         return firestore.collection('cowalks').doc(cowalkId).collection('membersPending');
     },
@@ -48,6 +50,8 @@ export const database = {
     },
 }
 
+
 export const storage = app.storage();
 
 export default app;
+

@@ -1,8 +1,9 @@
 /// ----- Material UI ----- ///
+
 import InputLabel from '@material-ui/core/Inputlabel';
-import MenuItem from '@material-ui/core/MenuItem';
+
 import Button from "@material-ui/core/Button";
-import TextField from '@material-ui/core/Textfield';
+import TextField from '@material-ui/core/TextField';
 import {
     DateTimePicker,
     MuiPickersUtilsProvider,
@@ -14,7 +15,7 @@ import CowalkingCard from "../CowalkingCard/CowalkingCard";
 import './cowalkingsearch.css';
 
 /// ----- React Modules ----- ///
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import {Link} from 'react-router-dom';
 
@@ -25,8 +26,8 @@ import { database } from '../../firebase';
 function CoWalkingSearch() {
 
     const [locations, setLocations] = useState([]);
-    const startFromRef = useRef();
-    const [selectedDate, handleDateChange] = useState(new Date());
+    const [startFrom,setStartFrom] = useState();
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const [resultsList, setResultsList] = useState([]);
     const [noSearch, setNoSearch] = useState(true)
 
@@ -47,7 +48,7 @@ function CoWalkingSearch() {
         const rangeEnd = new Date(selectedDate);
         rangeStart.setHours(rangeStart.getHours() - 2);
         rangeEnd.setHours(rangeEnd.getHours() + 2);
-        database.cowalks.where("startFrom", "==", startFromRef.current.value).where("startTime", ">=", rangeStart).where("startTime", "<=", rangeEnd).orderBy("startTime")
+        database.cowalks.where("startFrom", "==", startFrom).where("startTime", ">=", rangeStart).where("startTime", "<=", rangeEnd).orderBy("startTime")
             .get()
             .then((queryResults) => {
                 const tempResults = []
@@ -56,37 +57,38 @@ function CoWalkingSearch() {
                 })
                 setResultsList(tempResults);
                 setNoSearch(false);
-                console.log(tempResults)
+                
                 console.log("Requete envoyée")
             })
     }
 
     return (
-      <div className=" container colwalkingsearch-container">
-         <h2>Rechercher un itinéraire</h2>
-         <form onSubmit={handleSubmitSearch} className="searchform">
+        <div className="container colwalkingsearch-container">
+            <h2>Rechercher un itinéraire</h2>
+            <form onSubmit={handleSubmitSearch} className="searchform ">
 
-            <TextField select inputRef={startFromRef} label="Départ">
-                {locations.map((option) => (
-                <option key={option.id} value={option.name}>
-                {option.name}
-                </option>
-            ))}
-            </TextField>
+                <InputLabel className="label">Départ</InputLabel>
 
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DateTimePicker
-                value={selectedDate}
-                onChange={handleDateChange}
-                minutesStep={5}
-              />
-            </MuiPickersUtilsProvider>
+                <TextField defaultValue="" value={startFrom} onChange={(event)=>setStartFrom(event.targent.value)} select labelId="label" id="select">
+                    {locations.map((option) => (
+                        <option key={option.id} value={option.name}>
+                        {option.name}
+                        </option>
+                    ))} 
+                </TextField>
 
-            <Button type="submit" variant="contained">Rechercher</Button>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <DateTimePicker
+                        value={selectedDate}
+                        onChange={setSelectedDate}
+                        minutesStep={5}
+                    />
+                </MuiPickersUtilsProvider>
 
-          </form>
+                <Button type="submit" variant="contained">Rechercher</Button>
 
-          <div className="separator"></div>
+            </form>
+            <div className="separator"></div>
             {!noSearch &&
                 <ul className='cowalkingList'>
                 {resultsList.length > 0

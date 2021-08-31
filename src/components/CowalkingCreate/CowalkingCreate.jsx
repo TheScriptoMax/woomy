@@ -1,19 +1,17 @@
-
 /// ----- Material UI ---- ///
-import  InputLabel from '@material-ui/core/Inputlabel';
-import  MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import {
   DateTimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
+import {Alert} from "@material-ui/lab";
 
 /// ----- CSS ----- ///
 import './cowalkingcreate.css';
 
 /// ----- React Modules ----- ///
 
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useState} from 'react';
 import DateFnsUtils from '@date-io/date-fns'
 import {TextField} from "@material-ui/core";
 import {useAuth} from "../../contexts/AuthContext";
@@ -21,7 +19,6 @@ import {useAuth} from "../../contexts/AuthContext";
 // FIREBASE
 import {database} from '../../firebase'
 import {useHistory} from "react-router-dom";
-import {Alert} from "@material-ui/lab";
 
 ///////// PAGE DE CREATION DES COPIETONNAGE //////////
 
@@ -32,8 +29,8 @@ function CowalkingCreate () {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const goToRef = useRef();
-    const startFromRef = useRef();
+    const [goTo,setGoTo] = useState('');
+    const [startFrom,setStartFrom] = useState('');
 
     const {currentUser} = useAuth();
 
@@ -56,8 +53,8 @@ function CowalkingCreate () {
             setError('');
             setLoading(true)
         await database.cowalks.add({
-            startFrom: startFromRef.current.value,
-            goTo: goToRef.current.value,
+            startFrom: startFrom,
+            goTo: goTo,
             startTime: selectedDate,
             createdAt: database.getCurrentTimestamp,
             owner: currentUser.uid,
@@ -70,15 +67,17 @@ function CowalkingCreate () {
         setLoading(false);
     }
 
-   
+
 
 
 
     return (
-      <div className="container">
+      <div className="create-walk container">
         <h2>Créer votre itinéraire</h2>
         <form className="createform">
-        <TextField select inputRef={startFromRef} label="Départ">
+            
+            <TextField select defaultValue="" value={startFrom} onChange={(event)=>setStartFrom(event.target.value)} label="Départ">
+                <option value="" disabled>Choisissez un lieu de départ</option>    
                 {locations.map((option) => (
                 <option key={option.id} value={option.name}>
                 {option.name}
@@ -87,7 +86,8 @@ function CowalkingCreate () {
             </TextField>
 
 
-            <TextField select inputRef={goToRef} label="Destination">
+            <TextField select defaultValue="" value={goTo} onChange={(event)=>setGoTo(event.target.value)} label="Destination">
+                <option value="" disabled>Choisissez une destination</option> 
                 {locations.map((option) => (
                 <option key={option.id} value={option.name}>
                 {option.name}
@@ -95,17 +95,17 @@ function CowalkingCreate () {
             ))}
             </TextField>
 
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DateTimePicker
-            value={selectedDate}
-            onChange={setSelectedDate}
-            minutesStep={5}
-            />
-          </MuiPickersUtilsProvider>
-          <div className="button-container">
-            <Button disabled={loading} onClick={handleSubmitCowalk} type="submit" variant="contained">Créer</Button>
-            {error && <Alert severity="error">{error}</Alert>}
-          </div>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <DateTimePicker
+                value={selectedDate}
+                onChange={setSelectedDate}
+                minutesStep={5}
+                />
+            </MuiPickersUtilsProvider>
+            <div className="button-container">
+                <Button disabled={loading} onClick={handleSubmitCowalk} type="submit" variant="contained">Créer</Button>
+                {error && <Alert severity="error">{error}</Alert>}
+            </div>
         </form>
       </div>
     )

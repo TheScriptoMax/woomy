@@ -5,8 +5,6 @@ import {database} from '../../firebase';
 
 // MATERIAL UI IMPORT
 import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import Button from '@material-ui/core/Button';
 
 // CSS IMPORT
@@ -26,12 +24,10 @@ export default function SignIn () {
     const firstnameRef = useRef();
     const lastnameRef = useRef();
     const phoneRef = useRef();
+    const birthdateRef = useRef();
     const history = useHistory();
 
     const {signup} = useAuth()
-
-
-
 
     async function handleSubmit(ev) {
         ev.preventDefault();
@@ -41,7 +37,6 @@ export default function SignIn () {
         try {
             setLoading(true);
             setError('');
-            console.log(emailRef.current.value)
             await signup(emailRef.current.value, passwordRef.current.value)
                 .then((authUser) => {
                     database.users
@@ -51,13 +46,25 @@ export default function SignIn () {
                             firstname: firstnameRef.current.value,
                             lastname: lastnameRef.current.value,
                             phoneNumber: phoneRef.current.value,
+                            birthdate: birthdateRef.current.value,
+                            profilPic: '',
                             createdAt: database.getCurrentTimestamp,
+                            profilPic: '',
+                            accepted:false,
+                            admin:false
+                        })
+                        .then(() => {
+                            console.log('Crée dans la database')
+                            history.push("/send-confirm")
+                        })
+                        .catch((error)=> {
+                            console.log(error.message)
                         });
                 })
-                .then(() => {
-                        history.push("/send-confirm")
-                    }
-                );
+                .catch((error) => {
+                    console.log("Message d'erreur: " + error.message)
+
+                })
         } catch
             (error) {
             setError(error.message)
@@ -68,21 +75,22 @@ export default function SignIn () {
 
     return (
 
-    <div className='signIn container'>
+    <div className='sign-in container'>
 
-        <form onSubmit={handleSubmit} className='signIn-content'>
+        <form onSubmit={handleSubmit} className='sign-in-content'>
 
             {/* MATERIAL UI INPUT TO COMPLETE FOR SIGNIN */}
-    
             <TextField inputRef={firstnameRef} id="standard-basic" label="Entrez votre nom" variant="standard" />
             
             <TextField inputRef={lastnameRef} id="standard-basic" label="Entrez votre prénom" variant="standard" />
             
-            <TextField type="email" inputRef={emailRef} id="standard-basic" label="Entrez votre email" variant="standard" />
+            <TextField inputRef={emailRef} type='email' id="standard-basic" label="Entrez votre email" variant="standard" />
+
 
             <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Entrez votre numéro de téléphone" variant="standard" />
-            
-            <TextField type="date" id="standard-basic" label="Entrez votre date de naissance" variant="standard"  InputLabelProps={{
+
+            <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Entrez votre date de naissance" variant="standard"  InputLabelProps={{
+
           shrink: true,
         }}/>
 
@@ -98,10 +106,9 @@ export default function SignIn () {
 
         </form>
 
-        <div className='valid-signIn'>
-                <p>Une pièce d’identité + une photo de vous sont nécessaires pour établir votre propre sécurité et celles avec qui vous ferez du copiétonnage. Après chaque vérification nous détruisont celles ci.
+        <div className='valid-sign-in'>
+                <p>Une pièce d’identité et une photo de vous, seront demandées, car nécessaires pour établir votre propre sécurité et celles avec qui vous ferez du copiétonnage. Après chaque vérification, nous détruirons celles-ci.
                 </p>
-                {/* MATERIAL UI CALL TO ACTION FOR SIGNIN */}
         </div>
 
     </div>
