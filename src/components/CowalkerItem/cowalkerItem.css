@@ -12,11 +12,13 @@
     margin: 0 auto;
     margin-bottom: 0.875rem;
 }
-.cowalkerItem figure img{   
+.cowalkerItem figure img{
     max-width: 100%;
 }
 .cowalkerItem h3{   
     margin-bottom: 0.875rem;
+    font-weight: 400;
+    text-transform: capitalize;
 }
 
 .cowalkerItemButton{

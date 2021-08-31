@@ -24,9 +24,10 @@ function NotifCard({notif}) {
             .then(doc => {
                 setUserData(database.formatDoc(doc))
             })
+       
 
 
-    },[notif])
+    },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
 
     function handleDeleteNotif (e) {
@@ -37,7 +38,6 @@ function NotifCard({notif}) {
             console.log('notif Clear')
         )
     }
-
 
 
     function onGuestApproval () {
@@ -54,7 +54,6 @@ function NotifCard({notif}) {
                         .then(()=> {
                              console.log('notif delete')
                         })
-
                         database.notifications(notif.guest)
                             .add({
                                 cowalkRequested: notif.cowalkRequested,
@@ -62,11 +61,8 @@ function NotifCard({notif}) {
                                 status:'approval request',
                                 requestDate:new Date()
                             })
-
                     })
             })
-            
-
     }
     return (
 
@@ -93,11 +89,10 @@ function NotifCard({notif}) {
 
             <div className="card-notif-top">
                 <div className="card-notif-md notif-part">                
-                    <p className="first">Vous avez bien était accepter dans le copiétonnage de :</p>
-                    <p className="grey">{userData.firstname} {userData.lastname}</p>
+                    <p className="first">Vous avez bien était accepter dans le copiétonnage de </p>
+                    
                 </div>
                 
-                <Avatar/>
                 <Button onClick={(event)=>handleDeleteNotif(event)}><Clear/></Button>
                 
             </div></>
