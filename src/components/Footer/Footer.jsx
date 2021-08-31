@@ -14,33 +14,32 @@ import {Link}from "react-router-dom";
 
 function Footer() {
     return (
-   <footer>
-        <Link to="/list">
-            <div>
-                <div className="itinIcon">
-                    <Flag/>
+    <footer>
+            <Link to="/list">
+                <div>
+                    <div className="itinIcon">
+                        <Flag/>
+                    </div>
+                    <p>Itinéraire(s)</p>
                 </div>
-                <p>Itinéraire(s)</p>
-            </div>
-        </Link>
-        <Link to="/create">
-            <div> 
-                <div className="createIcon">
-                    <Add/>
+            </Link>
+            <Link to="/create">
+                <div> 
+                    <div className="createIcon">
+                        <Add/>
+                    </div>
+                    <p>Créer</p>
                 </div>
-                <p>Créer</p>
-            </div>
-        </Link>
-        <Link to="/message">
-            <div>
-                <div className="messageIcon">
-                    <MessageIcon/>
+            </Link>
+            <Link to="/message">
+                <div>
+                    <div className="messageIcon">
+                        <MessageIcon/>
+                    </div>
+                    <p>Message</p>
                 </div>
-                <p>Message</p>
-            </div>
-        </Link>
-
-   </footer>
+            </Link>
+    </footer>
     );
   }
   
