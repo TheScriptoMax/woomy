@@ -90,7 +90,7 @@ function NotifCard({notif}) {
 
             <div className="card-notif-top">
                 <div className="card-notif-md notif-part">                
-                    <p className="first">Vous avez bien était accepter dans le copiétonnage</p>
+                    <p className="first">Vous avez bien été accepté dans le copiétonnage</p>
                     
                 </div>
                 

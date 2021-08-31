@@ -3,6 +3,7 @@
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 import ButtonRound from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+
 import EditIcon from '@material-ui/icons/Edit';
 
 /// ----- CSS ----- ///
@@ -16,9 +17,12 @@ import {database} from '../../firebase';
 
 import {useAuth} from "../../contexts/AuthContext";
 
+
+
 //////// HEADER DU TICKET DE COPIETONNAGE /////////
 
 function CowalkingTicketHeader({cowalk}) {
+
 
     const [isOwner,setIsOwner] = useState(false);
     const [startFromUrl, setStartFromUrl] = useState([]);
@@ -94,13 +98,16 @@ function CowalkingTicketHeader({cowalk}) {
             .finally(() => {
                 history.push("/list")
             })
-
+        /* setToggleModal(!toggleModal) */
 
     }
 
+    
+
     return (
         <div className="cowalkingTicketHeader">
-        <h2>Itinéraire :</h2>
+        
+        <h2>Itinéraire:</h2>
         {isOwner&&
             <div className="cowalkingTicketHeaderButtonWrapper">
                 <div className='cowalkingTicketHeaderButton'>
@@ -121,16 +128,16 @@ function CowalkingTicketHeader({cowalk}) {
             </div>}
             <div className='cowalkingTicketRoute'>
                 <div>
-                    <h3>Départ :</h3>
+                    <h3>Départ:</h3>
                     <p>{cowalk.startFrom}</p>
                     <a href={startFromUrl} target="_blank" rel="noreferrer">Voir sur la carte</a>
                 </div>
-                {/* <span>
+                <span>
                     <TrendingFlatIcon/>
-                </span> */}
-                <div className="ticket-to-go">
-                    <h3>Destination :</h3>
-                    <p >{cowalk.goTo}</p>
+                </span>
+                <div>
+                    <h3>Destination:</h3>
+                    <p>{cowalk.goTo}</p>
                     <a href={goToUrl} target="_blank" rel="noreferrer">Voir sur la carte</a>
                 </div>
             </div>

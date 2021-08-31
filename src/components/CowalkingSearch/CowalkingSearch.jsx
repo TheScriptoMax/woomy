@@ -69,7 +69,7 @@ function CoWalkingSearch() {
 
                 <InputLabel className="label">Départ</InputLabel>
 
-                <TextField defaultValue="" value={startFrom} onChange={(event)=>setStartFrom(event.targent.value)} select labelId="label" id="select">
+                <TextField value={startFrom} onChange={(event)=>setStartFrom(event.targent.value)} select labelId="label" id="select">
                     {locations.map((option) => (
                         <option key={option.id} value={option.name}>
                         {option.name}
@@ -99,12 +99,9 @@ function CoWalkingSearch() {
                         <Button variant="contained">Créer un copiétonnage</Button>
                         </Link>
                     </>
-
                 }
             </ul>
-
             }
-
         </div>
     );
 }

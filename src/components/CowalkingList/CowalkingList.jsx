@@ -17,13 +17,12 @@ import {useAuth} from "../../contexts/AuthContext";
 function CowalkingList () {
 
 
-
     const [cowalks, setCowalks] = useState([])
     const [pageLoading, setPageLoading] = useState(true);
 
     const {currentUser} = useAuth();
-    
-
+    let cowalksbleu = database.cowalks
+    console.log(cowalksbleu)
     useEffect(() => {
         return database.cowalks
             .onSnapshot((querySnapshot) => {
@@ -57,27 +56,6 @@ function CowalkingList () {
         });
     }, [])
 
-
-    
-    
-   /*  useEffect(() => {
-        database.cowalks.where('owner','==',currentUser.uid)
-            .orderBy('startTime')
-            .get()
-            .then((querySnapshot) => {
-
-                    const tempResults = [];
-                    querySnapshot.forEach((doc) => {
-                        tempResults.push(
-                            database.formatDoc(doc)
-                        )
-                    })
-                setCowalks(tempResults);
-                setPageLoading(false)
-
-            })
-        
-    }, []); */
 
     return (
         <div className="container">

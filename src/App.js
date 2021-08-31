@@ -80,10 +80,9 @@ function App() {
 
                     {/*----- Route public -----*/}
                     <PublicRoute path='/signin' component={SignIn}/>
-                    <Route exact path='/landing' component={Landing}/>
-
                     <PublicRoute path='/login' component={Login}/>
                     <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
+                    <PublicRoute path='/' component={Landing}/>
 
                     {/*----- Route private Attente validation Email et AwaitingApproval -----*/}
 

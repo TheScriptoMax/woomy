@@ -121,7 +121,7 @@ function Account() {
             <>
                 <div className="account-top">
                     {pictureLoading ?
-                        <img className='img-picture' alt="Votre photo" src={urlPicture}/> :
+                        <img className='img-picture' alt="profil" src={urlPicture}/> :
                         <Avatar/>
                     }
                     <h2>Mon compte</h2>
