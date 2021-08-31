@@ -14,8 +14,12 @@ export default function AwaitingApprovalRoute({component: Component, ...rest})
         database.users.doc(currentUser.uid)
             .get()
             .then((doc) => {
-                setIsAccepted(doc.data().accepted)
-                setLoading(false)
+                if (doc.exists) {
+                    setIsAccepted(doc.data().accepted)
+                    setLoading(false)
+                } else {
+                    setLoading(false)
+                }
             })
     }, [currentUser.uid])
 

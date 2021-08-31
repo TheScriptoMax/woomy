@@ -13,10 +13,16 @@ export default function PublicRoute({component: Component, ...rest}) {
             database.users.doc(currentUser.uid)
                 .get()
                 .then((doc) => {
-                    setIsAccepted(doc.data().accepted)
+                    if (doc.exists) {
+                        setIsAccepted(doc.data().accepted)
+                        setLoading(false)
+                    } else {
+                        setLoading(false)
+                    }
                 })
+        } else {
+            setLoading(false)
         }
-        setLoading(false)
     }, [currentUser])
 
     return (
