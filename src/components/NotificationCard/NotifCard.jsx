@@ -1,9 +1,11 @@
+// IMPORT FIREBASE
 import {database} from '../../firebase';
+
+// IMPORT REACT
 import {useState, useEffect} from 'react';
 import {useAuth} from "../../contexts/AuthContext";
 
 // MATERIAL UI IMPORT
-
 import Button from '@material-ui/core/Button';
 import Clear from '@material-ui/icons/Clear';
 import { Avatar } from '@material-ui/core';
@@ -71,31 +73,34 @@ function NotifCard({notif}) {
             <><div className="separator-dark"></div>
 
             <div className="card-notif-top">
-                <Avatar/>
                 <div className="card-notif-md notif-part">
-                    <p className="first">{userData.firstname} {userData.lastname}</p>
+                    <p className="first first-name">{userData.firstname} {userData.lastname}</p>
                     <p className="grey">Requete de copietonnage</p>
                 </div>
                 <div className="card-notif-bot notif-part first">
                     <Button onClick={(event)=>handleDeleteNotif(event)}><Clear/></Button>
-                </div>
-            </div>
-
-            <div className="container-button">
+                    <div className="container-button">
                 <Button variant="contained" onClick={(event)=>onGuestApproval()}>Accepter</Button>
 
-            </div></>):(
+                    </div>
+                </div>
+                
+            </div>
+
+            </>):(
                 <><div className="separator-dark"></div>
 
             <div className="card-notif-top">
                 <div className="card-notif-md notif-part">                
-                    <p className="first">Vous avez bien était accepter dans le copiétonnage de </p>
+                    <p className="first">Vous avez bien était accepter dans le copiétonnage</p>
                     
                 </div>
                 
+
                 <Button onClick={(event)=>handleDeleteNotif(event)}><Clear/></Button>
                 
-            </div></>
+            </div>
+            </>
             
             )}
 

@@ -1,3 +1,4 @@
+// IMPORT FIREBASE
 import { database } from '../../firebase';
 
 // REACT IMPORT
@@ -9,6 +10,8 @@ import PlaceCard from '../PlaceCard/PlaceCard';
 
 // MATERIAL UI IMPORT
 import { Button } from '@material-ui/core';
+
+// IMPORT COMPONENT
 import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 
 //LIST ALL LOCATION

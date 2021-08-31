@@ -1,8 +1,17 @@
+// IMPORT CSS
 import './admincowalks.css'
+
+// IMPORT MATERIAL
 import {Button, TextField} from '@material-ui/core';
+
+// IMPORT REACT
 import {Link} from "react-router-dom";
 import React, {useRef, useState} from "react";
+
+// IMPORT FIREBASE
 import {database} from "../../firebase";
+
+// IMPORT COMPONENT
 import UserCard from "../AdminUserCard/AdminUserCard";
 import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 import {DateTimePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";

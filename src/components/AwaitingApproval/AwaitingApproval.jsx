@@ -1,7 +1,5 @@
 // REACT IMPORT
-
 import {useEffect,useState} from "react";
-
 
 // FIREBASE IMPORT
 import {database, storage} from "../../firebase";
@@ -63,7 +61,7 @@ export default function AwaitingApproval () {
                 console.log(error.message)
 
             })
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     function handleIdCardUpload(ev) {
         const idCardFile = ev.target.files[0];
@@ -185,7 +183,7 @@ export default function AwaitingApproval () {
                     />
                     {urlPicture &&
                     <div className='container-img'>
-                        <img className='img-picture' src={urlPicture} alt="Votre photo"/>
+                        <img className='img-picture' src={urlPicture} alt="Votre preuve d'identité'"/>
                     </div>}
                     <label htmlFor="raised-button-file-picture">
                         <Button variant="raised" component="span">

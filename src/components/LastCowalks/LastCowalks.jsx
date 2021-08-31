@@ -1,4 +1,3 @@
-
 /// ----- Import Components ---- ///
 import CowalkingCard from "../CowalkingCard/CowalkingCard";
 

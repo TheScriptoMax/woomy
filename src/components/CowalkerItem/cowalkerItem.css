@@ -4,13 +4,15 @@
     margin-bottom: 1.75rem;
 }
 .cowalkerItem figure{   
-    max-width: 3.375rem;
-    max-height: 3.375rem;
+    width: 3.375rem;
+    height: 3.375rem;
     border-radius: 50%;
-    border: 1px solid black;
     overflow: hidden;
     margin: 0 auto;
     margin-bottom: 0.875rem;
+    display: flex;
+    justify-content:center;
+    align-items:center;
 }
 .cowalkerItem figure img{
     max-width: 100%;

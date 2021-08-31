@@ -1,7 +1,16 @@
+// IMPORT CSS
 import './adminusers.css'
+
+// IMPORT MATERIAL
 import {Button, TextField} from '@material-ui/core';
+
+// IMPORT REACT
 import React, {useRef, useState} from "react";
+
+// IMPORT FIREBASE
 import {database} from "../../firebase";
+
+// IMPORT COMPONENT
 import AdminUserCard from "../AdminUserCard/AdminUserCard";
 import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 

@@ -1,6 +1,13 @@
+// IMPORT REACT
 import React, {useEffect, useState} from 'react'
+
+// IMPORT CSS
 import './adminacceptusers.css'
+
+// IMPORT FIREBASE
 import {database} from "../../firebase";
+
+// IMPORT COMPONENT
 import AdminUsersAwaitingApprovalCard from "../AdminUsersAwaitingApprovalCard/AdminUsersAwaitingApprovalCard";
 import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 

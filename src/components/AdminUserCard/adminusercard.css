@@ -1,0 +1,13 @@
+.admin-user-card{
+    border: solid 3px #670652;
+    border-radius: 5px;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.profile-pic{
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    object-fit: cover;
+}

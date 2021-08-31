@@ -1,7 +1,12 @@
+// IMPORT REACT
 import React, {useEffect, useState} from 'react'
+
+// IMPORT MATERIAL
 import {Button} from "@material-ui/core";
-import {database, storage} from "../../firebase";
 import {Alert} from "@material-ui/lab";
+
+// IMPORT FIREBASE
+import {database, storage} from "../../firebase";
 
 
 export default function AdminUsersAwaitingApprovalCard({user}) {
@@ -192,20 +197,24 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
     }
 
     return (
-        <div>
-            <p>{user.firstname}</p>
-            <p>{user.lastname}</p>
-            <p>utilisatrice inscrite - {user.createdAt.toString()}</p>
-            <a href={`mailto:${user.email}`}>{user.email}</a>
-            <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a>
-            <div>
-            {urlPicture ? <img src={urlPicture} alt="Profil"/> : <p>Pas encore de photo de pose</p>}
-            {urlCard ? <img src={urlCard} alt="Carte d'identité"/> : <p>Pas encore de carte d'identité</p>}
+        <div className="admin-user-card">
+            <span className="user-name">{user.firstname} </span>
+            <span className="user-name">{user.lastname}</span>
+            <p>utilisatrice inscrite - {new Date(user.createdAt.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})}</p>
+            <p>E-mail: <a href={`mailto:${user.email}`}>{user.email}</a></p>
+            <p>Téléphone: <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a></p>
+        
+            <div className="admin-user-card-img-container">
+                    {urlPicture ? <a href={urlPicture} target="_blank">Photo de confirmation: <br/><img src={urlPicture} alt="Profil" className="admin-user-card-img"/></a> : <p>Pas encore de photo de pose</p>}
+
+                    {urlCard ? <a href={urlCard} target="_blank">Pièce d'identité: <br/><img src={urlCard} alt="Carte d'identité" className="admin-user-card-img"/></a> : <p>Pas encore de carte d'identité</p>}
+
+
             </div>
             {error && <Alert severity="error">{error}</Alert>}
             {message && <Alert severity="success">{message}</Alert>}
             {urlPicture && urlCard &&
-            <Button variant="contained" onClick={handleApproveUser}>Accepter</Button>}
+            <Button variant="contained" onClick={handleApproveUser} color="primary">Accepter</Button>}
             <Button variant="contained" onClick={handleDeleteUser}>Supprimer</Button>
         </div>
     )

@@ -1,16 +1,17 @@
+// IMPORT REACT
 import {useState,useEffect} from 'react'
+
 /// ----- Material UI ----- ///
 import ButtonRound from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 /// ----- Import image ----- ///
-import ImageProfil from './profile-pic-placeholder.png'
+import ImageProfil from '../../assets/profile-pic-placeholder.png'
 import {database} from '../../firebase';
 
-
+// IMPORT FIREBASE
 import {useAuth} from "../../contexts/AuthContext";
-
 
 /// ----- CSS ----- ///
 import "./cowalkingCard.css";
@@ -103,33 +104,34 @@ function CowalkingCard ({cowalk,index}) {
     const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})
     
     return(
-        <Link
-            to={`/ticket/${cowalk.id}`}
-            >
+
             <li className='cowalkingCard' key={cowalk.id}>
-                <div className='cowalkingCardTitle'>
-                <p className='cowalk-start'>Heure de départ : {currentCowalkStartTime}</p>
-                    {/* <h3>itinéraire:{index+1}</h3> */}
-                    <div className="main-card">
-                        <div className="cowalk-bar">
-                            <div className="dot"></div>
-                            <div className="bar"></div>
-                            <div className="dot"></div>
-                        </div>
-                            <div className='cowalkingCardRoute'>
-                                <div className="cowalkingCardDeparture">
-                                    <p>Départ:  </p>
-                                    <p>{cowalk.startFrom}</p>
+                <Link
+                    to={`/ticket/${cowalk.id}`}
+                >
+                <div>
+                    <div className='cowalkingCardTitle'>
+                    <p className='cowalk-start'>Heure de départ : {currentCowalkStartTime}</p>
+                        {/* <h3>itinéraire:{index+1}</h3> */}
+                        <div className="main-card">
+                            <div className="cowalk-bar">
+                                <div className="dot"></div>
+                                <div className="bar"></div>
+                                <div className="dot"></div>
+                            </div>
+                                <div className='cowalkingCardRoute'>
+                                    <div className="cowalkingCardDeparture">
+                                        <p>Départ:  </p>
+                                        <p>{cowalk.startFrom}</p>
+                                    </div>
+                                <div className="cowalkingCardDestination">
+                                    <p>Destination:  </p>
+                                    <p>{cowalk.goTo}</p>
                                 </div>
-                            <div className="cowalkingCardDestination">
-                                <p>Destination:  </p>
-                                <p>{cowalk.goTo}</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className='cowalkingCardFooter'>
-                    
+                    <div className='cowalkingCardFooter'>
                         <div className='cowalkingCardCount'>
                             <figure>
                                 {pictureLoading ?
@@ -138,11 +140,16 @@ function CowalkingCard ({cowalk,index}) {
                                 }
                             </figure>
                             <ul>
-                                <li><span>+{membersList.length+1}</span></li>
+                                <li>
+                                    {membersList.length > 0 ?
+                                        <span className='members-list'>+{membersList.length}</span> :
+                                        <span className='members-list'>+0</span>
+                                    }
+                                </li>
                             </ul>
                         </div>
                         <div className='cowalkingCardButtons'>
-                            {isOwner && 
+                            {isOwner &&
                             <div className='buttons-owner'>
                                 <ButtonRound aria-label="delete" onClick={handleDeleteCowalk}>
                                     <DeleteIcon/>
@@ -155,12 +162,12 @@ function CowalkingCard ({cowalk,index}) {
                                     </ButtonRound>
                                 </Link>
                             </div>}
-                    
-                        
-                    </div>    
+                        </div>
+                    </div>
                 </div>
-            </li>
-        </Link>
+            </Link>
+        </li>
+
     )
 }
 

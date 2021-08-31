@@ -1,8 +1,10 @@
+// IMPORT REACT
 import {useAuth} from "../../contexts/AuthContext";
 import {useState, useEffect} from 'react';
-import {database} from '../../firebase'
 import NotifCard from '../NotificationCard/NotifCard'
 
+// IMPORT FIREBASE
+import {database} from '../../firebase'
 
 // CSS IMPORT
 import './notification.css';

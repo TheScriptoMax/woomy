@@ -1,4 +1,7 @@
+// IMPORT FIREBASE
 import {useAuth} from "../../contexts/AuthContext";
+
+// IMPORT COMPONENT
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 

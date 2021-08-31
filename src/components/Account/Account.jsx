@@ -14,7 +14,6 @@ import {useHistory} from "react-router-dom";
 /// ----- Firebase ///
 import {database, storage} from "../../firebase";
 
-
 //////// Page de profile ////////
 
 function Account() {
@@ -122,7 +121,7 @@ function Account() {
             <>
                 <div className="account-top">
                     {pictureLoading ?
-                        <img className='img-picture' alt="Votre photo" src={urlPicture}/> :
+                        <img className='img-picture-account' alt="Profil" src={urlPicture}/> :
                         <Avatar/>
                     }
                     <h2>Mon compte</h2>
@@ -158,28 +157,29 @@ function Account() {
                             <p>{userData.phoneNumber}</p>
                         </div>
                     </div>
-                    <Link to="/change-profile">
-                        <div className='account-field'>
+                    <div className='account-field'>
+                        <Link to="/change-profile">
                             <p>Changer vos informations</p>
                             <div className="account-field-result">
                             </div>
-                        </div>
-                    </Link>
-
-                    <div className='account-field'>
-                        <div className="button-bot-account">
-                            <input
-                                style={{display: 'none'}}
-                                id="raised-button-file-picture"
-                                type="file"
-                                onChange={handlePicture}
-                            />
-                            <label htmlFor="raised-button-file-picture">
-                                <Button variant="raised" component="span">Changer votre photo
-                                </Button>
-                            </label>
-                        </div>
+                        </Link>
                     </div>
+                    <div className='account-field'>
+
+                        <input
+                            style={{display: 'none'}}
+                            id="picture-profil-account"
+                            type="file"
+                            onChange={handlePicture}
+                        />
+                        <label htmlFor="picture-profil-account">
+                            <Button variant="raised" component="span">
+                                Changer votre photo
+                            </Button>
+                        </label>
+
+                    </div>
+
                     <Button onClick={clickResetPassword}>
                         <div className='account-field'>
                             <p>Réinitialiser le mot de passe</p>
