@@ -3,6 +3,7 @@ import {Button, TextField} from '@material-ui/core';
 import React, {useRef, useState} from "react";
 import {database} from "../../firebase";
 import AdminUserCard from "../AdminUserCard/AdminUserCard";
+import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 
 function AdminUsers() {
 
@@ -60,7 +61,7 @@ function AdminUsers() {
                 querySnapshot.forEach(doc => {
                     membersRetrieved.push(database.formatDoc(doc))
                 })
-                setSearchResults(membersRetrieved);
+                setSearchResults(membersRetrieved)
                 console.log(membersRetrieved)
             })
             .catch(error => {
@@ -88,25 +89,26 @@ function AdminUsers() {
 
         <div className="container container-admin">
             <h1>Administration des utilisatrices</h1>
+            <BackToAdminDashboardButton />
             <Button variant="contained" onClick={viewLastUsers}>Voir les 20 dernières utilisatrices</Button>
+            <h2>Chercher une utilisatrice</h2>
+            <h3>Par nom et prénom</h3>
             <form onSubmit={handleNameSearch}>
-                <h2>Chercher une utilisatrice</h2>
-                <h3>Par nom et prénom</h3>
                 <TextField inputRef={firstnameRef} id="standard-basic" label="Prénom de l'utilisatrice"
                            variant="standard"/>
                 <TextField inputRef={lastnameRef} id="standard-basic" label="Nom de l'utilisatrice" variant="standard"/>
                 <Button type="submit" variant="contained">Rechercher</Button>
             </form>
-            <br/>
+
+            <h3>Par ID</h3>
             <form onSubmit={handleIdSearch}>
-                <h3>Par ID</h3>
                 <TextField inputRef={userIdRef} id="standard-basic" label="Entrez l'id de l'utilisatrice"
                            variant="standard"/>
                 <Button type="submit" variant="contained">Rechercher</Button>
             </form>
 
+            <h3>Par Mail</h3>
             <form onSubmit={handleEmailSearch}>
-                <h3>Par Mail</h3>
                 <TextField type="email" inputRef={emailRef} id="standard-basic" label="Entrez l'email de l'utilisatrice"
                            variant="standard"/>
                 <Button type="submit" variant="contained">Rechercher</Button>
@@ -114,7 +116,7 @@ function AdminUsers() {
 
             <div>
                 <ul>
-                    {searchResults.map((user) => {
+                    {searchResults.length === 0 ? <p>Pas d'utilisatrice</p> : searchResults.map((user) => {
                         return <AdminUserCard key={user.id} user={user}/>
                     })}
                 </ul>

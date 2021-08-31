@@ -37,7 +37,8 @@ export default function PrivateRoute({component: Component, ...rest})
                 render={props => {
                     if (currentUser && currentUser.emailVerified && isAccepted) {
                         return <>
-                        <Header/><Component {...props} />
+                        <Header/>
+                            <Component {...props} />
                             <Footer/></>
                     } else if (currentUser && currentUser.emailVerified && !isAccepted) {
                         return <Redirect to="/awaiting-approval"/>
