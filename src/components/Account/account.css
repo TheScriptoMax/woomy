@@ -83,14 +83,17 @@
     margin-bottom: 2rem;
 }
 
+
 #change-picture-btn{
     color: white;
     text-transform: uppercase;
 }
+
 
 .img-picture{
     height: 15vh;
     width: 15vh;
     object-fit: cover;
     border-radius: 50%;
+
 }

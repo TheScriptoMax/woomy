@@ -10,6 +10,7 @@ import { useState,useEffect } from 'react';
 //FIREBASE
 import {database} from '../../firebase'
 
+import {useAuth} from "../../contexts/AuthContext";
 
 
 
@@ -20,19 +21,47 @@ function CowalkingList () {
     const [cowalks, setCowalks] = useState([])
     const [pageLoading, setPageLoading] = useState(true);
 
+    const {currentUser} = useAuth();
+    
 
     useEffect(() => {
-        return database.cowalks.onSnapshot((querySnapshot) => {
+        return database.cowalks
+            .onSnapshot((querySnapshot) => {
             const tempResults = [];
             querySnapshot.forEach((doc) => {
                 tempResults.push(database.formatDoc(doc))
             })
-            setCowalks(tempResults)
+            
+            
+            
+            
+            
+            
+            const tempResultsActual = tempResults.filter(tempResult=>{
+                return tempResult.startTime.seconds*1000 >= new Date().getTime()-3600000 ? true : false ;
+                  
+            })
+            tempResultsActual.sort(function compare (a,b){
+                    if(a.startTime.seconds<b.startTime.seconds){
+                        return -1
+                    }
+                    if(a.startTime.seconds>b.startTime.seconds){
+                        return 1
+                    }
+                    return 0;
+                })
+            setPageLoading(false)
+            setCowalks(tempResultsActual)
+            
+
         });
     }, [])
 
-    useEffect(() => {
-        database.cowalks
+
+    
+    
+   /*  useEffect(() => {
+        database.cowalks.where('owner','==',currentUser.uid)
             .orderBy('startTime')
             .get()
             .then((querySnapshot) => {
@@ -44,10 +73,11 @@ function CowalkingList () {
                         )
                     })
                 setCowalks(tempResults);
-                    setPageLoading(false)
+                setPageLoading(false)
 
             })
-    }, []);
+        
+    }, []); */
 
     return (
         <div className="container">

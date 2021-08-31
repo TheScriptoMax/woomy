@@ -3,11 +3,17 @@
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
+/**** BANDEAU WARNING *****/
+import BandeauWarning from "./components/BandeauWarning/BandeauWarning";
+
+
+
 /**** LEGAL *****/
-import Conditions from "./components/Conditions/Conditions";
+import Cgu from './components/Cgu/Cgu';
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 
 /**** CONNEXION *****/
+import Landing from './components/LandingPage/Landing'
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
@@ -16,7 +22,6 @@ import AwaitingApproval from "./components/AwaitingApproval/AwaitingApproval";
 
 /**** PROFIL *****/
 import Account from './components/Account/Account';
-import Params from './components/Params/Params';
 import ChangeAccount from './components/ChangeAccount/ChangeAccount';
 
 /**** ADMIN *****/
@@ -67,17 +72,25 @@ function App() {
 
             <Switch>
                 <AuthProvider>
-                    {/*----- Route public -----*/}
 
+
+                    {/*----- Route all access -----*/}
+                        <Route path='/cgu' component={Cgu}/>
+
+
+                    {/*----- Route public -----*/}
                     <PublicRoute path='/signin' component={SignIn}/>
+                    <Route exact path='/landing' component={Landing}/>
+
                     <PublicRoute path='/login' component={Login}/>
-                    <PublicRoute path='/cgu' component={Conditions}/>
                     <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
 
                     {/*----- Route private Attente validation Email et AwaitingApproval -----*/}
 
+
                     <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                     <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+
 
 
                     {/*----- Route private AwaitingApproval -----*/}
@@ -99,25 +112,27 @@ function App() {
 
                     {/*----- Profil connecté et approuvé -----*/}
 
-                        {/*----- Ticket -----*/}
-                        <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
-                        <PrivateRoute exact path='/create' component={CowalkingCreate}/>
-                        <PrivateRoute exact path='/search' component={CowalkingSearch}/>
-                        <PrivateRoute exact path='/list' component={CowalkingList}/>
-                        <PrivateRoute exact path='/message' component={Notification}/>
-                        <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit}/>
+                    
+                    
+                    {/*----- Ticket -----*/}
+                    <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
+                    <PrivateRoute exact path='/create' component={CowalkingCreate}/>
+                    <PrivateRoute exact path='/search' component={CowalkingSearch}/>
+                    <PrivateRoute exact path='/list' component={CowalkingList}/>
+                    <PrivateRoute exact path='/message'component={Notification} />
+                    <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
 
-                        {/*----- Account -----*/}
-                        <PrivateRoute exact path='/account' component={Account}/>
-                        <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
-                        <PrivateRoute exact path='/param' component={Params}/>
-
+                    {/*----- Account -----*/}
+                    <PrivateRoute exact path='/account' component={Account}/>
+                    <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
+                        
+                    
+                    <BandeauWarning/>
                 </AuthProvider>
             </Switch>
 
         </Router>
     );
-
 
 }
 

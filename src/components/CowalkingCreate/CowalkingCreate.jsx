@@ -45,31 +45,32 @@ function CowalkingCreate () {
             setLocations(tempLocations)
             
         })
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     async function handleSubmitCowalk(ev) {
         ev.preventDefault();
-        try {
-            setError('');
-            setLoading(true)
-        await database.cowalks.add({
-            startFrom: startFrom,
-            goTo: goTo,
-            startTime: selectedDate,
-            createdAt: database.getCurrentTimestamp,
-            owner: currentUser.uid,
-        }).then(()=>{
-                history.push("/list")
-            })
-        } catch(error) {
-        setError(error.message)
+        if (selectedDate.getTime() > new Date().getTime()-60000){
+
+            try {
+                setError('');
+                setLoading(true)
+            await database.cowalks.add({
+                startFrom: startFrom,
+                goTo: goTo,
+                startTime: selectedDate,
+                createdAt: database.getCurrentTimestamp,
+                owner: currentUser.uid,
+            }).then(()=>{
+                    history.push("/list")
+                })
+            } catch(error) {
+            setError(error.message)
+            }
+            setLoading(false);
+        } else {
+            setError("Vous ne pouvez pas créer un copiétonnage dans le passé")
         }
-        setLoading(false);
     }
-
-
-
-
 
     return (
       <div className="create-walk container">
@@ -99,7 +100,7 @@ function CowalkingCreate () {
                 <DateTimePicker
                 value={selectedDate}
                 onChange={setSelectedDate}
-                minutesStep={5}
+                minutesStep={15}
                 />
             </MuiPickersUtilsProvider>
             <div className="button-container">
