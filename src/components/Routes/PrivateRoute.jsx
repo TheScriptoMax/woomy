@@ -27,7 +27,7 @@ export default function PrivateRoute({component: Component, ...rest})
         } else {
             setLoading(false)
         }
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <>

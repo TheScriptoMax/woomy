@@ -25,7 +25,7 @@ export default function EmailNotVerifiedRoute({component: Component, ...rest})
         } else {
             setLoading(false)
         }
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <>

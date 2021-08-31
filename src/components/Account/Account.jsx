@@ -42,7 +42,7 @@ function Account() {
                 console.log(error.message)
             })
 
-    }, [currentUser])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
 
@@ -71,7 +71,7 @@ function Account() {
         }
     }
 
-    async function handlePicture(ev){
+    /* async function handlePicture(ev){
         ev.preventDefault();
 
         const idPicture = ev.target.files[0];
@@ -103,7 +103,7 @@ function Account() {
                     })
             }
             )
-    }
+    } */
 
     return (
       <div className='container'>
@@ -152,12 +152,12 @@ function Account() {
 
             <div className='account-field'>
                 <div className="button-bot-account">
-                    <input
+                    {/* <input
                         style={{ display: 'none' }}
                         id="raised-button-file-picture"
                         type="file"
                         onChange={handlePicture}
-                    />
+                    /> */}
                     {/*<div className='container-img'>*/}
                     {/*    <img className='img-picture' alt="Votre photo"/>*/}
                     {/*</div>*/}

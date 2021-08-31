@@ -10,7 +10,6 @@ export default function PublicRoute({component: Component, ...rest}) {
 
 
     useEffect(() => {
-        console.log(currentUser)
         if (currentUser && currentUser.hasOwnProperty("uid")) {
             database.users.doc(currentUser.uid)
                 .get()
@@ -26,7 +25,8 @@ export default function PublicRoute({component: Component, ...rest}) {
         } else {
             setLoading(false)
         }
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
 
     return (
         <>
