@@ -61,7 +61,6 @@ function CowalkingEdit() {
                     } else {
                         console.log("no such documents")
                     }
-                }).then(() => {
                 })
                 .catch((error) => {
                     console.log("Error getting document:", error);
@@ -76,14 +75,14 @@ function CowalkingEdit() {
         setLoading(true);
         setError('');
 
-        if (startFrom !== currentCowalk.startFrom) {
+        if (startFrom !== currentCowalk.startFrom && startFrom !== undefined) {
             promises.push(database.cowalks.doc(cowalkId).update({
                 startFrom: startFrom,
             }))
         }
         
 
-        if (goTo !== currentCowalk.goTo) {
+        if (goTo !== currentCowalk.goTo && goTo !== undefined) {
             promises.push(database.cowalks.doc(cowalkId).update({
                 goTo: goTo,
             }))

@@ -53,6 +53,7 @@ export default function SignIn () {
                         })
                         .then(() => {
                             console.log('Crée dans la database')
+                            history.push("/send-confirm")
                         })
                         .catch((error)=> {
                             console.log(error.message)
@@ -62,10 +63,6 @@ export default function SignIn () {
                     console.log("Message d'erreur: " + error.message)
 
                 })
-                .then(() => {
-                        history.push("/send-confirm")
-                    }
-                );
         } catch
             (error) {
             setError(error.message)

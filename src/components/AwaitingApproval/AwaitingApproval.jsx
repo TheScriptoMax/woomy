@@ -158,11 +158,12 @@ export default function AwaitingApproval () {
                         type="file"
                         onChange={handleIdCardUpload}
                     />
+                    {urlCard &&
                     <div className='container-img'>
 
                         <img className='img-card' src={urlCard} alt="Votre carte d'identité"/>
 
-                    </div>
+                    </div>}
                     <label htmlFor="raised-button-file-card">
                         <Button variant="raised" component="span">
                             {cardLoading ?
@@ -182,9 +183,10 @@ export default function AwaitingApproval () {
                         type="file"
                         onChange={handleIdPictureUpload}
                     />
+                    {urlPicture &&
                     <div className='container-img'>
                         <img className='img-picture' src={urlPicture} alt="Votre photo"/>
-                    </div>
+                    </div>}
                     <label htmlFor="raised-button-file-picture">
                         <Button variant="raised" component="span">
                             {pictureLoading ?

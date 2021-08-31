@@ -44,7 +44,7 @@ function Account() {
                 console.log(error.message)
             })
 
-    }, [currentUser])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
 

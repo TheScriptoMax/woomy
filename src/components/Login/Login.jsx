@@ -28,8 +28,6 @@ export default function Login () {
         
         try {
             setLoading(true);
-
-                 
             setError('');
             email && password && login(email,password).then(()=> {
                 history.push('/list');
