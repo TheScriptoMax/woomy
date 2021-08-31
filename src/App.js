@@ -13,6 +13,7 @@ import Cgu from './components/Cgu/Cgu';
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 
 /**** CONNEXION *****/
+import Landing from './components/LandingPage/Landing'
 import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
@@ -72,19 +73,24 @@ function App() {
             <Switch>
                 <AuthProvider>
 
+
                     {/*----- Route all access -----*/}
                         <Route path='/cgu' component={Cgu}/>
 
 
                     {/*----- Route public -----*/}
                     <PublicRoute path='/signin' component={SignIn}/>
-                        <PublicRoute path='/login' component={Login}/>
-                        <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
+                    <Route exact path='/landing' component={Landing}/>
+
+                    <PublicRoute path='/login' component={Login}/>
+                    <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
 
                     {/*----- Route private Attente validation Email et AwaitingApproval -----*/}
 
+
                     <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
                     <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+
 
 
                     {/*----- Route private AwaitingApproval -----*/}
