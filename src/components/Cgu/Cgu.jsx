@@ -1,9 +1,14 @@
 // CSS IMPORT
 import './Cgu.css'
 
+// IMPORT REACT
 import {useAuth} from '../../contexts/AuthContext';
 import { useEffect, useState } from 'react';
+
+// IMPORT FIREBASE
 import {database} from '../../firebase';
+
+// IMPORT COMPONENT
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 

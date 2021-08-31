@@ -14,7 +14,6 @@ import {useHistory} from "react-router-dom";
 /// ----- Firebase ///
 import {database, storage} from "../../firebase";
 
-
 //////// Page de profile ////////
 
 function Account() {

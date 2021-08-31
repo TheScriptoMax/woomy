@@ -1,7 +1,12 @@
+// IMPORT REACT
 import React, {useState} from 'react'
+
+// IMPORT MATERIAL
 import {Button} from "@material-ui/core";
-import {database, storage} from "../../firebase";
 import {Alert} from "@material-ui/lab";
+
+// IMPORT FIREBASE
+import {database, storage} from "../../firebase";
 
 
 export default function UserCard({user}) {

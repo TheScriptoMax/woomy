@@ -8,14 +8,12 @@ import {database} from "../../firebase";
 // REACT ROUTER DOM
 import {Link, useHistory} from "react-router-dom";
 
-
 // MATERIAL UI IMPORT
 import Button from '@material-ui/core/Button';
+import {Alert} from "@material-ui/lab";
 
 // CSS IMPORT
-
 import './ConfirmEmailSent.css';
-import {Alert} from "@material-ui/lab";
 
 //PAGE VALIDATION INCRIPTION 
 

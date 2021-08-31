@@ -1,9 +1,11 @@
+// IMPORT FIREBASE
 import {database} from '../../firebase';
+
+// IMPORT REACT
 import {useState, useEffect} from 'react';
 import {useAuth} from "../../contexts/AuthContext";
 
 // MATERIAL UI IMPORT
-
 import Button from '@material-ui/core/Button';
 import Clear from '@material-ui/icons/Clear';
 import { Avatar } from '@material-ui/core';

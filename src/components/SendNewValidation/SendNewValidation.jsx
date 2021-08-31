@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import {Alert} from "@material-ui/lab";
 
 // CSS IMPORT
-
 import './SendNewValidation.css';
 import {useHistory} from "react-router-dom";
 

@@ -1,4 +1,6 @@
+// IMPORT REACT
 import {useState,useEffect} from 'react'
+
 /// ----- Material UI ----- ///
 import ButtonRound from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -8,9 +10,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import ImageProfil from '../../assets/profile-pic-placeholder.png'
 import {database} from '../../firebase';
 
-
+// IMPORT FIREBASE
 import {useAuth} from "../../contexts/AuthContext";
-
 
 /// ----- CSS ----- ///
 import "./cowalkingCard.css";
