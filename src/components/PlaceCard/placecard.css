@@ -1,0 +1,36 @@
+.place-card{
+    border: solid 2px #670652;
+    color: #670652;
+    border-radius: 15px;
+    text-align: start;
+    padding: .5rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+
+
+}
+
+.place-card-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.place-card p{
+    line-height: 1.4rem;
+}
+
+.location-name{
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.location-district{
+    font-size: 1.1rem;
+}
+
+.location-adress{
+    font-size: 1rem;
+    font-weight: 500;
+}

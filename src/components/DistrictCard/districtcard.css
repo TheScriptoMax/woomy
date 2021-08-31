@@ -1,0 +1,38 @@
+.district-card{
+    border: solid 2px #670652;
+    color: #670652;
+    border-radius: 15px;
+    text-align: start;
+    padding: .5rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+
+.district-card-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.district-card p{
+    line-height: 1.4rem;
+}
+
+.district-name{
+    font-size: 1.3rem;
+    font-weight: 700;
+
+}
+
+.district-town{
+    font-size: 1rem;
+}
+
+.confirm-btns{
+    margin-top: .5rem;
+    display: flex;
+    justify-content: space-evenly;
+
+}

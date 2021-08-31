@@ -1,12 +1,17 @@
+// IMPORT REACT
+import {useState,useEffect} from 'react'
 
 /// ----- Material UI ----- ///
 import ButtonRound from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
-import RemoveIcon from '@material-ui/icons/Remove';
+
 /// ----- Import image ----- ///
-import ImageProfil from './profile-pic-placeholder.png'
+import ImageProfil from '../../assets/profile-pic-placeholder.png'
+import {database} from '../../firebase';
+
+// IMPORT FIREBASE
+import {useAuth} from "../../contexts/AuthContext";
 
 /// ----- CSS ----- ///
 import "./cowalkingCard.css";
@@ -17,58 +22,153 @@ import {Link} from "react-router-dom";
 /////////// CARTE DE COPIETONNAGE //////////////
 
 function CowalkingCard ({cowalk,index}) {
+
+    const [isOwner,setIsOwner] = useState(false)
+    const [membersList, setMembersList] = useState([]);
+
+
+    const [urlPicture, setUrlPicture] = useState('')
+    const [pictureLoading, setPictureLoading] = useState(false)
+
+
+
+    const {currentUser} = useAuth();
+     
+
+
+
+    useEffect(() => {
+        currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
+        const uid = cowalk.owner
+        database.users.doc(uid)
+            .get()
+            .then((doc) => {
+                // database.formatDoc(doc)
+                if (doc.data().profilPic !== '') {
+                    setUrlPicture(doc.data().profilPic)
+                    setPictureLoading(true)
+                }
+            })
+    }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        return database.membersApproved(cowalk.id).onSnapshot((querySnapshot) => {
+            const approvedMembers = [];
+            querySnapshot.forEach((doc) => {
+                approvedMembers.push(database.formatDoc(doc))
+            })
+            setMembersList(approvedMembers)
+        });
+    }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    function handleDeleteCowalk(ev) {
+        ev.preventDefault();
+        const deletePromises = [];
+
+        database.membersPending(cowalk.id)
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    deletePromises.push(
+                        database.membersPending(cowalk.id).doc(doc.id).delete()
+                    )
+                })
+            })
+
+        database.membersApproved(cowalk.id)
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    deletePromises.push(
+                        database.membersApproved(cowalk.id).doc(doc.id).delete()
+                    )
+                })
+            })
+
+
+        deletePromises.push(database.cowalks.doc(cowalk.id)
+            .delete())
+
+        Promise.all(deletePromises)
+            .then(() => {
+                console.log('Docs supprimés')
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+
+
+    
+    const currentCowalkStartTime = new Date(cowalk.startTime.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})
     
     return(
-        <Link to="/ticket">
+
             <li className='cowalkingCard' key={cowalk.id}>
-                <div className='cowalkingCardTitle'>
-                    <h3>itinéraire:{index+1}</h3>
-                    <div className='cowalkingCardRoute'>
-                        <div className="cowalkingCardDeparture">
-                            <p>Départ:</p>
-                            <span>{cowalk.startFrom}</span>
+                <Link
+                    to={`/ticket/${cowalk.id}`}
+                >
+                <div>
+                    <div className='cowalkingCardTitle'>
+                    <p className='cowalk-start'>Heure de départ : {currentCowalkStartTime}</p>
+                        {/* <h3>itinéraire:{index+1}</h3> */}
+                        <div className="main-card">
+                            <div className="cowalk-bar">
+                                <div className="dot"></div>
+                                <div className="bar"></div>
+                                <div className="dot"></div>
+                            </div>
+                                <div className='cowalkingCardRoute'>
+                                    <div className="cowalkingCardDeparture">
+                                        <p>Départ:  </p>
+                                        <p>{cowalk.startFrom}</p>
+                                    </div>
+                                <div className="cowalkingCardDestination">
+                                    <p>Destination:  </p>
+                                    <p>{cowalk.goTo}</p>
+                                </div>
+                            </div>
                         </div>
-                        <span>
-                            <TrendingFlatIcon/>
-                        </span>
-                        <div className="cowalkingCardDestination">
-                            <p>Destination:</p>
-                            <span>{cowalk.goTo}</span>
+                    </div>
+                    <div className='cowalkingCardFooter'>
+                        <div className='cowalkingCardCount'>
+                            <figure>
+                                {pictureLoading ?
+                                    <img src={urlPicture} alt="profil" /> :
+                                    <img src={ImageProfil} alt="profil" />
+                                }
+                            </figure>
+                            <ul>
+                                <li>
+                                    {membersList.length > 0 ?
+                                        <span className='members-list'>+{membersList.length}</span> :
+                                        <span className='members-list'>+0</span>
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                        <div className='cowalkingCardButtons'>
+                            {isOwner &&
+                            <div className='buttons-owner'>
+                                <ButtonRound aria-label="delete" onClick={handleDeleteCowalk}>
+                                    <DeleteIcon/>
+                                </ButtonRound>
+                                <Link
+                                to={`/ticket/edit/${cowalk.id}`}
+                                >
+                                    <ButtonRound aria-label="edit">
+                                        <EditIcon/>
+                                    </ButtonRound>
+                                </Link>
+                            </div>}
                         </div>
                     </div>
-                    <p>Heure de départ:{format(new date(cowalk.startFrom),"MM-dd'T'HH:mm")}</p>
                 </div>
-                <div className='cowalkingCardFooter'>
-                    <div className='cowalkingCardCount'>
-                        <figure>
-                            <img src={ImageProfil} alt="profil" />
-                        </figure>
-                        <ul>
-                            <li><span>+3</span></li>
-                        </ul>
-                        
-                    </div>
-                    <div className='cowalkingCardButtons'>
-                        <ButtonRound aria-label="delete" onClick={(e) => { 
-                            e.preventDefault();
-                            console.log('onClick'); }}>
-                            <DeleteIcon/>
-                        </ButtonRound>
-                        <ButtonRound aria-label="edit" onClick={(e) => { 
-                            e.preventDefault();
-                            console.log('onClick2'); }}>
-                            <EditIcon/>
-                        </ButtonRound>
-                        <ButtonRound aria-label="remove" onClick={(e) => { 
-                            e.preventDefault();
-                            console.log('remove'); }}>
-                            <RemoveIcon/>
-                        </ButtonRound>
-                    </div>
-                </div>
-            </li>
-        </Link>
-    ) 
+            </Link>
+        </li>
+
+    )
 }
 
 

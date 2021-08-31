@@ -1,42 +1,75 @@
 .cowalkingTicketHeader{
     display: block;
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
+}
+.cowalkingTicketHeader h2{
+    margin-bottom:0;
 }
 
-.cowalkingTicketHeaderTitle{
+.cowalkingTicketHeaderButton{
+    position:relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    margin-bottom: 1.875rem;
+    top:-2.7rem;
 }
 .cowalkingTicketHeader h2{
-    font-size: 2rem;
+    font-weight:800;
+    color: #BD1347;
+    font-size: 1.563rem;
 }
 
 .cowalkingTicketRoute{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.375rem;
+    background-color: #670652;
+    padding: 0.6rem;
+    color: white;
+    border-radius: 0.25rem 0.25rem 0 0;
 }
+
+.marginTop{
+    margin-top:2rem;
+}
+
+.cowalkingTicketRoute p{
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
 .cowalkingTicketRoute h3{
     margin-bottom: 0.625rem;
-    font-weight: 400;
+    font-weight: 800;
+    margin-bottom: 1rem;
 }
 
 .cowalkingTicketDeparture{
-    display: inline;
+    background-color: #670652;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     margin: 0 auto;
+    color: white;
+    border-radius: 0 0 0.25rem 0.25rem;
 }
 .cowalkingTicketDeparture h3{
     text-align: center;
     margin-bottom: 0.875rem;
-    font-weight: 400;
+    font-weight: 800;
 }
 .cowalkingTicketDeparture p{
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.125rem;
     font-weight: 400;
+}
+
+.ticket-to-go{
+    text-align: right;
+}
+
+.cowalk-header-map{
+    text-decoration: none;
+    color: white;
 }

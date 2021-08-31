@@ -18,6 +18,16 @@ export function AuthProvider({children}) {
         return newUserCredentials;
     }
 
+    async function reSendEmail(){
+        const newEmailVerification = await auth.currentUser.sendEmailVerification();
+        return newEmailVerification;
+    }
+
+    function resetPassword(email){
+        return auth.sendPasswordResetEmail(email)
+    }
+
+
     function login(email, password) {
         return auth.signInWithEmailAndPassword(email, password)
     }
@@ -27,18 +37,19 @@ export function AuthProvider({children}) {
     }
 
     useEffect(()=> {
-        const unsubscribe = auth.onAuthStateChanged(user => {
+        return auth.onAuthStateChanged(user => {
             setCurrentUser(user);
             setLoading(false);
-        })
-        return unsubscribe;
+        });
     }, []);
 
     const value ={
         currentUser,
         signup,
         login,
-        logout
+        logout,
+        reSendEmail,
+        resetPassword
     }
 
     return (

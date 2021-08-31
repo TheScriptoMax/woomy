@@ -1,9 +1,29 @@
-h2{
+.create-walk h2{
+    font-size: 1.563rem;
+    font-weight: 400;
     text-align: center;
 }
 
 .MuiInputBase-root, .MuiFormControl-root{
-width: 100%;
+    width: 100%;
+}
 
+.MuiInputBase-root{
+    margin-bottom: 2rem;
+}
+
+
+.create-walk .container{
+    margin: auto;
+}
+
+
+.createform div{
+    margin-bottom:1rem;
+}
+
+
+.create-walk button{
+    margin-top: 2rem;
 }
 

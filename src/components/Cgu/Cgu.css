@@ -1,0 +1,20 @@
+/* commentaire */
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.title-cgu, .subtitle-cgu{
+    text-align: center;
+    margin-bottom: .7rem;
+}
+
+.title3-cgu {
+    color: rgb(0, 81, 255);
+    margin-bottom: 1rem;
+}
+
+.paragraphe-cgu {
+    margin-bottom: 1rem;
+}

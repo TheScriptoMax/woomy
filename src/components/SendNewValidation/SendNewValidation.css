@@ -1,0 +1,40 @@
+.sign-in-validation{
+    display: flex;
+    flex-direction: column;
+}
+
+.text-validation{
+    background-color: #670652;
+    padding: 4rem 2rem 6rem 2rem;
+    border-radius: 10%;
+}
+
+.sign-in-validation .text-validation p{
+    font-size: 1.125rem;
+    text-align: left;
+    color: white;
+}
+
+.sign-in-validation button {
+    background-color: #670652;
+    border: solid white .1rem;
+    width: max-content;
+    box-shadow: none;
+    color: white;
+    text-transform: uppercase;
+    margin: 0 auto;
+    display: inline;
+    top: -4rem;
+
+
+}
+.sign-in-validation button:last-child{
+    top:0;
+}
+
+.button-bot-account{
+    margin-top:1rem;
+    display:flex;
+    justify-content:center;
+
+}

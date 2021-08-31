@@ -1,5 +1,21 @@
 .container{
-    padding: 6.625rem 2.75rem ;
+    padding: 6.625rem 1rem ;
     margin: 0 auto;
+    max-width: 600px;
+    margin-bottom: 5rem;
 }
+
+.loading{
+    width:100vw;
+    height:75vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+@media screen and (max-width: 320px){
+    p{
+        font-size:1rem;
+    }
+}
+
 
