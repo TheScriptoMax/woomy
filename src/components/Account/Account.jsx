@@ -176,13 +176,13 @@ function Account() {
             </Button>
 
             {!isShow && <Alert severity="info">Un email vous a été envoyé</Alert>}
-            <Link to="/param">
+            {/* <Link to="/param">
                 <div className='account-field'>
                     <p>Paramètres</p>
                     <div className="account-field-result">
                     </div>
                 </div>
-            </Link>
+            </Link> */}
             <div className="button-bot-account">
                 <Button variant="contained" onClick={handleLogout}> Se déconnecter </Button>
             </div>
