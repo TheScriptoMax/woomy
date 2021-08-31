@@ -42,15 +42,23 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
 
     }
 
+    function handleDeleteUser() {
+
+    }
+
     return (
         <div>
             <p>{user.firstname}</p>
             <p>{user.lastname}</p>
             <a href={`mailto:${user.email}`}>{user.email}</a>
             <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a>
+            <div>
             {urlPicture ? <img src={urlPicture} alt="Profil"/> : <p>Pas encore de photo de pose</p>}
             {urlCard ? <img src={urlCard} alt="Carte d'identité"/> : <p>Pas encore de carte d'identité</p>}
-            <Button variant="contained" onClick={handleApproveUser}>Coucou</Button>
+            </div>
+            {urlPicture && urlCard &&
+            <Button variant="contained" onClick={handleApproveUser}>Accepter</Button>}
+            <Button variant="contained" onClick={handleDeleteUser}>Supprimer</Button>
         </div>
     )
 }

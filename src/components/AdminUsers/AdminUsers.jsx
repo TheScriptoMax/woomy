@@ -2,7 +2,7 @@ import './adminusers.css'
 import {Button, TextField} from '@material-ui/core';
 import React, {useRef, useState} from "react";
 import {database} from "../../firebase";
-import UserCard from "../UserCard/UserCard";
+import AdminUserCard from "../AdminUserCard/AdminUserCard";
 
 function AdminUsers() {
 
@@ -115,7 +115,7 @@ function AdminUsers() {
             <div>
                 <ul>
                     {searchResults.map((user) => {
-                        return <UserCard key={user.id} user={user}/>
+                        return <AdminUserCard key={user.id} user={user}/>
                     })}
                 </ul>
             </div>

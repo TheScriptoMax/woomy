@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import {Redirect, Route} from "react-router-dom";
 import {useAuth} from "../../contexts/AuthContext";
 import {database} from "../../firebase";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 export default function PrivateRoute({component: Component, ...rest})
 {
@@ -10,16 +12,36 @@ export default function PrivateRoute({component: Component, ...rest})
     const {currentUser} = useAuth();
 
 
+    useEffect(() => {
+        if (currentUser && currentUser.hasOwnProperty("uid")) {
+            database.users.doc(currentUser.uid)
+                .get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        setIsAccepted(doc.data().accepted)
+                        setLoading(false)
+                    } else {
+                        setLoading(false)
+                    }
+                })
+        } else {
+            setLoading(false)
+        }
+    }, [])
+
     return (
         <>
+            {!loading &&
             <Route
                 {...rest}
                 render={props => {
-                    if (currentUser && currentUser.emailVerified) {
-                        return <Component {...props} />
-                    } else if (currentUser && currentUser.emailVerified) {
+                    if (currentUser && currentUser.emailVerified && isAccepted) {
+                        return <>
+                        <Header/><Component {...props} />
+                            <Footer/></>
+                    } else if (currentUser && currentUser.emailVerified && !isAccepted) {
                         return <Redirect to="/awaiting-approval"/>
-                } else if (currentUser && !currentUser.emailVerified) {
+                } else if (currentUser && !currentUser.emailVerified && !isAccepted) {
                     return <Redirect to="/send-new-validation"/>
                 }else {
                         return <Redirect to="/login"/>
@@ -27,7 +49,7 @@ export default function PrivateRoute({component: Component, ...rest})
                 }}
             >
             </Route>
-
+            }
         </>
     )
 }
