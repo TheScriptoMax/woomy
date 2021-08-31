@@ -77,7 +77,7 @@ function NotifCard({notif}) {
             <div className="card-notif-top">
                 <Avatar/>
                 <div className="card-notif-md notif-part">
-                    <p className="first">{userData.firstname} {userData.lastname}</p>
+                    <p className="first first-name">{userData.firstname} {userData.lastname}</p>
                     <p className="grey">Requete de copietonnage</p>
                 </div>
                 <div className="card-notif-bot notif-part first">
@@ -92,15 +92,17 @@ function NotifCard({notif}) {
                 <><div className="separator-dark"></div>
 
             <div className="card-notif-top">
+            <Avatar/>
                 <div className="card-notif-md notif-part">                
-                    <p className="first">Vous avez bien était accepter dans le copiétonnage de :</p>
-                    <p className="grey">{userData.firstname} {userData.lastname}</p>
+                    <p className="first">Vous avez été accepté dans le copiétonnage de : <span className="grey">{userData.firstname} {userData.lastname}</span></p>
+                 
                 </div>
                 
-                <Avatar/>
+               
                 <Button onClick={(event)=>handleDeleteNotif(event)}><Clear/></Button>
                 
-            </div></>
+            </div>
+            </>
             
             )}
 
