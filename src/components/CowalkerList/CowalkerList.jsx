@@ -30,7 +30,9 @@ function CowalkerList({cowalk}) {
             .catch(() => {
                 console.log('Couldnt retrieve the owner')
             })
-    }, [])
+
+    }, [cowalk]) 
+
 
     useEffect(() => {
         return database.membersApproved(cowalk.id).onSnapshot((querySnapshot) => {
@@ -40,12 +42,16 @@ function CowalkerList({cowalk}) {
             })
             setMembersList(approvedMembers)
         });
-    }, [])
+
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
 
 
     useEffect(() => {
         currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
-    }, [])
+
+    }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
+
 
     useEffect(() => {
         database.users.doc(currentUser.uid)
@@ -74,7 +80,7 @@ function CowalkerList({cowalk}) {
             .catch(error => {
                 console.log('Error getting collection')
             })
-    }, [cowalk.id, cowalk.owner, currentUser.uid])
+    }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
 
 
     function handleJoinCowalk() {
@@ -120,12 +126,12 @@ function CowalkerList({cowalk}) {
                     })
                 })   
             })
+
         database.membersApproved(cowalk.id).doc(currentUser.uid)
             .delete()
             .then(() => {
                 setIsMember(false)
             })
-        
     }
 
 

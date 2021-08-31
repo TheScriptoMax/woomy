@@ -1,8 +1,7 @@
 /// ----- Material UI ---- ///
 
 import {Alert} from "@material-ui/lab";
-import InputLabel from '@material-ui/core/Inputlabel';
-import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import {
     DateTimePicker,
@@ -14,7 +13,7 @@ import '../CowalkingCreate/cowalkingcreate.css';
 
 /// ----- React Modules ----- ///
 
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useState} from 'react';
 import DateFnsUtils from '@date-io/date-fns'
 import {TextField} from "@material-ui/core";
 import {useHistory, useParams} from "react-router-dom";
@@ -29,16 +28,27 @@ function CowalkingEdit() {
 
     const {cowalkId} = useParams();
 
+    const [locations, setLocations] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const [pageLoading, setPageLoading] = useState(true);
     const [currentCowalk, setCurrentCowalk] = useState({});
-    const goToRef = useRef();
-    const startFromRef = useRef();
+    const [goTo,setGoTo] = useState()
+    const [startFrom,setStartFrom] = useState()
 
     const history = useHistory();
 
+    useEffect(() => {
+        database.locations.orderBy('name').get().then(locations => {
+            const tempLocations = []
+            locations.forEach(location => {
+                tempLocations.push(database.formatDoc(location))
+            })
+            setLocations(tempLocations)
+            
+        })
+    }, [])
 
     useEffect(() => {
             database.cowalks.doc(cowalkId)
@@ -52,12 +62,11 @@ function CowalkingEdit() {
                         console.log("no such documents")
                     }
                 }).then(() => {
-            })
+                })
                 .catch((error) => {
                     console.log("Error getting document:", error);
                 })
-        }, [cowalkId]
-    );
+        }, [cowalkId] ); // eslint-disable-line react-hooks/exhaustive-deps
 
 
     function handleSubmitCowalk(ev) {
@@ -66,15 +75,17 @@ function CowalkingEdit() {
         const promises = [];
         setLoading(true);
         setError('');
-        if (goToRef.current.value !== currentCowalk.goTo) {
+
+        if (startFrom !== currentCowalk.startFrom) {
             promises.push(database.cowalks.doc(cowalkId).update({
-                goTo: goToRef.current.value,
+                startFrom: startFrom,
             }))
         }
+        
 
-        if (startFromRef.current.value !== currentCowalk.startFrom) {
+        if (goTo !== currentCowalk.goTo) {
             promises.push(database.cowalks.doc(cowalkId).update({
-                startFrom: startFromRef.current.value,
+                goTo: goTo,
             }))
         }
 
@@ -99,21 +110,25 @@ function CowalkingEdit() {
 
     return (
         <>
-            {!pageLoading &&
+            {!pageLoading && currentCowalk &&
             <div className="container">
-                <h2>Créer votre itinéraire</h2>
+                <h2>Modifiez votre itinéraire</h2>
                 <form className="createform">
                     <InputLabel className="label">Départ</InputLabel>
-                    <TextField defaultValue={currentCowalk.startFrom} inputRef={startFromRef} select>
-                        <MenuItem value="spdc">SPDC</MenuItem>
-                        <MenuItem value="prout">Prout</MenuItem>
-                        <MenuItem value="velpeau">Velpeau</MenuItem>
+                    <TextField defaultValue={currentCowalk.startFrom}  value={startFrom} onChange={(event)=>setStartFrom(event.target.value)} select>
+                        {locations.map((option) => (
+                            <option key={option.id} value={option.name}>
+                            {option.name}
+                            </option>
+                        ))}
                     </TextField>
                     <InputLabel className="label">Destination</InputLabel>
-                    <TextField defaultValue={currentCowalk.goTo} inputRef={goToRef} select>
-                        <MenuItem value="vealpeaugo">Velpeau</MenuItem>
-                        <MenuItem value="spdcgo">SPDC</MenuItem>
-                        <MenuItem value="prout">Prout</MenuItem>
+                    <TextField  defaultValue={currentCowalk.goTo} value={goTo} onChange={(event)=>setGoTo(event.target.value)} select>
+                        {locations.map((option) => (
+                            <option key={option.id} value={option.name}>
+                            {option.name}
+                            </option>
+                        ))}
                     </TextField>
 
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>

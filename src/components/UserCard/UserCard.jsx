@@ -47,7 +47,6 @@ export default function UserCard({user}) {
             })
     }
 
-
     return (
         <div>
             <p>{user.firstname}</p>

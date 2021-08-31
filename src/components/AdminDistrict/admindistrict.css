@@ -1,19 +1,30 @@
+.district-list-link{
+    text-decoration: none;
+}
 
-.district-form{
+
+.create-district-title{
+    margin-top: 1rem;
     margin-bottom: 1rem;
 }
 
-.district-form div,.create-district{
-    margin-top:1rem;
+.district-list-btn{
+    display: flex;
+    justify-content: center;
+}
+
+.district-list-btn button{
+    background-color: #670652;
+    border: solid white .1rem;
+    color: white;
+}
+
+.district-list-btn button:hover{
+    background-color: #c51162;
 }
 
 .create-district{
     margin-bottom: 1rem;
-
-}
-
-.container-admin .admin-form-btn{
-    margin-top: 1rem;;
 }
 
 .district-form button{
@@ -22,4 +33,5 @@
     box-shadow: none;
     color: white;
     text-transform: uppercase;
+    margin-bottom: 1rem;
 }

@@ -1,11 +1,8 @@
 import {useAuth} from "../../contexts/AuthContext";
 import {useState, useEffect} from 'react';
 import {database} from '../../firebase'
-import { doc, onSnapshot } from "firebase/firestore";
 import NotifCard from '../NotificationCard/NotifCard'
 
-// MATERIAL UI IMPORT
-import MessageCard from "../MessageCard/messageCard";
 
 // CSS IMPORT
 import './notification.css';
@@ -17,22 +14,19 @@ function Notification() {
   const [notifs, setNotifs] = useState([])
   
   const {currentUser} = useAuth();
-        
+
             
   useEffect(() => {
-    database.notifications(currentUser.uid).onSnapshot((querySnapshot)=>{
+    return database.notifications(currentUser.uid).onSnapshot((querySnapshot)=>{
       let notif = []
       querySnapshot.forEach((doc)=>{
         notif.push(database.formatDoc(doc))
       })
       setNotifs(notif)
-      console.log(notif)
     },(error)=>{
       console.log(error)
     })
-  }, [])
-
-  console.log(notifs)
+  },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
   
 
