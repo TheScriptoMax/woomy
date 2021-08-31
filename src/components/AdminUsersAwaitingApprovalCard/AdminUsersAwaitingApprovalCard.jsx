@@ -39,7 +39,6 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
 
     function handleApproveUser() {
 
-
     }
 
     function handleDeleteUser() {

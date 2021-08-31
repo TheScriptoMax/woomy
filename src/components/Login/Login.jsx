@@ -33,14 +33,16 @@ export default function Login () {
                 history.push('/list');
                 }
             )
-            setEmail(null)
-            setPassword(null)
+                .throw(() => {
+                    setError('Echec de connexion')
+                })
+            setEmail('')
+            setPassword('')
 
         } catch(error) {
             setError('Echec de connexion');
             
         }
-
         setLoading(false);
     }
 

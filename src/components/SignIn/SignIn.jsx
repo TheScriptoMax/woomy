@@ -48,6 +48,7 @@ export default function SignIn () {
                             phoneNumber: phoneRef.current.value,
                             birthdate: birthdateRef.current.value,
                             createdAt: database.getCurrentTimestamp,
+                            profilPic: '',
                             accepted:false,
                             admin:false
                         })

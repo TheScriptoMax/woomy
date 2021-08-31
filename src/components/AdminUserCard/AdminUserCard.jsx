@@ -47,23 +47,29 @@ export default function UserCard({user}) {
             })
 
         // Suppression des images liées au compte si elles existent
-        // Carte d'identité
-        storage.ref(`/files/idCards/${user.id}.jpg`).getDownloadURL().then(() => {
-            deletePromises.push(storage.ref(`/files/idCards/${user.id}.jpg`).delete())
+        // Image de profile
+        storage.ref(`/files/idProfilePictures/${user.id}/`).listAll().then((files) => {
+            files.items.forEach(file => {
+                deletePromises.push(file.delete())
+            })
         }).catch(error => {
             console.log('Something went wrong' + error.message)
         })
 
         // Image de pose
-        storage.ref(`/files/idPictures/${user.id}.jpg`).getDownloadURL().then(() => {
-            deletePromises.push(storage.ref(`/files/idPictures/${user.id}.jpg`).delete())
+        storage.ref(`/files/idPictures/${user.id}/`).listAll().then((files) => {
+            files.items.forEach(file => {
+                deletePromises.push(file.delete())
+            })
         }).catch(error => {
             console.log('Something went wrong' + error.message)
         })
 
-        // Image de profile
-        storage.ref(`/files/idPicturesProfiles/${user.id}.jpg`).getDownloadURL().then(() => {
-            deletePromises.push(storage.ref(`/files/idPicturesProfiles/${user.id}.jpg`).delete())
+        // Carte d'identité
+        storage.ref(`/files/idCards/${user.id}/`).listAll().then((files) => {
+            files.items.forEach(file => {
+                deletePromises.push(file.delete())
+            })
         }).catch(error => {
             console.log('Something went wrong' + error.message)
         })
