@@ -64,6 +64,7 @@ import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
 
 
 import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
+import AdminRoute from "./components/Routes/AdminRoute";
 
 
 function App() {
@@ -76,54 +77,53 @@ function App() {
                 <AuthProvider>
 
                     {/*----- Route all access -----*/}
-                        <Route path='/cgu' component={Cgu}/>
+                    <Route exact path='/cgu' component={Cgu}/>
+                    <Route path='/' component={Home}/>
 
 
                     {/*----- Route public -----*/}
-                    <PublicRoute path='/signin' component={SignIn}/>
-                        <PublicRoute path='/login' component={Login}/>
-                        <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
+                    <PublicRoute exact path='/signin' component={SignIn}/>
+                    <PublicRoute exact path='/login' component={Login}/>
+                    <PublicRoute exact path='/confidentialite' component={PrivacyPolicy}/>
 
                     {/*----- Route private Attente validation Email et AwaitingApproval -----*/}
 
-                    <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
-                    <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+                    <EmailNotVerifiedRoute exact path='/send-confirm' component={ConfirmEmailSent}/>
+                    <EmailNotVerifiedRoute exact path='/send-new-validation' component={SendNewValidation}/>
 
 
                     {/*----- Route private AwaitingApproval -----*/}
 
 
-                    <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
+                    <AwaitingApprovalRoute exact path='/awaiting-approval' component={AwaitingApproval}/>
 
 
                     {/*----- AdminCowalks -----*/}
 
-                    <Route exact path='/admin' component={AdminDashboard}/>
-                    <Route exact path='/admin-accept-users' component={AdminAcceptUsers}/>
-                    <Route exact path='/admin-users' component={AdminUsers}/>
-                    <Route exact path='/admin-place' component={AdminPlace}/>
-                    <Route exact path='/admin-district' component={AdminDistrict}/>
-                    <Route exact path='/place-list' component={PlaceList}/>
-                    <Route exact path='/district-list' component={DistrictList}/>
+                    <AdminRoute exact path='/admin' component={AdminDashboard}/>
+                    <AdminRoute exact path='/admin-accept-users' component={AdminAcceptUsers}/>
+                    <AdminRoute exact path='/admin-users' component={AdminUsers}/>
+                    <AdminRoute exact path='/admin-place' component={AdminPlace}/>
+                    <AdminRoute exact path='/admin-district' component={AdminDistrict}/>
+                    <AdminRoute exact path='/place-list' component={PlaceList}/>
+                    <AdminRoute exact path='/district-list' component={DistrictList}/>
 
 
                     {/*----- Profil connecté et approuvé -----*/}
 
-                    <>
-                        <Header/>
-                                {/*----- Ticket -----*/}
-                                <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
-                                <PrivateRoute exact path='/create' component={CowalkingCreate}/>
-                                <PrivateRoute exact path='/search' component={CowalkingSearch}/>
-                                <PrivateRoute exact path='/list' component={CowalkingList}/>
-                                <PrivateRoute exact path='/message'component={Notification} />
-                                <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
 
-                                {/*----- Account -----*/}
-                                <PrivateRoute exact path='/account' component={Account}/>
-                                <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
-                        <Footer/>
-                    </>
+                        {/*----- Ticket -----*/}
+                        <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
+                        <PrivateRoute exact path='/create' component={CowalkingCreate}/>
+                        <PrivateRoute exact path='/search' component={CowalkingSearch}/>
+                        <PrivateRoute exact path='/list' component={CowalkingList}/>
+                        <PrivateRoute exact path='/message' component={Notification}/>
+                        <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit}/>
+
+                        {/*----- Account -----*/}
+                        <PrivateRoute exact path='/account' component={Account}/>
+                        <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
+
                     <BandeauWarning/>
                 </AuthProvider>
             </Switch>
