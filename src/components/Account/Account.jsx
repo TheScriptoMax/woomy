@@ -11,9 +11,8 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 
-
 /// ----- Firebase ///
-import {database,storage} from "../../firebase";
+import {database, storage} from "../../firebase";
 
 
 //////// Page de profile ////////
@@ -21,10 +20,10 @@ import {database,storage} from "../../firebase";
 function Account() {
 
     const [userData, setUserData] = useState({});
-
-
+    const [pageLoading, setPageLoading] = useState(true)
     const [isShow, setIsShow] = useState(true);
     const [urlPicture, setUrlPicture] = useState('');
+    const [pictureLoading, setPictureLoading] = useState(false);
 
     const {logout, resetPassword} = useAuth();
 
@@ -32,11 +31,18 @@ function Account() {
 
     const {currentUser} = useAuth();
 
-    useEffect(()=> {
+    useEffect(() => {
         database.users.doc(currentUser.uid)
             .get()
             .then(doc => {
                 setUserData(database.formatDoc(doc))
+                if (doc.data().profilPic !== '') {
+                    setUrlPicture(doc.data().profilPic)
+                    setPictureLoading(true)
+                    setPageLoading(false)
+                } else {
+                    setPageLoading(false)
+                }
             })
             .catch(error => {
                 console.log(error.message)
@@ -45,25 +51,22 @@ function Account() {
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
-
-
-    async function clickResetPassword(e){
+    async function clickResetPassword(e) {
         resetPassword(currentUser.email)
             .then(() => {
                 console.log('email envoyé a ' + currentUser.email);
                 setIsShow(!isShow);
             })
-            .catch((error) =>{
+            .catch((error) => {
 
                 console.log('Marche pas')
 
             })
     }
 
-
     async function handleLogout() {
         try {
-            await logout().then(()=> {
+            await logout().then(() => {
                 history.push("/login");
             })
         } catch {
@@ -71,20 +74,24 @@ function Account() {
         }
     }
 
-    /* async function handlePicture(ev){
+   function handlePicture(ev) {
         ev.preventDefault();
+
 
         const idPicture = ev.target.files[0];
 
         const filename = idPicture.name;
-        const idPicturePartPath = `files/idPictureProfiles/${currentUser.uid}`;
+        const idPicturePartPath = `files/idPictureProfiles/${currentUser.uid}/${currentUser.uid}`;
         const idPicturePath = `${idPicturePartPath}.${filename.substring(filename.lastIndexOf('.') + 1, filename.length)}`
 
         const uploadPicture = storage
             .ref(idPicturePath)
             .put(idPicture)
+
         uploadPicture.on('state_changed',
-            snapchot => {
+            () => {
+            setPageLoading(true)
+                setPictureLoading(false);
 
             },
             error => {
@@ -96,98 +103,105 @@ function Account() {
                         database.users.doc(currentUser.uid).update({
                             profilPic: url
                         })
-                        .then(() => {
-                            setUrlPicture(url)
-
-                        })
+                            .then(() => {
+                                setUrlPicture(url)
+                                setPictureLoading(true)
+                                setPageLoading(false)
+                            })
                     })
             }
-            )
-    } */
+        )
+    }
+
 
     return (
-      <div className='container'>
-      <div className="account-top">
-        <Avatar/>
-        <h2>Mon compte</h2>
-      </div>
-        <div className="account-list">
-            <div className='account-field'>
-                <p>Nom</p>
-                <div className="account-field-result">
-                    <p>{userData.lastname}</p>
-                </div>
-            </div>
-            <div className='account-field'>
-                <p>Prénom</p>
-                <div className="account-field-result">
-                    <p>{userData.firstname}</p>
-                </div>
-            </div>
-            <div className='account-field'>
-                <p>E-mail</p>
-                <div className="account-field-result">
-                    <p>{currentUser.email}</p>
-                </div>
-            </div>
-            <div className='account-field'>
-                <p>Date de naissance</p>
-                <div className="account-field-result">
-                    <p>{userData.birthdate}</p>
-                </div>
-            </div>
-            <div className='account-field'>
-                <p>Téléphone</p>
-                <div className="account-field-result">
-                    <p>{userData.phoneNumber}</p>
-                </div>
-            </div>
-            <Link to="/change-profile">
-                <div className='account-field'>
-                    <p>Changer vos informations</p>
-                    <div className="account-field-result">
-                    </div>
-                </div>
-            </Link>
+        <div className='container'>
 
-            <div className='account-field'>
-                <div className="button-bot-account">
-                    {/* <input
-                        style={{ display: 'none' }}
-                        id="raised-button-file-picture"
-                        type="file"
-                        onChange={handlePicture}
-                    /> */}
-                    {/*<div className='container-img'>*/}
-                    {/*    <img className='img-picture' alt="Votre photo"/>*/}
-                    {/*</div>*/}
-                    <label htmlFor="raised-button-file-picture">
-                        <Button variant="raised" component="span">Changer votre photo
-                        </Button>
-                    </label>
+            {!pageLoading &&
+            <>
+                <div className="account-top">
+                    {pictureLoading ?
+                        <img className='img-picture' alt="Votre photo" src={urlPicture}/> :
+                        <Avatar/>
+                    }
+                    <h2>Mon compte</h2>
                 </div>
-            </div>
-            <Button onClick={clickResetPassword}>
-                <div className='account-field'>
-                        <p>Réinitialiser le mot de passe</p>
+                <div className="account-list">
+                    <div className='account-field'>
+                        <p>Nom</p>
                         <div className="account-field-result">
+                            <p>{userData.lastname}</p>
                         </div>
-                </div>
-            </Button>
+                    </div>
+                    <div className='account-field'>
+                        <p>Prénom</p>
+                        <div className="account-field-result">
+                            <p>{userData.firstname}</p>
+                        </div>
+                    </div>
+                    <div className='account-field'>
+                        <p>E-mail</p>
+                        <div className="account-field-result">
+                            <p>{currentUser.email}</p>
+                        </div>
+                    </div>
+                    <div className='account-field'>
+                        <p>Date de naissance</p>
+                        <div className="account-field-result">
+                            <p>{userData.birthdate}</p>
+                        </div>
+                    </div>
+                    <div className='account-field'>
+                        <p>Téléphone</p>
+                        <div className="account-field-result">
+                            <p>{userData.phoneNumber}</p>
+                        </div>
+                    </div>
+                    <Link to="/change-profile">
+                        <div className='account-field'>
+                            <p>Changer vos informations</p>
+                            <div className="account-field-result">
+                            </div>
+                        </div>
+                    </Link>
 
-            {!isShow && <Alert severity="info">Un email vous a été envoyé</Alert>}
-            <Link to="/param">
-                <div className='account-field'>
-                    <p>Paramètres</p>
-                    <div className="account-field-result">
+                    <div className='account-field'>
+                        <div className="button-bot-account">
+                            <input
+                                style={{display: 'none'}}
+                                id="raised-button-file-picture"
+                                type="file"
+                                onChange={handlePicture}
+                            />
+                            <label htmlFor="raised-button-file-picture">
+                                <Button variant="raised" component="span">Changer votre photo
+                                </Button>
+                            </label>
+                        </div>
+                    </div>
+                    <Button onClick={clickResetPassword}>
+                        <div className='account-field'>
+                            <p>Réinitialiser le mot de passe</p>
+                            <div className="account-field-result">
+                            </div>
+                        </div>
+                    </Button>
+
+                    {!isShow && <Alert severity="info">Un email vous a été envoyé</Alert>}
+                    <Link to="/param">
+                        <div className='account-field'>
+                            <p>Paramètres</p>
+                            <div className="account-field-result">
+                            </div>
+                        </div>
+                    </Link>
+                    <div className="button-bot-account">
+                        <Button variant="contained" onClick={handleLogout}> Se déconnecter </Button>
                     </div>
                 </div>
-            </Link>
-            <div className="button-bot-account">
-                <Button variant="contained" onClick={handleLogout}> Se déconnecter </Button>
-            </div>
+            </>}
         </div>
-      </div>
     );
-  }
-  export default Account;
+}
+
+export default Account;
