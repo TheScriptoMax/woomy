@@ -9,15 +9,21 @@ export default function PublicRoute({component: Component, ...rest}) {
     const {currentUser} = useAuth();
 
     useEffect(() => {
-        if (currentUser) {
+        if (currentUser && currentUser.hasOwnProperty("uid")) {
             database.users.doc(currentUser.uid)
                 .get()
                 .then((doc) => {
-                    setIsAccepted(doc.data().accepted)
+                    if (doc.exists) {
+                        setIsAccepted(doc.data().accepted)
+                        setLoading(false)
+                    } else {
+                        setLoading(false)
+                    }
                 })
+        } else {
+            setLoading(false)
         }
-        setLoading(false)
-    }, [currentUser])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <>

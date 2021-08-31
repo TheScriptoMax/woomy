@@ -15,11 +15,15 @@ export default function AdminRoute({component: Component, ...rest})
         database.users.doc(currentUser.uid)
             .get()
             .then((doc) => {
-                setIsAdmin(doc.data().admin)
-                setIsAccepted(doc.data().accepted)
-                setLoading(false)
+                if (doc.exists) {
+                    setIsAdmin(doc.data().admin)
+                    setIsAccepted(doc.data().accepted)
+                    setLoading(false)
+                } else {
+                    setLoading(false)
+                }
             })
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <>
