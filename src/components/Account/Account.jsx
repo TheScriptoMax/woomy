@@ -83,7 +83,7 @@ function Account() {
         const idPicture = ev.target.files[0];
 
         const filename = idPicture.name;
-        const idPicturePartPath = `files/idPictureProfiles/${currentUser.uid}`;
+        const idPicturePartPath = `files/idPictureProfiles/${currentUser.uid}/${currentUser.uid}`;
         const idPicturePath = `${idPicturePartPath}.${filename.substring(filename.lastIndexOf('.') + 1, filename.length)}`
 
         const uploadPicture = storage
