@@ -1,4 +1,3 @@
-import ChangeAccount from '../ChangeAccount/ChangeAccount';
 /// ----- Material UI ----- ///
 import {Avatar, Button} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
@@ -6,7 +5,7 @@ import Alert from '@material-ui/lab/Alert';
 /// ----- CSS ----- ///
 import './account.css';
 
-/// ----- React modules ///
+/// ----- React modules ----- ///
 import {useAuth} from "../../contexts/AuthContext";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
@@ -14,17 +13,20 @@ import {useHistory} from "react-router-dom";
 
 
 /// ----- Firebase ///
-import {database, storage} from "../../firebase";
+import {database,storage} from "../../firebase";
+
 
 //////// Page de profile ////////
 
 function Account() {
 
     const [userData, setUserData] = useState({});
-    const [error, setError] = useState('');
-    const {logout, resetPassword} = useAuth();
+
 
     const [isShow, setIsShow] = useState(true);
+    const [urlPicture, setUrlPicture] = useState('');
+
+    const {logout, resetPassword} = useAuth();
 
     const history = useHistory();
 
@@ -37,10 +39,13 @@ function Account() {
                 setUserData(database.formatDoc(doc))
             })
             .catch(error => {
-                setError(error.message)
+                console.log(error.message)
             })
 
-    }, [currentUser.uid])
+    }, [currentUser])
+
+
+
 
     async function clickResetPassword(e){
         resetPassword(currentUser.email)
@@ -49,7 +54,9 @@ function Account() {
                 setIsShow(!isShow);
             })
             .catch((error) =>{
-                setError('Marche pas')
+
+                console.log('Marche pas')
+
             })
     }
 
@@ -60,8 +67,42 @@ function Account() {
                 history.push("/login");
             })
         } catch {
-            setError('Woops, on a pas réussi à vous déconnecter')
+            console.log('Woops, on a pas réussi à vous déconnecter')
         }
+    }
+
+    async function handlePicture(ev){
+        ev.preventDefault();
+
+        const idPicture = ev.target.files[0];
+
+        const filename = idPicture.name;
+        const idPicturePartPath = `files/idPictureProfiles/${currentUser.uid}`;
+        const idPicturePath = `${idPicturePartPath}.${filename.substring(filename.lastIndexOf('.') + 1, filename.length)}`
+
+        const uploadPicture = storage
+            .ref(idPicturePath)
+            .put(idPicture)
+        uploadPicture.on('state_changed',
+            snapchot => {
+
+            },
+            error => {
+                console.log(error.message)
+            },
+            () => {
+                uploadPicture.snapshot.ref.getDownloadURL()
+                    .then((url) => {
+                        database.users.doc(currentUser.uid).update({
+                            profilPic: url
+                        })
+                        .then(() => {
+                            setUrlPicture(url)
+
+                        })
+                    })
+            }
+            )
     }
 
     return (
@@ -78,7 +119,7 @@ function Account() {
                 </div>
             </div>
             <div className='account-field'>
-                <p>Prenom</p>
+                <p>Prénom</p>
                 <div className="account-field-result">
                     <p>{userData.firstname}</p>
                 </div>
@@ -108,6 +149,24 @@ function Account() {
                     </div>
                 </div>
             </Link>
+
+            <div className='account-field'>
+                <div className="button-bot-account">
+                    <input
+                        style={{ display: 'none' }}
+                        id="raised-button-file-picture"
+                        type="file"
+                        onChange={handlePicture}
+                    />
+                    {/*<div className='container-img'>*/}
+                    {/*    <img className='img-picture' alt="Votre photo"/>*/}
+                    {/*</div>*/}
+                    <label htmlFor="raised-button-file-picture">
+                        <Button variant="raised" component="span">Changer votre photo
+                        </Button>
+                    </label>
+                </div>
+            </div>
             <Button onClick={clickResetPassword}>
                 <div className='account-field'>
                         <p>Réinitialiser le mot de passe</p>
@@ -115,21 +174,17 @@ function Account() {
                         </div>
                 </div>
             </Button>
+
             {!isShow && <Alert severity="info">Un email vous a été envoyé</Alert>}
             <Link to="/param">
                 <div className='account-field'>
-                    <p>Parametres</p>
+                    <p>Paramètres</p>
                     <div className="account-field-result">
                     </div>
                 </div>
             </Link>
             <div className="button-bot-account">
-                <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
-            </div>
-            <div className="button-bot-account">
-                <Link to="/admin">
-                    <Button variant="contained" >Admin</Button>
-                </Link>
+                <Button variant="contained" onClick={handleLogout}> Se déconnecter </Button>
             </div>
         </div>
       </div>

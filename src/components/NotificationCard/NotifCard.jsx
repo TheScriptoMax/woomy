@@ -2,9 +2,8 @@ import {database} from '../../firebase';
 import {useState, useEffect} from 'react';
 import {useAuth} from "../../contexts/AuthContext";
 
-
 // MATERIAL UI IMPORT
-import MessageIcon from '@material-ui/icons/Message';
+
 import Button from '@material-ui/core/Button';
 import Clear from '@material-ui/icons/Clear';
 import { Avatar } from '@material-ui/core';
@@ -25,8 +24,10 @@ function NotifCard({notif}) {
             .then(doc => {
                 setUserData(database.formatDoc(doc))
             })
-        
-    },[])
+
+
+    },[notif])
+
 
     function handleDeleteNotif (e) {
         e.preventDefault();
@@ -36,6 +37,8 @@ function NotifCard({notif}) {
             console.log('notif Clear')
         )
     }
+
+
 
     function onGuestApproval () {
         database.membersApproved(notif.cowalkRequested).doc(notif.guest)
@@ -51,6 +54,7 @@ function NotifCard({notif}) {
                         .then(()=> {
                              console.log('notif delete')
                         })
+
                         database.notifications(notif.guest)
                             .add({
                                 cowalkRequested: notif.cowalkRequested,
@@ -58,6 +62,7 @@ function NotifCard({notif}) {
                                 status:'approval request',
                                 requestDate:new Date()
                             })
+
                     })
             })
             
@@ -82,6 +87,7 @@ function NotifCard({notif}) {
 
             <div className="container-button">
                 <Button variant="contained" onClick={(event)=>onGuestApproval()}>Accepter</Button>
+
             </div></>):(
                 <><div className="separator-dark"></div>
 
@@ -97,6 +103,7 @@ function NotifCard({notif}) {
             </div></>
             
             )}
+
         </li>
     );
   }

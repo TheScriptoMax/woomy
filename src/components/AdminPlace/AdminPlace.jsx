@@ -1,7 +1,11 @@
+// IMPORT CSS
 import './adminplace.css'
+
+// IMPORT MATERIAL
 import {Button, TextField} from '@material-ui/core';
-import { MenuItem } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+
+// FIREBASE IMPORT
 import { database } from '../../firebase';
 
 // REACT IMPORT
@@ -11,12 +15,10 @@ import { Link } from 'react-router-dom';
 //ADD A LOCATION
 export default function AdminPlace () {
 
-
-    const [error, setError] = useState();
-    const [loading, setLoading] = useState();
     const [isShow, setIsShow] = useState(false);
     const [locationAdded, setLocationAdded] = useState(false);
     const [districts, setDistricts] = useState([]);
+    const [error,setError] = useState()
 
     const formRef = useRef();
     const locationNameRef = useRef();
@@ -67,21 +69,19 @@ export default function AdminPlace () {
 
     }
 
-
     return (
-        <>
 
-        <Link to={'/place-list'}><Button variant='contained'>Voir tous les lieux</Button></Link>
+      <div className="container container-admin">
+         <h1>Lieux</h1>
+         <Link className="place-list-link" to={'/place-list'}>
+             <div className="place-list-btn">
+                <Button variant="contained">Voir tous les lieux</Button>
+             </div>
+         </Link>
+         <h2 className="create-place-title">Création d'un nouveau lieu</h2>
 
-        <h2 className="placecreate">Création d'un nouveau lieu</h2>
+        <form onSubmit={addLocation} ref={formRef} className="place-form">
 
-
-    <div className="container container-admin">
-        <h2>Lieux</h2>
-        <Link className="MuiButtonBase-root MuiButton-root MuiButton-contained admin-form-btn" to={'/placelist'}>Voir tous les lieux</Link>
-        <p className="placecreate">Création d'un nouveau lieu</p>
-
-        <form onSubmit={addLocation} ref={formRef} className="placeform">
         <TextField inputRef={locationNameRef} label="Lieux" variant="outlined"/>
         <TextField select inputRef={districtRef} label="Quartier" variant="outlined">
             {districts.map((option) => (
@@ -92,7 +92,9 @@ export default function AdminPlace () {
         </TextField>
         <TextField inputRef={adressRef} label="Adresse" variant="outlined"/>
 
-        <Button disabled={loading} type="submit" color="secondary" variant='contained' className="admin-form-btn">Ajouter</Button>
+
+        <Button type="submit" color="secondary" variant='contained'>Ajouter</Button>
+
 
         {error && <Alert severity="error">{error}</Alert> }
         {locationAdded && <Alert severity="success">Le lieu a été ajouté</Alert>}
@@ -100,9 +102,7 @@ export default function AdminPlace () {
 
         </form>
         
-
         <Link to={'/admin-district'}><Button variant='contained'>Ajouter un quartier</Button></Link>
      </div>
-    </>
     )
 }

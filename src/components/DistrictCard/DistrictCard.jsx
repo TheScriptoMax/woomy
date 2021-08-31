@@ -1,4 +1,5 @@
 import './districtcard.css';
+
 import { useState } from 'react';
 
 import { database } from '../../firebase';
@@ -74,6 +75,7 @@ function DistrictCard ({district}) {
                 {districtDeleted && <div>
                 <Alert severity="success">Le quartier a été supprimé, il ne s'affichera plus au rechargement de la page</Alert></div>}
             
+
         </div>
     )
 

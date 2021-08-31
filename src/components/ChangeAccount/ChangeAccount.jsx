@@ -15,9 +15,8 @@ import {database} from "../../firebase";
 export default function ChangeAccount () {
 
     const [userData, setUserData] = useState({});
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState();
     const [pageLoading, setPageLoading] = useState(true);
+
 
     const history = useHistory();
 
@@ -37,17 +36,15 @@ export default function ChangeAccount () {
                 setPageLoading(false)
             })
             .catch(error => {
-                setError(error.message)
+                console.log(error.message)
+
             })
 
-    }, [currentUser.uid])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     async function handleSubmit(ev) {
         ev.preventDefault();
-
         const promises = [];
-        setLoading(true);
-        setError('');
 
         if (lastnameRef.current.value !== userData.lastname) {
             promises.push(database.users.doc(currentUser.uid).update({
@@ -75,10 +72,9 @@ export default function ChangeAccount () {
                 console.log('Edit updated successfully');
             })
             .catch((error) => {
-                setError(error);
+                console.log(error);
             })
             .finally(() => {
-                setLoading(false);
                 history.push('/account');
             })
     }
@@ -87,25 +83,28 @@ export default function ChangeAccount () {
     return (
 
         <div className='changeAccount container'>
-        {!pageLoading &&
 
-        <form onSubmit={handleSubmit} className='changeAccount-content'>
+            {!pageLoading &&
 
-            {/* MATERIAL UI INPUT TO COMPLETE FOR CHANGEACCOUNT */}
 
-            <TextField inputRef={lastnameRef} id="standard-basic" defaultValue={userData.lastname} variant="standard"/>
+            <form onSubmit={handleSubmit} className='changeAccount-content'>
 
-            <TextField inputRef={firstnameRef} id="standard-basic" label="Prénom" defaultValue={userData.firstname} variant="standard" />
+                {/* MATERIAL UI INPUT TO COMPLETE FOR CHANGEACCOUNT */}
 
-            <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Numéro de téléphone" defaultValue={userData.phoneNumber} variant="standard" />
+                <TextField inputRef={lastnameRef} id="standard-basic" defaultValue={userData.lastname} variant="standard"/>
 
-            <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Date de naissance" defaultValue={userData.birthdate} variant="standard"  InputLabelProps={{
-                shrink: true,
-            }}/>
+                <TextField inputRef={firstnameRef} id="standard-basic" label="Prénom" defaultValue={userData.firstname} variant="standard" />
 
-            <Button disabled={loading} type="submit" variant="contained">Envoyer</Button>
+                <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Numéro de téléphone" defaultValue={userData.phoneNumber} variant="standard" />
 
-        </form>}
+                <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Date de naissance" defaultValue={userData.birthdate} variant="standard"  InputLabelProps={{
+                    shrink: true,
+                }}/>
+
+                <Button  type="submit" variant="contained">Envoyer</Button>
+
+            </form>}
+
 
         </div>
     );

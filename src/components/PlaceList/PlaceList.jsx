@@ -38,6 +38,7 @@ export default function PlaceList () {
                 }
             </ul>
 
+
      </div>
     )
 }

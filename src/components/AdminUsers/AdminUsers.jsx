@@ -1,6 +1,5 @@
 import './adminusers.css'
 import {Button, TextField} from '@material-ui/core';
-import {Link} from "react-router-dom";
 import React, {useRef, useState} from "react";
 import {database} from "../../firebase";
 import UserCard from "../UserCard/UserCard";
@@ -32,6 +31,7 @@ function AdminUsers() {
 
 
     }
+
 
     function handleIdSearch(ev) {
         ev.preventDefault()
@@ -69,6 +69,7 @@ function AdminUsers() {
     }
 
     function viewLastUsers() {
+
         database.users.orderBy('createdAt', 'desc').limit(20)
             .get()
             .then((querySnapshot) => {
@@ -80,6 +81,7 @@ function AdminUsers() {
                 console.log(membersRetrieved)
             })
     }
+
 
 
     return (
