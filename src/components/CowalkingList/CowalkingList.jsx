@@ -10,6 +10,7 @@ import { useState,useEffect } from 'react';
 //FIREBASE
 import {database} from '../../firebase'
 
+import {useAuth} from "../../contexts/AuthContext";
 
 
 
@@ -20,19 +21,30 @@ function CowalkingList () {
     const [cowalks, setCowalks] = useState([])
     const [pageLoading, setPageLoading] = useState(true);
 
+    const {currentUser} = useAuth();
+    
 
     useEffect(() => {
-        return database.cowalks.onSnapshot((querySnapshot) => {
+        return database.cowalks
+            .onSnapshot((querySnapshot) => {
             const tempResults = [];
             querySnapshot.forEach((doc) => {
+                /* let tempResult = database.formatDoc(doc) */
+                /* console.log(tempResult) */
                 tempResults.push(database.formatDoc(doc))
             })
+            setPageLoading(false)
             setCowalks(tempResults)
+            
+
         });
     }, [])
 
-    useEffect(() => {
-        database.cowalks
+
+    
+    
+   /*  useEffect(() => {
+        database.cowalks.where('owner','==',currentUser.uid)
             .orderBy('startTime')
             .get()
             .then((querySnapshot) => {
@@ -44,10 +56,11 @@ function CowalkingList () {
                         )
                     })
                 setCowalks(tempResults);
-                    setPageLoading(false)
+                setPageLoading(false)
 
             })
-    }, []);
+        
+    }, []); */
 
     return (
         <div className="container">

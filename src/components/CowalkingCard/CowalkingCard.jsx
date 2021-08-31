@@ -25,12 +25,15 @@ function CowalkingCard ({cowalk,index}) {
     const [isOwner,setIsOwner] = useState(false)
     const [membersList, setMembersList] = useState([]);
 
+
     const [urlPicture, setUrlPicture] = useState('')
     const [pictureLoading, setPictureLoading] = useState(false)
 
 
+
     const {currentUser} = useAuth();
-    
+     
+
 
 
     useEffect(() => {
@@ -55,7 +58,7 @@ function CowalkingCard ({cowalk,index}) {
             })
             setMembersList(approvedMembers)
         });
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function handleDeleteCowalk(ev) {
         ev.preventDefault();
@@ -105,7 +108,7 @@ function CowalkingCard ({cowalk,index}) {
             >
             <li className='cowalkingCard' key={cowalk.id}>
                 <div className='cowalkingCardTitle'>
-                <p className='cowalk-start'>Heure de départ:{currentCowalkStartTime}</p>
+                <p className='cowalk-start'>Heure de départ : {currentCowalkStartTime}</p>
                     {/* <h3>itinéraire:{index+1}</h3> */}
                     <div className="main-card">
                         <div className="cowalk-bar">

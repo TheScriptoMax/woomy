@@ -3,8 +3,16 @@
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
+/**** BANDEAU WARNING *****/
+import BandeauWarning from "./components/BandeauWarning/BandeauWarning";
+
+/**** HEADER & FOOTER *****/
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+
+
 /**** LEGAL *****/
-import Conditions from "./components/Conditions/Conditions";
+import Cgu from './components/Cgu/Cgu';
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 
 /**** CONNEXION *****/
@@ -16,7 +24,6 @@ import AwaitingApproval from "./components/AwaitingApproval/AwaitingApproval";
 
 /**** PROFIL *****/
 import Account from './components/Account/Account';
-import Params from './components/Params/Params';
 import ChangeAccount from './components/ChangeAccount/ChangeAccount';
 
 /**** ADMIN *****/
@@ -67,12 +74,15 @@ function App() {
 
             <Switch>
                 <AuthProvider>
-                    {/*----- Route public -----*/}
 
-                    <Route path='/signin' component={SignIn}/>
-                    <PublicRoute path='/login' component={Login}/>
-                    <PublicRoute path='/cgu' component={Conditions}/>
-                    <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
+                    {/*----- Route all access -----*/}
+                        <Route path='/cgu' component={Cgu}/>
+
+
+                    {/*----- Route public -----*/}
+                    <PublicRoute path='/signin' component={SignIn}/>
+                        <PublicRoute path='/login' component={Login}/>
+                        <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
 
                     {/*----- Route private Attente validation Email et AwaitingApproval -----*/}
 
@@ -99,25 +109,27 @@ function App() {
 
                     {/*----- Profil connecté et approuvé -----*/}
 
-                        {/*----- Ticket -----*/}
-                        <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
-                        <PrivateRoute exact path='/create' component={CowalkingCreate}/>
-                        <PrivateRoute exact path='/search' component={CowalkingSearch}/>
-                        <PrivateRoute exact path='/list' component={CowalkingList}/>
-                        <PrivateRoute exact path='/message' component={Notification}/>
-                        <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit}/>
+                    <>
+                        <Header/>
+                                {/*----- Ticket -----*/}
+                                <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
+                                <PrivateRoute exact path='/create' component={CowalkingCreate}/>
+                                <PrivateRoute exact path='/search' component={CowalkingSearch}/>
+                                <PrivateRoute exact path='/list' component={CowalkingList}/>
+                                <PrivateRoute exact path='/message'component={Notification} />
+                                <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
 
-                        {/*----- Account -----*/}
-                        <PrivateRoute exact path='/account' component={Account}/>
-                        <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
-                        <PrivateRoute exact path='/param' component={Params}/>
-
+                                {/*----- Account -----*/}
+                                <PrivateRoute exact path='/account' component={Account}/>
+                                <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
+                        <Footer/>
+                    </>
+                    <BandeauWarning/>
                 </AuthProvider>
             </Switch>
 
         </Router>
     );
-
 
 }
 

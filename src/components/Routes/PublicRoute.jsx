@@ -14,7 +14,7 @@ export default function PublicRoute({component: Component, ...rest}) {
             database.users.doc(currentUser.uid)
                 .get()
                 .then((doc) => {
-                    console.log(doc)
+                    console.log(doc.id)
                     if (doc.exists) {
                         setIsAccepted(doc.data().accepted)
                         setLoading(false)

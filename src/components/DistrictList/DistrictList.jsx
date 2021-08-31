@@ -1,7 +1,7 @@
 import { database } from '../../firebase';
 
 // REACT IMPORT
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from 'react-router-dom';
 
 // CARD COMPONENT IMPORT
@@ -9,6 +9,7 @@ import DistrictCard from '../DistrictCard/DistrictCard';
 
 // MATERIAL UI IMPORT
 import { Button } from '@material-ui/core';
+import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 
 //LIST ALL LOCATION
 export default function DistrictList () {
@@ -27,7 +28,9 @@ export default function DistrictList () {
     }, [])
 
     return (
-      <div class="container container-admin">
+      <div className="container container-admin">
+
+          <BackToAdminDashboardButton />
          <h1>Quartiers existants</h1>
          <Link to={'/admin-district'}><Button variant='contained'>Retour</Button></Link>
 
