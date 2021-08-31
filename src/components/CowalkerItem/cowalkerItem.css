@@ -17,6 +17,8 @@
 }
 .cowalkerItem h3{   
     margin-bottom: 0.875rem;
+    font-weight: 400;
+    text-transform: capitalize;
 }
 
 .cowalkerItemButton{

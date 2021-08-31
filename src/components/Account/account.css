@@ -83,3 +83,12 @@
     margin-top: 1rem;
     margin-bottom: 2rem;
 }
+
+.button-bot-account label span{
+    
+    color: white;
+}
+
+.button-bot-account{
+    margin: auto;
+}

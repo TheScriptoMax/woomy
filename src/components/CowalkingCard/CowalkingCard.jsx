@@ -93,7 +93,7 @@ function CowalkingCard ({cowalk,index}) {
             >
             <li className='cowalkingCard' key={cowalk.id}>
                 <div className='cowalkingCardTitle'>
-                <p className='cowalk-start'>Heure de départ:{currentCowalkStartTime}</p>
+                <p className='cowalk-start'>Heure de départ : {currentCowalkStartTime}</p>
                     {/* <h3>itinéraire:{index+1}</h3> */}
                     <div className="main-card">
                         <div className="cowalk-bar">
