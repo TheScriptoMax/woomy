@@ -8,22 +8,6 @@ export default function PublicRoute({component: Component, ...rest}) {
     const [loading, setLoading] = useState(true)
     const {currentUser} = useAuth();
 
-    useEffect(() => {
-        if (currentUser) {
-            database.users.doc(currentUser.uid)
-                .get()
-                .then((doc) => {
-                    if (doc.exists) {
-                        setIsAccepted(doc.data().accepted)
-                        setLoading(false)
-                    } else {
-                        setLoading(false)
-                    }
-                })
-        } else {
-            setLoading(false)
-        }
-    }, [currentUser])
 
     return (
         <>
@@ -31,11 +15,11 @@ export default function PublicRoute({component: Component, ...rest}) {
             <Route
                 {...rest}
                 render={props => {
-                    if (currentUser && currentUser.emailVerified && isAccepted) {
+                    if (currentUser && currentUser.emailVerified) {
                         return <Redirect to="/account"/>
-                    } else if (currentUser && currentUser.emailVerified && !isAccepted) {
+                    } else if (currentUser && currentUser.emailVerified) {
                         return <Redirect to="/awaiting-approval"/>
-                    } else if (currentUser && !currentUser.emailVerified && !isAccepted) {
+                    } else if (currentUser && !currentUser.emailVerified) {
                         return <Redirect to="/send-new-validation"/>
                     } else {
                         return <Component {...props} />
