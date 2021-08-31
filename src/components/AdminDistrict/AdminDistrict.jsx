@@ -10,8 +10,9 @@ import { database } from '../../firebase';
 
 // REACT IMPORT
 
-import {useRef, useState, useEffect} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import { Link } from 'react-router-dom';
+import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 
 //ADD A LOCATION
 export default function AdminDistrict() {
@@ -74,7 +75,8 @@ export default function AdminDistrict() {
     }
 
     return (
-      <div class="container container-admin">
+      <div className="container container-admin">
+          <BackToAdminDashboardButton />
          <h1>Quartiers</h1>
         
          <Link className="district-list-link" to={'/district-list'}>

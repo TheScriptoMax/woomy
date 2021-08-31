@@ -3,6 +3,7 @@ import {Button, TextField} from '@material-ui/core';
 import React, {useRef, useState} from "react";
 import {database} from "../../firebase";
 import AdminUserCard from "../AdminUserCard/AdminUserCard";
+import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 
 function AdminUsers() {
 
@@ -88,6 +89,7 @@ function AdminUsers() {
 
         <div className="container container-admin">
             <h1>Administration des utilisatrices</h1>
+            <BackToAdminDashboardButton />
             <Button variant="contained" onClick={viewLastUsers}>Voir les 20 dernières utilisatrices</Button>
             <h2>Chercher une utilisatrice</h2>
             <h3>Par nom et prénom</h3>
