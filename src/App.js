@@ -3,13 +3,16 @@
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
+/**** BANDEAU WARNING *****/
+import BandeauWarning from "./components/BandeauWarning/BandeauWarning";
+
 /**** HEADER & FOOTER *****/
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 
 /**** LEGAL *****/
-import Conditions from "./components/Conditions/Conditions";
+import Cgu from './components/Cgu/Cgu';
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 
 /**** CONNEXION *****/
@@ -17,10 +20,10 @@ import Login from './components/Login/Login';
 import SignIn from './components/SignIn/SignIn';
 import ConfirmEmailSent from './components/ConfirmEmailSent/ConfirmEmailSent';
 import SendNewValidation from './components/SendNewValidation/SendNewValidation';
+import AwaitingApproval from "./components/AwaitingApproval/AwaitingApproval";
 
 /**** PROFIL *****/
 import Account from './components/Account/Account';
-import Params from './components/Params/Params';
 import ChangeAccount from './components/ChangeAccount/ChangeAccount';
 
 /**** ADMIN *****/
@@ -40,7 +43,6 @@ import CowalkingTicket from './components/CowalkingTicket/CowalkingTicket';
 import CowalkingCreate from './components/CowalkingCreate/CowalkingCreate';
 import CowalkingSearch from './components/CowalkingSearch/CowalkingSearch';
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
-
 
 
 /**** NOTIFICATION *****/
@@ -64,43 +66,41 @@ import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
 import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
 
 
-
-
 function App() {
 
     return (
-        
+
         <Router>
 
             <Switch>
                 <AuthProvider>
-                    {/*----- Route public -----*/}
 
-                    <Route path='/signin' component={SignIn}/>
+                    {/*----- Route all access -----*/}
+                        <Route path='/cgu' component={Cgu}/>
+
+
+                    {/*----- Route public -----*/}
+                    <PublicRoute path='/signin' component={SignIn}/>
                         <PublicRoute path='/login' component={Login}/>
-                        <PublicRoute path='/cgu' component={Conditions}/>
                         <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
 
                     {/*----- Route private Attente validation Email et AwaitingApproval -----*/}
 
-                        <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
-                        <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
-
-
-                        
+                    <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
+                    <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
 
 
                     {/*----- Route private AwaitingApproval -----*/}
 
 
-                        <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApprovalRoute}/>
+                    <AwaitingApprovalRoute path='/awaiting-approval' component={AwaitingApproval}/>
 
 
                     {/*----- AdminCowalks -----*/}
 
-                    <Route exact path='/admin' component={AdminDashboard} />
-                    <Route exact path='/admin-accept-users' component={AdminAcceptUsers} />
-                    <Route exact path='/admin-users' component={AdminUsers} />
+                    <Route exact path='/admin' component={AdminDashboard}/>
+                    <Route exact path='/admin-accept-users' component={AdminAcceptUsers}/>
+                    <Route exact path='/admin-users' component={AdminUsers}/>
                     <Route exact path='/admin-place' component={AdminPlace}/>
                     <Route exact path='/admin-district' component={AdminDistrict}/>
                     <Route exact path='/place-list' component={PlaceList}/>
@@ -122,16 +122,14 @@ function App() {
                                 {/*----- Account -----*/}
                                 <PrivateRoute exact path='/account' component={Account}/>
                                 <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
-                                <PrivateRoute exact path='/param' component={Params}/>
                         <Footer/>
                     </>
-
+                    <BandeauWarning/>
                 </AuthProvider>
             </Switch>
 
         </Router>
     );
-
 
 }
 

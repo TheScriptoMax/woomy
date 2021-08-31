@@ -1,7 +1,7 @@
 import { database } from '../../firebase';
 
 // REACT IMPORT
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from 'react-router-dom';
 
 // CARD COMPONENT IMPORT
@@ -9,6 +9,7 @@ import PlaceCard from '../PlaceCard/PlaceCard';
 
 // MATERIAL UI IMPORT
 import { Button } from '@material-ui/core';
+import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 
 //LIST ALL LOCATION
 export default function PlaceList () {
@@ -28,6 +29,8 @@ export default function PlaceList () {
 
     return (
       <div class="container container-admin">
+
+          <BackToAdminDashboardButton />
          <h1>Lieux existants</h1>
 
          <Link to={'/admin-place'}><Button variant='contained'>Retour</Button></Link>

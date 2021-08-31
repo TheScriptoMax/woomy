@@ -1,99 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Button} from "@material-ui/core";
 import {database, storage} from "../../firebase";
 import {Alert} from "@material-ui/lab";
 
 
-export default function AdminUsersAwaitingApprovalCard({user}) {
+export default function UserCard({user}) {
 
-    const [urlPicture, setUrlPicture] = useState('');
-    const [urlCard, setUrlCard] = useState('');
-    const [error, setError] = useState('')
-    const [message, setMessage] = useState('')
-
-    useEffect(() => {
-
-        database.idCardFiles.doc(user.id)
-            .get()
-            .then((doc) => {
-                if (doc.exists) {
-                    setUrlCard(doc.data().url)
-                } else {
-                    console.log('ça existe pas')
-                }
-            })
-            .catch((error) => {
-                console.log(error.message)
-            })
-
-        //On regarde si il y'a déja une photo
-        database.idPictureFiles.doc(user.id)
-            .get()
-            .then((doc) => {
-                if (doc.exists) {
-                    setUrlPicture(doc.data().url)
-                } else {
-                    console.log('ça existe pas')
-                }
-            }).catch(error => {
-            console.log(error.message)
-        })
-    }, [user]);
-
-    function handleApproveUser() {
-        const approvalPromises = [];
-        approvalPromises.push(
-            database.users
-                .doc(user.id)
-                .update({
-                    accepted:true
-                }))
-
-        storage.ref(`/files/idPictures/${user.id}/`).listAll().then((files) => {
-            files.items.forEach(file => {
-                approvalPromises.push(file.delete())
-            })
-        }).catch(error => {
-            console.log('Something went wrong' + error.message)
-        })
-        // Référence à l'image de pose dans la bdd
-        database.idPictureFiles.doc(user.id)
-            .get()
-            .then(doc => {
-                if (doc.exists) {
-                    approvalPromises.push(database.idPictureFiles.doc(user.id).delete())
-                }
-            })
-
-        // Carte d'identité
-        storage.ref(`/files/idCards/${user.id}/`).listAll().then((files) => {
-            files.items.forEach(file => {
-                approvalPromises.push(file.delete())
-            })
-        }).catch(error => {
-            console.log('Something went wrong' + error.message)
-        })
-        // Référence à la carte d'identité bdd
-        database.idCardFiles.doc(user.id)
-            .get()
-            .then(doc => {
-                if (doc.exists) {
-                    approvalPromises.push(database.idCardFiles.doc(user.id).delete())
-                }
-            })
-
-            Promise.all(approvalPromises)
-                .then(() => {
-                    setMessage('Utilisatrice acceptée')
-                    console.log('Utilisatrice acceptée')
-                })
-                .catch(() => {
-                    setError('Erreur lors de l\'acceptation de l\'utilisatrice')
-                })
-
-
-
-    }
+    const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
 
     function handleDeleteUser() {
         const deletePromises = []
@@ -143,7 +57,7 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
                 deletePromises.push(file.delete())
             })
         }).catch(error => {
-            console.log('Something went wrong' + error.message)
+            console.log(error.message)
         })
 
         // Image de pose
@@ -187,26 +101,20 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
                 setMessage('Utilisateur supprimé de la base de donnée, à supprimer égaement dans l\'authentification')
             })
             .catch(()=> {
-                setError('Suppression ratée')
+                setError('Erreur à la suppression de l\'utilisateur');
             })
     }
 
     return (
         <div>
-            <p>{user.firstname}</p>
-            <p>{user.lastname}</p>
+            {user.profilPic && <img src={user.profilPic} alt="Profile" /> }
+            <h3>{user.firstname} {user.lastname}</h3>
             <p>utilisatrice inscrite - {user.createdAt.toString()}</p>
             <a href={`mailto:${user.email}`}>{user.email}</a>
             <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a>
-            <div>
-            {urlPicture ? <img src={urlPicture} alt="Profil"/> : <p>Pas encore de photo de pose</p>}
-            {urlCard ? <img src={urlCard} alt="Carte d'identité"/> : <p>Pas encore de carte d'identité</p>}
-            </div>
-            {error && <Alert severity="error">{error}</Alert>}
-            {message && <Alert severity="success">{message}</Alert>}
-            {urlPicture && urlCard &&
-            <Button variant="contained" onClick={handleApproveUser}>Accepter</Button>}
-            <Button variant="contained" onClick={handleDeleteUser}>Supprimer</Button>
+            <Button variant="contained" onClick={handleDeleteUser}>Supprimer l'utilisateur</Button>
+            {message && <Alert severity="success">{message}</Alert> }
+            {error && <Alert severity="error">{error}</Alert> }
         </div>
     )
 }

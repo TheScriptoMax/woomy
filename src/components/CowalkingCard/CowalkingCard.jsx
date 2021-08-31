@@ -26,12 +26,28 @@ function CowalkingCard ({cowalk,index}) {
     const [membersList, setMembersList] = useState([]);
 
 
+    const [urlPicture, setUrlPicture] = useState('')
+    const [pictureLoading, setPictureLoading] = useState(false)
+
+
+
     const {currentUser} = useAuth();
-    
+     
+
 
 
     useEffect(() => {
         currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
+        const uid = cowalk.owner
+        database.users.doc(uid)
+            .get()
+            .then((doc) => {
+                // database.formatDoc(doc)
+                if (doc.data().profilPic !== '') {
+                    setUrlPicture(doc.data().profilPic)
+                    setPictureLoading(true)
+                }
+            })
     }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
@@ -42,12 +58,11 @@ function CowalkingCard ({cowalk,index}) {
             })
             setMembersList(approvedMembers)
         });
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function handleDeleteCowalk(ev) {
         ev.preventDefault();
         const deletePromises = [];
-
 
         database.membersPending(cowalk.id)
             .get()
@@ -93,7 +108,7 @@ function CowalkingCard ({cowalk,index}) {
             >
             <li className='cowalkingCard' key={cowalk.id}>
                 <div className='cowalkingCardTitle'>
-                <p className='cowalk-start'>Heure de départ:{currentCowalkStartTime}</p>
+                <p className='cowalk-start'>Heure de départ : {currentCowalkStartTime}</p>
                     {/* <h3>itinéraire:{index+1}</h3> */}
                     <div className="main-card">
                         <div className="cowalk-bar">
@@ -117,7 +132,10 @@ function CowalkingCard ({cowalk,index}) {
                     
                         <div className='cowalkingCardCount'>
                             <figure>
-                                <img src={ImageProfil} alt="profil" />
+                                {pictureLoading ?
+                                    <img src={urlPicture} alt="profil" /> :
+                                    <img src={ImageProfil} alt="profil" />
+                                }
                             </figure>
                             <ul>
                                 <li><span>+{membersList.length+1}</span></li>
