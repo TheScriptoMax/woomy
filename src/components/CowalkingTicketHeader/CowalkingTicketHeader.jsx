@@ -115,12 +115,12 @@ function CowalkingTicketHeader({cowalk}) {
                 <div>
                     <h3>Départ :</h3>
                     <p>{cowalk.startFrom}</p>
-                    <a href={startFromUrl} target="_blank" rel="noreferrer">Voir sur la carte</a>
+                    <a className='cowalk-header-map' href={startFromUrl} target="_blank" rel="noreferrer">Voir sur la carte</a>
                 </div>
                 <div className="ticket-to-go">
                     <h3>Destination :</h3>
                     <p >{cowalk.goTo}</p>
-                    <a href={goToUrl} target="_blank" rel="noreferrer">Voir sur la carte</a>
+                    <a className='cowalk-header-map' href={goToUrl} target="_blank" rel="noreferrer">Voir sur la carte</a>
                 </div>
             </div>
             <div className='cowalkingTicketDeparture'>

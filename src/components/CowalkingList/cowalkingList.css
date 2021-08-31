@@ -3,3 +3,7 @@
     position: relative;
     z-index: 1;
 }
+
+.cowalkingCard a {
+    text-decoration: none;
+}
