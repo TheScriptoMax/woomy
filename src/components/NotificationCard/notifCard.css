@@ -48,3 +48,8 @@ margin-left:5px;
 .card-notif-md .first-name {
     text-transform: capitalize; 
 }
+
+.card-notif-bot span{
+    text-transform: uppercase;
+    padding:0.2rem 0.5rem;
+}

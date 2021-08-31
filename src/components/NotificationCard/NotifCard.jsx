@@ -82,13 +82,15 @@ function NotifCard({notif}) {
                 </div>
                 <div className="card-notif-bot notif-part first">
                     <Button onClick={(event)=>handleDeleteNotif(event)}><Clear/></Button>
-                </div>
-            </div>
-
-            <div className="container-button">
+                    <div className="container-button">
                 <Button variant="contained" onClick={(event)=>onGuestApproval()}>Accepter</Button>
 
-            </div></>):(
+                    </div>
+                </div>
+                
+            </div>
+
+            </>):(
                 <><div className="separator-dark"></div>
 
             <div className="card-notif-top">
