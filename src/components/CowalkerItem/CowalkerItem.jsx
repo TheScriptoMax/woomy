@@ -1,10 +1,10 @@
 /// ----- Import React ----- //
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 /// ----- Material UI ----- ///
 import PhoneIcon from '@material-ui/icons/Phone';
 import ButtonRound from '@material-ui/core/IconButton';
-
+import {Avatar} from "@material-ui/core";
 
 /// ----- Import Img ----- ///
 import profilpic from './profile-pic-placeholder.png';
@@ -17,16 +17,28 @@ import './cowalkerItem.css'
 
 function CowalkerItem ({member}) {
     const [togglePhone, setTogglePhone] = useState(true)
+    const [urlPicture , setUrlPicture] = useState('')
+    const [loadingPicture, setLoadingPicture] = useState(false)
 
     const handlePhone = (event) =>{
         event.preventDefault()
         setTogglePhone(!togglePhone)
     }
 
+    useEffect(() => {
+        if(member.profilPic !== ''){
+            setLoadingPicture(true)
+        }
+    })
+
     return(
         <li className="cowalkerItem">
             <figure>
-                <img src={profilpic} alt="profil"/>
+                {loadingPicture ?
+                    <img src={member.profilPic} alt="profil"/> :
+                    <img src={profilpic} alt="profil"/>
+                }
+
             </figure>
             <h3>{member.firstname} {member.lastname}</h3>
             <div className="cowalkerItemButton">
