@@ -25,9 +25,9 @@ function CowalkingCard ({cowalk,index}) {
     const [isOwner,setIsOwner] = useState(false)
     const [membersList, setMembersList] = useState([]);
 
-
     const {currentUser} = useAuth();
-    
+     
+
 
 
     useEffect(() => {
@@ -42,7 +42,7 @@ function CowalkingCard ({cowalk,index}) {
             })
             setMembersList(approvedMembers)
         });
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function handleDeleteCowalk(ev) {
         ev.preventDefault();
