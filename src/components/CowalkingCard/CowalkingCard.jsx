@@ -25,13 +25,12 @@ function CowalkingCard ({cowalk,index}) {
     const [isOwner,setIsOwner] = useState(false)
     const [membersList, setMembersList] = useState([]);
 
-<<<<<<< HEAD
-=======
+
     const [urlPicture, setUrlPicture] = useState('')
     const [pictureLoading, setPictureLoading] = useState(false)
 
 
->>>>>>> database_max
+
     const {currentUser} = useAuth();
      
 
