@@ -17,7 +17,7 @@ export default function PrivateRoute({component: Component, ...rest})
                 setIsAccepted(doc.data().accepted)
                 setLoading(false)
             })}
-    }, [currentUser])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <>
