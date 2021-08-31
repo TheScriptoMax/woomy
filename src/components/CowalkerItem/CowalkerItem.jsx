@@ -4,7 +4,6 @@ import {useState, useEffect} from 'react';
 /// ----- Material UI ----- ///
 import PhoneIcon from '@material-ui/icons/Phone';
 import ButtonRound from '@material-ui/core/IconButton';
-import {Avatar} from "@material-ui/core";
 
 /// ----- Import Img ----- ///
 import ImageProfil from '../../assets/profile-pic-placeholder.png'
@@ -16,7 +15,6 @@ import './cowalkerItem.css'
 
 function CowalkerItem ({member}) {
     const [togglePhone, setTogglePhone] = useState(true)
-    const [urlPicture , setUrlPicture] = useState('')
     const [loadingPicture, setLoadingPicture] = useState(false)
 
     const handlePhone = (event) =>{
@@ -28,7 +26,7 @@ function CowalkerItem ({member}) {
         if(member.profilPic !== ''){
             setLoadingPicture(true)
         }
-    })
+    }, [])// eslint-disable-line react-hooks/exhaustive-deps
 
     return(
         <li className="cowalkerItem">

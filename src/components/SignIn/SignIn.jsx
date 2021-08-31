@@ -49,7 +49,6 @@ export default function SignIn () {
                             birthdate: birthdateRef.current.value,
                             profilPic: '',
                             createdAt: database.getCurrentTimestamp,
-                            profilPic: '',
                             accepted:false,
                             admin:false
                         })
