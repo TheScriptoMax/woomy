@@ -8,8 +8,6 @@
     
 }
 
-
-
 .cowalkingCardTitle{
     padding: 1.125rem 0 0 0;
     height:9.75rem;
@@ -63,7 +61,9 @@
     border-radius: 50%;
     overflow: hidden;
     margin-right:0.5rem ;
-
+    height: 32px;
+    display: flex;
+    align-items: center;
 }
 .cowalkingCardCount img{
     max-width: 100%;

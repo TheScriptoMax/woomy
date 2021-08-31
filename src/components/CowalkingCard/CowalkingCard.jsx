@@ -25,6 +25,13 @@ function CowalkingCard ({cowalk,index}) {
     const [isOwner,setIsOwner] = useState(false)
     const [membersList, setMembersList] = useState([]);
 
+<<<<<<< HEAD
+=======
+    const [urlPicture, setUrlPicture] = useState('')
+    const [pictureLoading, setPictureLoading] = useState(false)
+
+
+>>>>>>> database_max
     const {currentUser} = useAuth();
      
 
@@ -32,6 +39,16 @@ function CowalkingCard ({cowalk,index}) {
 
     useEffect(() => {
         currentUser.uid === cowalk.owner ? setIsOwner(true) : setIsOwner(false)
+        const uid = cowalk.owner
+        database.users.doc(uid)
+            .get()
+            .then((doc) => {
+                // database.formatDoc(doc)
+                if (doc.data().profilPic !== '') {
+                    setUrlPicture(doc.data().profilPic)
+                    setPictureLoading(true)
+                }
+            })
     }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
@@ -47,7 +64,6 @@ function CowalkingCard ({cowalk,index}) {
     function handleDeleteCowalk(ev) {
         ev.preventDefault();
         const deletePromises = [];
-
 
         database.membersPending(cowalk.id)
             .get()
@@ -117,7 +133,10 @@ function CowalkingCard ({cowalk,index}) {
                     
                         <div className='cowalkingCardCount'>
                             <figure>
-                                <img src={ImageProfil} alt="profil" />
+                                {pictureLoading ?
+                                    <img src={urlPicture} alt="profil" /> :
+                                    <img src={ImageProfil} alt="profil" />
+                                }
                             </figure>
                             <ul>
                                 <li><span>+{membersList.length+1}</span></li>
