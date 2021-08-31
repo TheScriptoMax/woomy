@@ -81,7 +81,7 @@ function CowalkingCreate () {
                 <option value="" disabled>Choisissez un lieu de départ</option>    
                 {locations.map((option) => (
                 <option key={option.id} value={option.name}>
-                {option.name}
+                {option.name + " - " + option.district}
                 </option>
             ))}
             </TextField>
@@ -91,7 +91,7 @@ function CowalkingCreate () {
                 <option value="" disabled>Choisissez une destination</option> 
                 {locations.map((option) => (
                 <option key={option.id} value={option.name}>
-                {option.name}
+                {option.name + " - " + option.district}
                 </option>
             ))}
             </TextField>

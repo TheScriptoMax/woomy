@@ -166,19 +166,15 @@ function Account() {
                     </Link>
 
                     <div className='account-field'>
-                        <div className="button-bot-account">
+                            <label for="change-picture-btn" >Changer votre photo</label>
                             <input
                                 style={{display: 'none'}}
-                                id="raised-button-file-picture"
+                                id="change-picture-btn"
                                 type="file"
                                 onChange={handlePicture}
                             />
-                            <label htmlFor="raised-button-file-picture">
-                                <Button variant="raised" component="span">Changer votre photo
-                                </Button>
-                            </label>
-                        </div>
                     </div>
+
                     <Button onClick={clickResetPassword}>
                         <div className='account-field'>
                             <p>Réinitialiser le mot de passe</p>

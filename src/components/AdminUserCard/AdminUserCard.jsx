@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
-import {Button} from "@material-ui/core";
+import './adminusercard.css';
+
+import {Avatar, Button} from "@material-ui/core";
 import {database, storage} from "../../firebase";
 import {Alert} from "@material-ui/lab";
 
@@ -7,7 +9,13 @@ import {Alert} from "@material-ui/lab";
 export default function UserCard({user}) {
 
     const [error, setError] = useState('');
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [buttonIsDisabled, setButtonIsDisabled] = useState(false);
     const [message, setMessage] = useState('');
+
+    const showConfirmAction = () => {
+        setShowConfirm(!showConfirm);
+    }
 
     function handleDeleteUser() {
         const deletePromises = []
@@ -98,7 +106,9 @@ export default function UserCard({user}) {
         // Résolution des promesses
         Promise.all(deletePromises)
             .then(()=> {
-                setMessage('Utilisateur supprimé de la base de donnée, à supprimer égaement dans l\'authentification')
+                setMessage('Utilisateur supprimé de la base de donnée, à supprimer également dans l\'authentification')
+                setShowConfirm(false);
+                setButtonIsDisabled(true);
             })
             .catch(()=> {
                 setError('Erreur à la suppression de l\'utilisateur');
@@ -106,13 +116,29 @@ export default function UserCard({user}) {
     }
 
     return (
-        <div>
-            {user.profilPic && <img src={user.profilPic} alt="Profile" /> }
+        <div className="admin-user-card">
+            {user.profilPic && <img src={user.profilPic} alt="Profile" className="profile-pic"/> }
+            {!user.profilPic && <Avatar/> }
             <h3>{user.firstname} {user.lastname}</h3>
-            <p>utilisatrice inscrite - {user.createdAt.toString()}</p>
+            <p>utilisatrice inscrite - {new Date(user.createdAt.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})}</p>
             <a href={`mailto:${user.email}`}>{user.email}</a>
             <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a>
-            <Button variant="contained" onClick={handleDeleteUser}>Supprimer l'utilisateur</Button>
+            <Button disabled={showConfirm} color="secondary" variant="contained" onClick={showConfirmAction}>Supprimer</Button>
+            {showConfirm && 
+                <div>
+                    <Alert severity="warning">Voulez-vous vraiment supprimer cette utilisatrice ? Cette action est irréversible !</Alert>
+                    <div className="confirm-btns">
+                        <span>
+                            <Button disabled={buttonIsDisabled} color="secondary" variant="contained" onClick={handleDeleteUser}>Supprimer</Button>
+                        </span>
+                        <span>
+                            <Button disabled={buttonIsDisabled} variant="contained" onClick={showConfirmAction}>Annuler</Button>
+                        </span>
+                    </div>
+                </div>
+                }
+
+
             {message && <Alert severity="success">{message}</Alert> }
             {error && <Alert severity="error">{error}</Alert> }
         </div>
