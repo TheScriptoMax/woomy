@@ -1,5 +1,10 @@
+// IMPORT CSS
 import './admindashboard.css'
+
+// IMPORT MATERIAL
 import { Button } from '@material-ui/core';
+
+// IMPORT REACR
 import {Link} from "react-router-dom";
 
 function AdminDashboard () {

@@ -1,8 +1,13 @@
+// IMPORT CSS
 import './placecard.css';
+
+// IMPORT REACT
 import { useState } from 'react';
 
+// IMPORT FIREBASE
 import { database } from '../../firebase';
 
+// IMPORT MATERIAL
 import { Button } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 

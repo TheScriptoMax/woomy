@@ -1,5 +1,6 @@
 /// ----- Material UI ---- ///
 import Button from '@material-ui/core/Button';
+import {TextField} from "@material-ui/core";
 import {
   DateTimePicker,
   MuiPickersUtilsProvider,
@@ -10,10 +11,8 @@ import {Alert} from "@material-ui/lab";
 import './cowalkingcreate.css';
 
 /// ----- React Modules ----- ///
-
 import {useEffect, useState} from 'react';
 import DateFnsUtils from '@date-io/date-fns'
-import {TextField} from "@material-ui/core";
 import {useAuth} from "../../contexts/AuthContext";
 
 // FIREBASE

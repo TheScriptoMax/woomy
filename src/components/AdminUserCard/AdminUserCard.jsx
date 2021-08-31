@@ -1,9 +1,14 @@
+// IMPORT REACT
 import React, {useState} from 'react'
-import './adminusercard.css';
 
-import {Avatar, Button} from "@material-ui/core";
-import {database, storage} from "../../firebase";
+
+// IMPORT MATERIAL
+import {Button} from "@material-ui/core";
+
 import {Alert} from "@material-ui/lab";
+
+// IMPORT FIREBASE
+import {database, storage} from "../../firebase";
 
 
 export default function UserCard({user}) {

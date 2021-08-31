@@ -54,7 +54,8 @@
 .account-list button{
     display: flex;
     align-items: center;
-    box-sizing: border-box;
+    border: none
+
 }
 
 
@@ -89,11 +90,14 @@
     text-transform: uppercase;
 }
 
-
 .img-picture{
+
     height: 15vh;
     width: 15vh;
     object-fit: cover;
     border-radius: 50%;
+}
 
+.account-field a {
+    text-decoration: none;
 }
