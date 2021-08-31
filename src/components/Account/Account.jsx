@@ -25,6 +25,7 @@ function Account() {
 
     const [isShow, setIsShow] = useState(true);
     const [urlPicture, setUrlPicture] = useState('');
+    const [pictureLoading, setPictureLoading] = useState(false);
 
     const {logout, resetPassword} = useAuth();
 
@@ -37,6 +38,7 @@ function Account() {
             .get()
             .then(doc => {
                 setUserData(database.formatDoc(doc))
+                setPictureLoading(true)
             })
             .catch(error => {
                 console.log(error.message)
@@ -74,6 +76,10 @@ function Account() {
     async function handlePicture(ev){
         ev.preventDefault();
 
+        if (userData.profilPic){
+            setUrlPicture(userData.profilPic)
+        }
+
         const idPicture = ev.target.files[0];
 
         const filename = idPicture.name;
@@ -98,17 +104,22 @@ function Account() {
                         })
                         .then(() => {
                             setUrlPicture(url)
-
+                            setPictureLoading(true)
                         })
                     })
             }
             )
     }
 
+
     return (
       <div className='container'>
       <div className="account-top">
-        <Avatar/>
+          {pictureLoading ?
+              <img className='img-picture' alt="Votre photo" src={userData.profilPic}/> :
+              <Avatar/>
+          }
+
         <h2>Mon compte</h2>
       </div>
         <div className="account-list">
@@ -158,9 +169,6 @@ function Account() {
                         type="file"
                         onChange={handlePicture}
                     />
-                    {/*<div className='container-img'>*/}
-                    {/*    <img className='img-picture' alt="Votre photo"/>*/}
-                    {/*</div>*/}
                     <label htmlFor="raised-button-file-picture">
                         <Button variant="raised" component="span">Changer votre photo
                         </Button>

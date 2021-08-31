@@ -182,9 +182,7 @@ export default function AwaitingApproval () {
                         onChange={handleIdPictureUpload}
                     />
                     <div className='container-img'>
-
                         <img className='img-picture' src={urlPicture} alt="Votre photo"/>
-
                     </div>
                     <label htmlFor="raised-button-file-picture">
                         <Button variant="raised" component="span">
