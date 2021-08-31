@@ -11,7 +11,6 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 
-
 /// ----- Firebase ///
 import {database,storage} from "../../firebase";
 
@@ -38,7 +37,9 @@ function Account() {
             .get()
             .then(doc => {
                 setUserData(database.formatDoc(doc))
-                setPictureLoading(true)
+                if (userData.profilPic !== ''){
+                    setPictureLoading(true)
+                }
             })
             .catch(error => {
                 console.log(error.message)
@@ -62,7 +63,6 @@ function Account() {
             })
     }
 
-
     async function handleLogout() {
         try {
             await logout().then(()=> {
@@ -76,7 +76,8 @@ function Account() {
     async function handlePicture(ev){
         ev.preventDefault();
 
-        if (userData.profilPic){
+        if (userData.profilPic !== ''){
+            setPictureLoading(true)
             setUrlPicture(userData.profilPic)
         }
 
