@@ -156,13 +156,13 @@ function Account() {
                             <p>{userData.phoneNumber}</p>
                         </div>
                     </div>
-                    <Link to="/change-profile">
-                        <div className='account-field'>
+                    <div className='account-field'>
+                        <Link to="/change-profile">
                             <p>Changer vos informations</p>
                             <div className="account-field-result">
                             </div>
-                        </div>
-                    </Link>
+                        </Link>
+                    </div>
                     <div className='account-field'>
                         <input
                             style={{display: 'none'}}
@@ -176,8 +176,6 @@ function Account() {
                             </Button>
                         </label>
                     </div>
-
-
                     <Button onClick={clickResetPassword}>
                         <div className='account-field'>
                             <p>Réinitialiser le mot de passe</p>

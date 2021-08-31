@@ -142,3 +142,11 @@ display: flex;
 .members-list{
     text-align: center;
 }
+
+.cowalkingCard a {
+    text-decoration: none;
+}
+
+cowalkingCardDeparture p {
+    color: black;
+}
