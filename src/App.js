@@ -6,9 +6,6 @@ import {AuthProvider} from "./contexts/AuthContext";
 /**** BANDEAU WARNING *****/
 import BandeauWarning from "./components/BandeauWarning/BandeauWarning";
 
-/**** HEADER & FOOTER *****/
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
 
 
 /**** LEGAL *****/
@@ -109,21 +106,21 @@ function App() {
 
                     {/*----- Profil connecté et approuvé -----*/}
 
-                    <>
-                        <Header/>
-                                {/*----- Ticket -----*/}
-                                <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
-                                <PrivateRoute exact path='/create' component={CowalkingCreate}/>
-                                <PrivateRoute exact path='/search' component={CowalkingSearch}/>
-                                <PrivateRoute exact path='/list' component={CowalkingList}/>
-                                <PrivateRoute exact path='/message'component={Notification} />
-                                <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+                    
+                    
+                    {/*----- Ticket -----*/}
+                    <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
+                    <PrivateRoute exact path='/create' component={CowalkingCreate}/>
+                    <PrivateRoute exact path='/search' component={CowalkingSearch}/>
+                    <PrivateRoute exact path='/list' component={CowalkingList}/>
+                    <PrivateRoute exact path='/message'component={Notification} />
+                    <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
 
-                                {/*----- Account -----*/}
-                                <PrivateRoute exact path='/account' component={Account}/>
-                                <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
-                        <Footer/>
-                    </>
+                    {/*----- Account -----*/}
+                    <PrivateRoute exact path='/account' component={Account}/>
+                    <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
+                        
+                    
                     <BandeauWarning/>
                 </AuthProvider>
             </Switch>
