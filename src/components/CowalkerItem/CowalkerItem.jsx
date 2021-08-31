@@ -38,7 +38,6 @@ function CowalkerItem ({member}) {
                     <img src={member.profilPic} alt="profil"/> :
                     <img src={profilpic} alt="profil"/>
                 }
-
             </figure>
             <h3>{member.firstname} {member.lastname}</h3>
             <div className="cowalkerItemButton">

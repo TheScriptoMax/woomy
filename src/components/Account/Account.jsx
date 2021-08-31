@@ -121,7 +121,7 @@ function Account() {
             <>
                 <div className="account-top">
                     {pictureLoading ?
-                        <img className='img-picture' alt="Votre photo" src={urlPicture}/> :
+                        <img className='img-picture-account' alt="Votre photo" src={urlPicture}/> :
                         <Avatar/>
                     }
                     <h2>Mon compte</h2>
@@ -164,21 +164,21 @@ function Account() {
                             </div>
                         </div>
                     </Link>
-
                     <div className='account-field'>
-                        <div className="button-bot-account">
-                            <input
-                                style={{display: 'none'}}
-                                id="raised-button-file-picture"
-                                type="file"
-                                onChange={handlePicture}
-                            />
-                            <label htmlFor="raised-button-file-picture">
-                                <Button variant="raised" component="span">Changer votre photo
-                                </Button>
-                            </label>
-                        </div>
+                        <input
+                            style={{display: 'none'}}
+                            id="picture-profil-account"
+                            type="file"
+                            onChange={handlePicture}
+                        />
+                        <label htmlFor="picture-profil-account">
+                            <Button variant="raised" component="span">
+                                Changer votre photo
+                            </Button>
+                        </label>
                     </div>
+
+
                     <Button onClick={clickResetPassword}>
                         <div className='account-field'>
                             <p>Réinitialiser le mot de passe</p>
