@@ -23,8 +23,27 @@ function CowalkingList () {
             querySnapshot.forEach((doc) => {
                 tempResults.push(database.formatDoc(doc))
             })
+            
+            
+            
+            
+            
+            
+            const tempResultsActual = tempResults.filter(tempResult=>{
+                return tempResult.startTime.seconds*1000 >= new Date().getTime()-3600000 ? true : false ;
+                  
+            })
+            tempResultsActual.sort(function compare (a,b){
+                    if(a.startTime.seconds<b.startTime.seconds){
+                        return -1
+                    }
+                    if(a.startTime.seconds>b.startTime.seconds){
+                        return 1
+                    }
+                    return 0;
+                })
             setPageLoading(false)
-            setCowalks(tempResults)
+            setCowalks(tempResultsActual)
             
 
         });

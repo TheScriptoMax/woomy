@@ -164,6 +164,7 @@ function Account() {
                         </Link>
                     </div>
                     <div className='account-field'>
+
                         <input
                             style={{display: 'none'}}
                             id="picture-profil-account"
@@ -175,7 +176,9 @@ function Account() {
                                 Changer votre photo
                             </Button>
                         </label>
+
                     </div>
+
                     <Button onClick={clickResetPassword}>
                         <div className='account-field'>
                             <p>Réinitialiser le mot de passe</p>
