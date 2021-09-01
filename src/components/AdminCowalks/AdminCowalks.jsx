@@ -16,7 +16,7 @@ import {database} from "../../firebase";
 import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdminDashboardButton";
 import {DateTimePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import CowalkingCard from "../CowalkingCard/CowalkingCard";
+import AdminCowalkingCard from "../AdminCowalkingCard/AdminCowalkingCard";
 
 function AdminCowalks() {
 
@@ -30,7 +30,7 @@ function AdminCowalks() {
         const rangeEnd = new Date(selectedDate);
         rangeStart.setHours(rangeStart.getHours() - 2);
         rangeEnd.setHours(rangeEnd.getHours() + 2);
-        database.cowalks.where("startTime", ">=", rangeStart).where("startTime", "<=", rangeEnd).orderBy("startTime")
+        database.cowalks.where("startTime", ">=", rangeStart).where("startTime", "<=", rangeEnd).orderBy("startTime","asc")
             .get()
             .then((queryResults) => {
                 const tempResults = []
@@ -44,7 +44,7 @@ function AdminCowalks() {
     }
 
     function viewLastCowalks() {
-        database.cowalks.orderBy('createdAt', 'desc').limit(20)
+        database.cowalks.orderBy('createdAt', 'asc').limit(20)
             .get()
             .then((querySnapshot) => {
                 const cowalksRetrieved = [];
@@ -55,9 +55,6 @@ function AdminCowalks() {
             })
     }
 
-    function handleDeleteCowalk() {
-
-    }
 
 
     return (
@@ -82,7 +79,7 @@ function AdminCowalks() {
             <div>
                 <ul>
                     {searchResults.map((cowalk, index) => {
-                        return <><CowalkingCard key={cowalk.id} cowalk={cowalk} index={index}/><Button variant="contained" onClick={handleDeleteCowalk}>Supprimer le copiet</Button></>
+                        return <AdminCowalkingCard key={cowalk.id} cowalk={cowalk} index={index}/>
                     })}
                 </ul>
             </div>

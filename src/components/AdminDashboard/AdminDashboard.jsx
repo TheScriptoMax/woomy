@@ -31,6 +31,9 @@ function AdminDashboard() {
             <Link to="/district-list">
                 <Button variant="contained">Voir les quartiers</Button>
             </Link>
+            <Link to="/account">
+                <Button variant="contained">Retour à votre compte</Button>
+            </Link>
         </div>
     )
 }

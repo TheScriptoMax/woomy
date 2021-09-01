@@ -1,0 +1,153 @@
+.cowalkingCard{
+    background-color: white;
+    border-radius: 4px;
+    max-width: 28.375rem;
+    margin: 0 auto;
+    margin-bottom: 1.125rem;
+    box-shadow: 1px 1px 4px grey;
+    
+}
+
+.cowalkingCardTitle{
+    padding: 1.125rem 0 0 0;
+    height:9.75rem;
+}
+.cowalkingCardTitle h3{
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+}
+
+.cowalkingCardRoute{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    margin-bottom: 1.875rem;
+    padding-left:30px;
+
+}
+
+.cowalkingCardRoute span{
+    flex-grow: 2;
+}
+.cowalkingCardFooter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #670652;
+    padding:0 0.75rem;
+    height:3.625rem;
+}
+.cowalkingCardFooter svg{
+    fill:white;
+    border: 2px white solid;
+    border-radius: 50%;
+    padding: 5px;
+    
+}
+
+.cowalkingCardButtons:nth-child(1){
+    padding-left:1.25rem ;
+}
+
+.cowalkingCardCount{
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+    position: relative;
+}
+
+.cowalkingCardCount figure{
+    width: 2.125rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right:0.5rem ;
+    height: 32px;
+    display: flex;
+    align-items: center;
+}
+.cowalkingCardCount img{
+    max-width: 100%;
+}
+.cowalkingCardCount li{
+    position: relative;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.cowalkingCardCount li:last-child{
+    background-color: white;
+    margin-right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.cowalkingCardDeparture, .cowalkingCardDestination{
+    display: flex;
+    
+}
+
+.cowalk-start{
+    margin-left:10px;
+    margin-bottom:10px;
+    color:#BD1347;
+
+}
+.cowalkingCardDeparture{
+    margin-bottom:30px;
+}
+
+.cowalkingCardButtons{
+    display: flex;
+    
+}
+
+.buttons-owner{
+    display: flex;
+    padding-right: 2.5rem;
+}
+.buttons-owner button{
+    padding:0;
+    padding-top: 10px;
+    padding-bottom:10px;
+}
+
+.dot{
+    width:10px;
+    height:10px;
+    border-radius: 50%;
+    background-color: #670652;
+    margin-bottom:2px;
+    margin-top:2px;
+}
+.bar{
+    height:40px;
+    width: 4px;
+    background-color: #BD1347;
+}
+
+.main-card{
+display: flex;
+}
+
+.cowalk-bar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left:30px;
+}
+
+.members-list{
+    text-align: center;
+    
+}
+
+.cowalkingCard a {
+    text-decoration: none;
+}
+
+cowalkingCardDeparture p {
+    color: black;
+}
