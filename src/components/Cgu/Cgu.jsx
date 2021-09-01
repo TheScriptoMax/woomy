@@ -5,11 +5,15 @@ import './Cgu.css'
 import {useAuth} from '../../contexts/AuthContext';
 import { useEffect, useState } from 'react';
 
+// IMPORT MATERIAL UI
+
 // IMPORT FIREBASE
 import {database} from '../../firebase';
 
-import Header from '../header/Header';
-import Footer from '../footer/Footer';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 
 //CGU
@@ -134,6 +138,9 @@ function Cgu() {
                     <br /> <br />
                     CGU réalisées sur http://legalplace.fr/
                     </p>
+
+                    <Link to="login"><Button variant="contained">Retour</Button></Link>
+
                 </div>
             {isAccepted && <Footer />}
             </>
