@@ -4,9 +4,9 @@ import './conditions.css';
 // Auth context
 import {useAuth} from "../../contexts/AuthContext";
 
-// Header & footer
-import Header from "../Header/Header"
-import Footer from "../Footer/Footer"
+// header & footer
+import Header from "../header/Header"
+import Footer from "../footer/Footer"
 
 export default function Conditions() {
 
