@@ -35,7 +35,7 @@ export default function PrivateRoute({component: Component, ...rest}) {
     return (
         <>
             {!loading &&
-            <Route>
+            <Route
                 {...rest}
                 render={props => {
                     if (currentUser && currentUser.emailVerified && isAccepted) {
@@ -52,8 +52,7 @@ export default function PrivateRoute({component: Component, ...rest}) {
                         return <Redirect to="/login"/>
                     }
                 }}
-            >
-            </Route>
+            />
             }
         </>
     )
