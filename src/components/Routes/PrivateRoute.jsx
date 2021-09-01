@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import {Redirect, Route} from "react-router-dom";
 import {useAuth} from "../../contexts/AuthContext";
 import {database} from "../../firebase";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import Header from "../header/Header";
+import Footer from "../footer/Footer";
 
 export default function PrivateRoute({component: Component, ...rest}) {
     const [loading, setLoading] = useState(true)
@@ -40,7 +40,7 @@ export default function PrivateRoute({component: Component, ...rest}) {
                 render={props => {
                     if (currentUser && currentUser.emailVerified && isAccepted) {
                         return <>
-                            <Header />
+                            <Header/>
                             <Component {...props} />
                             <Footer/>
                             </>
