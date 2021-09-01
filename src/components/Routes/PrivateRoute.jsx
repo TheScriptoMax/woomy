@@ -35,14 +35,15 @@ export default function PrivateRoute({component: Component, ...rest}) {
     return (
         <>
             {!loading &&
-            <Route
+            <Route>
                 {...rest}
                 render={props => {
                     if (currentUser && currentUser.emailVerified && isAccepted) {
                         return <>
                             <Header />
                             <Component {...props} />
-                            <Footer/></>
+                            <Footer/>
+                            </>
                     } else if (currentUser && currentUser.emailVerified && !isAccepted) {
                         return <Redirect to="/awaiting-approval"/>
                     } else if (currentUser && !currentUser.emailVerified && !isAccepted) {
