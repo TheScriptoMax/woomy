@@ -181,7 +181,7 @@ export default function AwaitingApproval () {
                     {urlCard &&
                     <div className='container-img'>
 
-                        <img className='img-card' src={urlCard} alt="Votre carte d'identité"/>
+                        <img className='img-card-awaiting' src={urlCard} alt="Votre carte d'identité"/>
 
                     </div>}
                     <label htmlFor="raised-button-file-card">
@@ -205,7 +205,7 @@ export default function AwaitingApproval () {
                     />
                     {urlPicture &&
                     <div className='container-img'>
-                        <img className='img-picture' src={urlPicture} alt="Votre preuve d'identité'"/>
+                        <img className='img-picture-awaiting' src={urlPicture} alt="Votre preuve d'identité'"/>
                     </div>}
                     <label htmlFor="raised-button-file-picture">
                         <Button variant="raised" component="span">

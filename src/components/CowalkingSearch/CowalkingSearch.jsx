@@ -71,7 +71,7 @@ function CoWalkingSearch() {
                     <option value="" disabled>Choisissez un lieu de départ</option>
                     {locations.map((option) => (
                         <option key={option.id} value={option.name}>
-                        {option.name}
+                        {option.name} - {option.district}
                         </option>
                     ))} 
                 </TextField>
