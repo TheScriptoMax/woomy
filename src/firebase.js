@@ -26,9 +26,7 @@ export const database = {
     towns: firestore.collection('towns'),
     idCardFiles: firestore.collection('idCardFiles'),
     idPictureFiles: firestore.collection('idPictureFiles'),
-    approvalCowalkRemove : cowalkdId => {
-        return firestore.fieldValue.arrayRemove(cowalkId)
-    },
+
 
     membersPending: cowalkId => {
         return firestore.collection('cowalks').doc(cowalkId).collection('membersPending');

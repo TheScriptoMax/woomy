@@ -12,6 +12,7 @@ import "./admincowalkingcard.css";
 /// ----- React Modules ----- ///
 import {Link} from "react-router-dom";
 import {Button} from "@material-ui/core";
+import firebase from 'firebase/app';
 
 /////////// CARTE DE COPIETONNAGE //////////////
 
@@ -38,7 +39,9 @@ function AdminCowalkingCard ({cowalk,index}) {
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     deletePromises.push(database.users.doc(doc.id).update({
-                        approvalCowalk:database.approvalCowalkRemove(cowalk.id)
+                        approvalCowalk:firebase.firestore.FieldValue.arrayRemove(
+                            cowalk.id
+                        )
                     }))
                     deletePromises.push(
                         database.membersApproved(cowalk.id).doc(doc.id).delete()

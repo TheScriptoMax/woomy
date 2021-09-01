@@ -10,6 +10,7 @@ import './cowalkingTicketHeader.css';
 import {Link, useHistory} from "react-router-dom";
 import {useEffect,useState} from "react";
 import {database} from '../../firebase';
+import firebase from 'firebase/app';
 
 import {useAuth} from "../../contexts/AuthContext";
 
@@ -74,7 +75,9 @@ function CowalkingTicketHeader({cowalk}) {
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     deletePromises.push(database.users.doc(doc.id).update({
-                        approvalCowalk:database.approvalCowalkRemove(cowalk.id)
+                        approvalCowalk:firebase.firestore.FieldValue.arrayRemove(
+                            cowalk.id
+                        )
                     }))
                     deletePromises.push(
                         database.membersApproved(cowalk.id).doc(doc.id).delete()

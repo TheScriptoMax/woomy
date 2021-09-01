@@ -8,7 +8,6 @@ import EditIcon from '@material-ui/icons/Edit';
 
 /// ----- Import image ----- ///
 import ImageProfil from '../../assets/profile-pic-placeholder.png'
-import {database} from '../../firebase';
 
 // IMPORT FIREBASE
 import {useAuth} from "../../contexts/AuthContext";
@@ -18,6 +17,8 @@ import "./cowalkingCard.css";
 
 /// ----- React Modules ----- ///
 import {Link} from "react-router-dom";
+import firebase from 'firebase/app';
+import {database} from '../../firebase';
 
 /////////// CARTE DE COPIETONNAGE //////////////
 
@@ -80,7 +81,9 @@ function CowalkingCard ({cowalk,index}) {
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     deletePromises.push(database.users.doc(doc.id).update({
-                        approvalCowalk:database.approvalCowalkRemove(cowalk.id)
+                        approvalCowalk:firebase.firestore.FieldValue.arrayRemove(
+                            cowalk.id
+                        )
                     }))
                     deletePromises.push(
                         database.membersApproved(cowalk.id).doc(doc.id).delete()
