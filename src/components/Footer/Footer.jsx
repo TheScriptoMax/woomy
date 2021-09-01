@@ -9,6 +9,7 @@ import "./Footer.css"
 
 /// ----- React Modules ----- /// 
 import {Link}from "react-router-dom";
+import BandeauWarning from "../BandeauWarning/BandeauWarning";
 
 ////// FOOTER //////
 
@@ -39,6 +40,7 @@ function Footer() {
                     <p>Message</p>
                 </div>
             </Link>
+        <BandeauWarning/>
     </footer>
     );
   }
