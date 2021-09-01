@@ -10,7 +10,6 @@ header{
     background-color: white;
     box-shadow: 0rem 1px 10px  black;
     z-index: 2;
-    
 }
 
 header div svg path{
@@ -31,9 +30,3 @@ header{
     width: 2rem;
     height: 2rem;
 }
-
-/* button{
-    border: 1px solid black;
-    background-color: chocolate;
-    border-radius: 50%;
-} */

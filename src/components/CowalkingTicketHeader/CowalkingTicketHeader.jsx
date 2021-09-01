@@ -1,6 +1,7 @@
 /// ----- Material UI ----- ///
 import ButtonRound from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import {database} from '../../firebase';
 
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -74,6 +75,9 @@ function CowalkingTicketHeader({cowalk}) {
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
+                    deletePromises.push(database.users.doc(doc.id).update({
+                        approvalCowalk:database.approvalCowalkRemove(cowalk.id)
+                    }))
                     deletePromises.push(
                         database.membersApproved(cowalk.id).doc(doc.id).delete()
                     )

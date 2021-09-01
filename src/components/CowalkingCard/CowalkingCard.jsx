@@ -79,6 +79,9 @@ function CowalkingCard ({cowalk,index}) {
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
+                    deletePromises.push(database.users.doc(doc.id).update({
+                        approvalCowalk:database.approvalCowalkRemove(cowalk.id)
+                    }))
                     deletePromises.push(
                         database.membersApproved(cowalk.id).doc(doc.id).delete()
                     )
