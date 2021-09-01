@@ -31,7 +31,7 @@ export default function AdminAcceptUsers() {
 
     return (
 
-        <div className="container container-admin">
+        <div className="container container-admin accept-user">
                 <BackToAdminDashboardButton />
                 <h1>Approbation des utilisatrices</h1>
                 {pageLoading ? <p>Loading</p> : waitingForApprovalUsers.length === 0 ? <p>Pas d'utilisatrice à approuver</p> :
