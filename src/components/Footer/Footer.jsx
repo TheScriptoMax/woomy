@@ -36,7 +36,7 @@ function Footer() {
                     <div className="messageIcon">
                         <MessageIcon/>
                     </div>
-                    <p>Message</p>
+                    <p>Notification</p>
                 </div>
             </Link>
     </footer>
