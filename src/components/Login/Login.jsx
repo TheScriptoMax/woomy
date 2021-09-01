@@ -30,7 +30,7 @@ export default function Login () {
             setLoading(true);
             setError('');
             email && password && login(email,password).then(()=> {
-                history.push('/send-new-validation');
+                history.push('/account');
                 }
             )
                 .catch(() => {

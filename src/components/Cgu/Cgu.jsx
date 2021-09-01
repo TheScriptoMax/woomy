@@ -8,8 +8,8 @@ import { useEffect, useState } from 'react';
 // IMPORT FIREBASE
 import {database} from '../../firebase';
 
-import Header from '../header/Header';
-import Footer from '../footer/Footer';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 
 //CGU

@@ -83,16 +83,16 @@ function App() {
 
                     {/*----- Route public -----*/}
 
-                    <PublicRoute path='/signin' component={SignIn}/>
-                    <PublicRoute path='/login' component={Login}/>
-                    <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
+                    <PublicRoute exact path='/signin' component={SignIn}/>
+                    <PublicRoute exact path='/login' component={Login}/>
+                    <PublicRoute exact path='/confidentialite' component={PrivacyPolicy}/>
                     <PublicRoute exact path='/' component={Landing}/>
 
                     {/*----- Route private Attente validation Email et AwaitingApproval -----*/}
 
 
-                    <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
-                    <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
+                    <EmailNotVerifiedRoute exact path='/send-confirm' component={ConfirmEmailSent}/>
+                    <EmailNotVerifiedRoute exact path='/send-new-validation' component={SendNewValidation}/>
 
 
 

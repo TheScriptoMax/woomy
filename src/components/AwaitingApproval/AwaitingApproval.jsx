@@ -13,13 +13,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 // CSS IMPORT
 import './awaitingapproval.css';
+import {useHistory} from "react-router-dom";
 
 //PAGE VALIDATION INCRIPTION
 
 export default function AwaitingApproval () {
 
 
-    const {currentUser} = useAuth();
+    const {currentUser, logout} = useAuth();
 
     const [iconCard, setIconCard] = useState(false);
     const [cardLoading, setCardLoading] = useState(false);
@@ -28,6 +29,8 @@ export default function AwaitingApproval () {
     const [iconPicture, setIconPicture] = useState(false);
     const [pictureLoading, setPictureLoading] = useState(false);
     const [urlPicture, setUrlPicture] = useState('');
+
+    const history = useHistory()
 
 
     useEffect(()=>{
@@ -135,6 +138,17 @@ export default function AwaitingApproval () {
             })
     }
 
+
+    async function handleLogout() {
+        try {
+            await logout().then(()=> {
+                history.push("/login");
+            })
+        } catch {
+            console.log('Woops, on a pas réussi à vous déconnecter')
+        }
+    }
+
     return (
     <div className='signIn-confirm container'>
         
@@ -194,6 +208,9 @@ export default function AwaitingApproval () {
                         </Button>
                     </label>
                 </div>
+            </div>
+            <div className="button-bot-account">
+                <Button variant="contained" onClick={handleLogout}>Se déconnecter</Button>
             </div>
 
         </div>

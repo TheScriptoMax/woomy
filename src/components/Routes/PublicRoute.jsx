@@ -16,13 +16,16 @@ export default function PublicRoute({component: Component, ...rest}) {
                 .then((doc) => {
                     console.log(doc.id)
                     if (doc.exists) {
+                        console.log('doc exist sur public')
                         setIsAccepted(doc.data().accepted)
                         setLoading(false)
                     } else {
+                        console.log('doc exist pas sur public')
                         setLoading(false)
                     }
                 })
         } else {
+            console.log('on trouve pas uid sur public')
             setLoading(false)
         }
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
