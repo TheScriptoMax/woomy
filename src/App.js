@@ -6,8 +6,6 @@ import {AuthProvider} from "./contexts/AuthContext";
 /**** BANDEAU WARNING *****/
 import BandeauWarning from "./components/BandeauWarning/BandeauWarning";
 
-
-
 /**** LEGAL *****/
 import Cgu from './components/Cgu/Cgu';
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
@@ -34,14 +32,12 @@ import DistrictList from "./components/DistrictList/DistrictList";
 import AdminUsers from "./components/AdminUsers/AdminUsers";
 import AdminAcceptUsers from "./components/AdminAcceptUsers/AdminAcceptUsers";
 
-
 /**** CRUD COPIETONNAGE *****/
 import CowalkingList from './components/CowalkingList/CowalkingList';
 import CowalkingTicket from './components/CowalkingTicket/CowalkingTicket';
 import CowalkingCreate from './components/CowalkingCreate/CowalkingCreate';
 import CowalkingSearch from './components/CowalkingSearch/CowalkingSearch';
 import CowalkingEdit from "./components/CowalkingEdit/CowalkingEdit";
-
 
 /**** NOTIFICATION *****/
 import Notification from './components/Notifications/Notification';
@@ -50,7 +46,6 @@ import Notification from './components/Notifications/Notification';
 import './App.css';
 
 /// ----- React Modules ----- ///
-
 import {
     BrowserRouter as Router,
     Switch,
@@ -59,8 +54,6 @@ import {
 import PublicRoute from './components/Routes/PublicRoute'
 import PrivateRoute from './components/Routes/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
-
-
 import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
 import AdminRoute from "./components/Routes/AdminRoute";
 import AdminCowalks from "./components/AdminCowalks/AdminCowalks";
@@ -100,7 +93,7 @@ function App() {
                     {/*----- Route private AwaitingApproval -----*/}
 
 
-                    <AwaitingApprovalRoute exact path='/awaiting-approval' component={AwaitingApproval}/>
+                    <Route exact path='/awaiting-approval' component={AwaitingApproval}/>
 
 
                     {/*----- AdminCowalks -----*/}
