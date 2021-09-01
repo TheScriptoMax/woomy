@@ -6,3 +6,11 @@
 .container-admin button{
 margin-top:2rem;
 }
+
+.container-admin h2, .container-admin h3{
+    margin-top:2rem;
+}
+
+.container-admin h2{
+    margin-bottom:1rem;
+}

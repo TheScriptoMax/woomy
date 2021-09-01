@@ -4,6 +4,9 @@
     margin: 1rem auto;
     padding: 1rem;
 }
+.admin-user-card img {
+    max-width:100%;
+}
 
 .profile-pic{
     width: 10vh;

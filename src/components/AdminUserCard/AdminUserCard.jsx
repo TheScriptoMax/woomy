@@ -1,7 +1,7 @@
 // IMPORT REACT
 import React, {useState} from 'react'
 
-
+import './adminusercard.css'
 // IMPORT MATERIAL
 import {Button} from "@material-ui/core";
 import { Avatar } from '@material-ui/core';
