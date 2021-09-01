@@ -73,7 +73,6 @@ export default function Login () {
                 <TextField value={email} onChange={(e)=>setEmail(e.target.value)} id="email" label="Entrez votre email" variant="standard" />
 
                 <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} id="password" label="Entrez votre mot de passe" variant="standard" />
-                <p className='forgot-password'>Vous avez oublié votre mot de passe? <Link to="/">Cliquez ici</Link></p>
                 <div className='button-container'>
                     <Button disabled={loading} type='submit' variant="contained">S'identifier</Button>
                 </div>
