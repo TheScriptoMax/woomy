@@ -7,9 +7,10 @@ import { useEffect, useState } from 'react';
 
 // IMPORT FIREBASE
 import {database} from '../../firebase';
-
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import {Link} from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 
 //CGU
@@ -134,6 +135,9 @@ function Cgu() {
                     <br /> <br />
                     CGU réalisées sur http://legalplace.fr/
                     </p>
+                    <Link to="/">
+                        <Button variant="contained">Retour à l'accueil</Button>
+                    </Link>
                 </div>
             {isAccepted && <Footer />}
             </>

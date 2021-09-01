@@ -23,6 +23,7 @@ function Account() {
     const [isShow, setIsShow] = useState(true);
     const [urlPicture, setUrlPicture] = useState('');
     const [pictureLoading, setPictureLoading] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const {logout, resetPassword} = useAuth();
 
@@ -35,6 +36,7 @@ function Account() {
             .get()
             .then(doc => {
                 setUserData(database.formatDoc(doc))
+                setIsAdmin(doc.data().admin)
                 if (doc.data().profilPic !== '') {
                     setUrlPicture(doc.data().profilPic)
                     setPictureLoading(true)
@@ -129,6 +131,14 @@ function Account() {
                     <h2>Mon compte</h2>
                 </div>
                 <div className="account-list">
+                    {isAdmin &&
+                    <div className='account-field'>
+                        <Link to="/admin">
+                            <p>Accéder à l'administration</p>
+                            <div className="account-field-result">
+                            </div>
+                        </Link>
+                    </div>}
                     <div className='account-field'>
                         <p>Nom</p>
                         <div className="account-field-result">
