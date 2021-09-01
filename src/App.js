@@ -86,8 +86,7 @@ function App() {
 
                     {/*----- Route private AwaitingApproval -----*/}
 
-
-                    <AwaitingApprovalRoute ute exact path='/awaiting-approval' component={AwaitingApproval}/>
+                    <AwaitingApprovalRoute exact path='/awaiting-approval' component={AwaitingApproval}/>
 
 
                     {/*----- AdminCowalks -----*/}
