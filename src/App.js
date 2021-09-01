@@ -3,8 +3,7 @@
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
-/**** BANDEAU WARNING *****/
-import BandeauWarning from "./components/BandeauWarning/BandeauWarning";
+
 
 /**** LEGAL *****/
 import Cgu from './components/Cgu/Cgu';
@@ -127,7 +126,7 @@ function App() {
                         
                     
 
-                    <BandeauWarning/>
+                    
                 </AuthProvider>
             </Switch>
 

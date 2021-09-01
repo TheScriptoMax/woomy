@@ -3,6 +3,7 @@
 import Flag from "@material-ui/icons/Flag";
 import Add from "@material-ui/icons/Add";
 import MessageIcon from '@material-ui/icons/Message';
+import BandeauWarning from "../../components/BandeauWarning/BandeauWarning";
 
 /// ----- CSS ----- ///
 import "./Footer.css"
@@ -39,6 +40,7 @@ function Footer() {
                     <p>Notification</p>
                 </div>
             </Link>
+            <BandeauWarning/>
     </footer>
     );
   }
