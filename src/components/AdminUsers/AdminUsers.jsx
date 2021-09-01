@@ -24,20 +24,51 @@ function AdminUsers() {
 
     function handleNameSearch(ev) {
         ev.preventDefault()
-        database.users.where('firstname', '==', firstnameRef.current.value)
-            .where('lastname', '==', lastnameRef.current.value)
-            .get()
-            .then(querySnapshot => {
-                const membersRetrieved = [];
-                querySnapshot.forEach(doc => {
-                    membersRetrieved.push(database.formatDoc(doc))
+        if (firstnameRef.current.value.length === 0 && lastnameRef.current.value.length > 0) {
+            database.users
+                .where('lastname', '==', lastnameRef.current.value)
+                .get()
+                .then(querySnapshot => {
+                    const membersRetrieved = [];
+                    querySnapshot.forEach(doc => {
+                        membersRetrieved.push(database.formatDoc(doc))
+                    })
+                    setSearchResults(membersRetrieved);
                 })
-                setSearchResults(membersRetrieved);
-                console.log(membersRetrieved)
-            })
-            .catch(error => {
-                console.log(error.message);
-            })
+                .catch(error => {
+                    console.log(error.message);
+                })
+        } else if (firstnameRef.current.value.length > 0 && lastnameRef.current.value.length === 0) {
+            database.users
+                .where('firstname', '==', firstnameRef.current.value)
+                .get()
+                .then(querySnapshot => {
+                    const membersRetrieved = [];
+                    querySnapshot.forEach(doc => {
+                        membersRetrieved.push(database.formatDoc(doc))
+                    })
+                    setSearchResults(membersRetrieved);
+                })
+                .catch(error => {
+                    console.log(error.message);
+                })
+
+        } else {
+            database.users.where('firstname', '==', firstnameRef.current.value)
+                .where('lastname', '==', lastnameRef.current.value)
+                .get()
+                .then(querySnapshot => {
+                    const membersRetrieved = [];
+                    querySnapshot.forEach(doc => {
+                        membersRetrieved.push(database.formatDoc(doc))
+                    })
+                    setSearchResults(membersRetrieved);
+                })
+                .catch(error => {
+                    console.log(error.message);
+                })
+
+        }
 
 
     }

@@ -16,7 +16,7 @@ export default function AdminAcceptUsers() {
     const [pageLoading, setPageLoading] = useState(true)
 
     useEffect(() => {
-        database.users.where('accepted', '==',false)
+        database.users.where('accepted', '==',false).orderBy('createdAt', 'desc')
             .get()
             .then(querySnapshot => {
                 const tempMembers = []

@@ -125,7 +125,8 @@ export default function UserCard({user}) {
             {user.profilPic && <img src={user.profilPic} alt="Profile" className="profile-pic"/> }
             {!user.profilPic && <Avatar/> }
             <h3>{user.firstname} {user.lastname}</h3>
-            <p>utilisatrice inscrite - {new Date(user.createdAt.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})}</p>
+            <p><b>utilisatrice inscrite</b> - {new Date(user.createdAt.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})}</p>
+            <p><b>ID de l'utilisatrice :</b> {user.id}</p>
             <a href={`mailto:${user.email}`}>{user.email}</a>
             <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a>
             <Button disabled={showConfirm} color="secondary" variant="contained" onClick={showConfirmAction}>Supprimer</Button>

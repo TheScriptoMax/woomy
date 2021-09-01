@@ -15,6 +15,7 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
     const [urlCard, setUrlCard] = useState('');
     const [error, setError] = useState('')
     const [message, setMessage] = useState('')
+    const [disabled, setDisabled] = useState(false);
 
     useEffect(() => {
 
@@ -90,7 +91,7 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
             Promise.all(approvalPromises)
                 .then(() => {
                     setMessage('Utilisatrice acceptée')
-                    console.log('Utilisatrice acceptée')
+                    setDisabled(true)
                 })
                 .catch(() => {
                     setError('Erreur lors de l\'acceptation de l\'utilisatrice')
@@ -190,6 +191,7 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
         Promise.all(deletePromises)
             .then(()=> {
                 setMessage('Utilisateur supprimé de la base de donnée, à supprimer égaement dans l\'authentification')
+                setDisabled(true);
             })
             .catch(()=> {
                 setError('Suppression ratée')
@@ -200,9 +202,11 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
         <div className="admin-user-card">
             <span className="user-name">{user.firstname} </span>
             <span className="user-name">{user.lastname}</span>
-            <p>utilisatrice inscrite - {new Date(user.createdAt.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})}</p>
-            <p>E-mail: <a href={`mailto:${user.email}`}>{user.email}</a></p>
-            <p>Téléphone: <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a></p>
+            <p><b>utilisatrice inscrite </b> - {new Date(user.createdAt.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})}</p>
+            <p><b>E-mail </b>: <a href={`mailto:${user.email}`}>{user.email}</a></p>
+            <p><b>Téléphone </b>: <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a></p>
+            <p><b>ID de l'utilisatrice </b>: {user.id}</p>
+            <p><b>Née le </b>: {user.birthdate}</p>
         
             <div className="admin-user-card-img-container">
                     {urlPicture ? <a href={urlPicture} target="_blank" rel="noreferrer">Photo de confirmation: <br/><img src={urlPicture} alt="Profil" className="admin-user-card-img"/></a> : <p>Pas encore de photo de pose</p>}
@@ -214,8 +218,8 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
             {error && <Alert severity="error">{error}</Alert>}
             {message && <Alert severity="success">{message}</Alert>}
             {urlPicture && urlCard &&
-            <Button variant="contained" onClick={handleApproveUser} color="primary">Accepter</Button>}
-            <Button variant="contained" onClick={handleDeleteUser}>Supprimer</Button>
+            <Button disabled={disabled} variant="contained" onClick={handleApproveUser} color="primary">Accepter</Button>}
+            <Button disabled={disabled} variant="contained" onClick={handleDeleteUser}>Supprimer</Button>
         </div>
     )
 }
