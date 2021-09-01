@@ -17,11 +17,15 @@ import BackToAdminDashboardButton from "../BackToAdminDashboardButton/BackToAdmi
 import {DateTimePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import AdminCowalkingCard from "../AdminCowalkingCard/AdminCowalkingCard";
+import firebase from "firebase";
+import {Alert} from "@material-ui/lab";
 
 function AdminCowalks() {
 
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [searchResults, setSearchResults] = useState([]);
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
 
     function handleSubmitSearch(ev) {
@@ -56,13 +60,85 @@ function AdminCowalks() {
     }
 
 
+    function viewOldCowalks() {
+        const currentTime = new Date();
+        currentTime.setHours(currentTime.getHours() - 8)
+        database.cowalks.where("startTime", "<=", currentTime).orderBy("startTime","desc")
+            .get()
+            .then((queryResults) => {
+                const tempResults = []
+                queryResults.forEach(result => {
+                    tempResults.push(database.formatDoc(result))
+                })
+                setSearchResults(tempResults);
+                console.log("Requete envoyée")
+            })
+    }
+
+    function deleteOldestCowalks() {
+        const currentTime = new Date();
+        currentTime.setDate(currentTime.getDate() - 15);
+        const deletePromises = [];
+        database.cowalks.where("startTime", "<=", currentTime).orderBy("startTime","asc").limit(20)
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach(cowalk => {
+                    deletePromises.push(database.cowalks.doc(cowalk.id).delete())
+
+                    database.membersPending(cowalk.id)
+                        .get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                deletePromises.push(
+                                    database.membersPending(cowalk.id).doc(doc.id).delete()
+                                )
+                            })
+                        })
+
+                    database.membersApproved(cowalk.id)
+                        .get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                deletePromises.push(database.users.doc(doc.id).update({
+                                    approvalCowalk:firebase.firestore.FieldValue.arrayRemove(
+                                        cowalk.id
+                                    )
+                                }))
+                                deletePromises.push(
+                                    database.membersApproved(cowalk.id).doc(doc.id).delete()
+                                )
+                            })
+                        })
+                })
+            })
+
+        Promise.all(deletePromises)
+            .then(() => {
+                console.log('Docs supprimés')
+                setMessage('Copiétonnages supprimés')
+            })
+            .catch((error) => {
+                console.log(error)
+                setError('Problèmes à la suppression !')
+            })
+
+    }
+
+
 
     return (
 
         <div className="container container-admin">
             <BackToAdminDashboardButton />
             <h1>Administration des copiétonnages</h1>
-            <Button variant="contained" onClick={viewLastCowalks}>Voir les 20 dernières copiétonnages</Button>
+            <Button variant="contained" onClick={viewOldCowalks}>Voir les anciens copiétonnages</Button>
+
+            <Button variant="contained" onClick={deleteOldestCowalks}>Supprimer les copiétonnages les plus anciens</Button>
+            {error && <Alert severity="error">{error}</Alert>}
+            {message && <Alert severity="success">{message}</Alert>}
+            <p>Ce bouton supprimera les 20 copiétonnages les plus anciens. Les copiétonnages dont la date de départ a eu lieu jusque deux semaines avant la date actuelle ne seront pas pris en compte</p>
+
+            <Button variant="contained" onClick={viewLastCowalks}>Voir les 20 dernières copiétonnages crées</Button>
             <form onSubmit={handleSubmitSearch}>
                 <h2>Chercher un cowalk</h2>
                 <h3>Par date</h3>

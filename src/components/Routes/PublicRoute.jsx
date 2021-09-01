@@ -6,6 +6,7 @@ import {database} from "../../firebase";
 export default function PublicRoute({component: Component, ...rest}) {
     const [isAccepted, setIsAccepted] = useState(false);
     const [loading, setLoading] = useState(true)
+
     const {currentUser} = useAuth();
 
 

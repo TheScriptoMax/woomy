@@ -1,5 +1,5 @@
 // IMPORT REACT
-import React from 'react'
+import React, {useState} from 'react'
 
 
 /// ----- Import image ----- ///
@@ -13,10 +13,15 @@ import "./admincowalkingcard.css";
 import {Link} from "react-router-dom";
 import {Button} from "@material-ui/core";
 import firebase from 'firebase/app';
+import {Alert} from "@material-ui/lab";
 
 /////////// CARTE DE COPIETONNAGE //////////////
 
 function AdminCowalkingCard ({cowalk,index}) {
+
+    const [disabled, setDisabled] = useState(false);
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
 
 
@@ -56,9 +61,12 @@ function AdminCowalkingCard ({cowalk,index}) {
         Promise.all(deletePromises)
             .then(() => {
                 console.log('Docs supprimés')
+                setDisabled(true);
+                setMessage('Copiétonnage supprimé')
             })
             .catch((error) => {
                 console.log(error)
+                setError('Problème à la suppression !')
             })
     }
 
@@ -70,7 +78,7 @@ function AdminCowalkingCard ({cowalk,index}) {
     return(
 
             <li className='cowalkingCard' key={cowalk.id}>
-                <Link
+                <Link disabled={disabled}
                     to={`/ticket/${cowalk.id}`}
                 >
                 <div>
@@ -97,7 +105,10 @@ function AdminCowalkingCard ({cowalk,index}) {
                     </div>
                 </div>
             </Link>
-                <Button variant="contained" onClick={handleDeleteCowalk}>Supprimer le copiet</Button>
+
+                <Button disabled={disabled} variant="contained" onClick={handleDeleteCowalk}>Supprimer le copiet</Button>
+                {error && <Alert severity="error">{error}</Alert>}
+                {message && <Alert severity="success">{message}</Alert>}
         </li>
 
     )

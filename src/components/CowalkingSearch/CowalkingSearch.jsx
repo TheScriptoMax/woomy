@@ -60,6 +60,23 @@ function CoWalkingSearch() {
             })
     }
 
+    function viewNextCowalks() {
+        const currentTime = new Date();
+        currentTime.setMinutes(currentTime.getMinutes() - 15)
+        database.cowalks.where("startTime", ">=", currentTime).orderBy("startTime").limit(15)
+        .get()
+        .then((queryResults) => {
+            const tempResults = []
+            queryResults.forEach(result => {
+                tempResults.push(database.formatDoc(result))
+            })
+            setResultsList(tempResults);
+            setNoSearch(false);
+
+            console.log("Requete envoyée")
+        })
+    }
+
     return (
         <div className="container colwalkingsearch-container">
             <h2>Rechercher un itinéraire</h2>
@@ -86,7 +103,9 @@ function CoWalkingSearch() {
 
                 <Button type="submit" onClick={(event)=>handleSubmitSearch(event)} variant="contained">Rechercher</Button>
 
+                <Button onClick={viewNextCowalks} variant="contained">Prochains copiétonnages</Button>
             </form>
+
             <div className="separator"></div>
             {!noSearch &&
                 <ul className='cowalkingList'>
