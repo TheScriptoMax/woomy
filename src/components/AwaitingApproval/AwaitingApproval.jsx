@@ -13,6 +13,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 // CSS IMPORT
 import './awaitingapproval.css';
+import Alert from "@material-ui/lab/Alert";
 
 //PAGE VALIDATION INCRIPTION
 
@@ -37,6 +38,8 @@ export default function AwaitingApproval () {
             .then((doc) =>{
                 if(doc.exists){
                     setUrlCard(doc.data().url)
+                    setCardLoading(false)
+                    setIconCard(true)
                 }
                 else {
                     console.log('ça existe pas')
@@ -52,6 +55,8 @@ export default function AwaitingApproval () {
             .then((doc) =>{
                 if(doc.exists){
                     setUrlPicture(doc.data().url)
+                    setPictureLoading(false)
+                    setIconPicture(true)
                 }
                 else {
                     console.log('ça existe pas')
@@ -146,7 +151,7 @@ export default function AwaitingApproval () {
                 Le procéssus peut prendre un peu de temps, merci de votre patience.
             </p>
 
-            <div className='confirm-id'>
+            <div className='confirm-upload-account'>
                 <div className='identity-confirm'>
                     <p>Pièce d'identité</p>
                     {/* MATERIAL UI BUTTON FOR LOGIN */}
@@ -195,9 +200,11 @@ export default function AwaitingApproval () {
                     </label>
                 </div>
             </div>
-
+            {iconCard && iconPicture ?
+                <Alert severity="info">Vos images ont bien été envoyé ! Merci de patienter.</Alert> :
+                ''
+            }
         </div>
-
     </div>
     );
   }
