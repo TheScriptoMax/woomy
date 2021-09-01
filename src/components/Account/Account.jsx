@@ -66,7 +66,7 @@ function Account() {
     async function handleLogout() {
         try {
             await logout().then(() => {
-                history.push("/login");
+                history.push("/");
             })
         } catch {
             console.log('Woops, on a pas réussi à vous déconnecter')

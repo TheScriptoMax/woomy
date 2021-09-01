@@ -50,7 +50,7 @@ export default function SendNewValidation () {
     async function handleLogout() {
         try {
             await logout().then(()=> {
-                history.push("/login");
+                history.push("/");
             })
         } catch {
             setError('Woops, on a pas réussi à vous déconnecter')
@@ -65,13 +65,14 @@ export default function SendNewValidation () {
 
                     <p>{userData.firstname}, un e-mail de confirmation vous a été renvoyé, merci de vérifier votre boite mail à l'adresse {currentUser.email}.<br/>
                         Attention, vérifiez si le mail n'est pas dans vos Spams.</p>
+                    <Alert severity="warning">Une fois le mail validé, déconnectez avec le bouton ci-dessous vous puis reconnectez vous pour poursuivre le processus d'inscription</Alert>
                 </div>}
 
             {/* MATERIAL UI BUTTON FOR CLOSE VALIDATION */}
             <Button onClick={sendEmail}>Renvoyer un mail</Button>
 
             <div className="button-bot-account">
-                <Button variant="contained" onClick={handleLogout}>Connexion</Button>
+                <Button variant="contained" onClick={handleLogout}>Se déconnecter</Button>
             </div>
 
         </div>

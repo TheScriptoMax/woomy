@@ -3,8 +3,6 @@
 /**** AUTHPROVIDER *****/
 import {AuthProvider} from "./contexts/AuthContext";
 
-
-
 /**** LEGAL *****/
 import Cgu from './components/Cgu/Cgu';
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
@@ -62,31 +60,28 @@ function App() {
 
     return (
 
-        <Router>
+        <AuthProvider>
+            <Router>
 
-            <Switch>
-                <AuthProvider>
+                <Switch>
 
 
                     {/*----- Route all access -----*/}
                     <Route exact path='/cgu' component={Cgu}/>
+                    <Route exact path='/' component={Landing}/>
                     {/*<Route path='/' component={Home}/>*/}
 
 
                     {/*----- Route public -----*/}
-
-                    <PublicRoute path='/signin' component={SignIn}/>
-                    <PublicRoute path='/login' component={Login}/>
-                    <PublicRoute path='/confidentialite' component={PrivacyPolicy}/>
-                    <PublicRoute exact path='/' component={Landing}/>
+                    <PublicRoute exact path='/signin' component={SignIn}/>
+                    <PublicRoute exact path='/login' component={Login}/>
+                    <PublicRoute exact path='/confidentialite' component={PrivacyPolicy}/>
 
                     {/*----- Route private Attente validation Email et AwaitingApproval -----*/}
 
 
-                    <EmailNotVerifiedRoute path='/send-confirm' component={ConfirmEmailSent}/>
-                    <EmailNotVerifiedRoute path='/send-new-validation' component={SendNewValidation}/>
-
-
+                    <EmailNotVerifiedRoute exact path='/send-confirm' component={ConfirmEmailSent}/>
+                    <EmailNotVerifiedRoute exact path='/send-new-validation' component={SendNewValidation}/>
 
 
                     {/*----- Route private AwaitingApproval -----*/}
@@ -110,27 +105,26 @@ function App() {
                     {/*----- Profil connecté et approuvé -----*/}
 
 
-                    
-                    
                     {/*----- Ticket -----*/}
                     <PrivateRoute exact path='/ticket/:cowalkId' component={CowalkingTicket}/>
                     <PrivateRoute exact path='/create' component={CowalkingCreate}/>
                     <PrivateRoute exact path='/search' component={CowalkingSearch}/>
                     <PrivateRoute exact path='/list' component={CowalkingList}/>
-                    <PrivateRoute exact path='/message'component={Notification} />
-                    <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit} />
+                    <PrivateRoute exact path='/message' component={Notification}/>
+                    <PrivateRoute exact path='/ticket/edit/:cowalkId' component={CowalkingEdit}/>
 
                     {/*----- Account -----*/}
                     <PrivateRoute exact path='/account' component={Account}/>
                     <PrivateRoute exact path='/change-profile' component={ChangeAccount}/>
-                        
-                    
 
-                    
-                </AuthProvider>
-            </Switch>
 
-        </Router>
+
+                </Switch>
+
+
+            </Router>
+
+        </AuthProvider>
     );
 
 }

@@ -10,6 +10,7 @@ import "./Footer.css"
 
 /// ----- React Modules ----- /// 
 import {Link}from "react-router-dom";
+import BandeauWarning from "../BandeauWarning/BandeauWarning";
 
 ////// FOOTER //////
 
@@ -40,7 +41,11 @@ function Footer() {
                     <p>Notification</p>
                 </div>
             </Link>
+<<<<<<< HEAD
             <BandeauWarning/>
+=======
+        <BandeauWarning/>
+>>>>>>> database_int
     </footer>
     );
   }
