@@ -6,3 +6,16 @@
 .container-admin button{
     margin-top:2rem;
 }
+
+.accept-user button{
+    margin-bottom:1rem;
+}
+
+.accept-user h1{
+    margin-bottom:1rem;
+}
+
+.container-admin button{
+    background-color:#670652;
+    color:white;
+ }

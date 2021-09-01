@@ -5,8 +5,7 @@ import {database} from "../../firebase";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 
-export default function PrivateRoute({component: Component, ...rest})
-{
+export default function PrivateRoute({component: Component, ...rest}) {
     const [loading, setLoading] = useState(true)
     const [isAccepted, setIsAccepted] = useState(false)
     const {currentUser} = useAuth();
@@ -18,13 +17,16 @@ export default function PrivateRoute({component: Component, ...rest})
                 .get()
                 .then((doc) => {
                     if (doc.exists) {
+                        console.log('doc exist')
                         setIsAccepted(doc.data().accepted)
                         setLoading(false)
                     } else {
+                        console.log('doc existe pas')
                         setLoading(false)
                     }
                 })
         } else {
+            console.log('pas property uid')
             setLoading(false)
         }
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
@@ -37,14 +39,14 @@ export default function PrivateRoute({component: Component, ...rest})
                 render={props => {
                     if (currentUser && currentUser.emailVerified && isAccepted) {
                         return <>
-                        <Header/>
+                            <Header/>
                             <Component {...props} />
                             <Footer/></>
                     } else if (currentUser && currentUser.emailVerified && !isAccepted) {
                         return <Redirect to="/awaiting-approval"/>
-                } else if (currentUser && !currentUser.emailVerified && !isAccepted) {
-                    return <Redirect to="/send-new-validation"/>
-                }else {
+                    } else if (currentUser && !currentUser.emailVerified && !isAccepted) {
+                        return <Redirect to="/send-new-validation"/>
+                    } else {
                         return <Redirect to="/login"/>
                     }
                 }}

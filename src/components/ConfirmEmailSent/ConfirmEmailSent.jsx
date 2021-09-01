@@ -58,7 +58,7 @@ export default function ConfirmEmailSent () {
     async function handleLogout() {
         try {
             await logout().then(()=> {
-                history.push("/login");
+                history.push("/");
             })
         } catch {
             setError('Woops, on a pas réussi à vous déconnecter')
@@ -73,9 +73,12 @@ export default function ConfirmEmailSent () {
         <div className="text-validation">
 
             {error ? <Alert severity="error">{error}</Alert> :
+                <>
             <p>{userData.firstname}Votre inscription a bien été prise en compte.
             Un e-mail de confirmation vous a été envoyé, merci de vérifier votre boite mail.
-                <br></br>Attention, vérifiez si le mail n'est pas dans vos Spams.</p>}
+                <br></br>Attention, vérifiez si le mail n'est pas dans vos Spams.</p>
+
+                <Alert severity="warning">Une fois le mail validé, déconnectez vous à l'aide du bouton ci-dessous puis reconnectez vous pour poursuivre le processus d'inscription</Alert></>}
 
         </div>
 
@@ -83,7 +86,7 @@ export default function ConfirmEmailSent () {
         <Button component={Link} to={'/send-new-validation'} onClick={sendEmail}>Renvoyer un mail</Button>
 
         <div className="button-bot-account">
-            <Button variant="contained" onClick={handleLogout}> Se deconnecter </Button>
+            <Button variant="contained" onClick={handleLogout}> Se déconnecter</Button>
         </div>
 
     </div>

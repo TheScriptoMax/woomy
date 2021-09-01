@@ -1,5 +1,4 @@
 .text-info {
-    width: 100%;
     background: linear-gradient(#DD0081, #F21323);
     width: 100%;
     position: fixed;
@@ -15,4 +14,5 @@
     color: white;
     font-size: .8rem;
     text-transform: uppercase;
+    margin:0;
 }

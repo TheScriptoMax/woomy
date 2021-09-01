@@ -7,7 +7,7 @@ import {Alert} from "@material-ui/lab";
 
 // IMPORT FIREBASE
 import {database, storage} from "../../firebase";
-
+import './adminusersawaitingapprovalcard.css'
 
 export default function AdminUsersAwaitingApprovalCard({user}) {
 

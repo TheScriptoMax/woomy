@@ -66,7 +66,7 @@ function Account() {
     async function handleLogout() {
         try {
             await logout().then(() => {
-                history.push("/login");
+                history.push("/");
             })
         } catch {
             console.log('Woops, on a pas réussi à vous déconnecter')
@@ -175,12 +175,13 @@ function Account() {
                             onChange={handlePicture}
                         />
                         <label htmlFor="picture-profil-account">
-                            <Button variant="contained" >
+                            <Button variant="raised" component="span">
                                 Changer votre photo
                             </Button>
                         </label>
 
                     </div>
+
                     <Button onClick={clickResetPassword}>
                         <div className='account-field'>
                             <p>Réinitialiser le mot de passe</p>
@@ -188,7 +189,6 @@ function Account() {
                             </div>
                         </div>
                     </Button>
-
 
                     {!isShow && <Alert severity="info">Un email vous a été envoyé</Alert>}
                     <div className="button-bot-account">

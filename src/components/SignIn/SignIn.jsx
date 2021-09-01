@@ -12,6 +12,8 @@ import './SignIn.css';
 import {useAuth} from "../../contexts/AuthContext";
 import {Alert} from "@material-ui/lab";
 
+import BandeauWarning from "../../components/BandeauWarning/BandeauWarning";
+
 //PAGE INSCRIPTION
 export default function SignIn () {
 
@@ -74,42 +76,43 @@ export default function SignIn () {
 
 
     return (
+    <div>
+        <div className='sign-in container'>
 
-    <div className='sign-in container'>
+            <form onSubmit={handleSubmit} className='sign-in-content'>
 
-        <form onSubmit={handleSubmit} className='sign-in-content'>
-
-            {/* MATERIAL UI INPUT TO COMPLETE FOR SIGNIN */}
-            <TextField label="Entrez votre prénom" variant="standard" value={firstname} onChange={(event)=>setFirstname(event.target.value)} />
-            
-            <TextField label="Entrez votre nom" variant="standard" value={lastname} onChange={(event)=>setLastname(event.target.value)} />
-            
-            <TextField type='email' label="Entrez votre email" variant="standard" value={email} onChange={(event)=>setEmail(event.target.value)} />
-
-
-            <TextField type="tel" label="Entrez votre numéro de téléphone" variant="standard" value={phone} onChange={(event)=>setPhone(event.target.value)} />
-
-            <TextField type="date" label="Entrez votre date de naissance" variant="standard" value={birthdate} onChange={(event)=>setBirthdate(event.target.value)}  InputLabelProps={{
-
-          shrink: true}}  />
-
-            <TextField type="password" label="Entrez un mot de passe" variant="standard" value={password} onChange={(event)=>setPassword(event.target.value)} />
-            
-            <TextField type="password"  label="Confirmez le mot de passe" variant="standard" value={passwordConfirm} onChange={(event)=>setPasswordConfirm(event.target.value)} />
-
-            {error && <Alert severity="error">{error}</Alert>}
-
-            <Button disabled={loading} type="submit" onClick={handleSubmit} variant="contained">S'inscrire</Button>
+                {/* MATERIAL UI INPUT TO COMPLETE FOR SIGNIN */}
+                <TextField label="Entrez votre prénom" variant="standard" value={firstname} onChange={(event)=>setFirstname(event.target.value)} />
+                
+                <TextField label="Entrez votre nom" variant="standard" value={lastname} onChange={(event)=>setLastname(event.target.value)} />
+                
+                <TextField type='email' label="Entrez votre email" variant="standard" value={email} onChange={(event)=>setEmail(event.target.value)} />
 
 
+                <TextField type="tel" label="Entrez votre numéro de téléphone" variant="standard" value={phone} onChange={(event)=>setPhone(event.target.value)} />
 
-        </form>
+                <TextField type="date" label="Entrez votre date de naissance" variant="standard" value={birthdate} onChange={(event)=>setBirthdate(event.target.value)}  InputLabelProps={{
 
-        <div className='valid-sign-in'>
-                <p>Une pièce d’identité et une photo de vous, seront demandées, car nécessaires pour établir votre propre sécurité et celles avec qui vous ferez du copiétonnage. Après chaque vérification, nous détruirons celles-ci.
-                </p>
+            shrink: true}}  />
+
+                <TextField type="password" label="Entrez un mot de passe" variant="standard" value={password} onChange={(event)=>setPassword(event.target.value)} />
+                
+                <TextField type="password"  label="Confirmez le mot de passe" variant="standard" value={passwordConfirm} onChange={(event)=>setPasswordConfirm(event.target.value)} />
+
+                {error && <Alert severity="error">{error}</Alert>}
+
+                <Button disabled={loading} type="submit" onClick={handleSubmit} variant="contained">S'inscrire</Button>
+
+
+
+            </form>
+
+            <div className='valid-sign-in'>
+                    <p>Une pièce d’identité et une photo de vous, seront demandées, car nécessaires pour établir votre propre sécurité et celles avec qui vous ferez du copiétonnage. Après chaque vérification, nous détruirons celles-ci.
+                    </p>
+            </div>
         </div>
-
+        <BandeauWarning/>
     </div>
     );
   }

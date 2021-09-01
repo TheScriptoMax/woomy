@@ -8,6 +8,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {Alert} from "@material-ui/lab";
 
+import BandeauWarning from "../../components/BandeauWarning/BandeauWarning";
+
 // CSS IMPORT
 import './login.css';
 
@@ -30,7 +32,7 @@ export default function Login () {
             setLoading(true);
             setError('');
             email && password && login(email,password).then(()=> {
-                history.push('/send-new-validation');
+                history.push('/account');
                 }
             )
                 .catch(() => {
@@ -48,8 +50,8 @@ export default function Login () {
 
     return (
 
-    <div className='login container'>
-
+    <div className='login'>
+        <div className="container">
             <div className='logo-woomy-login'>
                 <svg width="120" height="85" viewBox="0 0 120 85" fill="none" xmlns="http://www.w3.org/2000/svg">
 
@@ -64,28 +66,29 @@ export default function Login () {
                 </svg>
             </div>
 
-        {error && <Alert severity="error">{error}</Alert> }
-        <form className='login-content' onSubmit={handleSubmit}>
+            {error && <Alert severity="error">{error}</Alert> }
+            <form className='login-content' onSubmit={handleSubmit}>
 
-            {/* MATERIAL UI INPUT TO COMPLETE FOR LOGIN */}
-            <TextField value={email} onChange={(e)=>setEmail(e.target.value)} id="email" label="Entrez votre email" variant="standard" />
+                {/* MATERIAL UI INPUT TO COMPLETE FOR LOGIN */}
+                <TextField value={email} onChange={(e)=>setEmail(e.target.value)} id="email" label="Entrez votre email" variant="standard" />
 
-            <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} id="password" label="Entrez votre mot de passe" variant="standard" />
-            <p className='forgot-password'>Vous avez oublié votre mot de passe? <Link to="/">Cliquez ici</Link></p>
-            <div className='button-container'>
-                <Button disabled={loading} type='submit' variant="contained">S'identifier</Button>
+                <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} id="password" label="Entrez votre mot de passe" variant="standard" />
+                <p className='forgot-password'>Vous avez oublié votre mot de passe? <Link to="/">Cliquez ici</Link></p>
+                <div className='button-container'>
+                    <Button disabled={loading} type='submit' variant="contained">S'identifier</Button>
+                </div>
+            </form>
+
+
+            <div className='button-container noAccount'>
+
+                {/* MATERIAL UI INPUT TO COMPLETE FOR SIGNIN */}
+                <p>Pas de compte ?</p>
+                <Button component={Link} to={'/signin'} variant="contained">S'inscrire</Button>
+
             </div>
-        </form>
-
-
-        <div className='button-container noAccount'>
-
-            {/* MATERIAL UI INPUT TO COMPLETE FOR SIGNIN */}
-            <p>Pas de compte ?</p>
-            <Button component={Link} to={'/signin'} variant="contained">S'inscrire</Button>
-
         </div>
-
+    <BandeauWarning/>
     </div>
     );
   }

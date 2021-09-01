@@ -33,7 +33,7 @@
     margin-bottom: 2rem;
 }
 
-.confirm-id {
+.confirm-upload-account {
     display: grid;
     grid-template-columns: repeat(2,1fr);
 }
@@ -49,4 +49,11 @@
     height: 100%;
 }
 
+
+.button-bot-account{
+    margin-top:1rem;
+    display:flex;
+    justify-content:center;
+
+}
 

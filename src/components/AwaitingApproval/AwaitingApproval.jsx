@@ -14,12 +14,17 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // CSS IMPORT
 import './awaitingapproval.css';
 
+import Alert from "@material-ui/lab/Alert";
+
+import {useHistory} from "react-router-dom";
+
+
 //PAGE VALIDATION INCRIPTION
 
 export default function AwaitingApproval () {
 
 
-    const {currentUser} = useAuth();
+    const {currentUser, logout} = useAuth();
 
     const [iconCard, setIconCard] = useState(false);
     const [cardLoading, setCardLoading] = useState(false);
@@ -29,6 +34,8 @@ export default function AwaitingApproval () {
     const [pictureLoading, setPictureLoading] = useState(false);
     const [urlPicture, setUrlPicture] = useState('');
 
+    const history = useHistory()
+
 
     useEffect(()=>{
         //On regarde si il y'a déja une carte d'identité
@@ -37,6 +44,8 @@ export default function AwaitingApproval () {
             .then((doc) =>{
                 if(doc.exists){
                     setUrlCard(doc.data().url)
+                    setCardLoading(false)
+                    setIconCard(true)
                 }
                 else {
                     console.log('ça existe pas')
@@ -52,6 +61,8 @@ export default function AwaitingApproval () {
             .then((doc) =>{
                 if(doc.exists){
                     setUrlPicture(doc.data().url)
+                    setPictureLoading(false)
+                    setIconPicture(true)
                 }
                 else {
                     console.log('ça existe pas')
@@ -135,6 +146,17 @@ export default function AwaitingApproval () {
             })
     }
 
+
+    async function handleLogout() {
+        try {
+            await logout().then(()=> {
+                history.push("/");
+            })
+        } catch {
+            console.log('Woops, on a pas réussi à vous déconnecter')
+        }
+    }
+
     return (
     <div className='signIn-confirm container'>
         
@@ -146,7 +168,7 @@ export default function AwaitingApproval () {
                 Le procéssus peut prendre un peu de temps, merci de votre patience.
             </p>
 
-            <div className='confirm-id'>
+            <div className='confirm-upload-account'>
                 <div className='identity-confirm'>
                     <p>Pièce d'identité</p>
                     {/* MATERIAL UI BUTTON FOR LOGIN */}
@@ -196,8 +218,17 @@ export default function AwaitingApproval () {
                 </div>
             </div>
 
-        </div>
+            {iconCard && iconPicture ?
+                <Alert severity="info">Vos images ont bien été envoyé ! Merci de patienter.</Alert> :
+                ''
+            }
 
+            <div className="button-bot-account">
+                <Button variant="contained" onClick={handleLogout}>Se déconnecter</Button>
+            </div>
+
+
+        </div>
     </div>
     );
   }
