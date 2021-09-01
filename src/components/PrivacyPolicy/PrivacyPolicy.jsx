@@ -1,8 +1,8 @@
 // IMPORT FIREBASE
 import {useAuth} from "../../contexts/AuthContext";
 
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 
 
 export default function PrivacyPolicy () {
