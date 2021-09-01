@@ -1,8 +1,6 @@
 /// ----- Material UI ----- ///
 import ButtonRound from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import {database} from '../../firebase';
-
 import EditIcon from '@material-ui/icons/Edit';
 
 /// ----- CSS ----- ///
