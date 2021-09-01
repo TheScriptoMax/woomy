@@ -180,7 +180,6 @@ export default function AwaitingApproval () {
                     />
                     {urlCard &&
                     <div className='container-img'>
-
                         <img className='img-card-awaiting' src={urlCard} alt="Votre carte d'identité"/>
 
                     </div>}

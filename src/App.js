@@ -53,6 +53,7 @@ import PrivateRoute from './components/Routes/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
 import AdminRoute from "./components/Routes/AdminRoute";
 import AdminCowalks from "./components/AdminCowalks/AdminCowalks";
+import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
 
 
 function App() {
@@ -86,7 +87,7 @@ function App() {
                     {/*----- Route private AwaitingApproval -----*/}
 
 
-                    <Route exact path='/awaiting-approval' component={AwaitingApproval}/>
+                    <AwaitingApprovalRoute ute exact path='/awaiting-approval' component={AwaitingApproval}/>
 
 
                     {/*----- AdminCowalks -----*/}
