@@ -51,7 +51,6 @@ import {
 import PublicRoute from './components/Routes/PublicRoute'
 import PrivateRoute from './components/Routes/PrivateRoute'
 import EmailNotVerifiedRoute from "./components/Routes/EmailNotVerifiedRoute";
-import AwaitingApprovalRoute from "./components/Routes/AwaitingApprovalRoute";
 import AdminRoute from "./components/Routes/AdminRoute";
 import AdminCowalks from "./components/AdminCowalks/AdminCowalks";
 

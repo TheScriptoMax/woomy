@@ -217,17 +217,17 @@ export default function AwaitingApproval () {
                     </label>
                 </div>
             </div>
-<<<<<<< HEAD
+
             {iconCard && iconPicture ?
                 <Alert severity="info">Vos images ont bien été envoyé ! Merci de patienter.</Alert> :
                 ''
             }
-=======
+
             <div className="button-bot-account">
                 <Button variant="contained" onClick={handleLogout}>Se déconnecter</Button>
             </div>
 
->>>>>>> database_int
+
         </div>
     </div>
     );
