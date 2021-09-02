@@ -1,5 +1,6 @@
 // IMPORT REACT
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 
 import './adminusercard.css'
 // IMPORT MATERIAL
@@ -123,6 +124,10 @@ export default function UserCard({user}) {
             <p><b>ID de l'utilisatrice :</b> {user.id}</p>
             <p><b>Email : </b><a href={`mailto:${user.email}`}>{user.email}</a></p>
             <p><b>Téléphone : </b><a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a></p>
+            {user.accepted
+                ? <Alert severity="success">Cette utilisatrice a été acceptée par une admin</Alert>
+                : <><Alert severity="warning">Cette utilisatrice n'est pas encore acceptée</Alert>
+                    <Link to="/admin-accept-users"><Button color="secondary" variant="contained">Voir les profils à accepter</Button></Link></> }
             <Button disabled={showConfirm} color="secondary" variant="contained" onClick={showConfirmAction}>Supprimer</Button>
             {showConfirm && 
                 <div>

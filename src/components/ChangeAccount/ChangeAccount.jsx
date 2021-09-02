@@ -10,12 +10,14 @@ import Button from '@material-ui/core/Button';
 import './ChangeAccount.css';
 import {useAuth} from "../../contexts/AuthContext";
 import {database} from "../../firebase";
+import {Alert} from "@material-ui/lab";
 
 //PAGE INSCRIPTION
 export default function ChangeAccount () {
 
     const [userData, setUserData] = useState({});
     const [pageLoading, setPageLoading] = useState(true);
+    const [error, setError] = useState('');
 
 
     const history = useHistory();
@@ -61,13 +63,10 @@ export default function ChangeAccount () {
 
         Promise.all(promises)
             .then(() => {
-                console.log('Edit updated successfully');
+                history.push('/account');
             })
             .catch((error) => {
-                console.log(error);
-            })
-            .finally(() => {
-                history.push('/account');
+                setError('Problème lors de la mise à jour');
             })
     }
 
@@ -83,13 +82,13 @@ export default function ChangeAccount () {
 
                 {/* MATERIAL UI INPUT TO COMPLETE FOR CHANGEACCOUNT */}
 
-                <TextField inputRef={lastnameRef} id="standard-basic" defaultValue={userData.lastname} variant="standard"/>
-
                 <TextField inputRef={firstnameRef} id="standard-basic" label="Prénom" defaultValue={userData.firstname} variant="standard" />
+
+                <TextField inputRef={lastnameRef} id="standard-basic"  label="Nom" defaultValue={userData.lastname} variant="standard"/>
 
                 <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Numéro de téléphone" defaultValue={userData.phoneNumber} variant="standard" />
 
-
+                {error && <Alert severity="error">{error}</Alert>}
                 <Button  type="submit" variant="contained">Envoyer</Button>
 
             </form>}

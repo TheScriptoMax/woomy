@@ -155,15 +155,15 @@ function Account() {
                         </Link>
                     </div>}
                     <div className='account-field'>
-                        <p>Nom</p>
-                        <div className="account-field-result">
-                            <p>{userData.lastname}</p>
-                        </div>
-                    </div>
-                    <div className='account-field'>
                         <p>Prénom</p>
                         <div className="account-field-result">
                             <p>{userData.firstname}</p>
+                        </div>
+                    </div>
+                    <div className='account-field'>
+                        <p>Nom</p>
+                        <div className="account-field-result">
+                            <p>{userData.lastname}</p>
                         </div>
                     </div>
                     <div className='account-field'>
