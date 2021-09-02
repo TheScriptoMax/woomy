@@ -47,7 +47,9 @@ export default function ConfirmEmailSent () {
         reSendEmail(currentUser)
             .then(() => {
                 history.push('/send-new-validation');
-            })
+            }).catch(()=> {
+                setError('Echec lors de l\'envoi du mail, patientez un peu et réessayez');
+        })
         } catch(error) {
             setError('Marche pas');
         }
@@ -72,7 +74,7 @@ export default function ConfirmEmailSent () {
 
             {error ? <Alert severity="error">{error}</Alert> :
                 <>
-            <p>{userData.firstname}Votre inscription a bien été prise en compte.
+            <p>{userData.firstname}, votre inscription a bien été prise en compte.
             Un e-mail de confirmation vous a été envoyé, merci de vérifier votre boite mail.
                 <br></br>Attention, vérifiez si le mail n'est pas dans vos Spams.</p>
 

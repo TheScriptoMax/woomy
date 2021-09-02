@@ -40,6 +40,9 @@ export default function SendNewValidation () {
                 .then(() => {
                     setMessage('email envoyé a ' + currentUser.email);
                 })
+                .catch(()=> {
+                    setError('Echec lors de l`\'envoi du mail. Patientez quelques minutes et réessayez');
+                })
         } catch(error) {
             setError('Quelque chose n\' pas fonctionné ...');
         }
