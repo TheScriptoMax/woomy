@@ -130,18 +130,20 @@ function AdminCowalks() {
         <div className="container container-admin">
             <BackToAdminDashboardButton/>
             <h1>Administration des copiétonnages</h1>
+            <p>Le bouton ci-dessous affiche les copiétonnages vieux de plus de 8 heures.</p>
             <Button variant="contained" onClick={viewOldCowalks}>Voir les anciens copiétonnages</Button>
-            <p>Ce bouton affiche les copiétonnages vieux de plus de 8 heures.</p>
-
+            
+            <p>Le bouton ci-dessous supprimera les 20 copiétonnages les plus anciens. Les copiétonnages dont la date de départ a eu
+                lieu jusque deux semaines avant la date actuelle ne seront pas pris en compte. Utilisez ce bouton à vos propres risques !</p>
             <Button variant="contained" onClick={deleteOldestCowalks}>Supprimer les copiétonnages les plus
                 anciens</Button>
             {error && <Alert severity="error">{error}</Alert>}
             {message && <Alert severity="success">{message}</Alert>}
-            <p>Ce bouton supprimera les 20 copiétonnages les plus anciens. Les copiétonnages dont la date de départ a eu
-                lieu jusque deux semaines avant la date actuelle ne seront pas pris en compte. Utilisez ce bouton à vos propres risques !</p>
+            
 
+            <p>Le bouton ci-dessous affiche les 20 derniers copiétonnages créés et ordonnés par date de création.</p>
             <Button variant="contained" onClick={viewLastCowalks}>Voir les 20 dernières copiétonnages crées</Button>
-            <p>Ce bouton affiche les 20 derniers copiétonnages créés et ordonnés par date de création.</p>
+            
             <form onSubmit={handleSubmitSearch}>
                 <h2>Chercher un cowalk</h2>
                 <h3>Par date</h3>

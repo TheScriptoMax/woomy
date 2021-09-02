@@ -116,3 +116,7 @@
     font-weight:400;
     text-transform:lowercase;
 }
+
+.account-field label span{
+    color: white;
+}
