@@ -5,7 +5,7 @@ import {
   DateTimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
-import {Alert} from "@material-ui/lab";
+import {Alert, Autocomplete} from "@material-ui/lab";
 
 /// ----- CSS ----- ///
 import './cowalkingcreate.css';
@@ -48,7 +48,7 @@ function CowalkingCreate () {
 
     async function handleSubmitCowalk(ev) {
         ev.preventDefault();
-        if (startFrom.length>=1&&goTo.length>=1){
+        if (startFrom.name.length>=1 && goTo.name.length>=1){
 
             if (selectedDate.getTime() > new Date().getTime()-60000){
 
@@ -56,8 +56,8 @@ function CowalkingCreate () {
                     setError('');
                     setLoading(true)
                 await database.cowalks.add({
-                    startFrom: startFrom,
-                    goTo: goTo,
+                    startFrom: startFrom.name,
+                    goTo: goTo.name,
                     startTime: selectedDate,
                     createdAt: database.getCurrentTimestamp,
                     owner: currentUser.uid,
@@ -80,25 +80,38 @@ function CowalkingCreate () {
       <div className="create-walk container">
         <h2>Créer votre itinéraire</h2>
         <form className="createform">
-            
-            <TextField select defaultValue="" value={startFrom} onChange={(event)=>setStartFrom(event.target.value)} label="Départ">
-                <option value="" disabled>Choisissez un lieu de départ</option>    
-                {locations.map((option) => (
-                <option key={option.id} value={option.name}>
-                {option.name + " - " + option.district}
-                </option>
-            ))}
-            </TextField>
 
 
-            <TextField select defaultValue="" value={goTo} onChange={(event)=>setGoTo(event.target.value)} label="Destination">
-                <option value="" disabled>Choisissez une destination</option> 
-                {locations.map((option) => (
-                <option key={option.id} value={option.name}>
-                {option.name + " - " + option.district}
-                </option>
-            ))}
-            </TextField>
+            <Autocomplete
+                value={startFrom}
+                options={locations}
+                onChange={(event, newValue) => setStartFrom(newValue)}
+                getOptionLabel={(option) => option.name}
+                renderInput={(params) => <TextField
+                    {...params}
+                    variant="standard"
+                    label="Choix du point de départ"
+                    placeholder="Point de départ"
+                    margin="normal"
+                    fullWidth
+                />}
+            />
+
+
+            <Autocomplete
+                value={goTo}
+                options={locations}
+                onChange={(event, newValue) => setGoTo(newValue)}
+                getOptionLabel={(option) => option.name}
+                renderInput={(params) => <TextField
+                    {...params}
+                    variant="standard"
+                    label="Choix du point d'arrivée"
+                    placeholder="Point d'arrivée"
+                    margin="normal"
+                    fullWidth
+                />}
+            />
 
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <DateTimePicker
