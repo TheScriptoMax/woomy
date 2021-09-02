@@ -4,21 +4,31 @@
 }
 
 .text-confirm{
-    background-color: rgb(207, 206, 206);
-    padding: 5rem 2rem 3rem 2rem;
-    border-radius: 10%;
-    margin-top: 3rem;
+    background-color:#670652;
+    color:white;
+    padding:2rem;
+    border-radius: 15px;
+}
+
+.text-confirm svg{
+    fill:white;
+    border:2px solid white;
+    border-radius: 50%;
+    padding:0.3rem;
+}
+.text-confirm p br{
+    margin-bottom: 0.3rem;
 }
 
 .text-confirm p{
-    font-size: 1.8rem;
-    text-align: justify;
-    margin-bottom: 3rem;
+    font-size: 1rem;
+    margin-bottom: 2rem;
 }
 
 .signIn-confirm button{
     display: flex;
     margin: auto;
+    margin-top:2rem;
 }
 
 .container-img {
@@ -27,8 +37,8 @@
     margin: auto;
 }
 
-.img-card-awaiting,
-.img-picture-awaiting{
+.img-card,
+.img-picture{
     max-width: 40%;
     margin-bottom: 2rem;
 }
@@ -49,9 +59,15 @@
     height: 100%;
 }
 
+
 .button-bot-account{
     margin-top:1rem;
     display:flex;
     justify-content:center;
+
 }
 
+.button-bot-account button{
+    background-color: white;
+    color:#670652;
+}

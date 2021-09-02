@@ -12,6 +12,7 @@ import './adminusersawaitingapprovalcard.css'
 export default function AdminUsersAwaitingApprovalCard({user}) {
 
     const [urlPicture, setUrlPicture] = useState('');
+    const [poseString, setPoseString] = useState('');
     const [urlCard, setUrlCard] = useState('');
     const [error, setError] = useState('')
     const [message, setMessage] = useState('')
@@ -38,6 +39,7 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
             .then((doc) => {
                 if (doc.exists) {
                     setUrlPicture(doc.data().url)
+                    setPoseString(doc.data().poseString)
                 } else {
                     console.log('ça existe pas')
                 }
@@ -207,6 +209,7 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
             <p><b>Téléphone </b>: <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a></p>
             <p><b>ID de l'utilisatrice </b>: {user.id}</p>
             <p><b>Née le </b>: {user.birthdate}</p>
+            <p><b>Pose demandée </b>: "{poseString}"</p>
         
             <div className="admin-user-card-img-container">
                     {urlPicture ? <a href={urlPicture} target="_blank" rel="noreferrer">Photo de confirmation: <br/><img src={urlPicture} alt="Profil" className="admin-user-card-img"/></a> : <p>Pas encore de photo de pose</p>}

@@ -36,6 +36,9 @@ export default function AwaitingApproval () {
 
     const history = useHistory()
 
+    const poseArray = ["pouce gauche levé","pouce droit levé","pince le nez", "main droite sur le coeur", "V avec les doigts", "tirez la langue", "se tenir le menton"];
+    const randomPose = Math.floor(Math.random() * poseArray.length);
+    const randomPoseString = poseArray[randomPose]
 
     useEffect(()=>{
         //On regarde si il y'a déja une carte d'identité
@@ -135,6 +138,7 @@ export default function AwaitingApproval () {
                     .then(url=> {
                         database.idPictureFiles.doc(currentUser.uid).set({
                             url:url,
+                            poseString:randomPoseString,
                             createdAt: database.getCurrentTimestamp,
                         })
                             .then(() => {
@@ -163,9 +167,10 @@ export default function AwaitingApproval () {
         <div className="text-confirm">
             <p>
                 Votre email est bien validé.<br/>
-                Une pièce d’identité + une photo de vous sont nécessaires pour établir votre propre sécurité et celles avec qui vous ferez du copiétonnage.<br/>
-                Après chaque vérification nous détruisont celles ci.<br/>
-                Le procéssus peut prendre un peu de temps, merci de votre patience.
+                Une pièce d’identité et une photo de vous avec une pose particulière sont nécessaires pour établir votre identité et pour la sécurité des utilisatrices avec qui vous allez copiétonner.<br/>
+                Après chaque vérification nous détruisons celles ci.<br/>
+                <p>Pose demandée : "{randomPoseString}" </p>
+                Le processus peut prendre un peu de temps, merci de votre patience.
             </p>
 
             <div className='confirm-upload-account'>
