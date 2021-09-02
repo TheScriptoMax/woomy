@@ -40,7 +40,7 @@ function Notification() {
           <ul>
           {notifs&&
             notifs.map((notif,index)=>{
-              return <NotifCard notif={notif} key={index}/>
+              return <NotifCard notif={notif} key={notif.id}/>
             })
           }
           </ul>
