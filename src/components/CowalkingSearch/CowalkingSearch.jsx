@@ -56,7 +56,6 @@ function CoWalkingSearch() {
                 setResultsList(tempResults);
                 setNoSearch(false);
                 
-                console.log("Requete envoyée")
             })
     }
 
@@ -73,7 +72,6 @@ function CoWalkingSearch() {
             setResultsList(tempResults);
             setNoSearch(false);
 
-            console.log("Requete envoyée")
         })
     }
 

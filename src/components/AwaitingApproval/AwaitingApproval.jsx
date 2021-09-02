@@ -51,12 +51,10 @@ export default function AwaitingApproval () {
                     setIconCard(true)
                 }
                 else {
-                    console.log('ça existe pas')
+                    console.log("Doesn't exist")
                 }
             })
-            .catch((error) => {
-                console.log(error.message)
-            })
+
 
         //On regarde si il y'a déja une photo
         database.idPictureFiles.doc(currentUser.uid)
@@ -68,20 +66,15 @@ export default function AwaitingApproval () {
                     setIconPicture(true)
                 }
                 else {
-                    console.log('ça existe pas')
+                    console.log("Doesn't exist")
                 }
         })
-            .catch((error) => {
-                console.log(error.message)
 
-            })
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     function handleIdCardUpload(ev) {
         const idCardFile = ev.target.files[0];
-        if (!idCardFile) {
-            console.log('Vous devez soumettre une copie du recto de votre carte d\'identité');
-        }
+        
         const filename = idCardFile.name;
         const idCardPathPart = `files/idCards/${currentUser.uid}/${currentUser.uid}`
         const idCardPath = `${idCardPathPart}.${filename.substring(filename.lastIndexOf('.')+1, filename.length)}`
@@ -157,7 +150,7 @@ export default function AwaitingApproval () {
                 history.push("/");
             })
         } catch {
-            console.log('Woops, on a pas réussi à vous déconnecter')
+            console.log("Connexion failed")
         }
     }
 

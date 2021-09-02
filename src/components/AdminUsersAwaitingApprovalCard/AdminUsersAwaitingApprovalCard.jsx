@@ -26,12 +26,10 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
                 if (doc.exists) {
                     setUrlCard(doc.data().url)
                 } else {
-                    console.log('ça existe pas')
+                    console.log("Doesn't exist")
                 }
             })
-            .catch((error) => {
-                console.log(error.message)
-            })
+
 
         //On regarde si il y'a déja une photo
         database.idPictureFiles.doc(user.id)
@@ -41,11 +39,9 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
                     setUrlPicture(doc.data().url)
                     setPoseString(doc.data().poseString)
                 } else {
-                    console.log('ça existe pas')
+                    console.log("Doesn't exist")
                 }
-            }).catch(error => {
-            console.log(error.message)
-        })
+            })
     }, [user]);
 
     function handleApproveUser() {
@@ -61,8 +57,6 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
             files.items.forEach(file => {
                 approvalPromises.push(file.delete())
             })
-        }).catch(error => {
-            console.log('Something went wrong' + error.message)
         })
         // Référence à l'image de pose dans la bdd
         database.idPictureFiles.doc(user.id)
@@ -78,8 +72,6 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
             files.items.forEach(file => {
                 approvalPromises.push(file.delete())
             })
-        }).catch(error => {
-            console.log('Something went wrong' + error.message)
         })
         // Référence à la carte d'identité bdd
         database.idCardFiles.doc(user.id)
@@ -150,8 +142,6 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
             files.items.forEach(file => {
                 deletePromises.push(file.delete())
             })
-        }).catch(error => {
-            console.log('Something went wrong' + error.message)
         })
 
         // Image de pose
@@ -159,8 +149,6 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
             files.items.forEach(file => {
                 deletePromises.push(file.delete())
             })
-        }).catch(error => {
-            console.log('Something went wrong' + error.message)
         })
         // Référence à l'image de pose dans la bdd
         database.idPictureFiles.doc(user.id)
@@ -176,8 +164,6 @@ export default function AdminUsersAwaitingApprovalCard({user}) {
             files.items.forEach(file => {
                 deletePromises.push(file.delete())
             })
-        }).catch(error => {
-            console.log('Something went wrong' + error.message)
         })
         // Référence à la carte d'identité bdd
         database.idCardFiles.doc(user.id)

@@ -32,9 +32,7 @@ function DistrictCard ({district}) {
         });
         return Promise.all(promises)
         })
-        .catch((error)=>{
-            console.log("Erreur: " + error);
-        })
+
     }
 
     const deleteDistrict = () => {
@@ -43,12 +41,9 @@ function DistrictCard ({district}) {
                 setButtonIsDisabled(true);
                 setDistrictDeleted(true);
                 setShowConfirm(false);
-                console.log(district.name + " supprimé");
                 updateLocationsDistrict();
             })
-            .catch((error) => {
-                console.error("Une erreur est survenue : " + error)
-            })
+
     }
 
     return (

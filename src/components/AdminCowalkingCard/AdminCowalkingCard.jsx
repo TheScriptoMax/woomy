@@ -60,12 +60,10 @@ function AdminCowalkingCard ({cowalk,index}) {
 
         Promise.all(deletePromises)
             .then(() => {
-                console.log('Docs supprimés')
                 setDisabled(true);
                 setMessage('Copiétonnage supprimé')
             })
             .catch((error) => {
-                console.log(error)
                 setError('Problème à la suppression !')
             })
     }

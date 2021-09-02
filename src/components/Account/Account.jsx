@@ -45,9 +45,7 @@ function Account() {
                     setPageLoading(false)
                 }
             })
-            .catch(error => {
-                console.log(error.message)
-            })
+
 
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -55,14 +53,9 @@ function Account() {
     async function clickResetPassword(e) {
         resetPassword(currentUser.email)
             .then(() => {
-                console.log('email envoyé a ' + currentUser.email);
                 setIsShow(!isShow);
             })
-            .catch((error) => {
 
-                console.log('Marche pas')
-
-            })
     }
 
     async function handleLogout() {
@@ -71,7 +64,7 @@ function Account() {
                 history.push("/");
             })
         } catch {
-            console.log('Woops, on a pas réussi à vous déconnecter')
+            console.log('Connexion failed')
         }
     }
 
@@ -96,7 +89,6 @@ function Account() {
 
             },
             error => {
-                console.log(error.message)
                 history.push('/account')
             },
             () => {

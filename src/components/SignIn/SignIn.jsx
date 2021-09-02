@@ -56,17 +56,11 @@ export default function SignIn () {
                             approvalCowalk:[]
                         })
                         .then(() => {
-                            console.log('Crée dans la database')
                             history.push("/send-confirm")
                         })
-                        .catch((error)=> {
-                            console.log(error.message)
-                        });
-                })
-                .catch((error) => {
-                    console.log("Message d'erreur: " + error.message)
 
                 })
+
         } catch
             (error) {
             setError(error.message)

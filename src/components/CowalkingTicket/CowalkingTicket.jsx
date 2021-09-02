@@ -24,12 +24,10 @@ function CowalkingTicket () {
                         setCurrentCowalk(database.formatDoc(doc))
                         setLoading(false);
                     } else {
-                        console.log("no such document")
+                        console.log("No such document")
                     }
                 })
-                .catch((error) => {
-                    console.log("Error getting document:", error);
-                })
+
         }, [cowalkId]
     );
 

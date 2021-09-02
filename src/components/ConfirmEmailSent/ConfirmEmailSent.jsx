@@ -43,11 +43,9 @@ export default function ConfirmEmailSent () {
 
     async function sendEmail(ev){
         ev.preventDefault();
-        console.log(currentUser)
         try{
         reSendEmail(currentUser)
             .then(() => {
-                console.log('email envoyé a ' + currentUser.email);
                 history.push('/send-new-validation');
             })
         } catch(error) {

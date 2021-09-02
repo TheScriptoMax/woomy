@@ -26,7 +26,6 @@ function CowalkerItem ({member}) {
     useEffect(() => {
         setLoadingPicture(false)
         if(member.profilPic){
-            console.log(member.profilPic)
             setLoadingPicture(true)
             setLoading(false)
         } else {

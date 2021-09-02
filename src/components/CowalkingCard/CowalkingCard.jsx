@@ -99,9 +99,7 @@ function CowalkingCard ({cowalk,index}) {
             .then(() => {
                 console.log('Docs supprimés')
             })
-            .catch((error) => {
-                console.log(error)
-            })
+
     }
 
 

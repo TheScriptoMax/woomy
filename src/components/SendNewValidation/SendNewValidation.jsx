@@ -35,7 +35,6 @@ export default function SendNewValidation () {
 
     async function sendEmail(ev){
         ev.preventDefault();
-        console.log(currentUser)
         try{
             reSendEmail(currentUser)
                 .then(() => {
@@ -44,7 +43,6 @@ export default function SendNewValidation () {
         } catch(error) {
             setError('Quelque chose n\' pas fonctionné ...');
         }
-        console.log(message)
     }
 
     async function handleLogout() {

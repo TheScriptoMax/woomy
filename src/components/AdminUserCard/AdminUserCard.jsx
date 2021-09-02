@@ -69,8 +69,6 @@ export default function UserCard({user}) {
             files.items.forEach(file => {
                 deletePromises.push(file.delete())
             })
-        }).catch(error => {
-            console.log(error.message)
         })
 
         // Image de pose
@@ -78,8 +76,6 @@ export default function UserCard({user}) {
             files.items.forEach(file => {
                 deletePromises.push(file.delete())
             })
-        }).catch(error => {
-            console.log('Something went wrong' + error.message)
         })
         // Référence à l'image de pose dans la bdd
         database.idPictureFiles.doc(user.id)
@@ -95,8 +91,6 @@ export default function UserCard({user}) {
             files.items.forEach(file => {
                 deletePromises.push(file.delete())
             })
-        }).catch(error => {
-            console.log('Something went wrong' + error.message)
         })
         // Référence à la carte d'identité bdd
         database.idCardFiles.doc(user.id)

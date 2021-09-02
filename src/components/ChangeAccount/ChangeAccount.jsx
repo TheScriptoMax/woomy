@@ -35,10 +35,7 @@ export default function ChangeAccount () {
                 setUserData(database.formatDoc(doc))
                 setPageLoading(false)
             })
-            .catch(error => {
-                console.log(error.message)
 
-            })
 
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 

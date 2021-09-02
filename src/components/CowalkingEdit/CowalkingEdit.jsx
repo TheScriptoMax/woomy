@@ -58,12 +58,10 @@ function CowalkingEdit() {
                         setPageLoading(false);
                         setSelectedDate(new Date(doc.data().startTime.seconds * 1000));
                     } else {
-                        console.log("no such documents")
+                        console.log("No such documents")
                     }
                 })
-                .catch((error) => {
-                    console.log("Error getting document:", error);
-                })
+
         }, [cowalkId] ); // eslint-disable-line react-hooks/exhaustive-deps
 
 

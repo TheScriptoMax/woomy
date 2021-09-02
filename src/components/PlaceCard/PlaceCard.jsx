@@ -28,11 +28,8 @@ function PlaceCard ({location}) {
                 setButtonIsDisabled(true);
                 setLocationDeleted(true);
                 setShowConfirm(false);
-                console.log(location.name + " supprimé");
             })
-            .catch((error) => {
-                console.error("Une erreur est survenue : " + error)
-            })
+
     }
 
     return (

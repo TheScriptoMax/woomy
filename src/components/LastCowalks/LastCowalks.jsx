@@ -41,9 +41,7 @@ function LastCowalks () {
                 })
                 const lastCreatedAt = new Date(Math.max(...tempResults.map(e => e.createdAt.seconds)) * 1000)
                 setLastInitialDate(lastCreatedAt);
-                console.log(lastCreatedAt)
                 setInitialCowalks(tempResults);
-                console.log(tempResults);
             })
     }, []);
 

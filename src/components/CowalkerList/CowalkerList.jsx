@@ -36,9 +36,7 @@ function CowalkerList({cowalk}) {
                 setOwner(database.formatDoc(owner))
                 setLoading(false)
             })
-            .catch(() => {
-                console.log('Couldnt retrieve the owner')
-            })
+
 
     }, [cowalk]) 
 
@@ -76,9 +74,7 @@ function CowalkerList({cowalk}) {
                     setIsMember(true);
                 }
             })
-            .catch(error => {
-                console.log('Error getting collection')
-            })
+
         database.membersApproved(cowalk.id).doc(currentUser.uid)
             .get()
             .then((memberApproved) => {
@@ -86,9 +82,7 @@ function CowalkerList({cowalk}) {
                     setIsMember(true);
                 }
             })
-            .catch(error => {
-                console.log('Error getting collection')
-            })
+
     }, [cowalk]) // eslint-disable-line react-hooks/exhaustive-deps
 
 
@@ -125,8 +119,7 @@ function CowalkerList({cowalk}) {
                 database.notifications(cowalk.owner).where("guest", "==", currentUser.uid).where("cowalkRequested", "==", cowalk.id)
                 .get()
                 .then(onSnapshot => {
-                    onSnapshot.forEach(doc => {
-                        console.log(database.formatDoc(doc))            
+                    onSnapshot.forEach(doc => {          
                         database.notifications(cowalk.owner).doc(doc.id)
                         .delete()
                         .then(()=>{

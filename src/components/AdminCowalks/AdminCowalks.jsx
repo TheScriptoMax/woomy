@@ -42,8 +42,6 @@ function AdminCowalks() {
                     tempResults.push(database.formatDoc(result))
                 })
                 setSearchResults(tempResults);
-
-                console.log("Requete envoyée")
             })
     }
 
@@ -71,7 +69,6 @@ function AdminCowalks() {
                     tempResults.push(database.formatDoc(result))
                 })
                 setSearchResults(tempResults);
-                console.log("Requete envoyée")
             })
     }
 
@@ -114,11 +111,9 @@ function AdminCowalks() {
 
         Promise.all(deletePromises)
             .then(() => {
-                console.log('Docs supprimés')
                 setMessage('Copiétonnages supprimés')
             })
             .catch((error) => {
-                console.log(error)
                 setError('Problèmes à la suppression !')
             })
 

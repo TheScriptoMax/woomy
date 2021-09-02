@@ -35,9 +35,7 @@ function AdminUsers() {
                     })
                     setSearchResults(membersRetrieved);
                 })
-                .catch(error => {
-                    console.log(error.message);
-                })
+
         } else if (firstnameRef.current.value.length > 0 && lastnameRef.current.value.length === 0) {
             database.users
                 .where('firstname', '==', firstnameRef.current.value)
@@ -49,9 +47,7 @@ function AdminUsers() {
                     })
                     setSearchResults(membersRetrieved);
                 })
-                .catch(error => {
-                    console.log(error.message);
-                })
+
 
         } else {
             database.users.where('firstname', '==', firstnameRef.current.value)
@@ -64,9 +60,7 @@ function AdminUsers() {
                     })
                     setSearchResults(membersRetrieved);
                 })
-                .catch(error => {
-                    console.log(error.message);
-                })
+
 
         }
 
@@ -83,12 +77,9 @@ function AdminUsers() {
                     const membersRetrieved = [];
                     membersRetrieved.push(database.formatDoc(doc))
                     setSearchResults(membersRetrieved);
-                    console.log(membersRetrieved)
                 }
             })
-            .catch(error => {
-                console.log(error.message);
-            })
+
     }
 
 
@@ -102,11 +93,8 @@ function AdminUsers() {
                     membersRetrieved.push(database.formatDoc(doc))
                 })
                 setSearchResults(membersRetrieved)
-                console.log(membersRetrieved)
             })
-            .catch(error => {
-                console.log(error.message);
-            })
+
     }
 
     function viewLastUsers() {
@@ -119,7 +107,6 @@ function AdminUsers() {
                     membersRetrieved.push(database.formatDoc(doc))
                 })
                 setSearchResults(membersRetrieved);
-                console.log(membersRetrieved)
             })
     }
 
