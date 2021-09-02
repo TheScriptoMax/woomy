@@ -25,7 +25,6 @@ export default function ChangeAccount () {
     const firstnameRef = useRef();
     const lastnameRef = useRef();
     const phoneRef = useRef();
-    const birthdateRef = useRef();
 
 
     useEffect(()=> {
@@ -48,6 +47,7 @@ export default function ChangeAccount () {
                 lastname: lastnameRef.current.value,
             }))
         }
+
         if (firstnameRef.current.value !== userData.firstname) {
             promises.push(database.users.doc(currentUser.uid).update({
                 firstname: firstnameRef.current.value,
@@ -56,11 +56,6 @@ export default function ChangeAccount () {
         if (phoneRef.current.value !== userData.phoneNumber) {
             promises.push(database.users.doc(currentUser.uid).update({
                 phoneNumber: phoneRef.current.value,
-            }))
-        }
-        if (birthdateRef.current.value !== userData.birthdate) {
-            promises.push(database.users.doc(currentUser.uid).update({
-                birthdate: birthdateRef.current.value,
             }))
         }
 
@@ -94,9 +89,6 @@ export default function ChangeAccount () {
 
                 <TextField type="tel" inputRef={phoneRef} id="standard-basic" label="Numéro de téléphone" defaultValue={userData.phoneNumber} variant="standard" />
 
-                <TextField type="date" inputRef={birthdateRef} id="standard-basic" label="Date de naissance" defaultValue={userData.birthdate} variant="standard"  InputLabelProps={{
-                    shrink: true,
-                }}/>
 
                 <Button  type="submit" variant="contained">Envoyer</Button>
 

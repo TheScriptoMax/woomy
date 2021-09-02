@@ -37,8 +37,8 @@
     margin: auto;
 }
 
-.img-card,
-.img-picture{
+.img-card-awaiting,
+.img-picture-awaiting{
     max-width: 40%;
     margin-bottom: 2rem;
 }
@@ -70,4 +70,12 @@
 .button-bot-account button{
     background-color: white;
     color:#670652;
+}
+
+.pose {
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+    margin-top:1rem;
+    border-bottom: 2px white solid;
+    border-top: 2px white solid;
 }

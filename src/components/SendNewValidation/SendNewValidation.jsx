@@ -69,6 +69,8 @@ export default function SendNewValidation () {
             {/* MATERIAL UI BUTTON FOR CLOSE VALIDATION */}
             <Button onClick={sendEmail}>Renvoyer un mail</Button>
 
+            {message && <Alert severity="success">{message}</Alert>}
+
             <div className="button-bot-account">
                 <Button variant="contained" onClick={handleLogout}>Se déconnecter</Button>
             </div>

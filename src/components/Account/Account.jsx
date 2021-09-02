@@ -14,12 +14,18 @@ import {useHistory} from "react-router-dom";
 /// ----- Firebase ///
 import {database, storage} from "../../firebase";
 
+// Browser image compression
+import imageCompression from "browser-image-compression";
+
+
 //////// Page de profile ////////
 
 function Account() {
 
     const [userData, setUserData] = useState({});
-    const [pageLoading, setPageLoading] = useState(true)
+    const [pageLoading, setPageLoading] = useState(true);
+    const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
     const [isShow, setIsShow] = useState(true);
     const [urlPicture, setUrlPicture] = useState('');
     const [pictureLoading, setPictureLoading] = useState(false);
@@ -64,7 +70,7 @@ function Account() {
                 history.push("/");
             })
         } catch {
-            console.log('Connexion failed')
+            setError('Echec de déconnexion')
         }
     }
 
@@ -72,39 +78,53 @@ function Account() {
         ev.preventDefault();
 
 
-        const idPicture = ev.target.files[0];
+        const idPictureOriginal = ev.target.files[0];
+        const compressionOptions = {
+            maxSizeMB: 0.5,
+            maxWidthOrHeight: 1920,
+        };
+        imageCompression(idPictureOriginal, compressionOptions)
+            .then(idPicture => {
 
-        const filename = idPicture.name;
-        const idPicturePartPath = `files/idPictureProfiles/${currentUser.uid}/${currentUser.uid}`;
-        const idPicturePath = `${idPicturePartPath}.${filename.substring(filename.lastIndexOf('.') + 1, filename.length)}`
+                const filename = idPicture.name;
+                const idPicturePartPath = `files/idPictureProfiles/${currentUser.uid}/${currentUser.uid}`;
+                const idPicturePath = `${idPicturePartPath}.${filename.substring(filename.lastIndexOf('.') + 1, filename.length)}`
 
-        const uploadPicture = storage
-            .ref(idPicturePath)
-            .put(idPicture)
+                const uploadPicture = storage
+                    .ref(idPicturePath)
+                    .put(idPicture)
 
-        uploadPicture.on('state_changed',
-            () => {
-            setPageLoading(true)
-                setPictureLoading(false);
+                uploadPicture.on('state_changed',
+                    () => {
+                        setPageLoading(true)
+                        setPictureLoading(false);
 
-            },
-            error => {
-                history.push('/account')
-            },
-            () => {
-                uploadPicture.snapshot.ref.getDownloadURL()
-                    .then((url) => {
-                        database.users.doc(currentUser.uid).update({
-                            profilPic: url
-                        })
-                            .then(() => {
-                                setUrlPicture(url)
-                                setPictureLoading(true)
-                                setPageLoading(false)
+                    },
+                    error => {
+                        setError('Echec à l\'envoi de la photo');
+                    },
+                    () => {
+                        uploadPicture.snapshot.ref.getDownloadURL()
+                            .then((url) => {
+                                database.users.doc(currentUser.uid).update({
+                                    profilPic: url
+                                })
+                                    .then(() => {
+                                        setError('')
+                                        setMessage('Photo de profil modifiée')
+                                        setUrlPicture(url)
+                                        setPictureLoading(true)
+                                        setPageLoading(false)
+                                    })
                             })
-                    })
-            }
-        )
+                    }
+                )
+            })
+            .catch(()=> {
+                setMessage('')
+                setError('Echec à la compression du fichier')
+            })
+
     }
 
 
@@ -123,6 +143,9 @@ function Account() {
                     <h2>Mon compte</h2>
                 </div>
                 <div className="account-list">
+
+                    {error && <Alert severity="error">{error}</Alert>}
+                    {message && <Alert severity="info">{message}</Alert>}
                     {isAdmin &&
                     <div className='account-field'>
                         <Link to="/admin">
@@ -174,6 +197,7 @@ function Account() {
                             style={{display: 'none'}}
                             id="picture-profil-account"
                             type="file"
+                            accept="image/*"
                             onChange={handlePicture}
                         />
                         <label htmlFor="picture-profil-account">

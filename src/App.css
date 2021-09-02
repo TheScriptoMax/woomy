@@ -16,6 +16,13 @@
     p{
         font-size:1rem;
     }
+    .landing-logo svg{
+        margin-bottom: 0;
+    }
+    .landing-title{
+        margin-bottom: 0;
+    }
+    .landing-text{
+        font-size: 0.9rem;
+    }
 }
-
-
