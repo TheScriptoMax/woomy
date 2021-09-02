@@ -121,8 +121,8 @@ export default function UserCard({user}) {
             <h3>{user.firstname} {user.lastname}</h3>
             <p><b>utilisatrice inscrite</b> - {new Date(user.createdAt.seconds*1000).toLocaleString('fr-FR',{timeZone:"Europe/Paris",day:"numeric",month:"short", hour:"2-digit",minute:"2-digit"})}</p>
             <p><b>ID de l'utilisatrice :</b> {user.id}</p>
-            <a href={`mailto:${user.email}`}>{user.email}</a>
-            <a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a>
+            <p><b>Email : </b><a href={`mailto:${user.email}`}>{user.email}</a></p>
+            <p><b>Téléphone : </b><a href={`tel:${user.phoneNumber}`}>{user.phoneNumber}</a></p>
             <Button disabled={showConfirm} color="secondary" variant="contained" onClick={showConfirmAction}>Supprimer</Button>
             {showConfirm && 
                 <div>

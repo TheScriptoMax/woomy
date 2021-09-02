@@ -50,7 +50,8 @@ function AdminUsers() {
 
 
         } else {
-            database.users.where('firstname', '==', firstnameRef.current.value)
+            database.users
+                .where('firstname', '==', firstnameRef.current.value)
                 .where('lastname', '==', lastnameRef.current.value)
                 .get()
                 .then(querySnapshot => {
@@ -85,7 +86,8 @@ function AdminUsers() {
 
     function handleEmailSearch(ev) {
         ev.preventDefault();
-        database.users.where('email', '==', emailRef.current.value)
+        database.users
+            .where('email', '==', emailRef.current.value)
             .get()
             .then(querySnapshot => {
                 const membersRetrieved = [];
@@ -99,7 +101,8 @@ function AdminUsers() {
 
     function viewLastUsers() {
 
-        database.users.orderBy('createdAt', 'desc').limit(20)
+        database.users
+            .orderBy('createdAt', 'desc').limit(20)
             .get()
             .then((querySnapshot) => {
                 const membersRetrieved = [];
