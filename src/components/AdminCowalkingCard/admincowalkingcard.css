@@ -86,7 +86,11 @@
 }
 .cowalkingCardDeparture, .cowalkingCardDestination{
     display: flex;
-    
+}
+
+.cowalkingCardDeparture p,
+.cowalkingCardDestination p {
+    margin-top:0px;
 }
 
 .cowalk-start{

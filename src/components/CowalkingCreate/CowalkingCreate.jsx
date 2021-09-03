@@ -90,8 +90,8 @@ function CowalkingCreate () {
                 renderInput={(params) => <TextField
                     {...params}
                     variant="standard"
-                    label="Choix du point de départ"
-                    placeholder="Point de départ"
+                    label="Lieu de départ"
+                    placeholder="Lieu de départ"
                     margin="normal"
                     fullWidth
                 />}
@@ -106,8 +106,8 @@ function CowalkingCreate () {
                 renderInput={(params) => <TextField
                     {...params}
                     variant="standard"
-                    label="Choix du point d'arrivée"
-                    placeholder="Point d'arrivée"
+                    label="Lieu d'arrivée"
+                    placeholder="Lieu d'arrivée"
                     margin="normal"
                     fullWidth
                 />}

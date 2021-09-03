@@ -92,7 +92,7 @@ function CoWalkingSearch() {
                 renderInput={(params) => <TextField
                     {...params}
                     variant="standard"
-                    label="Choix du point de départ"
+                    label="Point de départ"
                     placeholder="Point de départ"
                     margin="normal"
                     fullWidth
