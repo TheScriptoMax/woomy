@@ -33,4 +33,5 @@ footer div svg path{
 .createIcon svg, .itinIcon svg, .messageIcon svg{
         width: 1.7rem;
         height: 1.7rem;
+    color:#670652;
 }
