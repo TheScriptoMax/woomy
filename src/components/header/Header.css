@@ -22,11 +22,11 @@ header{
 }
 
 .logoWoomy svg{
-    width: 3em;
-    height: min-content;
+    width: 3rem;
 }
 
 .accountIcon svg, .searchIcon svg{
     width: 2rem;
     height: 2rem;
+    color:white;
 }
