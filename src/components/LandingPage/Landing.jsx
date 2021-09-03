@@ -22,9 +22,9 @@ function Landing () {
             </div>
             <div>
                 <p className="landing-text" >
-                    Nous sommes 4 étudiantes, Assetou, Ines, Maureen et Manuela voulant agir contre le harcèlement de rue. 
-                    Nous avons commencé par un concours de création d’entreprise fictive et l’univers de l’entrepreneuriat nous a toute beaucoup plu. 
-                    C’est pour cela qu’après une année entière à travailler sur Woomy, nous sommes fières de vous présenter ce MVP. 
+                    Nous sommes 4 étudiantes, Assetou, Ines, Maureen et Manuela voulant agir contre le harcèlement de rue.
+                    Après avoir participé à un concours de création d'entreprise fictive, nous nous sommes rendu compte que l'univers de l'entrepreneuriat nous plaisait énormément.<br/>
+                    C’est pour cela qu’après une année entière à travailler sur Woomy, nous sommes fières de vous présenter ce prototype d'application.
                     Si vous avez des questions, que ce soit sur nous, sur notre démarche ou sur notre projet, 
                     n’hésitez pas à nous envoyer un mail à <a href="mailto:contact@woomy.fr">contact@woomy.fr</a>
                 </p>

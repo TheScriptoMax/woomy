@@ -27,9 +27,16 @@
     margin-top: 1rem;
 }
 
-.login-content .forgot-password{
+.login-content {
     font-weight: 400;
     font-size: 1rem;
+    text-transform: initial;
+    text-align: center;
+}
+
+.forgot-password{
+    font-weight: 400;
+    font-size: .8rem;
     text-transform: initial;
     text-align: center;
 }

@@ -73,12 +73,13 @@ export default function Login () {
                 <TextField value={email} onChange={(e)=>setEmail(e.target.value)} id="email" label="Entrez votre email" variant="standard" />
 
                 <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} id="password" label="Entrez votre mot de passe" variant="standard" />
-                <p className="forgot-password">Mot de passe oublié ? <br/>
-                    Demandez une réinitialisation à<br/>
-                    <a href="mailto:contact@woomy.fr">contact@woomy.fr</a></p>
+
                 <div className='button-container'>
                     <Button disabled={loading} type='submit' variant="contained">S'identifier</Button>
                 </div>
+                <p className="forgot-password">Mot de passe oublié ? <br/>
+                    Demandez une réinitialisation à<br/>
+                    <a href="mailto:contact@woomy.fr">contact@woomy.fr</a></p>
             </form>
 
 
