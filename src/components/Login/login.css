@@ -4,13 +4,13 @@
 
 .login-content{
     display: grid;
-    row-gap: 2rem;
+    row-gap: 1rem;
     margin: 0 auto;
 }
 
 .button-container{
     display: grid;
-    row-gap: 2rem;
+    row-gap: 1rem;
     text-align: center;
     padding: 0 4rem;
 }
@@ -24,7 +24,7 @@
 }
 
 .button-container p{
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .login-content .forgot-password{
@@ -37,10 +37,6 @@
 .forgot-password a{
     font-weight: 600;
     text-decoration: none;
-}
-
-label{
-    position:block;
 }
 
 .logo-woomy-login svg{
