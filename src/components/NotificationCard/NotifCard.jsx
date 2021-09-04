@@ -82,7 +82,7 @@ function NotifCard({notif}) {
 
             <div className="card-notif-top">
                 <div className="card-notif-md notif-part">
-                    <p className="first first-name">{userData.firstname} {userData.lastname}</p>
+                    <p className="first first-name">{userData.firstname}</p>
                     <p className="grey">Requete de copietonnage</p>
                 </div>
                 <div className="card-notif-bot notif-part first">

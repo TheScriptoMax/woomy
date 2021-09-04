@@ -43,7 +43,7 @@ function CowalkerItem ({member}) {
                         <img src={ImageProfil} alt="profil"/>
                     }
                 </figure>
-                <h3>{member.firstname} {member.lastname}</h3>
+                <h3>{member.firstname}</h3>
                 <div className="cowalkerItemButton">
                     {togglePhone ? (<ButtonRound onClick={(event)=>handlePhone(event)}>
                         <PhoneIcon/>
