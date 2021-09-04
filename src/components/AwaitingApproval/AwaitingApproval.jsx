@@ -34,12 +34,16 @@ export default function AwaitingApproval() {
     const [iconPicture, setIconPicture] = useState(false);
     const [pictureLoading, setPictureLoading] = useState(false);
     const [urlPicture, setUrlPicture] = useState('');
+    const [randomPoseString, setRandomPoseString] = useState('')
 
-    const history = useHistory()
+    const history = useHistory();
 
-    const poseArray = ["pouce gauche levé", "pouce droit levé", "pince le nez", "main droite sur le coeur", "V avec les doigts", "tirez la langue", "se tenir le menton"];
-    const randomPose = Math.floor(Math.random() * poseArray.length);
-    const randomPoseString = poseArray[randomPose]
+    useEffect(() => {
+        const poseArray = ["pouce gauche levé", "pouce droit levé", "pince le nez", "main droite sur le coeur", "V avec les doigts", "tirez la langue", "se tenir le menton"];
+        const randomPose = Math.floor(Math.random() * poseArray.length);
+        setRandomPoseString(poseArray[randomPose]);
+    }, [])
+
 
     useEffect(() => {
         //On regarde si il y'a déja une carte d'identité
