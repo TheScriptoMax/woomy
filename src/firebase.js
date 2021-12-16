@@ -6,12 +6,7 @@ import 'firebase/storage';
 
 
 const app = firebase.initializeApp({
-    apiKey: "AIzaSyDqXSbXW5dTrpubT1gyI3AJ9opFcmisksw",
-    authDomain: "woomy-app.firebaseapp.com",
-    projectId: "woomy-app",
-    storageBucket: "woomy-app.appspot.com",
-    messagingSenderId: "796599799860",
-    appId: "1:796599799860:web:a74f9a63a9322d86f1ba61"
+    // FIREBASE CREDENTIALS
 });
 
 export const auth = app.auth();
